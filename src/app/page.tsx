@@ -274,6 +274,7 @@ export default function Home() {
             <a href="#adn" className="hover:text-golden-extraction transition-colors">Notre ADN</a>
             <a href="#services" className="hover:text-golden-extraction transition-colors">L'Expérience</a>
             <a href="#partenaires" className="hover:text-golden-extraction transition-colors">Confiance</a>
+            <a href="/about" className="hover:text-golden-extraction transition-colors">À Propos</a>
           </div>
           <div className="flex-1 flex justify-end">
             <CapsuleButton href="#contact" variant="primary">
