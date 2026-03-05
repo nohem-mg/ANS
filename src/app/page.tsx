@@ -196,7 +196,7 @@ const PartnershipIcon = () => (
 );
 
 // 7. Service Row — Technical Datasheet / Spec-Sheet Style
-const ServiceRow = ({ number, title, desc, icon }: { number: string, title: string, desc: string, icon: React.ReactNode }) => {
+const ServiceRow = ({ title, desc, icon }: { title: string, desc: string, icon: React.ReactNode }) => {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -211,15 +211,6 @@ const ServiceRow = ({ number, title, desc, icon }: { number: string, title: stri
       style={{ opacity, y, paddingTop: 'clamp(2rem, 5vw, 4rem)', paddingBottom: 'clamp(2rem, 5vw, 4rem)' }}
       className="group relative flex flex-col md:flex-row md:items-center gap-5 md:gap-16 border-b border-coffee-cream/[0.12] overflow-hidden"
     >
-      {/* Ghost number — purely decorative */}
-      <div
-        className="absolute right-0 top-1/2 -translate-y-1/2 font-bold leading-none select-none pointer-events-none tabular-nums text-coffee-cream"
-        style={{ fontSize: 'clamp(80px, 10vw, 120px)', opacity: 0.07, letterSpacing: '-0.04em' }}
-        aria-hidden="true"
-      >
-        {number}
-      </div>
-
       {/* Left column: icon + title */}
       <div className="md:w-[30%] flex items-center gap-4 flex-shrink-0 relative z-10">
         <div className="text-coffee-cream/40 group-hover:text-golden-extraction transition-colors duration-300 flex-shrink-0">
@@ -283,6 +274,7 @@ export default function Home() {
             <a href="#adn" className="hover:text-golden-extraction transition-colors">Notre ADN</a>
             <a href="#services" className="hover:text-golden-extraction transition-colors">L'Expérience</a>
             <a href="#partenaires" className="hover:text-golden-extraction transition-colors">Confiance</a>
+            <a href="/about" className="hover:text-golden-extraction transition-colors">À Propos</a>
           </div>
           <div className="flex-1 flex justify-end">
             <CapsuleButton href="#contact" variant="primary">
@@ -438,19 +430,16 @@ export default function Home() {
           {/* Spec-sheet rows */}
           <div className="border-t border-coffee-cream/[0.12]">
             <ServiceRow
-              number="01"
               title="Coffee Corners"
               desc="Architecture d'espaces de pause premium. Mobilier design et ambiance feutrée pour favoriser les échanges."
               icon={<CoffeeCornerIcon />}
             />
             <ServiceRow
-              number="02"
               title="Disponibilité Totale"
               desc="Notre promesse : une réactivité sans faille. Une machine à l'arrêt, c'est une pause gâchée. Nous ne laissons jamais cela arriver."
               icon={<MaintenanceIcon />}
             />
             <ServiceRow
-              number="03"
               title="Partenariat Durable"
               desc="La fidélisation est notre KPI principal. Nous construisons des relations long terme basées sur la confiance et la transparence."
               icon={<PartnershipIcon />}
@@ -460,34 +449,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Partners Carousel (Circular Concept) */}
-      <section id="partenaires" className="py-32 overflow-hidden relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-deep-roast via-black/40 to-deep-roast pointer-events-none" />
-        
-        <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
-          <h2 className="text-3xl font-bold mb-16 text-white/40">Ils savourent notre expertise via nos contrats nationaux</h2>
-          
-          <div className="flex flex-wrap justify-center gap-12 md:gap-24 items-center opacity-60">
-            {/* Partner Logos (Placeholder Style) */}
-            {[1, 2, 3, 4, 5].map((i) => (
-              <motion.div 
-                key={i}
-                whileHover={{ scale: 1.1, opacity: 1, filter: "brightness(1.2)" }}
-                className="w-32 h-12 bg-white/10 rounded-lg backdrop-blur-md flex items-center justify-center border border-white/5 cursor-pointer transition-all"
-              >
-                <div className="text-xs font-bold tracking-widest text-white/30">PARTNER {i}</div>
-              </motion.div>
-            ))}
-          </div>
-          
-          <div className="mt-20">
-             <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-golden-extraction/10 border border-golden-extraction/20 text-golden-extraction">
-                <Award className="w-5 h-5" />
-                <span className="font-bold">Membre du réseau Prodia+</span>
-             </div>
-          </div>
-        </div>
-      </section>
+
 
       {/* Footer / Contact CTA */}
       <section id="contact" className="py-32 relative overflow-hidden">
