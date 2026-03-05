@@ -335,9 +335,9 @@ export default function Home() {
         style={{ backgroundColor: 'rgba(43,18,0,0.92)' }}
       >
         <div className="max-w-7xl mx-auto px-8 h-[68px] grid items-center" style={{ gridTemplateColumns: '1fr auto 1fr' }}>
-          {/* Left: wordmark */}
-          <a href="/" className="flex items-center gap-2.5 no-underline">
-            <span className="text-sm font-bold tracking-[0.16em] uppercase text-coffee-cream font-mono">ANS</span>
+          {/* Left: logo */}
+          <a href="/" className="flex items-center no-underline">
+            <Image src="/logo-ANS.png" alt="ANS" width={36} height={36} style={{ objectFit: 'contain' }} />
           </a>
 
           {/* Center: nav links */}
@@ -608,11 +608,33 @@ export default function Home() {
             </button>
           </form>
           
-          <div className="mt-24 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-sm text-coffee-cream/30" style={{ fontFamily: 'var(--font-ibm-plex-mono)' }}>
-            <p>© {new Date().getFullYear()} ANS. All rights reserved.</p>
-            <div className="flex gap-6 mt-4 md:mt-0">
-               <a href="#" className="hover:text-golden-extraction">Mentions Légales</a>
-               <a href="#" className="hover:text-golden-extraction">Confidentialité</a>
+          {/* Address block */}
+          <div className="mt-16 pt-10 border-t border-white/5" style={{ fontFamily: 'var(--font-ibm-plex-mono)' }}>
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
+              {/* Company info */}
+              <div className="text-left space-y-1">
+                <p className="text-coffee-cream/70 text-xs tracking-[0.16em] uppercase mb-3">A.N.S.</p>
+                <p className="text-coffee-cream/35 text-xs leading-relaxed">
+                  780 rue Blaise Pascal<br />
+                  59267 Proville<br />
+                  France
+                </p>
+                <a
+                  href="tel:+33327371684"
+                  className="inline-block text-coffee-cream/35 text-xs tracking-wide hover:text-golden-extraction transition-colors mt-1"
+                >
+                  03 27 37 16 84
+                </a>
+              </div>
+
+              {/* Legal links */}
+              <div className="flex flex-col items-start md:items-end gap-3">
+                <p className="text-coffee-cream/20 text-xs">© {new Date().getFullYear()} ANS. Tous droits réservés.</p>
+                <div className="flex gap-6">
+                  <a href="#" className="text-coffee-cream/20 text-xs hover:text-golden-extraction transition-colors">Mentions Légales</a>
+                  <a href="#" className="text-coffee-cream/20 text-xs hover:text-golden-extraction transition-colors">Confidentialité</a>
+                </div>
+              </div>
             </div>
           </div>
         </div>

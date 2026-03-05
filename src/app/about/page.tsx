@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, useInView, useReducedMotion, useScroll, useTransform, useSpring } from 'framer-motion';
 import Image from 'next/image';
-import { ArrowRight, ArrowLeft, Github, Globe, Coffee, Linkedin, Instagram, Mail } from 'lucide-react';
+import { ArrowRight, ArrowLeft, Github, Globe, Linkedin, Instagram, Mail } from 'lucide-react';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // TYPESCRIPT INTERFACES
@@ -440,18 +440,7 @@ function InternalNav() {
             flexShrink: 0,
           }}
         >
-          <Coffee size={17} color={C.accent} />
-          <span
-            style={{
-              fontFamily: FONT.mono,
-              fontSize: '13px',
-              letterSpacing: '0.16em',
-              color: C.textPrimary,
-              fontWeight: 700,
-            }}
-          >
-            ANS
-          </span>
+          <Image src="/logo-ANS.png" alt="ANS" width={36} height={36} style={{ objectFit: 'contain' }} />
         </a>
 
         {/* ── Center: social icons — absolutely pinned to the true center ── */}
