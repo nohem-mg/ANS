@@ -20,32 +20,30 @@ const Loader = ({ onComplete }: { onComplete: () => void }) => {
       animate={{ opacity: 0, transition: { delay: 2.5, duration: 0.8, ease: "easeInOut" } }}
       onAnimationComplete={onComplete}
     >
-      <div className="relative">
+      <div className="flex flex-col items-center gap-4">
         <motion.div
-          initial={{ height: 0 }}
-          animate={{ height: 100 }}
-          transition={{ duration: 1.5, ease: "easeInOut" }}
-          className="w-1 bg-golden-extraction absolute left-1/2 -translate-x-1/2 top-0"
-          style={{ originY: 0 }}
-        />
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8, y: 20 }}
+          initial={{ opacity: 0, scale: 0.92, y: 16 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ delay: 1.2, duration: 0.8 }}
-          className="mt-28 text-6xl font-bold tracking-tighter"
-          style={{ fontFamily: 'var(--font-sora)' }}
+          transition={{ delay: 0.4, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
-          ANS
+          <Image
+            src="/logo-ans-entier.png"
+            alt="A.N.S — Pause Évasion"
+            width={280}
+            height={120}
+            style={{ objectFit: 'contain' }}
+            priority
+          />
         </motion.div>
+
+        {/* Horizontal underline growing left to right */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5, duration: 0.5 }}
-          className="mt-4 text-golden-extraction text-sm uppercase tracking-[0.3em] text-center"
-          style={{ fontFamily: 'var(--font-ibm-plex-mono)' }}
-        >
-          Expérience Café
-        </motion.div>
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ delay: 1.0, duration: 1.0, ease: "easeInOut" }}
+          className="h-px bg-golden-extraction/60 w-[280px]"
+          style={{ originX: 0 }}
+        />
       </div>
     </motion.div>
   );
