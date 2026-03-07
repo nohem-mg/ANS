@@ -58,8 +58,7 @@ interface MoodboardImage {
 const NAV_ITEMS: NavItem[] = [
   { label: 'Nos Valeurs', anchor: 'nos-valeurs' },
   { label: "Rejoindre l'équipe", anchor: 'rejoindre' },
-  { label: "L'Équipe", anchor: 'equipe' },
-  { label: 'Partenaires', anchor: 'partenaires' },
+  { label: "L'Équipe", anchor: 'equipe' }
 ];
 
 const VALUES: Value[] = [
@@ -181,8 +180,7 @@ const MOODBOARD: MoodboardImage[] = [
 const FOOTER_NAV = [
   { label: 'À Propos', href: '/about' },
   { label: 'Nos Solutions', href: '#' },
-  { label: 'Partenaires', href: '#partenaires' },
-  { label: 'Contact', href: '#' },
+  { label: 'Contact', href: '#' }
 ];
 
 const FOOTER_LEGAL = [
@@ -422,10 +420,10 @@ function InternalNav() {
         style={{
           maxWidth: 1280,
           margin: '0 auto',
-          padding: '0 32px',
+          padding: '0 56px',
           display: 'flex',
           alignItems: 'center',
-          height: 52,
+          height: 68,
           position: 'relative',
         }}
       >
@@ -491,7 +489,7 @@ function InternalNav() {
                 letterSpacing: '0.06em',
                 color: C.textMuted,
                 padding: '0 12px',
-                height: 52,
+                height: 68,
                 whiteSpace: 'nowrap',
                 transition: 'color 0.2s',
               }}
@@ -1445,127 +1443,76 @@ function SiteFooter() {
   return (
     <footer
       style={{
-        backgroundColor: C.footer,
-        borderTop: `1px solid ${C.divider}`,
-        padding: '72px 24px 36px',
+        backgroundColor: C.bg,
+        padding: '0 24px 36px',
+        fontFamily: FONT.mono,
       }}
     >
-      <div style={{ maxWidth: 1280, margin: '0 auto' }}>
+      <div style={{ maxWidth: 860, margin: '0 auto' }}>
+
+        {/* Top divider with logo */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 24, paddingTop: 40, marginBottom: 40 }}>
+          <div style={{ flex: 1, height: 1, backgroundColor: C.divider }} />
+          <Image src="/logo-ANS.png" alt="ANS" width={28} height={28} style={{ objectFit: 'contain', opacity: 0.3 }} />
+          <div style={{ flex: 1, height: 1, backgroundColor: C.divider }} />
+        </div>
+
+        {/* 3-column grid */}
         <div
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-            gap: '48px',
-            marginBottom: '72px',
+            gap: 40,
+            marginBottom: 40,
+            textAlign: 'center' as const,
           }}
         >
-          {/* Logo + tagline */}
+          {/* Col 1 — Brand */}
           <div>
-            <div
-              style={{
-                fontFamily: FONT.display,
-                fontSize: '26px',
-                fontWeight: 800,
-                color: C.textPrimary,
-                letterSpacing: '-0.03em',
-                marginBottom: '14px',
-              }}
-            >
-              ANS
-            </div>
-            <p
-              style={{
-                fontFamily: FONT.body,
-                fontSize: '13px',
-                color: C.textMuted,
-                lineHeight: 1.65,
-                maxWidth: 240,
-                margin: 0,
-              }}
-            >
-              La pause café réinventée pour les entreprises qui comptent.
+            <p style={{ color: 'rgba(255,246,239,0.60)', fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase' as const, marginBottom: 16, margin: '0 0 16px' }}>A.N.S.</p>
+            <p style={{ color: 'rgba(255,246,239,0.30)', fontSize: 12, lineHeight: 1.7, margin: 0 }}>
+              Depuis 1980, nous réinventons<br />la pause café en entreprise.
             </p>
           </div>
 
-          {/* Navigation */}
+          {/* Col 2 — Address */}
           <div>
-            <div
-              style={{
-                fontFamily: FONT.mono,
-                fontSize: '10px',
-                letterSpacing: '0.16em',
-                color: C.textMuted,
-                textTransform: 'uppercase',
-                marginBottom: '20px',
-              }}
+            <p style={{ color: 'rgba(255,246,239,0.60)', fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase' as const, margin: '0 0 16px' }}>Adresse</p>
+            <p style={{ color: 'rgba(255,246,239,0.30)', fontSize: 12, lineHeight: 1.7, margin: '0 0 8px' }}>
+              780 rue Blaise Pascal<br />
+              59267 Proville — France
+            </p>
+            <a
+              href="tel:+33327371684"
+              style={{ display: 'inline-block', color: 'rgba(255,246,239,0.30)', fontSize: 12, textDecoration: 'none', transition: 'color 0.2s' }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = C.accent)}
+              onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,246,239,0.30)')}
             >
-              Navigation
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-              {FOOTER_NAV.map((link, i) => (
+              03 27 37 16 84
+            </a>
+          </div>
+
+          {/* Col 3 — Navigation */}
+          <div>
+            <p style={{ color: 'rgba(255,246,239,0.60)', fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase' as const, margin: '0 0 16px' }}>Navigation</p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+              {[
+                { label: 'Notre Savoir-Faire', href: '/#services' },
+                { label: 'Notre Histoire',     href: '/#adn' },
+                { label: 'Contact',            href: '/#contact' },
+                { label: 'Accueil',            href: '/' },
+              ].map(({ label, href }) => (
                 <a
-                  key={i}
-                  href={link.href}
-                  style={{
-                    fontFamily: FONT.body,
-                    fontSize: '14px',
-                    color: C.textMuted,
-                    textDecoration: 'none',
-                    transition: 'color 0.2s',
-                  }}
-                  onMouseEnter={(e) =>
-                    (e.currentTarget.style.color = C.textPrimary)
-                  }
-                  onMouseLeave={(e) =>
-                    (e.currentTarget.style.color = C.textMuted)
-                  }
+                  key={href}
+                  href={href}
+                  style={{ color: 'rgba(255,246,239,0.30)', fontSize: 12, textDecoration: 'none', transition: 'color 0.2s' }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = C.accent)}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,246,239,0.30)')}
                 >
-                  {link.label}
+                  {label}
                 </a>
               ))}
             </div>
-          </div>
-
-          {/* CTA */}
-          <div>
-            <div
-              style={{
-                fontFamily: FONT.mono,
-                fontSize: '10px',
-                letterSpacing: '0.16em',
-                color: C.textMuted,
-                textTransform: 'uppercase',
-                marginBottom: '20px',
-              }}
-            >
-              Contact
-            </div>
-            <a
-              href="#"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px',
-                fontFamily: FONT.body,
-                fontSize: '14px',
-                fontWeight: 600,
-                color: C.textPrimary,
-                textDecoration: 'none',
-                padding: '12px 20px',
-                border: `1px solid ${C.accent}`,
-                transition: 'background-color 0.2s, color 0.2s',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = C.accent;
-                e.currentTarget.style.color = '#1C0A00';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = 'transparent';
-                e.currentTarget.style.color = C.textPrimary;
-              }}
-            >
-              Nous contacter <ArrowRight size={14} />
-            </a>
           </div>
         </div>
 
@@ -1573,49 +1520,35 @@ function SiteFooter() {
         <div
           style={{
             borderTop: `1px solid ${C.divider}`,
-            paddingTop: '24px',
+            paddingTop: 24,
             display: 'flex',
+            flexWrap: 'wrap' as const,
+            justifyContent: 'center',
             alignItems: 'center',
-            justifyContent: 'space-between',
-            flexWrap: 'wrap',
-            gap: '12px',
+            gap: 24,
           }}
         >
-          <span
-            style={{
-              fontFamily: FONT.mono,
-              fontSize: '11px',
-              color: C.textMuted,
-              letterSpacing: '0.06em',
-            }}
-          >
-            © 2025 ANS. Tous droits réservés.
-          </span>
-          <div style={{ display: 'flex', gap: '24px' }}>
-            {FOOTER_LEGAL.map((link, i) => (
+          <p style={{ color: 'rgba(255,246,239,0.20)', fontSize: 10, letterSpacing: '0.04em', margin: 0 }}>
+            © {new Date().getFullYear()} A.N.S. Tous droits réservés.
+          </p>
+          <div style={{ display: 'flex', gap: 24 }}>
+            {[
+              { label: 'Mentions Légales', href: '#' },
+              { label: 'Confidentialité',  href: '#' },
+            ].map(({ label, href }) => (
               <a
-                key={i}
-                href={link.href}
-                style={{
-                  fontFamily: FONT.mono,
-                  fontSize: '11px',
-                  color: C.textMuted,
-                  textDecoration: 'none',
-                  letterSpacing: '0.05em',
-                  transition: 'color 0.2s',
-                }}
-                onMouseEnter={(e) =>
-                  (e.currentTarget.style.color = C.textPrimary)
-                }
-                onMouseLeave={(e) =>
-                  (e.currentTarget.style.color = C.textMuted)
-                }
+                key={label}
+                href={href}
+                style={{ color: 'rgba(255,246,239,0.20)', fontSize: 10, letterSpacing: '0.04em', textDecoration: 'none', transition: 'color 0.2s' }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = C.accent)}
+                onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,246,239,0.20)')}
               >
-                {link.label}
+                {label}
               </a>
             ))}
           </div>
         </div>
+
       </div>
     </footer>
   );
@@ -1659,13 +1592,11 @@ function HeroMoodboardSection() {
       <div
         style={{
           position: 'sticky',
-          /* stick just below the 48 px InternalNav */
-          top: 0,
-          height: '100vh',
+          top: 68,
+          height: 'calc(100vh - 68px)',
           overflow: 'hidden',
           backgroundColor: '#F2DECA',
-          /* top = nav height + same gutter as bottom → widget visually centered */
-          padding: 'calc(52px + clamp(12px, 1.5vw, 16px)) clamp(16px, 4vw, 48px) clamp(12px, 1.5vw, 16px)',
+          padding: 'clamp(10px, 1.2vw, 14px) clamp(16px, 4vw, 48px)',
           boxSizing: 'border-box',
         }}
       >

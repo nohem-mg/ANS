@@ -5,7 +5,10 @@ import { motion, useScroll, useTransform, AnimatePresence, useSpring } from 'fra
 import { 
   ArrowRight, 
   Award,
-  ChevronDown
+  ChevronDown,
+  Linkedin,
+  Instagram,
+  Mail,
 } from 'lucide-react';
 import Image from 'next/image';
 
@@ -115,26 +118,7 @@ const CapsuleButton = ({ children, href, variant = 'primary' }: { children: Reac
   );
 };
 
-// 4. Reactive Status Widget
-const ReactiveStatusWidget = () => {
-  return (
-    <motion.div 
-      initial={{ opacity: 0, x: 50 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ delay: 3, duration: 0.8 }}
-      className="fixed bottom-8 right-8 z-40 bg-deep-roast/90 backdrop-blur-xl border border-coffee-cream/10 rounded p-4 shadow-2xl flex items-center gap-4 max-w-xs"
-    >
-      <div className="relative flex-shrink-0">
-        <div className="w-2 h-2 bg-golden-extraction rounded-full animate-pulse" />
-        <div className="absolute inset-0 w-2 h-2 bg-golden-extraction rounded-full animate-ping opacity-50" />
-      </div>
-      <div>
-        <div className="text-[10px] text-golden-extraction font-mono uppercase tracking-[0.18em] mb-0.5">Statut Équipe</div>
-        <div className="text-xs font-medium text-coffee-cream/80" style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}>30 collaborateurs prêts à intervenir</div>
-      </div>
-    </motion.div>
-  );
-};
+
 
 // 5. Timeline — horizontal editorial 3-column design
 const MILESTONES = [
@@ -324,44 +308,117 @@ export default function Home() {
         style={{ scaleX }}
       />
 
-      {/* Navigation — flat sticky bar matching /about design language */}
-      <motion.nav 
+      {/* Navigation — sticky bar identical in structure to /about page */}
+      <motion.nav
         initial={{ opacity: 0, y: -8 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5, duration: 0.6 }}
-        className="fixed top-0 w-full z-40 border-b border-coffee-cream/10 backdrop-blur-xl"
-        style={{ backgroundColor: 'rgba(43,18,0,0.92)' }}
+        style={{
+          position: 'sticky',
+          top: 0,
+          zIndex: 50,
+          backgroundColor: 'rgba(28,10,0,0.92)',
+          backdropFilter: 'blur(16px)',
+          WebkitBackdropFilter: 'blur(16px)',
+          borderBottom: '1px solid rgba(255,246,239,0.08)',
+        }}
       >
-        <div className="max-w-7xl mx-auto px-8 h-[68px] grid items-center" style={{ gridTemplateColumns: '1fr auto 1fr' }}>
+        <div
+          style={{
+            maxWidth: 1280,
+            margin: '0 auto',
+            padding: '0 56px',
+            display: 'flex',
+            alignItems: 'center',
+            height: 68,
+            position: 'relative',
+          }}
+        >
           {/* Left: logo */}
-          <a href="/" className="flex items-center no-underline">
+          <a href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', flexShrink: 0 }}>
             <Image src="/logo-ANS.png" alt="ANS" width={36} height={36} style={{ objectFit: 'contain' }} />
           </a>
 
-          {/* Center: nav links */}
-          <div className="hidden md:flex items-center gap-1">
+          {/* Center: social icons — absolutely pinned to true center */}
+          <div
+            style={{
+              position: 'absolute',
+              left: '50%',
+              transform: 'translateX(-50%)',
+              display: 'flex',
+              alignItems: 'center',
+              gap: 22,
+            }}
+          >
             {[
-              { label: 'Notre ADN',   href: '#adn' },
-              { label: "L'Expérience", href: '#services' },
-              { label: 'Confiance',   href: '#partenaires' },
-              { label: 'À Propos',    href: '/about' },
-            ].map(({ label, href }) => (
+              { icon: <Linkedin size={14} />, href: '#' },
+              { icon: <Instagram size={14} />, href: '#' },
+              { icon: <Mail size={14} />, href: '#contact' },
+            ].map(({ icon, href }, i) => (
               <a
-                key={href}
+                key={i}
                 href={href}
-                className="px-3 h-[52px] inline-flex items-center text-[11px] font-mono uppercase tracking-[0.06em] text-coffee-cream/50 hover:text-coffee-cream transition-colors"
+                style={{ color: 'rgba(255,246,239,0.35)', transition: 'color 0.2s', display: 'flex' }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = '#FFF6EF')}
+                onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,246,239,0.35)')}
               >
-                {label}
+                {icon}
               </a>
             ))}
           </div>
 
-          {/* Right: CTA */}
-          <div className="flex justify-end">
-            <CapsuleButton href="#contact" variant="primary">
+          {/* Right: nav links + CTA */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 4, marginLeft: 'auto' }}>
+            {[
+              { label: 'Notre ADN',    href: '#adn' },
+              { label: "L'Expérience", href: '#services' },
+              { label: 'À Propos',     href: '/about' },
+            ].map(({ label, href }) => (
+              <a
+                key={href}
+                href={href}
+                style={{
+                  fontFamily: 'var(--font-ibm-plex-mono)',
+                  fontSize: 11,
+                  letterSpacing: '0.06em',
+                  textTransform: 'uppercase' as const,
+                  color: 'rgba(255,246,239,0.35)',
+                  padding: '0 12px',
+                  height: 68,
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  whiteSpace: 'nowrap' as const,
+                  textDecoration: 'none',
+                  transition: 'color 0.2s',
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = '#FFF6EF')}
+                onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,246,239,0.35)')}
+              >
+                {label}
+              </a>
+            ))}
+            <a
+              href="#contact"
+              style={{
+                marginLeft: 8,
+                fontFamily: 'var(--font-ibm-plex-mono)',
+                fontSize: 11,
+                letterSpacing: '0.06em',
+                textTransform: 'uppercase' as const,
+                color: '#FFF6EF',
+                background: 'rgba(255,246,239,0.1)',
+                border: '1px solid rgba(255,246,239,0.15)',
+                borderRadius: 6,
+                padding: '6px 16px',
+                textDecoration: 'none',
+                transition: 'background 0.2s',
+                whiteSpace: 'nowrap' as const,
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(255,246,239,0.18)')}
+              onMouseLeave={(e) => (e.currentTarget.style.background = 'rgba(255,246,239,0.1)')}
+            >
               Contact
-              <ArrowRight className="w-3.5 h-3.5" />
-            </CapsuleButton>
+            </a>
           </div>
         </div>
       </motion.nav>
@@ -370,8 +427,8 @@ export default function Home() {
       <section
         style={{
           backgroundColor: '#F2DECA',
-          height: '100vh',
-          padding: 'calc(68px + clamp(20px, 2.5vw, 32px)) clamp(16px, 4vw, 48px) clamp(20px, 2.5vw, 32px)',
+          height: 'calc(100vh - 68px)',
+          padding: 'clamp(10px, 1.2vw, 14px) clamp(16px, 4vw, 48px)',
           boxSizing: 'border-box',
         }}
       >
@@ -606,39 +663,74 @@ export default function Home() {
             </button>
           </form>
           
-          {/* Address block */}
-          <div className="mt-16 pt-10 border-t border-white/5" style={{ fontFamily: 'var(--font-ibm-plex-mono)' }}>
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
-              {/* Company info */}
-              <div className="text-left space-y-1">
-                <p className="text-coffee-cream/70 text-xs tracking-[0.16em] uppercase mb-3">A.N.S.</p>
-                <p className="text-coffee-cream/35 text-xs leading-relaxed">
+          {/* ── Footer bar ── */}
+          <div className="mt-20" style={{ fontFamily: 'var(--font-ibm-plex-mono)' }}>
+            {/* Top divider with logo */}
+            <div className="flex items-center gap-6 mb-10">
+              <div className="flex-1 h-px bg-coffee-cream/8" />
+              <Image src="/logo-ANS.png" alt="ANS" width={28} height={28} style={{ objectFit: 'contain', opacity: 0.3 }} />
+              <div className="flex-1 h-px bg-coffee-cream/8" />
+            </div>
+
+            {/* 3-column footer grid */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-10 text-center mb-10">
+
+              {/* Col 1 — Brand */}
+              <div className="space-y-3">
+                <p className="text-coffee-cream/60 text-[10px] tracking-[0.22em] uppercase mb-4">A.N.S.</p>
+                <p className="text-coffee-cream/30 text-xs leading-relaxed">
+                  Depuis 1980, nous réinventons<br />la pause café en entreprise.
+                </p>
+              </div>
+
+              {/* Col 2 — Address */}
+              <div className="space-y-2">
+                <p className="text-coffee-cream/60 text-[10px] tracking-[0.22em] uppercase mb-4">Adresse</p>
+                <p className="text-coffee-cream/30 text-xs leading-relaxed">
                   780 rue Blaise Pascal<br />
-                  59267 Proville<br />
-                  France
+                  59267 Proville — France
                 </p>
                 <a
                   href="tel:+33327371684"
-                  className="inline-block text-coffee-cream/35 text-xs tracking-wide hover:text-golden-extraction transition-colors mt-1"
+                  className="inline-block text-coffee-cream/30 text-xs tracking-wide hover:text-golden-extraction transition-colors"
                 >
                   03 27 37 16 84
                 </a>
               </div>
 
-              {/* Legal links */}
-              <div className="flex flex-col items-start md:items-end gap-3">
-                <p className="text-coffee-cream/20 text-xs">© {new Date().getFullYear()} ANS. Tous droits réservés.</p>
-                <div className="flex gap-6">
-                  <a href="#" className="text-coffee-cream/20 text-xs hover:text-golden-extraction transition-colors">Mentions Légales</a>
-                  <a href="#" className="text-coffee-cream/20 text-xs hover:text-golden-extraction transition-colors">Confidentialité</a>
-                </div>
+              {/* Col 3 — Links */}
+              <div className="space-y-2">
+                <p className="text-coffee-cream/60 text-[10px] tracking-[0.22em] uppercase mb-4">Navigation</p>
+                {[
+                  { label: 'Notre Savoir-Faire', href: '#services' },
+                  { label: 'Notre Histoire',     href: '#adn' },
+                  { label: 'Contact',            href: '#contact' },
+                  { label: 'À Propos',           href: '/about' },
+                ].map(({ label, href }) => (
+                  <a
+                    key={href}
+                    href={href}
+                    className="block text-coffee-cream/30 text-xs tracking-wide hover:text-golden-extraction transition-colors"
+                  >
+                    {label}
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            {/* Bottom bar */}
+            <div className="pt-6 border-t border-coffee-cream/8 flex flex-col md:flex-row justify-center items-center gap-6">
+              <p className="text-coffee-cream/20 text-[10px] tracking-wide">© {new Date().getFullYear()} A.N.S. Tous droits réservés.</p>
+              <div className="flex gap-6">
+                <a href="#" className="text-coffee-cream/20 text-[10px] tracking-wide hover:text-golden-extraction transition-colors">Mentions Légales</a>
+                <a href="#" className="text-coffee-cream/20 text-[10px] tracking-wide hover:text-golden-extraction transition-colors">Confidentialité</a>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <ReactiveStatusWidget />
+
     </div>
   );
 }
