@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, useInView, useReducedMotion, useScroll, useTransform, useSpring } from 'framer-motion';
 import Image from 'next/image';
-import { ArrowRight, ArrowLeft, Github, Globe, Linkedin, Instagram, Mail } from 'lucide-react';
+import { ArrowRight, ArrowLeft, Github, Globe } from 'lucide-react';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // TYPESCRIPT INTERFACES
@@ -108,20 +108,20 @@ const JOBS: Job[] = [
 ];
 
 const TEAM_MEMBERS: TeamMember[] = [
-  { name: 'Marc Dufresne',       role: 'PDG / Fondateur',                picId: 1011, twitter: '#', website: '#' },
-  { name: 'Sophie Renard',       role: 'Directrice des Opérations',      picId: 1024, twitter: '#', github: '#' },
-  { name: 'Julien Moreau',       role: 'Responsable Technique',          picId: 1025, twitter: '#', github: '#', website: '#' },
-  { name: 'Claire Petit',        role: 'Chargée de Relation Client',     picId: 1027, twitter: '#', website: '#' },
-  { name: 'Antoine Lefebvre',    role: 'Technicien Senior',              picId: 1012, twitter: '#', github: '#' },
-  { name: 'Emma Blanc',          role: 'Responsable Commercial',         picId: 1047, twitter: '#', website: '#' },
-  { name: 'Thomas Girard',       role: 'Ingénieur Produit',              picId: 1015, twitter: '#', github: '#', website: '#' },
-  { name: 'Lucie Bernard',       role: 'Chargée Marketing',              picId: 1032, twitter: '#' },
-  { name: 'Alexandre Faure',     role: 'Technicien de Maintenance',      picId: 1062, twitter: '#', github: '#' },
-  { name: 'Camille Dupont',      role: 'Chargée des Ressources Humaines',picId: 1042, twitter: '#', website: '#' },
-  { name: 'Nicolas Brun',        role: 'Responsable Logistique',         picId: 1033, twitter: '#' },
-  { name: 'Marie-Laure Vidal',   role: 'Ingénieure Qualité',             picId: 1053, twitter: '#', github: '#' },
-  { name: 'Romain Tessier',      role: 'Développeur IoT',                picId: 1019, twitter: '#', github: '#', website: '#' },
-  { name: 'Isabelle Morin',      role: 'Directrice Financière',          picId: 1035, twitter: '#', website: '#' },
+  { name: 'Marc Dufresne', role: 'PDG / Fondateur', picId: 1011, twitter: '#', website: '#' },
+  { name: 'Sophie Renard', role: 'Directrice des Opérations', picId: 1024, twitter: '#', github: '#' },
+  { name: 'Julien Moreau', role: 'Responsable Technique', picId: 1025, twitter: '#', github: '#', website: '#' },
+  { name: 'Claire Petit', role: 'Chargée de Relation Client', picId: 1027, twitter: '#', website: '#' },
+  { name: 'Antoine Lefebvre', role: 'Technicien Senior', picId: 1012, twitter: '#', github: '#' },
+  { name: 'Emma Blanc', role: 'Responsable Commercial', picId: 1047, twitter: '#', website: '#' },
+  { name: 'Thomas Girard', role: 'Ingénieur Produit', picId: 1015, twitter: '#', github: '#', website: '#' },
+  { name: 'Lucie Bernard', role: 'Chargée Marketing', picId: 1032, twitter: '#' },
+  { name: 'Alexandre Faure', role: 'Technicien de Maintenance', picId: 1062, twitter: '#', github: '#' },
+  { name: 'Camille Dupont', role: 'Chargée des Ressources Humaines', picId: 1042, twitter: '#', website: '#' },
+  { name: 'Nicolas Brun', role: 'Responsable Logistique', picId: 1033, twitter: '#' },
+  { name: 'Marie-Laure Vidal', role: 'Ingénieure Qualité', picId: 1053, twitter: '#', github: '#' },
+  { name: 'Romain Tessier', role: 'Développeur IoT', picId: 1019, twitter: '#', github: '#', website: '#' },
+  { name: 'Isabelle Morin', role: 'Directrice Financière', picId: 1035, twitter: '#', website: '#' },
 ];
 
 const PARTNERS: Partner[] = [
@@ -162,18 +162,18 @@ const P = (seed: string, w: number, h: number) =>
 
 const MOODBOARD: MoodboardImage[] = [
   { area: 'a', src: U('1522071820081-009f0129c71c', 600, 400), w: 600, h: 400 }, /* team collaboration */
-  { area: 'b', src: P('espresso-machine', 400, 360),           w: 400, h: 360 }, /* espresso machine */
+  { area: 'b', src: P('espresso-machine', 400, 360), w: 400, h: 360 }, /* espresso machine */
   { area: 'c', src: U('1447933601403-0c6688de566e', 500, 750), w: 500, h: 750 }, /* coffee beans tall */
   { area: 'd', src: U('1495474472287-4d71bcdd2085', 400, 360), w: 400, h: 360 }, /* latte art */
   { area: 'e', src: U('1509042239860-f550ce710b93', 700, 360), w: 700, h: 360 }, /* coffee on desk */
   { area: 'f', src: U('1461023058943-07fcbe16d735', 300, 360), w: 300, h: 360 }, /* pour-over coffee */
-  { area: 'g', src: P('team-office-wide', 900, 420),           w: 900, h: 420 }, /* team building wide */
+  { area: 'g', src: P('team-office-wide', 900, 420), w: 900, h: 420 }, /* team building wide */
   { area: 'h', src: U('1514432324607-a09d9b4aefdd', 500, 420), w: 500, h: 420 }, /* coffee shop */
   { area: 'i', src: U('1497515114629-f71d768fd07c', 300, 420), w: 300, h: 420 }, /* coffee beans */
-  { area: 'p', src: P('barista-portrait', 400, 650),           w: 400, h: 650 }, /* barista tall */
-  { area: 'k', src: P('coffee-grains', 300, 280),              w: 300, h: 280 }, /* coffee grains */
-  { area: 'l', src: P('coffee-beans-wide', 700, 280),          w: 700, h: 280 }, /* coffee beans wide */
-  { area: 'm', src: U('1553877522-43269d4ea984', 900, 280),    w: 900, h: 280 }, /* team meeting wide */
+  { area: 'p', src: P('barista-portrait', 400, 650), w: 400, h: 650 }, /* barista tall */
+  { area: 'k', src: P('coffee-grains', 300, 280), w: 300, h: 280 }, /* coffee grains */
+  { area: 'l', src: P('coffee-beans-wide', 700, 280), w: 700, h: 280 }, /* coffee beans wide */
+  { area: 'm', src: U('1553877522-43269d4ea984', 900, 280), w: 900, h: 280 }, /* team meeting wide */
   { area: 'n', src: U('1507133750040-4a8f57021571', 500, 280), w: 500, h: 280 }, /* coffee steam */
 ];
 
@@ -389,124 +389,7 @@ function SectionTag({ index, label }: { index: string; label: string }) {
   );
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// SECTION: INTERNAL NAV
-// ─────────────────────────────────────────────────────────────────────────────
-
-function InternalNav() {
-  const scrollTo = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  const iconStyle = {
-    color: C.textMuted,
-    transition: 'color 0.2s',
-    display: 'flex' as const,
-  };
-
-  return (
-    <nav
-      style={{
-        position: 'sticky',
-        top: 0,
-        zIndex: 50,
-        backgroundColor: 'rgba(28,10,0,0.92)',
-        backdropFilter: 'blur(16px)',
-        WebkitBackdropFilter: 'blur(16px)',
-        borderBottom: `1px solid ${C.divider}`,
-      }}
-    >
-      <div
-        style={{
-          maxWidth: 1280,
-          margin: '0 auto',
-          padding: '0 56px',
-          display: 'flex',
-          alignItems: 'center',
-          height: 68,
-          position: 'relative',
-        }}
-      >
-        {/* ── Left: logo ── */}
-        <a
-          href="/"
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: 10,
-            textDecoration: 'none',
-            flexShrink: 0,
-          }}
-        >
-          <Image src="/logo-ANS.png" alt="ANS" width={36} height={36} style={{ objectFit: 'contain' }} />
-        </a>
-
-        {/* ── Center: social icons — absolutely pinned to the true center ── */}
-        <div style={{
-          position: 'absolute',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          display: 'flex',
-          alignItems: 'center',
-          gap: 22,
-        }}>
-          {[
-            { icon: <Linkedin size={14} />, href: '#' },
-            { icon: <Instagram size={14} />, href: '#' },
-            { icon: <Mail size={14} />, href: '#' },
-          ].map(({ icon, href }, i) => (
-            <a
-              key={i}
-              href={href}
-              style={iconStyle}
-              onMouseEnter={(e) => (e.currentTarget.style.color = C.textPrimary)}
-              onMouseLeave={(e) => (e.currentTarget.style.color = C.textMuted)}
-            >
-              {icon}
-            </a>
-          ))}
-        </div>
-
-        {/* ── Right: nav links + CTA ── */}
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: 4,
-            marginLeft: 'auto',
-          }}
-        >
-          {NAV_ITEMS.map((item, i) => (
-            <button
-              key={i}
-              onClick={() => scrollTo(item.anchor)}
-              style={{
-                background: 'none',
-                border: 'none',
-                cursor: 'pointer',
-                fontFamily: FONT.mono,
-                fontSize: '11px',
-                letterSpacing: '0.06em',
-                color: C.textMuted,
-                padding: '0 12px',
-                height: 68,
-                whiteSpace: 'nowrap',
-                transition: 'color 0.2s',
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = C.textPrimary)}
-              onMouseLeave={(e) => (e.currentTarget.style.color = C.textMuted)}
-            >
-              {item.label}
-            </button>
-          ))}
-
-          {/* Pill CTA */}
-          
-        </div>
-      </div>
-    </nav>
-  );
-}
+// InternalNav removed — now using shared Header from layout
 
 // ─────────────────────────────────────────────────────────────────────────────
 // SECTION 1: HERO / MANIFESTO
@@ -564,72 +447,72 @@ function HeroSection() {
           maxWidth: 860,
         }}
       >
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.35, ease: 'easeOut' }}
-            style={{
-              fontFamily: FONT.mono,
-              fontSize: '11px',
-              letterSpacing: '0.22em',
-              color: C.accent,
-              textTransform: 'uppercase',
-              marginBottom: '44px',
-            }}
-          >
-            À Propos · ANS
-          </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.35, ease: 'easeOut' }}
+          style={{
+            fontFamily: FONT.mono,
+            fontSize: '11px',
+            letterSpacing: '0.22em',
+            color: C.accent,
+            textTransform: 'uppercase',
+            marginBottom: '44px',
+          }}
+        >
+          À Propos · ANS
+        </motion.div>
 
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.1, delay: 0.6, ease: EASE_OUT }}
-            style={{
-              fontSize: 'clamp(26px, 3.8vw, 50px)',
-              fontFamily: FONT.display,
-              fontWeight: 600,
-              lineHeight: 1.22,
-              color: C.textPrimary,
-              letterSpacing: '-0.025em',
-              margin: 0,
-            }}
-          >
-            Les distributeurs de boissons sont le premier point de contact
-            entre une entreprise et ses collaborateurs.
-          </motion.p>
+        <motion.p
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.1, delay: 0.6, ease: EASE_OUT }}
+          style={{
+            fontSize: 'clamp(26px, 3.8vw, 50px)',
+            fontFamily: FONT.display,
+            fontWeight: 600,
+            lineHeight: 1.22,
+            color: C.textPrimary,
+            letterSpacing: '-0.025em',
+            margin: 0,
+          }}
+        >
+          Les distributeurs de boissons sont le premier point de contact
+          entre une entreprise et ses collaborateurs.
+        </motion.p>
 
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.1, delay: 0.85, ease: EASE_OUT }}
-            style={{
-              fontSize: 'clamp(26px, 3.8vw, 50px)',
-              fontFamily: FONT.display,
-              fontWeight: 300,
-              lineHeight: 1.22,
-              color: C.accent,
-              letterSpacing: '-0.025em',
-              marginTop: '14px',
-              marginBottom: 0,
-            }}
-          >
-            Chez ANS, nous faisons en sorte que ce moment soit toujours
-            parfait.
-          </motion.p>
+        <motion.p
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.1, delay: 0.85, ease: EASE_OUT }}
+          style={{
+            fontSize: 'clamp(26px, 3.8vw, 50px)',
+            fontFamily: FONT.display,
+            fontWeight: 300,
+            lineHeight: 1.22,
+            color: C.accent,
+            letterSpacing: '-0.025em',
+            marginTop: '14px',
+            marginBottom: 0,
+          }}
+        >
+          Chez ANS, nous faisons en sorte que ce moment soit toujours
+          parfait.
+        </motion.p>
 
-          <motion.div
-            initial={{ scaleY: 0, opacity: 0 }}
-            animate={{ scaleY: 1, opacity: 0.45 }}
-            transition={{ duration: 1.2, delay: 1.1, ease: 'easeOut' }}
-            style={{
-              width: 1,
-              height: 52,
-              backgroundColor: C.accent,
-              margin: '52px auto 0',
-              transformOrigin: 'top',
-            }}
-          />
-        </div>
+        <motion.div
+          initial={{ scaleY: 0, opacity: 0 }}
+          animate={{ scaleY: 1, opacity: 0.45 }}
+          transition={{ duration: 1.2, delay: 1.1, ease: 'easeOut' }}
+          style={{
+            width: 1,
+            height: 52,
+            backgroundColor: C.accent,
+            margin: '52px auto 0',
+            transformOrigin: 'top',
+          }}
+        />
+      </div>
     </div>
   );
 }
@@ -1273,7 +1156,7 @@ function TeamSection() {
       el.removeEventListener('scroll', updateArrows);
       window.removeEventListener('resize', updateArrows);
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const scroll = (dir: 'left' | 'right') => {
@@ -1435,124 +1318,7 @@ function TeamSection() {
 }
 
 
-// ─────────────────────────────────────────────────────────────────────────────
-// FOOTER
-// ─────────────────────────────────────────────────────────────────────────────
-
-function SiteFooter() {
-  return (
-    <footer
-      style={{
-        backgroundColor: C.bg,
-        padding: '0 24px 36px',
-        fontFamily: FONT.mono,
-      }}
-    >
-      <div style={{ maxWidth: 860, margin: '0 auto' }}>
-
-        {/* Top divider with logo */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 24, paddingTop: 40, marginBottom: 40 }}>
-          <div style={{ flex: 1, height: 1, backgroundColor: C.divider }} />
-          <Image src="/logo-ANS.png" alt="ANS" width={28} height={28} style={{ objectFit: 'contain', opacity: 0.3 }} />
-          <div style={{ flex: 1, height: 1, backgroundColor: C.divider }} />
-        </div>
-
-        {/* 3-column grid */}
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-            gap: 40,
-            marginBottom: 40,
-            textAlign: 'center' as const,
-          }}
-        >
-          {/* Col 1 — Brand */}
-          <div>
-            <p style={{ color: 'rgba(255,246,239,0.60)', fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase' as const, marginBottom: 16, margin: '0 0 16px' }}>A.N.S.</p>
-            <p style={{ color: 'rgba(255,246,239,0.30)', fontSize: 12, lineHeight: 1.7, margin: 0 }}>
-              Depuis 1980, nous réinventons<br />la pause café en entreprise.
-            </p>
-          </div>
-
-          {/* Col 2 — Address */}
-          <div>
-            <p style={{ color: 'rgba(255,246,239,0.60)', fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase' as const, margin: '0 0 16px' }}>Adresse</p>
-            <p style={{ color: 'rgba(255,246,239,0.30)', fontSize: 12, lineHeight: 1.7, margin: '0 0 8px' }}>
-              780 rue Blaise Pascal<br />
-              59267 Proville — France
-            </p>
-            <a
-              href="tel:+33327371684"
-              style={{ display: 'inline-block', color: 'rgba(255,246,239,0.30)', fontSize: 12, textDecoration: 'none', transition: 'color 0.2s' }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = C.accent)}
-              onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,246,239,0.30)')}
-            >
-              03 27 37 16 84
-            </a>
-          </div>
-
-          {/* Col 3 — Navigation */}
-          <div>
-            <p style={{ color: 'rgba(255,246,239,0.60)', fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase' as const, margin: '0 0 16px' }}>Navigation</p>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-              {[
-                { label: 'Notre Savoir-Faire', href: '/#services' },
-                { label: 'Notre Histoire',     href: '/#adn' },
-                { label: 'Contact',            href: '/#contact' },
-                { label: 'Accueil',            href: '/' },
-              ].map(({ label, href }) => (
-                <a
-                  key={href}
-                  href={href}
-                  style={{ color: 'rgba(255,246,239,0.30)', fontSize: 12, textDecoration: 'none', transition: 'color 0.2s' }}
-                  onMouseEnter={(e) => (e.currentTarget.style.color = C.accent)}
-                  onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,246,239,0.30)')}
-                >
-                  {label}
-                </a>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Bottom bar */}
-        <div
-          style={{
-            borderTop: `1px solid ${C.divider}`,
-            paddingTop: 24,
-            display: 'flex',
-            flexWrap: 'wrap' as const,
-            justifyContent: 'center',
-            alignItems: 'center',
-            gap: 24,
-          }}
-        >
-          <p style={{ color: 'rgba(255,246,239,0.20)', fontSize: 10, letterSpacing: '0.04em', margin: 0 }}>
-            © {new Date().getFullYear()} A.N.S. Tous droits réservés.
-          </p>
-          <div style={{ display: 'flex', gap: 24 }}>
-            {[
-              { label: 'Mentions Légales', href: '#' },
-              { label: 'Confidentialité',  href: '#' },
-            ].map(({ label, href }) => (
-              <a
-                key={label}
-                href={href}
-                style={{ color: 'rgba(255,246,239,0.20)', fontSize: 10, letterSpacing: '0.04em', textDecoration: 'none', transition: 'color 0.2s' }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = C.accent)}
-                onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,246,239,0.20)')}
-              >
-                {label}
-              </a>
-            ))}
-          </div>
-        </div>
-
-      </div>
-    </footer>
-  );
-}
+// SiteFooter removed — now using shared Footer from layout
 
 // ─────────────────────────────────────────────────────────────────────────────
 // PAGE
@@ -1580,11 +1346,11 @@ function HeroMoodboardSection() {
 
   // Hero: long hold, then gentle fade + barely-noticeable scale-down over ~40 % of scroll
   const heroOpacity = useTransform(smoothProgress, [0, 0.28, 0.68], [1, 1, 0]);
-  const heroScale  = useTransform(smoothProgress, [0.28, 0.68], [1, 0.97]);
+  const heroScale = useTransform(smoothProgress, [0.28, 0.68], [1, 0.97]);
 
   // Moodboard: starts drifting in while hero is still fading — long overlap zone
   const moodOpacity = useTransform(smoothProgress, [0.38, 0.75], [0, 1]);
-  const moodY       = useTransform(smoothProgress, [0.38, 0.75], ['4%', '0%']);
+  const moodY = useTransform(smoothProgress, [0.38, 0.75], ['4%', '0%']);
 
   return (
     // 200 vh scroll space — the sticky frame fills one viewport the whole time
@@ -1621,7 +1387,7 @@ function HeroMoodboardSection() {
               inset: 0,
               zIndex: 2,
               opacity: shouldReduce ? 1 : heroOpacity,
-              scale:   shouldReduce ? 1 : heroScale,
+              scale: shouldReduce ? 1 : heroScale,
             }}
           >
             <HeroSection />
@@ -1634,7 +1400,7 @@ function HeroMoodboardSection() {
               inset: 0,
               zIndex: 1,
               opacity: shouldReduce ? 1 : moodOpacity,
-              y:       shouldReduce ? 0  : moodY,
+              y: shouldReduce ? 0 : moodY,
             }}
           >
             <MoodboardGrid />
@@ -1655,12 +1421,10 @@ export default function AboutPage() {
         minHeight: '100vh',
       }}
     >
-      <InternalNav />
       <HeroMoodboardSection />
       <ValuesSection />
       <CareersSection />
       <TeamSection />
-      <SiteFooter />
     </div>
   );
 }

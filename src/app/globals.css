@@ -1,9 +1,11 @@
 @import "tailwindcss";
 
 :root {
-  --background: #451F17; /* Deep Roast */
-  --foreground: #FFF6EF; /* Coffee Cream */
-  
+  --background: #451F17;
+  /* Deep Roast */
+  --foreground: #FFF6EF;
+  /* Coffee Cream */
+
   /* Custom Palette */
   --deep-roast: #451F17;
   --golden-extraction: #DE9E67;
@@ -18,20 +20,21 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-serif: var(--font-playfair);
-  
+
   --color-deep-roast: var(--deep-roast);
   --color-golden-extraction: var(--golden-extraction);
   --color-sienna-racing: var(--sienna-racing);
   --color-sienna-racing-dark: var(--sienna-racing-dark);
   --color-coffee-cream: var(--coffee-cream);
-  
+
   /* Glassmorphism utilities could be added here or used inline */
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     /* Keep the brand colors consistent in dark mode for this specific design */
-    --background: #2D140F; /* Slightly darker version for dark mode preference */
+    --background: #2D140F;
+    /* Slightly darker version for dark mode preference */
     --foreground: #FFF6EF;
   }
 }
@@ -43,21 +46,27 @@ body {
   overflow-x: hidden;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-playfair), Georgia, serif;
 }
 
-/* Scrollbar customization for that premium feel */
-::-webkit-scrollbar {
-  width: 8px;
+/* Hide scrollbar everywhere */
+html,
+body,
+* {
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
 }
-::-webkit-scrollbar-track {
-  background: var(--deep-roast);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--sienna-racing);
-  border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: var(--golden-extraction);
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+*::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
 }
