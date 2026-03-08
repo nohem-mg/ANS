@@ -9,6 +9,37 @@ import {
 } from 'lucide-react';
 import Image from 'next/image';
 
+// --- Types ---
+interface MoodboardImage {
+  area: string;
+  src: string;
+  w: number;
+  h: number;
+}
+
+// --- Data ---
+const U = (id: string, w: number, h: number) =>
+  `https://images.unsplash.com/photo-${id}?w=${w}&h=${h}&fit=crop&auto=format&q=80`;
+const P = (seed: string, w: number, h: number) =>
+  `https://picsum.photos/seed/${seed}/${w}/${h}`;
+
+const MOODBOARD: MoodboardImage[] = [
+  { area: 'a', src: U('1522071820081-009f0129c71c', 600, 400), w: 600, h: 400 },
+  { area: 'b', src: P('espresso-machine', 400, 360), w: 400, h: 360 },
+  { area: 'c', src: U('1447933601403-0c6688de566e', 500, 750), w: 500, h: 750 },
+  { area: 'd', src: U('1495474472287-4d71bcdd2085', 400, 360), w: 400, h: 360 },
+  { area: 'e', src: U('1509042239860-f550ce710b93', 700, 360), w: 700, h: 360 },
+  { area: 'f', src: U('1461023058943-07fcbe16d735', 300, 360), w: 300, h: 360 },
+  { area: 'g', src: P('team-office-wide', 900, 420), w: 900, h: 420 },
+  { area: 'h', src: U('1514432324607-a09d9b4aefdd', 500, 420), w: 500, h: 420 },
+  { area: 'i', src: U('1497515114629-f71d768fd07c', 300, 420), w: 300, h: 420 },
+  { area: 'p', src: P('barista-portrait', 400, 650), w: 400, h: 650 },
+  { area: 'k', src: P('coffee-grains', 300, 280), w: 300, h: 280 },
+  { area: 'l', src: P('coffee-beans-wide', 700, 280), w: 700, h: 280 },
+  { area: 'm', src: U('1553877522-43269d4ea984', 900, 280), w: 900, h: 280 },
+  { area: 'n', src: U('1507133750040-4a8f57021571', 500, 280), w: 500, h: 280 },
+];
+
 // --- Components ---
 
 // 1. "Infusion" Loader
@@ -114,6 +145,110 @@ const CapsuleButton = ({ children, href, variant = 'primary' }: { children: Reac
   );
 };
 
+// 4. Moodboard Grid
+const MoodboardGrid = () => {
+  return (
+    <div style={{ height: '100%', overflow: 'hidden' }}>
+      <style>{`
+        /* ── Desktop: 12-col irregular mosaic ── */
+        .ans-moodboard {
+          display: grid;
+          gap: 12px;
+          padding: 80px 32px 32px;
+          grid-template-columns: repeat(12, 1fr);
+          grid-template-rows: 180px 200px 160px;
+          grid-template-areas:
+            "a  a  b  b  c  c  c  d  d  e  e  f "
+            "g  g  g  g  c  c  c  h  h  i  p  p "
+            "k  l  l  l  m  m  m  m  n  n  p  p ";
+        }
+
+        /* ── Tablet: 4-col simplified ── */
+        @media (max-width: 1024px) {
+          .ans-moodboard {
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(3, 210px);
+            grid-template-areas:
+              "a  a  b  c "
+              "g  g  h  c "
+              "k  l  l  n ";
+            gap: 10px;
+            padding: 10px 32px;
+          }
+          .ans-moodboard-cell { grid-area: unset !important; }
+          .ans-cell-a { grid-area: a !important; }
+          .ans-cell-b { grid-area: b !important; }
+          .ans-cell-c { grid-area: c !important; }
+          .ans-cell-g { grid-area: g !important; }
+          .ans-cell-h { grid-area: h !important; }
+          .ans-cell-k { grid-area: k !important; }
+          .ans-cell-l { grid-area: l !important; }
+          .ans-cell-n { grid-area: n !important; }
+          .ans-cell-d, .ans-cell-e, .ans-cell-f,
+          .ans-cell-i, .ans-cell-m, .ans-cell-p { display: none; }
+        }
+
+        /* ── Mobile: 2-col simple stack ── */
+        @media (max-width: 640px) {
+          .ans-moodboard {
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: repeat(4, 170px);
+            grid-template-areas: none;
+            gap: 8px;
+            padding: 8px 16px;
+          }
+          .ans-moodboard-cell { grid-area: auto !important; }
+          .ans-cell-c, .ans-cell-g, .ans-cell-h,
+          .ans-cell-i, .ans-cell-l, .ans-cell-m,
+          .ans-cell-n, .ans-cell-p { display: none; }
+        }
+
+        /* ── Shared cell styles ── */
+        .ans-moodboard-cell {
+          overflow: hidden;
+          position: relative;
+          border-radius: 7px;
+        }
+        .ans-moodboard-inner {
+          width: 100%;
+          height: 100%;
+          overflow: hidden;
+          border-radius: 7px;
+        }
+        .ans-moodboard-inner img {
+          transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .ans-moodboard-cell:hover .ans-moodboard-inner img {
+          transform: scale(1.04);
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .ans-moodboard-cell:hover .ans-moodboard-inner img { transform: none; }
+        }
+      `}</style>
+
+      <div className="ans-moodboard">
+        {MOODBOARD.map(({ area, src, w }) => (
+          <div
+            key={area}
+            className={`ans-moodboard-cell ans-cell-${area}`}
+            style={{ gridArea: area }}
+          >
+            <div className="ans-moodboard-inner">
+              <Image
+                src={src}
+                alt=""
+                fill
+                unoptimized
+                style={{ objectFit: 'cover' }}
+                sizes={`(max-width: 640px) 50vw, (max-width: 1024px) 33vw, ${w}px`}
+              />
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
 
 
 // 5. Timeline — horizontal editorial 3-column design
@@ -523,9 +658,17 @@ export default function Home() {
               }}
             />
 
+            {/* Background Moodboard Grid Overlay */}
+            <div className="absolute inset-0 z-0 opacity-40">
+              <MoodboardGrid />
+            </div>
+
+            {/* Simple solid dark overlay for text contrast instead of gradient */}
+            <div className="absolute inset-0 z-0 bg-[#2B1200]/30 pointer-events-none" />
+
             {/* Content — centered like /about hero */}
             {/* ── Stars · headline · subtitle · two pills ── */}
-            <div className="relative z-10 w-full max-w-4xl mx-auto px-8 text-center">
+            <div className="relative z-10 w-full max-w-4xl mx-auto px-8 text-center flex flex-col items-center justify-center h-full">
 
               {/* Stars rating */}
               <motion.div
@@ -566,7 +709,7 @@ export default function Home() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1.05, duration: 0.8 }}
-                className="text-base text-coffee-cream/50 leading-relaxed mx-auto max-w-lg mb-10"
+                className="text-base text-coffee-cream/80 leading-relaxed mx-auto max-w-lg mb-10"
               >
                 Depuis 40 ans, nous transformons la pause café en un levier de Qualité de Vie au Travail.
                 Service ultra-personnalisé, réactivité immédiate et engagement familial.
