@@ -462,7 +462,7 @@ const VisionSection = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <section id="pause-vision" className="py-24 md:py-32 relative overflow-hidden">
+    <section id="pause-vision" className="py-16 md:py-24 relative overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-[#F2DECA]/5 to-transparent pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10 flex flex-col lg:flex-row gap-12 lg:gap-20 items-center">
@@ -799,11 +799,11 @@ export default function Home() {
 
 
         {/* Services Section — Spec-Sheet Layout */}
-        <section id="services" className="py-32 relative">
+        <section id="services" className="py-20 relative">
           <div className="max-w-7xl mx-auto px-6">
 
             {/* Section header */}
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-20">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12">
               <div>
                 <span className="text-golden-extraction text-[10px] tracking-[0.22em] uppercase mb-5 block" style={{ fontFamily: 'var(--font-ibm-plex-mono)' }}>Notre Savoir-Faire</span>
                 <h2 className="text-4xl md:text-5xl leading-tight" style={{ fontFamily: 'var(--font-sora)', fontWeight: 600 }}>
@@ -839,7 +839,7 @@ export default function Home() {
         </section>
 
         {/* Testimonials / Cas Clients Section */}
-        <section id="avis" className="py-32 relative bg-deep-roast/50">
+        <section id="avis" className="py-24 relative bg-deep-roast/50">
           <div className="max-w-7xl mx-auto px-6 relative z-10">
             <div className="text-center mb-16">
               <span className="block text-[10px] font-mono uppercase tracking-[0.22em] text-golden-extraction mb-4">
@@ -902,14 +902,14 @@ export default function Home() {
         </section>
 
         {/* ADN Section (Timeline) */}
-        <section id="adn" className="py-48 relative overflow-hidden">
+        <section id="adn" className="py-24 relative overflow-hidden">
           <div className="max-w-7xl mx-auto px-10 relative z-10">
             {/* Header */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-32"
+              className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-20"
             >
               <div>
                 <span className="block text-[10px] font-mono uppercase tracking-[0.22em] text-golden-extraction mb-4">
@@ -938,7 +938,7 @@ export default function Home() {
 
 
         {/* Footer / Contact CTA */}
-        <section id="contact" className="py-32 relative overflow-hidden">
+        <section id="contact" className="py-20 relative overflow-hidden">
           {/* Abstract shapes */}
           <div className="absolute bottom-0 left-0 w-full h-full bg-gradient-to-t from-sienna-racing/10 to-transparent pointer-events-none" />
 
