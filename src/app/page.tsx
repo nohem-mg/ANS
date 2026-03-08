@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
+import { motion, useScroll, useTransform, useSpring, animate } from 'framer-motion';
 import {
   ArrowRight,
   Award,
@@ -581,6 +581,18 @@ export default function Home() {
               >
                 <motion.a
                   href="#services"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    const target = document.getElementById('services');
+                    if (target) {
+                      const y = target.getBoundingClientRect().top + window.scrollY;
+                      animate(window.scrollY, y, {
+                        duration: 1.2,
+                        ease: [0.16, 1, 0.3, 1],
+                        onUpdate: (value) => window.scrollTo(0, value),
+                      });
+                    }
+                  }}
                   className="inline-flex items-center gap-2 px-7 py-3 text-sm font-medium text-deep-roast bg-coffee-cream"
                   style={{ borderRadius: 999 }}
                   whileHover={{ scale: 1.03 }}
@@ -590,6 +602,18 @@ export default function Home() {
                 </motion.a>
                 <motion.a
                   href="#adn"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    const target = document.getElementById('adn');
+                    if (target) {
+                      const y = target.getBoundingClientRect().top + window.scrollY;
+                      animate(window.scrollY, y, {
+                        duration: 1.2,
+                        ease: [0.16, 1, 0.3, 1],
+                        onUpdate: (value) => window.scrollTo(0, value),
+                      });
+                    }
+                  }}
                   className="inline-flex items-center gap-2 px-7 py-3 text-sm font-medium text-coffee-cream border border-coffee-cream/20"
                   style={{ borderRadius: 999 }}
                   whileHover={{ scale: 1.03, borderColor: 'rgba(245,230,211,0.5)' }}
