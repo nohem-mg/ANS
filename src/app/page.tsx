@@ -598,7 +598,7 @@ export default function Home() {
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
                 >
-                  Découvrir l'Excellence
+                  Découvrir notre approche
                 </motion.a>
                 <motion.a
                   href="#adn"
