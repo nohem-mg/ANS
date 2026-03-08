@@ -280,6 +280,162 @@ const ServiceRow = ({ title, desc, icon }: { title: string, desc: string, icon: 
   );
 };
 
+/* 8. Vision Section with Interactive Gallery */
+const VISION_POINTS = [
+  {
+    id: 'deconnexion',
+    img: '/pause-evasion.png',
+    title: 'Déconnexion Totale',
+    desc: 'Offrez-vous un instant suspendu pour souffler. Nos espaces sont pensés pour créer une véritable évasion mentale hors du rythme effréné.',
+  },
+  {
+    id: 'liens',
+    img: '/convivialite-equipe.png',
+    title: 'Créateur de Liens',
+    desc: "C'est autour d'un excellent café que naissent les meilleures idées, que les silos se brisent et que la cohésion d'équipe se renforce.",
+  },
+  {
+    id: 'bienetre',
+    img: '/qualite-vie-travail.png',
+    title: 'Bien-être au Quotidien',
+    desc: "Un café premium et un espace soigné sont des preuves tangibles de l'attention que vous portez au bien-être de vos collaborateurs.",
+  },
+  {
+    id: 'serenite',
+    img: '/solution-simplicite.png',
+    title: 'Sérénité Absolue',
+    desc: "Profitez de l'instant, on s'occupe du reste. Installation, entretien, réactivité : un service invisible mais toujours présent.",
+  },
+];
+
+const VisionSection = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  return (
+    <section id="pause-vision" className="py-24 md:py-32 relative overflow-hidden">
+      <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-[#F2DECA]/5 to-transparent pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-6 relative z-10 flex flex-col lg:flex-row gap-12 lg:gap-20 items-center">
+        {/* Left Side: Text Content & Navigation */}
+        <div className="w-full lg:w-1/2 flex flex-col">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="mb-12"
+          >
+            <span
+              className="block text-[10px] font-mono uppercase tracking-[0.22em] text-golden-extraction mb-5"
+              style={{ fontFamily: 'var(--font-ibm-plex-mono)' }}
+            >
+              Notre Vision
+            </span>
+            <h2
+              className="text-coffee-cream leading-tight mb-8"
+              style={{
+                fontFamily: 'var(--font-sora)',
+                fontSize: 'clamp(2rem, 3.5vw, 3rem)',
+                fontWeight: 600,
+              }}
+            >
+              Transformez la pause en un
+              <br />
+              <span className="text-sienna-racing">véritable moment d'évasion.</span>
+            </h2>
+            <p
+              className="text-coffee-cream/50 leading-relaxed"
+              style={{ fontSize: 'clamp(0.9375rem, 1.1vw, 1.0625rem)', fontFamily: 'var(--font-ibm-plex-sans)' }}
+            >
+              Oubliez la simple machine dans un coin de couloir. Nous concevons la pause comme une vraie coupure mentale dans votre journée. Un instant suspendu où l'on savoure un café de qualité, on décompresse, et on recrée du lien avec son équipe. Une vraie respiration pour repartir de l'avant.
+            </p>
+          </motion.div>
+
+          {/* Interactive Accordion List */}
+          <div className="flex flex-col gap-2 relative">
+            {/* Vertical progressive line */}
+            <div className="absolute left-[1px] top-0 bottom-0 w-[2px] bg-coffee-cream/10 hidden lg:block" />
+
+            {VISION_POINTS.map((point, index) => {
+              const isActive = activeIndex === index;
+              return (
+                <div
+                  key={point.id}
+                  className={`relative cursor-pointer pl-6 py-4 transition-all duration-500 group border-l-2 lg:border-l-0 ${isActive ? 'border-golden-extraction' : 'border-coffee-cream/10'}`}
+                  onMouseEnter={() => setActiveIndex(index)}
+                  onClick={() => setActiveIndex(index)}
+                >
+                  {/* Custom active line for desktop */}
+                  <motion.div
+                    className="absolute left-0 top-0 bottom-0 w-[2px] bg-golden-extraction hidden lg:block"
+                    initial={false}
+                    animate={{ opacity: isActive ? 1 : 0, scaleY: isActive ? 1 : 0 }}
+                    style={{ originY: 0 }}
+                    transition={{ duration: 0.3 }}
+                  />
+
+                  <div className="flex items-center gap-4 mb-2">
+                    <span className={`text-xs font-mono transition-colors duration-500 ${isActive ? 'text-golden-extraction' : 'text-coffee-cream/20'}`}>
+                      0{index + 1}
+                    </span>
+                    <h3
+                      className={`text-xl md:text-2xl transition-colors duration-500 ${isActive ? 'text-coffee-cream font-semibold' : 'text-coffee-cream/40 font-medium group-hover:text-coffee-cream/70'}`}
+                      style={{ fontFamily: 'var(--font-sora)' }}
+                    >
+                      {point.title}
+                    </h3>
+                  </div>
+                  <motion.div
+                    initial={false}
+                    animate={{
+                      height: isActive ? 'auto' : 0,
+                      opacity: isActive ? 1 : 0,
+                    }}
+                    className="overflow-hidden"
+                    transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                  >
+                    <p className="text-coffee-cream/60 leading-relaxed text-sm pt-2 pb-1 pr-4"
+                      style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}>
+                      {point.desc}
+                    </p>
+                  </motion.div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Right Side: Floating Image Display */}
+        <div className="w-full lg:w-1/2 h-[400px] md:h-[500px] lg:h-[700px] relative rounded-[2rem] overflow-hidden bg-white/5 shadow-2xl">
+          {VISION_POINTS.map((point, index) => (
+            <motion.div
+              key={point.id}
+              className="absolute inset-0"
+              initial={false}
+              animate={{
+                opacity: activeIndex === index ? 1 : 0,
+                scale: activeIndex === index ? 1 : 1.05,
+              }}
+              transition={{ duration: 0.7, ease: [0.32, 0.72, 0, 1] }}
+              style={{ pointerEvents: activeIndex === index ? 'auto' : 'none', zIndex: activeIndex === index ? 10 : 0 }}
+            >
+              <Image
+                src={point.img}
+                alt={point.title}
+                fill
+                className="object-cover"
+                priority={index === 0}
+              />
+              {/* Subtle inner gradient for depth */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-deep-roast/90 via-deep-roast/20 to-transparent" />
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
 export default function Home() {
   const [loading, setLoading] = useState(true);
   const containerRef = useRef(null);
@@ -402,7 +558,7 @@ export default function Home() {
                   marginBottom: '1.75rem',
                 }}
               >
-                Au-delà de la machine.
+                Faites de la pause un moment qui compte
               </motion.h1>
 
               {/* Subtitle */}
@@ -455,6 +611,10 @@ export default function Home() {
             </motion.div>
           </motion.div>
         </section>
+
+        {/* ── "Notre Vision" Section (Interactive Gallery) ── */}
+        <VisionSection />
+
 
         {/* Services Section — Spec-Sheet Layout */}
         <section id="services" className="py-32 relative">
