@@ -135,7 +135,7 @@ export default function ContactPage() {
                             transition={{ delay: 0.35, duration: 0.9, ease: EASE_OUT }}
                             style={{
                                 fontSize: 'clamp(2rem, 5vw, 4.5rem)',
-                                fontFamily: 'var(--font-playfair)',
+                                fontFamily: 'var(--font-sora)',
                                 lineHeight: 1.1,
                                 letterSpacing: '-0.02em',
                                 color: C.textPrimary,

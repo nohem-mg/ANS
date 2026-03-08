@@ -64,7 +64,16 @@ export default function Header() {
                     }}
                 >
                     {/* Left: logo */}
-                    <a href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', flexShrink: 0 }}>
+                    <a
+                        href="/"
+                        style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', flexShrink: 0 }}
+                        onClick={(e) => {
+                            if (pathname === '/') {
+                                e.preventDefault();
+                                window.scrollTo({ top: 0, behavior: 'smooth' });
+                            }
+                        }}
+                    >
                         <Image src="/logo-ANS.png" alt="ANS" width={36} height={36} style={{ objectFit: 'contain' }} />
                     </a>
 
@@ -101,6 +110,12 @@ export default function Header() {
                                 }}
                                 onMouseEnter={(e) => { if (!isActive(href)) e.currentTarget.style.color = '#FFF6EF'; }}
                                 onMouseLeave={(e) => { if (!isActive(href)) e.currentTarget.style.color = 'rgba(255,246,239,0.35)'; }}
+                                onClick={(e) => {
+                                    if (href === '/' && pathname === '/') {
+                                        e.preventDefault();
+                                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                                    }
+                                }}
                             >
                                 {label}
                             </a>
@@ -201,6 +216,13 @@ export default function Header() {
                                     textDecoration: 'none',
                                     padding: '14px 24px',
                                     letterSpacing: '-0.01em',
+                                }}
+                                onClick={(e) => {
+                                    if (href === '/' && pathname === '/') {
+                                        e.preventDefault();
+                                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                                        setMobileOpen(false);
+                                    }
                                 }}
                             >
                                 {label}
