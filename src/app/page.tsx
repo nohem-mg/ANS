@@ -395,7 +395,7 @@ export default function Home() {
                 transition={{ delay: 0.85, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
                 style={{
                   fontSize: 'clamp(2.8rem, 6.5vw, 6.5rem)',
-                  fontFamily: 'var(--font-playfair)',
+                  fontFamily: 'var(--font-sora)',
                   lineHeight: 1.08,
                   letterSpacing: '-0.02em',
                   color: 'var(--color-coffee-cream)',
