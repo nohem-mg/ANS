@@ -40,6 +40,21 @@ const MOODBOARD: MoodboardImage[] = [
   { area: 'n', src: U('1507133750040-4a8f57021571', 500, 280), w: 500, h: 280 },
 ];
 
+const TESTIMONIALS = [
+  {
+    name: "Thomas D.",
+    review: "Un service irréprochable et régulier. Les machines sont modernes, le café d'excellente qualité, et les équipes très réactives au moindre souci. Un vrai plus pour la pause !",
+  },
+  {
+    name: "Sandrine L.",
+    review: "Nous avons fait installer un espace détente complet avec ANS. Rien à dire, c'est design, le passage du technicien est très discret et nos collaborateurs sont ravis de la qualité des produits.",
+  },
+  {
+    name: "Michel B.",
+    review: "Entreprise à l'écoute et très pro. On sent l'esprit familial et l'envie de bien faire. Ça change vraiment des gros prestataires classiques impersonnels. Je recommande.",
+  }
+];
+
 // --- Components ---
 
 // 1. "Infusion" Loader
@@ -820,6 +835,69 @@ export default function Home() {
               />
             </div>
 
+          </div>
+        </section>
+
+        {/* Testimonials / Cas Clients Section */}
+        <section id="avis" className="py-32 relative bg-deep-roast/50">
+          <div className="max-w-7xl mx-auto px-6 relative z-10">
+            <div className="text-center mb-16">
+              <span className="block text-[10px] font-mono uppercase tracking-[0.22em] text-golden-extraction mb-4">
+                La parole à nos clients
+              </span>
+              <h2
+                className="text-coffee-cream leading-tight mb-8"
+                style={{
+                  fontFamily: 'var(--font-sora)',
+                  fontSize: 'clamp(2rem, 3.5vw, 3rem)',
+                  fontWeight: 600,
+                }}
+              >
+                Une expérience appréciée
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+              {TESTIMONIALS.map((t, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.2 + idx * 0.15, duration: 0.6 }}
+                  className="bg-white/5 border border-coffee-cream/10 p-8 rounded-lg flex flex-col"
+                >
+                  <div className="flex gap-1 mb-4 text-golden-extraction">
+                    {[...Array(5)].map((_, i) => (
+                      <span key={i} className="text-sm">★</span>
+                    ))}
+                  </div>
+                  <p className="text-coffee-cream/80 italic mb-6 flex-grow leading-relaxed" style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}>
+                    "{t.review}"
+                  </p>
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-sienna-racing/40 flex items-center justify-center text-golden-extraction font-bold" style={{ fontFamily: 'var(--font-sora)' }}>
+                      {t.name.charAt(0)}
+                    </div>
+                    <div>
+                      <p className="text-coffee-cream font-medium text-sm" style={{ fontFamily: 'var(--font-sora)' }}>{t.name}</p>
+                      <p className="text-coffee-cream/40 text-xs mt-0.5" style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}>Avis Google</p>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            <div className="text-center">
+              <a
+                href="https://www.google.com/maps/place/Prodia+%2B+ANS+(Automatique+Nord+Service)/@50.1529539,3.2171998,18z/data=!3m1!4b1!4m6!3m5!1s0x47c2966792d94f13:0x824371045fc07674!8m2!3d50.1529539!4d3.2187845!16s%2Fg%2F1ptwl3984?entry=ttu&g_ep=EgoyMDI2MDMwNC4xIKXMDSoASAFQAw%3D%3D"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 text-golden-extraction hover:text-white transition-colors duration-300 border-b border-golden-extraction/30 pb-1 text-sm tracking-widest uppercase font-mono"
+              >
+                Voir nos avis sur Google <ArrowRight className="w-4 h-4" />
+              </a>
+            </div>
           </div>
         </section>
 
