@@ -150,7 +150,7 @@ export default function GroupePage() {
 
             <section
                 style={{
-                    backgroundColor: '#F2DECA',
+                    backgroundColor: '#F9F1E8',
                     height: 'calc(100vh - 68px)',
                     padding: 'clamp(10px, 1.2vw, 14px) clamp(16px, 4vw, 48px)',
                     boxSizing: 'border-box',
@@ -167,7 +167,7 @@ export default function GroupePage() {
                         backgroundColor: '#2B1200',
                         borderRadius: 20,
                         overflow: 'hidden',
-                        boxShadow: '0 4px 48px rgba(0,0,0,0.35)',
+                        boxShadow: 'none',
                         position: 'relative',
                         display: 'flex',
                         flexDirection: 'column',

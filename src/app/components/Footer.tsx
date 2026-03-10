@@ -25,7 +25,7 @@ export default function Footer() {
                     backgroundColor: '#2B1200',
                     borderRadius: '20px',
                     padding: '80px 24px 40px',
-                    boxShadow: '0 4px 48px rgba(0,0,0,0.35)',
+                    boxShadow: 'none',
                     position: 'relative',
                     overflow: 'hidden',
                 }}
