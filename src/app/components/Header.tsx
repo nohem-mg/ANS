@@ -42,14 +42,11 @@ export default function Header() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.15, duration: 0.6 }}
                 style={{
-                    position: 'sticky',
-                    top: 0,
+                    position: 'relative',
                     zIndex: 50,
-                    backgroundColor: scrolled ? 'rgba(28,10,0,0.95)' : 'rgba(28,10,0,0.92)',
-                    backdropFilter: 'blur(16px)',
-                    WebkitBackdropFilter: 'blur(16px)',
-                    borderBottom: '1px solid rgba(255,246,239,0.08)',
-                    transition: 'background-color 0.3s',
+                    backgroundColor: '#FAF2E9',
+                    borderBottom: scrolled ? '1px solid rgba(43,18,0,0.1)' : '1px solid transparent',
+                    transition: 'background-color 0.3s, border-bottom 0.3s',
                 }}
             >
                 <div
@@ -95,10 +92,11 @@ export default function Header() {
                                 href={href}
                                 style={{
                                     fontFamily: 'var(--font-ibm-plex-mono)',
+                                    fontWeight: 600,
                                     fontSize: 11,
                                     letterSpacing: '0.06em',
                                     textTransform: 'uppercase' as const,
-                                    color: isActive(href) ? '#FFF6EF' : 'rgba(255,246,239,0.35)',
+                                    color: isActive(href) ? '#2B1200' : 'rgba(43,18,0,0.5)',
                                     padding: '0 14px',
                                     height: 68,
                                     display: 'inline-flex',
@@ -106,10 +104,10 @@ export default function Header() {
                                     whiteSpace: 'nowrap' as const,
                                     textDecoration: 'none',
                                     transition: 'color 0.2s',
-                                    borderBottom: isActive(href) ? '2px solid #DE9E67' : '2px solid transparent',
+                                    borderBottom: isActive(href) ? '2px solid #C8763A' : '2px solid transparent',
                                 }}
-                                onMouseEnter={(e) => { if (!isActive(href)) e.currentTarget.style.color = '#FFF6EF'; }}
-                                onMouseLeave={(e) => { if (!isActive(href)) e.currentTarget.style.color = 'rgba(255,246,239,0.35)'; }}
+                                onMouseEnter={(e) => { if (!isActive(href)) e.currentTarget.style.color = '#2B1200'; }}
+                                onMouseLeave={(e) => { if (!isActive(href)) e.currentTarget.style.color = 'rgba(43,18,0,0.5)'; }}
                                 onClick={(e) => {
                                     if (href === '/' && pathname === '/') {
                                         e.preventDefault();
@@ -129,26 +127,29 @@ export default function Header() {
                         style={{
                             marginLeft: 'auto',
                             fontFamily: 'var(--font-ibm-plex-mono)',
+                            fontWeight: 600,
                             fontSize: 11,
                             letterSpacing: '0.06em',
                             textTransform: 'uppercase' as const,
-                            color: pathname === '/contact' ? '#1C0A00' : '#FFF6EF',
-                            background: pathname === '/contact' ? '#DE9E67' : 'rgba(255,246,239,0.1)',
-                            border: pathname === '/contact' ? '1px solid #DE9E67' : '1px solid rgba(255,246,239,0.15)',
+                            color: pathname === '/contact' ? '#FFF6EF' : '#2B1200',
+                            background: pathname === '/contact' ? '#2B1200' : 'transparent',
+                            border: pathname === '/contact' ? '1px solid #2B1200' : '1px solid rgba(43,18,0,0.2)',
                             borderRadius: 6,
                             padding: '6px 16px',
                             textDecoration: 'none',
-                            transition: 'background 0.2s, color 0.2s',
+                            transition: 'background 0.2s, color 0.2s, border-color 0.2s',
                             whiteSpace: 'nowrap' as const,
                         }}
                         onMouseEnter={(e) => {
                             if (pathname !== '/contact') {
-                                e.currentTarget.style.background = 'rgba(255,246,239,0.18)';
+                                e.currentTarget.style.background = 'rgba(43,18,0,0.05)';
+                                e.currentTarget.style.borderColor = 'rgba(43,18,0,0.4)';
                             }
                         }}
                         onMouseLeave={(e) => {
                             if (pathname !== '/contact') {
-                                e.currentTarget.style.background = 'rgba(255,246,239,0.1)';
+                                e.currentTarget.style.background = 'transparent';
+                                e.currentTarget.style.borderColor = 'rgba(43,18,0,0.2)';
                             }
                         }}
                     >
@@ -165,7 +166,7 @@ export default function Header() {
                             marginLeft: 'auto',
                             background: 'none',
                             border: 'none',
-                            color: '#FFF6EF',
+                            color: '#2B1200',
                             cursor: 'pointer',
                             padding: 8,
                         }}

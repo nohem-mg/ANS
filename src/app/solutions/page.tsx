@@ -550,7 +550,7 @@ export default function SolutionsPage() {
 
       <section
         style={{
-          backgroundColor: '#F2DECA',
+          backgroundColor: '#FAF2E9',
           height: 'calc(100vh - 68px)',
           padding: 'clamp(10px, 1.2vw, 14px) clamp(16px, 4vw, 48px)',
           boxSizing: 'border-box',
