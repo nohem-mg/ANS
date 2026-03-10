@@ -298,7 +298,7 @@ export default function GroupePage() {
 
             {/* ── CHIFFRES CLÉS ── */}
             <section style={{
-                backgroundColor: C.surface,
+                backgroundColor: '#FAF2E9',
                 padding: 'clamp(64px, 10vw, 100px) 24px',
             }}>
                 <div style={{ maxWidth: 1280, margin: '0 auto' }}>
@@ -405,7 +405,7 @@ export default function GroupePage() {
 
             {/* ── ANS DANS LE RÉSEAU ── */}
             <section style={{
-                backgroundColor: C.surface,
+                backgroundColor: '#FAF2E9',
                 padding: 'clamp(64px, 10vw, 100px) 24px',
             }}>
                 <div style={{ maxWidth: 900, margin: '0 auto', textAlign: 'center' }}>
