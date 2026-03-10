@@ -415,22 +415,6 @@ function ProcessSection() {
               />
 
               <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '32px' }}>
-                <div
-                  style={{
-                    width: '48px',
-                    height: '48px',
-                    borderRadius: '10px',
-                    background: 'rgba(140,79,37,0.10)',
-                    border: '1px solid rgba(140,79,37,0.20)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: '#8c4f25',
-                    flexShrink: 0,
-                  }}
-                >
-                  {step.icon}
-                </div>
                 <div>
                   <p
                     style={{
