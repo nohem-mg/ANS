@@ -6,39 +6,12 @@ import {
   ArrowRight,
   Award,
   ChevronDown,
+  Lightbulb,
+  MessageCircle
 } from 'lucide-react';
 import Image from 'next/image';
 
 // --- Types ---
-interface MoodboardImage {
-  area: string;
-  src: string;
-  w: number;
-  h: number;
-}
-
-// --- Data ---
-const U = (id: string, w: number, h: number) =>
-  `https://images.unsplash.com/photo-${id}?w=${w}&h=${h}&fit=crop&auto=format&q=80`;
-const P = (seed: string, w: number, h: number) =>
-  `https://picsum.photos/seed/${seed}/${w}/${h}`;
-
-const MOODBOARD: MoodboardImage[] = [
-  { area: 'a', src: U('1522071820081-009f0129c71c', 600, 400), w: 600, h: 400 },
-  { area: 'b', src: P('espresso-machine', 400, 360), w: 400, h: 360 },
-  { area: 'c', src: U('1447933601403-0c6688de566e', 500, 750), w: 500, h: 750 },
-  { area: 'd', src: U('1495474472287-4d71bcdd2085', 400, 360), w: 400, h: 360 },
-  { area: 'e', src: U('1509042239860-f550ce710b93', 700, 360), w: 700, h: 360 },
-  { area: 'f', src: U('1461023058943-07fcbe16d735', 300, 360), w: 300, h: 360 },
-  { area: 'g', src: P('team-office-wide', 900, 420), w: 900, h: 420 },
-  { area: 'h', src: U('1514432324607-a09d9b4aefdd', 500, 420), w: 500, h: 420 },
-  { area: 'i', src: U('1497515114629-f71d768fd07c', 300, 420), w: 300, h: 420 },
-  { area: 'p', src: P('barista-portrait', 400, 650), w: 400, h: 650 },
-  { area: 'k', src: P('coffee-grains', 300, 280), w: 300, h: 280 },
-  { area: 'l', src: P('coffee-beans-wide', 700, 280), w: 700, h: 280 },
-  { area: 'm', src: U('1553877522-43269d4ea984', 900, 280), w: 900, h: 280 },
-  { area: 'n', src: U('1507133750040-4a8f57021571', 500, 280), w: 500, h: 280 },
-];
 
 const TESTIMONIALS = [
   {
@@ -61,7 +34,7 @@ const TESTIMONIALS = [
 const Loader = ({ onComplete }: { onComplete: () => void }) => {
   return (
     <motion.div
-      className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-deep-roast text-coffee-cream"
+      className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#FAF2E9] text-deep-roast"
       initial={{ opacity: 1 }}
       animate={{ opacity: 0, transition: { delay: 2.5, duration: 0.8, ease: "easeInOut" } }}
       onAnimationComplete={onComplete}
@@ -97,14 +70,24 @@ const Loader = ({ onComplete }: { onComplete: () => void }) => {
 
 // 2. Stylized Coffee Bean Background
 const CoffeeBeanParticles = () => {
-  // Generates random positions for background elements
-  const particles = Array.from({ length: 12 }).map((_, i) => ({
-    id: i,
-    x: Math.random() * 100,
-    y: Math.random() * 100,
-    size: Math.random() * 20 + 10,
-    duration: Math.random() * 20 + 10,
-  }));
+  const [mounted, setMounted] = useState(false);
+  const [particles, setParticles] = useState<{ id: number, x: number, y: number, size: number, duration: number }[]>([]);
+
+  useEffect(() => {
+    setMounted(true);
+    // Generates random positions for background elements only on the client
+    setParticles(
+      Array.from({ length: 12 }).map((_, i) => ({
+        id: i,
+        x: Math.random() * 100,
+        y: Math.random() * 100,
+        size: Math.random() * 20 + 10,
+        duration: Math.random() * 20 + 10,
+      }))
+    );
+  }, []);
+
+  if (!mounted) return null;
 
   return (
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden opacity-10">
@@ -141,7 +124,7 @@ const CapsuleButton = ({ children, href, variant = 'primary' }: { children: Reac
       href={href}
       className={`relative inline-flex items-center justify-center px-7 py-3 rounded font-medium text-sm tracking-widest uppercase overflow-hidden group ${variant === 'primary'
         ? 'bg-sienna-racing text-white'
-        : 'bg-transparent border border-coffee-cream/20 text-coffee-cream hover:border-golden-extraction/60 hover:text-golden-extraction'
+        : 'bg-transparent border border-deep-roast/20 text-deep-roast hover:border-golden-extraction/60 hover:text-golden-extraction'
         }`}
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
@@ -160,110 +143,7 @@ const CapsuleButton = ({ children, href, variant = 'primary' }: { children: Reac
   );
 };
 
-// 4. Moodboard Grid
-const MoodboardGrid = () => {
-  return (
-    <div style={{ height: '100%', overflow: 'hidden' }}>
-      <style>{`
-        /* ── Desktop: 12-col irregular mosaic ── */
-        .ans-moodboard {
-          display: grid;
-          gap: 12px;
-          padding: 80px 32px 32px;
-          grid-template-columns: repeat(12, 1fr);
-          grid-template-rows: 180px 200px 160px;
-          grid-template-areas:
-            "a  a  b  b  c  c  c  d  d  e  e  f "
-            "g  g  g  g  c  c  c  h  h  i  p  p "
-            "k  l  l  l  m  m  m  m  n  n  p  p ";
-        }
-
-        /* ── Tablet: 4-col simplified ── */
-        @media (max-width: 1024px) {
-          .ans-moodboard {
-            grid-template-columns: repeat(4, 1fr);
-            grid-template-rows: repeat(3, 210px);
-            grid-template-areas:
-              "a  a  b  c "
-              "g  g  h  c "
-              "k  l  l  n ";
-            gap: 10px;
-            padding: 10px 32px;
-          }
-          .ans-moodboard-cell { grid-area: unset !important; }
-          .ans-cell-a { grid-area: a !important; }
-          .ans-cell-b { grid-area: b !important; }
-          .ans-cell-c { grid-area: c !important; }
-          .ans-cell-g { grid-area: g !important; }
-          .ans-cell-h { grid-area: h !important; }
-          .ans-cell-k { grid-area: k !important; }
-          .ans-cell-l { grid-area: l !important; }
-          .ans-cell-n { grid-area: n !important; }
-          .ans-cell-d, .ans-cell-e, .ans-cell-f,
-          .ans-cell-i, .ans-cell-m, .ans-cell-p { display: none; }
-        }
-
-        /* ── Mobile: 2-col simple stack ── */
-        @media (max-width: 640px) {
-          .ans-moodboard {
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: repeat(4, 170px);
-            grid-template-areas: none;
-            gap: 8px;
-            padding: 8px 16px;
-          }
-          .ans-moodboard-cell { grid-area: auto !important; }
-          .ans-cell-c, .ans-cell-g, .ans-cell-h,
-          .ans-cell-i, .ans-cell-l, .ans-cell-m,
-          .ans-cell-n, .ans-cell-p { display: none; }
-        }
-
-        /* ── Shared cell styles ── */
-        .ans-moodboard-cell {
-          overflow: hidden;
-          position: relative;
-          border-radius: 7px;
-        }
-        .ans-moodboard-inner {
-          width: 100%;
-          height: 100%;
-          overflow: hidden;
-          border-radius: 7px;
-        }
-        .ans-moodboard-inner img {
-          transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-        .ans-moodboard-cell:hover .ans-moodboard-inner img {
-          transform: scale(1.04);
-        }
-        @media (prefers-reduced-motion: reduce) {
-          .ans-moodboard-cell:hover .ans-moodboard-inner img { transform: none; }
-        }
-      `}</style>
-
-      <div className="ans-moodboard">
-        {MOODBOARD.map(({ area, src, w }) => (
-          <div
-            key={area}
-            className={`ans-moodboard-cell ans-cell-${area}`}
-            style={{ gridArea: area }}
-          >
-            <div className="ans-moodboard-inner">
-              <Image
-                src={src}
-                alt=""
-                fill
-                unoptimized
-                style={{ objectFit: 'cover' }}
-                sizes={`(max-width: 640px) 50vw, (max-width: 1024px) 33vw, ${w}px`}
-              />
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
+// Removed MoodboardGrid Component
 
 
 // 5. Timeline — horizontal editorial 3-column design
@@ -300,7 +180,7 @@ const Timeline = () => {
     <div ref={sectionRef} className="relative">
       {/* Connecting line track */}
       <div className="relative hidden md:block mb-0">
-        <div className="absolute left-[16.67%] right-[16.67%] top-0 h-px bg-coffee-cream/8" />
+        <div className="absolute left-[16.67%] right-[16.67%] top-0 h-px bg-deep-roast/10" />
         {/* Animated golden fill */}
         <motion.div
           className="absolute left-[16.67%] right-[16.67%] top-0 h-px bg-golden-extraction/40 origin-left"
@@ -310,7 +190,7 @@ const Timeline = () => {
         {MILESTONES.map((_, i) => (
           <motion.div
             key={i}
-            className="absolute top-0 -translate-x-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-sienna-racing border-2 border-deep-roast"
+            className="absolute top-0 -translate-x-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-sienna-racing border-2 border-[#FAF2E9]"
             style={{ left: `${16.67 + i * 33.33}%` }}
             initial={{ scale: 0, opacity: 0 }}
             whileInView={{ scale: 1, opacity: 1 }}
@@ -325,7 +205,7 @@ const Timeline = () => {
         {MILESTONES.map((m, i) => (
           <motion.div
             key={m.year}
-            className="relative px-12 pt-16 pb-10 md:border-r border-coffee-cream/8 last:border-r-0 overflow-hidden"
+            className="relative px-12 pt-16 pb-10 md:border-r border-deep-roast/10 last:border-r-0 overflow-hidden"
             initial={{ opacity: 0, y: 32 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -338,7 +218,7 @@ const Timeline = () => {
 
             {/* Title */}
             <h3
-              className="text-coffee-cream mb-5 leading-tight"
+              className="text-deep-roast mb-5 leading-tight"
               style={{
                 fontFamily: 'var(--font-sora)',
                 fontSize: 'clamp(1.1rem, 1.5vw, 1.45rem)',
@@ -352,7 +232,7 @@ const Timeline = () => {
             <div className="w-10 h-px bg-golden-extraction/40 mb-5" />
 
             {/* Description */}
-            <p className="text-coffee-cream/45 leading-relaxed" style={{ fontSize: '0.9375rem', fontFamily: 'var(--font-ibm-plex-sans)' }}>
+            <p className="text-deep-roast/60 leading-relaxed" style={{ fontSize: '0.9375rem', fontFamily: 'var(--font-ibm-plex-sans)' }}>
               {m.desc}
             </p>
           </motion.div>
@@ -404,15 +284,15 @@ const ServiceRow = ({ title, desc, icon }: { title: string, desc: string, icon: 
     <motion.div
       ref={ref}
       style={{ opacity, y, paddingTop: 'clamp(2rem, 5vw, 4rem)', paddingBottom: 'clamp(2rem, 5vw, 4rem)' }}
-      className="group relative flex flex-col md:flex-row md:items-center gap-5 md:gap-16 border-b border-coffee-cream/[0.12] overflow-hidden"
+      className="group relative flex flex-col md:flex-row md:items-center gap-5 md:gap-16 border-b border-deep-roast/10 overflow-hidden"
     >
       {/* Left column: icon + title */}
       <div className="md:w-[30%] flex items-center gap-4 flex-shrink-0 relative z-10">
-        <div className="text-coffee-cream/40 group-hover:text-golden-extraction transition-colors duration-300 flex-shrink-0">
+        <div className="text-deep-roast/40 group-hover:text-golden-extraction transition-colors duration-300 flex-shrink-0">
           {icon}
         </div>
         <h3
-          className="text-coffee-cream font-semibold"
+          className="text-deep-roast font-semibold"
           style={{ fontSize: 'clamp(0.7rem, 1.1vw, 0.8rem)', letterSpacing: '0.1em', textTransform: 'uppercase', fontFamily: 'var(--font-ibm-plex-mono)' }}
         >
           {title}
@@ -421,7 +301,7 @@ const ServiceRow = ({ title, desc, icon }: { title: string, desc: string, icon: 
 
       {/* Right column: description */}
       <p
-        className="md:w-[70%] text-coffee-cream/60 relative z-10 group-hover:text-coffee-cream/80 transition-colors duration-300"
+        className="md:w-[70%] text-deep-roast/60 relative z-10 group-hover:text-deep-roast/80 transition-colors duration-300"
         style={{ lineHeight: 1.75, fontSize: 'clamp(0.875rem, 1.05vw, 1rem)', fontFamily: 'var(--font-ibm-plex-sans)' }}
       >
         {desc}
@@ -435,152 +315,167 @@ const VISION_POINTS = [
   {
     id: 'deconnexion',
     img: '/pause-evasion.png',
-    title: 'Le "Reset" Sensoriel',
-    desc: "Une pause réussie mobilise les sens pour couper court à la fatigue des écrans. Le son du broyeur, l'arôme d'un grain fraîchement torréfié, la mousse d'un latte : un petit rituel physique qui fait chuter la charge mentale et relance immédiatement la concentration.",
+    title: '"Reset" Sensoriel',
+    desc: "Une pause réussie mobilise les sens pour couper court à la fatigue. Un rituel de déconnexion pour faire chuter la charge mentale et relancer la concentration.",
   },
   {
     id: 'liens',
     img: '/convivialite-equipe.png',
-    title: 'Le Collisionneur d\'Idées',
-    desc: "Les meilleures décisions ne naissent pas toujours en salle de réunion. Nos espaces sont conçus comme des points de rencontre privilégiés : ils provoquent ces discussions informelles entre les différents départements, brisant naturellement les silos dans l'entreprise.",
+    title: 'Collisionneur d\'Idées',
+    desc: "Les meilleures décisions ne naissent pas toujours en salle de réunion. Nos espaces créent des points de rencontres informels qui brisent les silos dans l'entreprise.",
   },
   {
     id: 'bienetre',
     img: '/qualite-vie-travail.png',
-    title: 'Le Marqueur d\'Attention',
-    desc: "Ce que vous mettez dans la tasse de vos collaborateurs en dit long sur la façon dont vous les valorisez. Offrir une expérience digne d'un véritable coffee shop sur le lieu de travail est un levier concret et quotidien de Qualité de Vie au Travail (QVT).",
+    title: 'Marqueur d\'Attention',
+    desc: "Ce que vous glissez dans la tasse de vos équipes en dit long. Une expérience digne d'un coffee shop est un levier concret et quotidien de Qualité de Vie au Travail.",
   },
   {
     id: 'serenite',
     img: '/solution-simplicite.png',
-    title: 'La Fluidité Invisible',
-    desc: "Pour qu'une pause soit reposante, la logistique doit s'effacer. Grâce à nos parcs de machines connectées, nous anticipons l'entretien préventif et les réapprovisionnements avant que vous ne manquiez de quoi que ce soit. Vous ne voyez qu'un café toujours prêt.",
+    title: 'Fluidité Invisible',
+    desc: "Pour qu'une pause soit reposante, la logistique doit s'effacer. Connexion, entretien préventif et réapprovisionnements : tout est anticipé sans que vous n'y pensiez.",
   },
 ];
 
 const VisionSection = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
-
   return (
-    <section id="pause-vision" className="py-16 md:py-24 relative overflow-hidden">
-      <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-[#F2DECA]/5 to-transparent pointer-events-none" />
+    <section id="pause-vision" className="py-12 md:py-20 min-h-[90vh] lg:min-h-screen flex items-center relative overflow-hidden">
+      <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-[#FAF2E9]/5 to-transparent pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-6 relative z-10 flex flex-col lg:flex-row gap-12 lg:gap-20 items-center">
-        {/* Left Side: Text Content & Navigation */}
-        <div className="w-full lg:w-1/2 flex flex-col">
+      <div className="max-w-[105rem] mx-auto px-6 lg:px-12 relative z-10 w-full">
+
+        {/* Top Header - 2 Columns */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 mb-12 lg:mb-20 items-start max-w-7xl">
+          {/* Left Title */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="mb-12"
           >
             <span
-              className="block text-[10px] font-mono uppercase tracking-[0.22em] text-golden-extraction mb-5"
+              className="block text-[10px] font-mono uppercase tracking-[0.22em] text-golden-extraction mb-4"
               style={{ fontFamily: 'var(--font-ibm-plex-mono)' }}
             >
               Notre Vision
             </span>
             <h2
-              className="text-coffee-cream leading-tight mb-8"
+              className="text-deep-roast leading-tight"
               style={{
                 fontFamily: 'var(--font-sora)',
-                fontSize: 'clamp(2rem, 3.5vw, 3rem)',
+                fontSize: 'clamp(1.75rem, 3.5vw, 3rem)',
                 fontWeight: 600,
+                letterSpacing: '-0.02em'
               }}
             >
-              La machine à café n'est plus un meuble.
+              Votre machine à café,
               <br />
               <span className="text-sienna-racing">C'est le cœur battant de vos bureaux.</span>
             </h2>
-            <p
-              className="text-coffee-cream/50 leading-relaxed"
-              style={{ fontSize: 'clamp(0.9375rem, 1.1vw, 1.0625rem)', fontFamily: 'var(--font-ibm-plex-sans)' }}
-            >
-              Fini le café avalé à la hâte dans un couloir froid. La vraie pause est un moment stratégique invisible. C'est le sas de décompression qui préserve le capital énergie de vos équipes, et la « place du village » où se forge votre culture d'entreprise. Chez ANS, nous aménageons ces quelques mètres carrés pour en faire de véritables refuges sensoriels et conviviaux.
-            </p>
           </motion.div>
 
-          {/* Interactive Accordion List */}
-          <div className="flex flex-col gap-2 relative">
-            {/* Vertical progressive line */}
-            <div className="absolute left-[1px] top-0 bottom-0 w-[2px] bg-coffee-cream/10 hidden lg:block" />
-
-            {VISION_POINTS.map((point, index) => {
-              const isActive = activeIndex === index;
-              return (
-                <div
-                  key={point.id}
-                  className={`relative cursor-pointer pl-6 py-4 transition-all duration-500 group border-l-2 lg:border-l-0 ${isActive ? 'border-golden-extraction' : 'border-coffee-cream/10'}`}
-                  onMouseEnter={() => setActiveIndex(index)}
-                  onClick={() => setActiveIndex(index)}
-                >
-                  {/* Custom active line for desktop */}
-                  <motion.div
-                    className="absolute left-0 top-0 bottom-0 w-[2px] bg-golden-extraction hidden lg:block"
-                    initial={false}
-                    animate={{ opacity: isActive ? 1 : 0, scaleY: isActive ? 1 : 0 }}
-                    style={{ originY: 0 }}
-                    transition={{ duration: 0.3 }}
-                  />
-
-                  <div className="flex items-center gap-4 mb-2">
-                    <span className={`text-xs font-mono transition-colors duration-500 ${isActive ? 'text-golden-extraction' : 'text-coffee-cream/20'}`}>
-                      0{index + 1}
-                    </span>
-                    <h3
-                      className={`text-xl md:text-2xl transition-colors duration-500 ${isActive ? 'text-coffee-cream font-semibold' : 'text-coffee-cream/40 font-medium group-hover:text-coffee-cream/70'}`}
-                      style={{ fontFamily: 'var(--font-sora)' }}
-                    >
-                      {point.title}
-                    </h3>
-                  </div>
-                  <motion.div
-                    initial={false}
-                    animate={{
-                      height: isActive ? 'auto' : 0,
-                      opacity: isActive ? 1 : 0,
-                    }}
-                    className="overflow-hidden"
-                    transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                  >
-                    <p className="text-coffee-cream/60 leading-relaxed text-sm pt-2 pb-1 pr-4"
-                      style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}>
-                      {point.desc}
-                    </p>
-                  </motion.div>
-                </div>
-              );
-            })}
-          </div>
+          {/* Right Description */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:pt-8"
+          >
+            <p
+              className="text-deep-roast/70 leading-relaxed"
+              style={{ fontSize: 'clamp(0.95rem, 1vw, 1.05rem)', fontFamily: 'var(--font-ibm-plex-sans)' }}
+            >
+              Fini le café avalé dans un couloir. La pause est un moment stratégique — celui où l'énergie se recharge et où la culture d'entreprise se construit. Chez ANS, on aménage cet espace pour qu'il soit à la hauteur.            </p>
+          </motion.div>
         </div>
 
-        {/* Right Side: Floating Image Display */}
-        <div className="w-full lg:w-1/2 h-[400px] md:h-[500px] lg:h-[700px] relative rounded-[2rem] overflow-hidden bg-white/5 shadow-2xl">
+        {/* 4-Column Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 xl:gap-8">
           {VISION_POINTS.map((point, index) => (
             <motion.div
               key={point.id}
-              className="absolute inset-0"
-              initial={false}
-              animate={{
-                opacity: activeIndex === index ? 1 : 0,
-                scale: activeIndex === index ? 1 : 1.05,
-              }}
-              transition={{ duration: 0.7, ease: [0.32, 0.72, 0, 1] }}
-              style={{ pointerEvents: activeIndex === index ? 'auto' : 'none', zIndex: activeIndex === index ? 10 : 0 }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 + index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+              className="bg-[#DCEBF3] rounded-[1rem] p-5 pb-6 xl:p-6 xl:pb-6 flex flex-col h-full hover:shadow-lg transition-all duration-300 relative overflow-hidden group"
             >
-              <Image
-                src={point.img}
-                alt={point.title}
-                fill
-                className="object-cover"
-                priority={index === 0}
-              />
-              {/* Subtle inner gradient for depth */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-deep-roast/90 via-deep-roast/20 to-transparent" />
+              {/* Card Number */}
+              <div className="w-8 h-8 rounded-full border border-[#0070A0] flex items-center justify-center mb-4 relative z-10 bg-transparent">
+                <span className="text-sm font-medium text-[#0070A0]">
+                  {index + 1}
+                </span>
+              </div>
+
+              {/* Title */}
+              <h3
+                className="text-[1.4rem] xl:text-[1.65rem] text-[#0070A0] font-medium mb-3 relative z-10 leading-tight"
+                style={{ fontFamily: 'var(--font-ibm-plex-sans)', letterSpacing: '-0.02em' }}
+              >
+                {point.title}
+              </h3>
+
+              {/* Description */}
+              <p
+                className="text-[#6591A9] leading-relaxed text-[0.95rem] xl:text-[1.05rem] flex-grow relative z-10 pr-4"
+                style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}
+              >
+                {point.desc}
+              </p>
+
+              {/* Decorative abstract elements at bottom */}
+              <div className="pt-8 mt-auto relative z-10 opacity-60 group-hover:opacity-100 transition-opacity duration-500">
+                {index === 0 && (
+                  <div className="flex flex-col gap-2 w-full">
+                    <div className="h-px bg-[#0070A0] w-full relative">
+                      <span className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1 w-1.5 h-1.5 border-t border-r border-[#0070A0] rotate-45 -mt-px"></span>
+                    </div>
+                    <div className="h-px bg-[#0070A0] w-4/5 relative">
+                      <span className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1 w-1.5 h-1.5 border-t border-r border-[#0070A0] rotate-45 -mt-px"></span>
+                    </div>
+                    <div className="h-px bg-[#0070A0] w-[65%] relative">
+                      <span className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1 w-1.5 h-1.5 border-t border-r border-[#0070A0] rotate-45 -mt-px"></span>
+                    </div>
+                  </div>
+                )}
+                {index === 1 && (
+                  <div className="flex gap-2 h-10 items-end">
+                    {[...Array(6)].map((_, i) => (
+                      <div key={i} className="flex-1 border border-[#0070A0] rounded-[0.25rem] h-full relative" style={{ height: `${100 - i * 10}%` }}>
+                        {i === 2 && <span className="absolute inset-0 flex items-center justify-center text-[#0070A0]"><Lightbulb className="w-3.5 h-3.5" strokeWidth={2.5} /></span>}
+                        {i === 5 && <span className="absolute inset-0 flex items-center justify-center text-[#0070A0]"><MessageCircle className="w-2.5 h-2.5" strokeWidth={2.5} /></span>}
+                      </div>
+                    ))}
+                  </div>
+                )}
+                {index === 2 && (
+                  <div className="flex gap-1.5 items-center h-10 w-full">
+                    <div className="flex-1 border border-[#0070A0] h-full rounded-sm" />
+                    <div className="flex-1 border border-[#0070A0] h-full skew-x-[-15deg] rounded-sm transform scale-90" />
+                    <div className="flex-1 border border-[#0070A0] h-full rounded-full mx-0.5" />
+                    <div className="flex-[0.8] border border-[#0070A0] h-full rounded-full" />
+                  </div>
+                )}
+                {index === 3 && (
+                  <div className="flex gap-0 items-center h-8 relative">
+                    <div className="w-1/3 h-full border border-[#0070A0] rounded-l-md rounded-r-[0.35rem] relative" />
+                    <div className="w-[15%] h-full border-t border-b border-[#0070A0] -mx-1 z-10 bg-[#DCEBF3]">
+                      <div className="absolute top-1/2 -translate-y-1/2 w-full h-[60%] border-t border-b border-[#0070A0] bg-[#DCEBF3]" />
+                    </div>
+                    <div className="w-1/3 h-full border border-[#0070A0] rounded-[0.35rem] relative" />
+                    <div className="w-[15%] h-full border-t border-b border-[#0070A0] -mx-1 z-10 bg-[#DCEBF3]">
+                      <div className="absolute top-1/2 -translate-y-1/2 w-full h-[60%] border-t border-b border-[#0070A0] bg-[#DCEBF3]" />
+                    </div>
+                    <div className="w-1/6 h-full border border-[#0070A0] border-l-0 rounded-r-md rounded-l-[0.35rem] relative" />
+                  </div>
+                )}
+              </div>
             </motion.div>
           ))}
         </div>
+
       </div>
     </section>
   );
@@ -613,7 +508,7 @@ export default function Home() {
 
       <div
         ref={containerRef}
-        className="min-h-screen bg-deep-roast text-coffee-cream font-sans selection:bg-golden-extraction selection:text-deep-roast overflow-x-hidden"
+        className="min-h-screen bg-[#FAF2E9] text-deep-roast font-sans selection:bg-golden-extraction selection:text-white overflow-x-hidden"
         style={loading ? { overflow: 'hidden', height: '100vh', pointerEvents: 'none' } : undefined}
       >
         <CoffeeBeanParticles />
@@ -627,7 +522,7 @@ export default function Home() {
         {/* Hero Section — cream frame + dark widget */}
         <section
           style={{
-            backgroundColor: '#F2DECA',
+            backgroundColor: '#FAF2E9',
             height: 'calc(100vh - 68px)',
             padding: 'clamp(10px, 1.2vw, 14px) clamp(16px, 4vw, 48px)',
             boxSizing: 'border-box',
@@ -673,61 +568,94 @@ export default function Home() {
               }}
             />
 
-            {/* Background Moodboard Grid Overlay */}
-            <div className="absolute inset-0 z-0 opacity-40">
-              <MoodboardGrid />
+            {/* Background Image with Ken Burns Effect */}
+            <div className="absolute inset-0 z-0 overflow-hidden bg-deep-roast">
+              <motion.div
+                className="absolute inset-0 origin-center"
+                initial={{ scale: 1.05 }}
+                animate={{ scale: 1.2 }}
+                transition={{
+                  duration: 25,
+                  ease: "linear",
+                  repeat: Infinity,
+                  repeatType: "reverse"
+                }}
+              >
+                <Image
+                  src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?q=80&w=2560&auto=format&fit=crop"
+                  alt="Extraction espresso"
+                  fill
+                  style={{ objectFit: 'cover', objectPosition: 'center' }}
+                  priority
+                />
+              </motion.div>
             </div>
 
-            {/* Simple solid dark overlay for text contrast instead of gradient */}
-            <div className="absolute inset-0 z-0 bg-[#2B1200]/30 pointer-events-none" />
+            {/* Rich gradient overlays for Deep Roast mood & readable text */}
+            <div className="absolute inset-0 z-0 bg-gradient-to-t from-[#2B1200] via-[#2B1200]/70 to-transparent pointer-events-none" />
+            <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#2B1200]/90 via-transparent to-[#2B1200]/40 pointer-events-none" />
+            <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#2B1200]/60 via-transparent to-[#2B1200]/60 pointer-events-none" />
+
+            {/* Subtle noise/grain texture */}
+            <div
+              className="absolute inset-0 z-0 opacity-[0.04] pointer-events-none mix-blend-overlay"
+              style={{
+                backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+                backgroundRepeat: 'repeat',
+              }}
+            />
 
             {/* Content — centered like /about hero */}
             {/* ── Stars · headline · subtitle · two pills ── */}
             <div className="relative z-10 w-full max-w-4xl mx-auto px-8 text-center flex flex-col items-center justify-center h-full">
 
-              {/* Stars rating */}
+              {/* Stars rating in a sleek badge */}
               <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.7, duration: 0.7 }}
-                className="flex items-center justify-center gap-2.5 mb-10"
+                initial={{ opacity: 0, scale: 0.9, y: 10 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                transition={{ delay: 0.7, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                className="flex items-center justify-center gap-3 mb-10 px-5 py-2 rounded-full border border-golden-extraction/20 bg-[#2B1200]/40 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.3)]"
               >
-                <div className="flex gap-0.5">
+                <div className="flex gap-1" style={{ filter: 'drop-shadow(0 2px 4px rgba(200,118,58,0.4))' }}>
                   {[...Array(5)].map((_, i) => (
-                    <span key={i} className="text-golden-extraction text-base leading-none">★</span>
+                    <span key={i} className="text-golden-extraction text-sm leading-none">★</span>
                   ))}
                 </div>
-                <span className="text-coffee-cream/40 text-xs font-mono tracking-widest">
-                  4.9 / 5 · 200+ entreprises partenaires
+                <div className="w-px h-3 bg-coffee-cream/20" />
+                <span className="text-coffee-cream/80 text-[11px] font-mono tracking-[0.2em] uppercase">
+                  4.9 / 5 <span className="opacity-50">·</span> 200+ partenaires
                 </span>
               </motion.div>
 
-              {/* Big serif headline */}
+              {/* Big serif headline with enhanced typography & contrast */}
               <motion.h1
                 initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.85, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+                className="drop-shadow-[0_4px_24px_rgba(0,0,0,0.5)]"
                 style={{
-                  fontSize: 'clamp(2.8rem, 6.5vw, 6.5rem)',
+                  fontSize: 'clamp(2.8rem, 6vw, 6rem)',
                   fontFamily: 'var(--font-sora)',
-                  lineHeight: 1.08,
+                  lineHeight: 1.05,
                   letterSpacing: '-0.02em',
                   color: 'var(--color-coffee-cream)',
                   marginBottom: '1.75rem',
                 }}
               >
-                Faites de la pause un moment qui compte
+                Faites de la <span className="text-transparent bg-clip-text bg-gradient-to-br from-golden-extraction to-sienna-racing italic pr-2">pause</span>
+                <br className="hidden md:block" /> un moment qui compte
               </motion.h1>
 
-              {/* Subtitle */}
+              {/* Subtitle with improved legibility */}
               <motion.p
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1.05, duration: 0.8 }}
-                className="text-base text-coffee-cream/80 leading-relaxed mx-auto max-w-lg mb-10"
+                className="text-[1.05rem] md:text-lg text-coffee-cream/90 leading-relaxed mx-auto max-w-xl mb-10 drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)] font-light"
+                style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}
               >
-                Depuis 40 ans, nous transformons la pause café en un levier de Qualité de Vie au Travail.
-                Service ultra-personnalisé, réactivité immédiate et engagement familial.
+                Depuis <span className="text-coffee-cream font-medium">40 ans</span>, nous transformons la pause café en un véritable levier de <span className="text-coffee-cream font-medium">Qualité de Vie au Travail.</span>
+                <br className="hidden md:block" /> Service ultra-personnalisé, réactivité immédiate et engagement familial.
               </motion.p>
 
               {/* Pill CTAs — matching reference button shapes */}
@@ -810,14 +738,14 @@ export default function Home() {
                   L'Excellence de la <span className="text-sienna-racing">Pause Technique.</span>
                 </h2>
               </div>
-              <p className="max-w-sm text-coffee-cream/50 leading-relaxed text-sm md:text-right" style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}>
+              <p className="max-w-sm text-deep-roast/60 leading-relaxed text-sm md:text-right" style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}>
                 Des équipements de pointe pilotés par une équipe humaine dédiée.{' '}
                 La technologie au service de l'humain.
               </p>
             </div>
 
             {/* Spec-sheet rows */}
-            <div className="border-t border-coffee-cream/[0.12]">
+            <div className="border-t border-deep-roast/10">
               <ServiceRow
                 title="Coffee Corners"
                 desc="Architecture d'espaces de pause premium. Mobilier design et ambiance feutrée pour favoriser les échanges."
@@ -839,14 +767,14 @@ export default function Home() {
         </section>
 
         {/* Testimonials / Cas Clients Section */}
-        <section id="avis" className="py-24 relative bg-deep-roast/50">
+        <section id="avis" className="py-24 relative bg-[#FAF2E9]/30">
           <div className="max-w-7xl mx-auto px-6 relative z-10">
             <div className="text-center mb-16">
               <span className="block text-[10px] font-mono uppercase tracking-[0.22em] text-golden-extraction mb-4">
                 La parole à nos clients
               </span>
               <h2
-                className="text-coffee-cream leading-tight mb-8"
+                className="text-deep-roast leading-tight mb-8"
                 style={{
                   fontFamily: 'var(--font-sora)',
                   fontSize: 'clamp(2rem, 3.5vw, 3rem)',
@@ -865,23 +793,23 @@ export default function Home() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.2 + idx * 0.15, duration: 0.6 }}
-                  className="bg-white/5 border border-coffee-cream/10 p-8 rounded-lg flex flex-col"
+                  className="bg-white border border-deep-roast/10 shadow-sm p-8 rounded-lg flex flex-col"
                 >
                   <div className="flex gap-1 mb-4 text-golden-extraction">
                     {[...Array(5)].map((_, i) => (
                       <span key={i} className="text-sm">★</span>
                     ))}
                   </div>
-                  <p className="text-coffee-cream/80 italic mb-6 flex-grow leading-relaxed" style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}>
+                  <p className="text-deep-roast/80 italic mb-6 flex-grow leading-relaxed" style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}>
                     "{t.review}"
                   </p>
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-sienna-racing/40 flex items-center justify-center text-golden-extraction font-bold" style={{ fontFamily: 'var(--font-sora)' }}>
+                    <div className="w-10 h-10 rounded-full bg-[#FAF2E9] border border-golden-extraction/30 flex items-center justify-center text-golden-extraction font-bold" style={{ fontFamily: 'var(--font-sora)' }}>
                       {t.name.charAt(0)}
                     </div>
                     <div>
-                      <p className="text-coffee-cream font-medium text-sm" style={{ fontFamily: 'var(--font-sora)' }}>{t.name}</p>
-                      <p className="text-coffee-cream/40 text-xs mt-0.5" style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}>Avis Google</p>
+                      <p className="text-deep-roast font-medium text-sm" style={{ fontFamily: 'var(--font-sora)' }}>{t.name}</p>
+                      <p className="text-deep-roast/50 text-xs mt-0.5" style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}>Avis Google</p>
                     </div>
                   </div>
                 </motion.div>
@@ -916,7 +844,7 @@ export default function Home() {
                   Notre Histoire
                 </span>
                 <h2
-                  className="text-coffee-cream leading-tight"
+                  className="text-deep-roast leading-tight"
                   style={{
                     fontFamily: 'var(--font-sora)',
                     fontSize: 'clamp(2rem, 4vw, 3.5rem)',
@@ -926,7 +854,7 @@ export default function Home() {
                   40 Ans d'Excellence
                 </h2>
               </div>
-              <p className="text-coffee-cream/35 text-sm max-w-xs leading-relaxed md:text-right" style={{ fontFamily: 'var(--font-ibm-plex-mono)' }}>
+              <p className="text-deep-roast/50 text-sm max-w-xs leading-relaxed md:text-right" style={{ fontFamily: 'var(--font-ibm-plex-mono)' }}>
                 De l'entreprise familiale au partenaire QVT de référence.
               </p>
             </motion.div>
@@ -938,13 +866,13 @@ export default function Home() {
 
 
         {/* Footer / Contact CTA */}
-        <section id="contact" className="py-20 relative overflow-hidden">
+        <section id="contact" className="py-20 relative overflow-hidden bg-[#FAF2E9]">
           {/* Abstract shapes */}
-          <div className="absolute bottom-0 left-0 w-full h-full bg-gradient-to-t from-sienna-racing/10 to-transparent pointer-events-none" />
+          <div className="absolute bottom-0 left-0 w-full h-full from-sienna-racing/10 to-transparent pointer-events-none" />
 
           <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
             <h2 className="text-5xl md:text-7xl mb-8 tracking-tight" style={{ fontFamily: 'var(--font-sora)', fontWeight: 600 }}>Prêt pour l'infusion ?</h2>
-            <p className="text-xl text-coffee-cream/60 mb-12 max-w-2xl mx-auto" style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}>
+            <p className="text-xl text-deep-roast/70 mb-12 max-w-2xl mx-auto" style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}>
               Discutons de votre projet d'espace détente. Nos experts sont prêts à concevoir la solution idéale pour vos collaborateurs.
             </p>
 
@@ -953,7 +881,7 @@ export default function Home() {
                 <input
                   type="email"
                   placeholder="Votre email professionnel"
-                  className="w-full bg-white/5 border border-coffee-cream/10 rounded px-6 py-4 text-coffee-cream text-sm focus:outline-none focus:border-golden-extraction/50 transition-colors"
+                  className="w-full bg-white border border-deep-roast/20 shadow-inner rounded px-6 py-4 text-deep-roast text-sm focus:outline-none focus:border-golden-extraction/50 transition-colors"
                   style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}
                 />
                 <div className="absolute inset-0 rounded bg-gradient-to-r from-sienna-racing/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />

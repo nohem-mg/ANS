@@ -6,13 +6,13 @@ import { ArrowRight, Users, MapPin, Cog, Handshake, ShieldCheck, Zap } from 'luc
 
 // ─── Design tokens ───────────────────────────────────────────────────────────
 const C = {
-    bg: '#2B1200',
-    surface: '#3A1A06',
+    bg: '#FAF2E9',
+    surface: '#FFFFFF',
     accent: '#C8763A',
     gold: '#DE9E67',
-    textPrimary: '#F5E6D3',
-    textMuted: 'rgba(245,230,211,0.55)',
-    divider: 'rgba(245,230,211,0.12)',
+    textPrimary: '#2B1200',
+    textMuted: 'rgba(43,18,0,0.6)',
+    divider: 'rgba(43,18,0,0.1)',
 } as const;
 
 const FONT = {
@@ -148,11 +148,10 @@ export default function GroupePage() {
     return (
         <div style={{ backgroundColor: C.bg, color: C.textPrimary, fontFamily: FONT.body, minHeight: '100vh' }}>
 
-            {/* ── HERO ── */}
             <section
                 style={{
                     backgroundColor: '#F2DECA',
-                    minHeight: 'calc(70vh - 68px)',
+                    height: 'calc(100vh - 68px)',
                     padding: 'clamp(10px, 1.2vw, 14px) clamp(16px, 4vw, 48px)',
                     boxSizing: 'border-box',
                     display: 'flex',
@@ -165,7 +164,7 @@ export default function GroupePage() {
                     transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
                     style={{
                         flex: 1,
-                        backgroundColor: C.bg,
+                        backgroundColor: '#2B1200',
                         borderRadius: 20,
                         overflow: 'hidden',
                         boxShadow: '0 4px 48px rgba(0,0,0,0.35)',
@@ -213,7 +212,7 @@ export default function GroupePage() {
                                 fontFamily: 'var(--font-sora)',
                                 lineHeight: 1.1,
                                 letterSpacing: '-0.02em',
-                                color: C.textPrimary,
+                                color: '#F5E6D3',
                                 marginBottom: 24,
                             }}
                         >
@@ -225,7 +224,7 @@ export default function GroupePage() {
                             animate={{ opacity: 1 }}
                             transition={{ delay: 0.55, duration: 0.8 }}
                             style={{
-                                fontSize: 16, color: C.textMuted, lineHeight: 1.7,
+                                fontSize: 16, color: 'rgba(245,230,211,0.55)', lineHeight: 1.7,
                                 maxWidth: 580, margin: '0 auto',
                             }}
                         >
@@ -299,7 +298,7 @@ export default function GroupePage() {
 
             {/* ── CHIFFRES CLÉS ── */}
             <section style={{
-                backgroundColor: C.surface,
+                backgroundColor: '#FAF2E9',
                 padding: 'clamp(64px, 10vw, 100px) 24px',
             }}>
                 <div style={{ maxWidth: 1280, margin: '0 auto' }}>
@@ -343,7 +342,7 @@ export default function GroupePage() {
                                     padding: '32px 16px',
                                     borderRadius: 12,
                                     border: `1px solid ${C.divider}`,
-                                    background: 'rgba(43,18,0,0.5)',
+                                    background: '#FAF2E9',
                                 }}
                             >
                                 <AnimatedCounter target={fig.value} suffix={fig.suffix} />
@@ -406,7 +405,7 @@ export default function GroupePage() {
 
             {/* ── ANS DANS LE RÉSEAU ── */}
             <section style={{
-                backgroundColor: C.surface,
+                backgroundColor: '#FAF2E9',
                 padding: 'clamp(64px, 10vw, 100px) 24px',
             }}>
                 <div style={{ maxWidth: 900, margin: '0 auto', textAlign: 'center' }}>
