@@ -293,7 +293,7 @@ const ServiceRow = ({ title, desc, icon }: { title: string, desc: string, icon: 
         </div>
         <h3
           className="text-deep-roast font-semibold"
-          style={{ fontSize: 'clamp(0.7rem, 1.1vw, 0.8rem)', letterSpacing: '0.1em', textTransform: 'uppercase', fontFamily: 'var(--font-ibm-plex-mono)' }}
+          style={{ fontSize: 'clamp(0.75rem, 1.2vw, 0.9rem)', letterSpacing: '0.1em', textTransform: 'uppercase', fontFamily: 'var(--font-ibm-plex-mono)' }}
         >
           {title}
         </h3>
@@ -302,7 +302,7 @@ const ServiceRow = ({ title, desc, icon }: { title: string, desc: string, icon: 
       {/* Right column: description */}
       <p
         className="md:w-[70%] text-deep-roast/60 relative z-10 group-hover:text-deep-roast/80 transition-colors duration-300"
-        style={{ lineHeight: 1.75, fontSize: 'clamp(0.875rem, 1.05vw, 1rem)', fontFamily: 'var(--font-ibm-plex-sans)' }}
+        style={{ lineHeight: 1.75, fontSize: 'clamp(0.95rem, 1.15vw, 1.05rem)', fontFamily: 'var(--font-ibm-plex-sans)' }}
       >
         {desc}
       </p>
