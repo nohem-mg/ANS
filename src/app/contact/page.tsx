@@ -1,42 +1,9 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { ArrowRight, Phone, Mail, MapPin, Clock } from 'lucide-react';
-
-// ─── Design tokens ───────────────────────────────────────────────────────────
-const C = {
-    bg: '#2B1200',
-    surface: '#3A1A06',
-    accent: '#C8763A',
-    gold: '#DE9E67',
-    textPrimary: '#F5E6D3',
-    textMuted: 'rgba(245,230,211,0.55)',
-    divider: 'rgba(245,230,211,0.12)',
-} as const;
-
-const FONT = {
-    display: "var(--font-sora, 'Georgia', serif)",
-    body: "var(--font-ibm-plex-sans, sans-serif)",
-    mono: "var(--font-ibm-plex-mono, monospace)",
-} as const;
-
-const EASE_OUT = [0.25, 0.46, 0.45, 0.94] as const;
-
-// ─── INPUT STYLE ─────────────────────────────────────────────────────────────
-const inputStyle: React.CSSProperties = {
-    width: '100%',
-    background: 'rgba(255,246,239,0.04)',
-    border: `1px solid ${C.divider}`,
-    borderRadius: 8,
-    padding: '14px 18px',
-    fontFamily: FONT.body,
-    fontSize: 14,
-    color: C.textPrimary,
-    outline: 'none',
-    transition: 'border-color 0.2s',
-    boxSizing: 'border-box',
-};
+import Image from 'next/image';
 
 // ─── CONTACT INFO ────────────────────────────────────────────────────────────
 const CONTACT_INFO = [
@@ -71,13 +38,23 @@ export default function ContactPage() {
     const formRef = useRef<HTMLDivElement>(null);
     const isFormInView = useInView(formRef, { once: true, margin: '-40px' });
 
+    // Scroll to top on mount
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
+    // ─── INPUT STYLE CLASSES ───
+    const inputClasses = "w-full bg-[#FAF2E9]/40 border border-deep-roast/20 rounded-lg px-4 py-3.5 text-sm font-[family-name:var(--font-ibm-plex-sans)] text-deep-roast focus:outline-none focus:border-sienna-racing transition-colors duration-200 placeholder:text-deep-roast/40";
+    const labelClasses = "block mb-2 text-[10px] font-[family-name:var(--font-ibm-plex-mono)] tracking-[0.15em] text-deep-roast/60 uppercase";
+
     return (
-        <div style={{ backgroundColor: C.bg, color: C.textPrimary, fontFamily: FONT.body, minHeight: '100vh' }}>
+        <div className="min-h-screen bg-[#FAF2E9] text-deep-roast font-[family-name:var(--font-ibm-plex-sans)] selection:bg-golden-extraction selection:text-white">
 
             {/* ── HERO ── */}
             <section
+                className="w-full"
                 style={{
-                    backgroundColor: '#F2DECA',
+                    backgroundColor: '#FAF2E9',
                     minHeight: 'calc(50vh - 68px)',
                     padding: 'clamp(10px, 1.2vw, 14px) clamp(16px, 4vw, 48px)',
                     boxSizing: 'border-box',
@@ -89,219 +66,191 @@ export default function ContactPage() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
-                    style={{
-                        flex: 1,
-                        backgroundColor: C.bg,
-                        borderRadius: 20,
-                        overflow: 'hidden',
-                        boxShadow: 'none',
-                        position: 'relative',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        padding: 'clamp(40px, 6vw, 80px) clamp(24px, 6vw, 80px)',
-                    }}
+                    className="flex-1 bg-deep-roast rounded-[20px] overflow-hidden relative flex flex-col items-center justify-center p-10 md:p-20"
                 >
-                    {/* Dot grid */}
-                    <div aria-hidden style={{
-                        position: 'absolute', inset: 0,
-                        backgroundImage: 'radial-gradient(circle, rgba(245,230,211,0.25) 1px, transparent 1px)',
-                        backgroundSize: '32px 32px', opacity: 0.06, pointerEvents: 'none',
-                    }} />
-                    <div aria-hidden style={{
-                        position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)',
-                        width: 700, height: 700, borderRadius: '50%',
-                        background: 'radial-gradient(circle, rgba(200,118,58,0.1) 0%, transparent 65%)',
-                        pointerEvents: 'none',
-                    }} />
+                    {/* Background Noise & Grain */}
+                    <div
+                        aria-hidden="true"
+                        className="absolute inset-0 z-0 opacity-[0.04] pointer-events-none mix-blend-overlay"
+                        style={{
+                            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+                            backgroundRepeat: 'repeat',
+                        }}
+                    />
 
-                    <div style={{ position: 'relative', zIndex: 1, textAlign: 'center', maxWidth: 700 }}>
+                    {/* Dot grid */}
+                    <div aria-hidden="true" className="absolute inset-0 pointer-events-none opacity-5"
+                        style={{
+                            backgroundImage: 'radial-gradient(circle, rgba(245,230,211,0.25) 1px, transparent 1px)',
+                            backgroundSize: '32px 32px'
+                        }}
+                    />
+
+                    {/* Amber glow */}
+                    <div aria-hidden="true" className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full pointer-events-none"
+                        style={{
+                            background: 'radial-gradient(circle, rgba(200,118,58,0.12) 0%, transparent 65%)',
+                        }}
+                    />
+
+                    <div className="relative z-10 text-center max-w-[700px]">
                         <motion.div
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.2, duration: 0.7 }}
-                            style={{
-                                fontFamily: FONT.mono, fontSize: 11, letterSpacing: '0.22em',
-                                color: C.accent, textTransform: 'uppercase', marginBottom: 28,
-                            }}
+                            className="text-[11px] font-[family-name:var(--font-ibm-plex-mono)] tracking-[0.22em] text-sienna-racing uppercase mb-9"
                         >
                             Contact
                         </motion.div>
 
                         <motion.h1
-                            initial={{ opacity: 0, y: 30 }}
+                            initial={{ opacity: 0, y: 40 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.35, duration: 0.9, ease: EASE_OUT }}
+                            transition={{ delay: 0.85, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+                            className="drop-shadow-[0_4px_24px_rgba(0,0,0,0.5)]"
                             style={{
-                                fontSize: 'clamp(2rem, 5vw, 4.5rem)',
+                                fontSize: 'clamp(2.8rem, 6vw, 6rem)',
                                 fontFamily: 'var(--font-sora)',
-                                lineHeight: 1.1,
+                                lineHeight: 1.05,
                                 letterSpacing: '-0.02em',
-                                color: C.textPrimary,
-                                marginBottom: 16,
+                                color: 'var(--color-coffee-cream)',
+                                marginBottom: '1.75rem',
                             }}
                         >
-                            Parlons de votre <span style={{ color: C.accent }}>projet.</span>
+                            Parlons de votre <span className="text-transparent bg-clip-text bg-gradient-to-br from-golden-extraction to-sienna-racing italic pr-2">projet.</span>
                         </motion.h1>
 
                         <motion.p
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
-                            transition={{ delay: 0.55, duration: 0.8 }}
-                            style={{
-                                fontSize: 15, color: C.textMuted, lineHeight: 1.7,
-                                maxWidth: 500, margin: '0 auto',
-                            }}
+                            transition={{ delay: 1.05, duration: 0.8 }}
+                            className="text-[1.05rem] md:text-lg text-coffee-cream/90 leading-relaxed mx-auto max-w-xl mb-10 drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)] font-light"
+                            style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}
                         >
                             Audit gratuit, proposition sur-mesure et accompagnement personnalisé.
-                            Notre équipe est à votre écoute.
+                            Notre équipe est à votre écoute pour redéfinir la pause dans votre entreprise.
                         </motion.p>
                     </div>
                 </motion.div>
             </section>
 
             {/* ── FORM + INFO ── */}
-            <section style={{ padding: 'clamp(64px, 10vw, 120px) 24px' }}>
-                <div ref={formRef} style={{
-                    maxWidth: 1100,
-                    margin: '0 auto',
-                    display: 'grid',
-                    gridTemplateColumns: '1.4fr 1fr',
-                    gap: 'clamp(40px, 6vw, 80px)',
-                    alignItems: 'start',
-                }}>
+            <section className="px-6 py-20 md:py-32">
+                <div ref={formRef} className="max-w-[1100px] mx-auto grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-16 lg:gap-24 items-start">
 
                     {/* Left: Form */}
                     <motion.div
                         initial={{ opacity: 0, y: 24 }}
                         animate={isFormInView ? { opacity: 1, y: 0 } : undefined}
-                        transition={{ duration: 0.8, ease: EASE_OUT }}
+                        transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
                     >
                         <h2 style={{
-                            fontFamily: FONT.display,
+                            fontFamily: "var(--font-sora, 'Georgia', serif)",
                             fontSize: 'clamp(22px, 3vw, 32px)',
-                            fontWeight: 600, color: C.textPrimary,
-                            letterSpacing: '-0.02em', margin: '0 0 8px',
+                            fontWeight: 600, color: '#451F17',
+                            letterSpacing: '-0.02em', margin: '0 0 12px',
                         }}>
                             Envoyez-nous un message
                         </h2>
-                        <p style={{
-                            fontFamily: FONT.body, fontSize: 13, color: C.textMuted,
-                            lineHeight: 1.6, margin: '0 0 32px',
-                        }}>
+                        <p className="text-[0.95rem] md:text-[1rem] text-deep-roast/70 leading-relaxed mb-10 font-[family-name:var(--font-ibm-plex-sans)]">
                             Remplissez le formulaire ci-dessous et nous vous recontacterons sous 24h.
                         </p>
 
                         <form
                             onSubmit={(e) => e.preventDefault()}
-                            style={{ display: 'flex', flexDirection: 'column', gap: 16 }}
+                            className="flex flex-col gap-6"
                         >
                             {/* Row: Nom + Email */}
-                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div>
-                                    <label style={{ fontFamily: FONT.mono, fontSize: 10, letterSpacing: '0.15em', color: C.textMuted, textTransform: 'uppercase', display: 'block', marginBottom: 8 }}>
+                                    <label className={labelClasses}>
                                         Nom complet
                                     </label>
                                     <input
                                         type="text"
                                         placeholder="Jean Dupont"
-                                        style={inputStyle}
-                                        onFocus={(e) => (e.currentTarget.style.borderColor = C.accent)}
-                                        onBlur={(e) => (e.currentTarget.style.borderColor = C.divider)}
+                                        className={inputClasses}
                                     />
                                 </div>
                                 <div>
-                                    <label style={{ fontFamily: FONT.mono, fontSize: 10, letterSpacing: '0.15em', color: C.textMuted, textTransform: 'uppercase', display: 'block', marginBottom: 8 }}>
+                                    <label className={labelClasses}>
                                         Email professionnel
                                     </label>
                                     <input
                                         type="email"
                                         placeholder="jean@entreprise.fr"
-                                        style={inputStyle}
-                                        onFocus={(e) => (e.currentTarget.style.borderColor = C.accent)}
-                                        onBlur={(e) => (e.currentTarget.style.borderColor = C.divider)}
+                                        className={inputClasses}
                                     />
                                 </div>
                             </div>
 
                             {/* Row: Téléphone + Entreprise */}
-                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div>
-                                    <label style={{ fontFamily: FONT.mono, fontSize: 10, letterSpacing: '0.15em', color: C.textMuted, textTransform: 'uppercase', display: 'block', marginBottom: 8 }}>
+                                    <label className={labelClasses}>
                                         Téléphone
                                     </label>
                                     <input
                                         type="tel"
                                         placeholder="06 12 34 56 78"
-                                        style={inputStyle}
-                                        onFocus={(e) => (e.currentTarget.style.borderColor = C.accent)}
-                                        onBlur={(e) => (e.currentTarget.style.borderColor = C.divider)}
+                                        className={inputClasses}
                                     />
                                 </div>
                                 <div>
-                                    <label style={{ fontFamily: FONT.mono, fontSize: 10, letterSpacing: '0.15em', color: C.textMuted, textTransform: 'uppercase', display: 'block', marginBottom: 8 }}>
+                                    <label className={labelClasses}>
                                         Entreprise
                                     </label>
                                     <input
                                         type="text"
-                                        placeholder="Nom de l'entreprise"
-                                        style={inputStyle}
-                                        onFocus={(e) => (e.currentTarget.style.borderColor = C.accent)}
-                                        onBlur={(e) => (e.currentTarget.style.borderColor = C.divider)}
+                                        placeholder="Nom de l&apos;entreprise"
+                                        className={inputClasses}
                                     />
                                 </div>
                             </div>
 
                             {/* Nombre de collaborateurs */}
                             <div>
-                                <label style={{ fontFamily: FONT.mono, fontSize: 10, letterSpacing: '0.15em', color: C.textMuted, textTransform: 'uppercase', display: 'block', marginBottom: 8 }}>
+                                <label className={labelClasses}>
                                     Nombre de collaborateurs
                                 </label>
-                                <select
-                                    style={{ ...inputStyle, appearance: 'none', cursor: 'pointer' }}
-                                    onFocus={(e) => (e.currentTarget.style.borderColor = C.accent)}
-                                    onBlur={(e) => (e.currentTarget.style.borderColor = C.divider)}
-                                >
-                                    <option value="" style={{ background: C.bg }}>Sélectionnez une tranche</option>
-                                    <option value="1-20" style={{ background: C.bg }}>1 – 20 collaborateurs</option>
-                                    <option value="21-50" style={{ background: C.bg }}>21 – 50 collaborateurs</option>
-                                    <option value="51-100" style={{ background: C.bg }}>51 – 100 collaborateurs</option>
-                                    <option value="101-250" style={{ background: C.bg }}>101 – 250 collaborateurs</option>
-                                    <option value="250+" style={{ background: C.bg }}>250+ collaborateurs</option>
-                                </select>
+                                <div className="relative">
+                                    <select
+                                        className={`${inputClasses} appearance-none cursor-pointer pr-10`}
+                                        defaultValue=""
+                                    >
+                                        <option value="" disabled className="text-deep-roast/40">Sélectionnez une tranche</option>
+                                        <option value="1-20" className="text-deep-roast">1 – 20 collaborateurs</option>
+                                        <option value="21-50" className="text-deep-roast">21 – 50 collaborateurs</option>
+                                        <option value="51-100" className="text-deep-roast">51 – 100 collaborateurs</option>
+                                        <option value="101-250" className="text-deep-roast">101 – 250 collaborateurs</option>
+                                        <option value="250+" className="text-deep-roast">250+ collaborateurs</option>
+                                    </select>
+                                    <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-deep-roast/40">
+                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                                    </div>
+                                </div>
                             </div>
 
                             {/* Message */}
                             <div>
-                                <label style={{ fontFamily: FONT.mono, fontSize: 10, letterSpacing: '0.15em', color: C.textMuted, textTransform: 'uppercase', display: 'block', marginBottom: 8 }}>
+                                <label className={labelClasses}>
                                     Votre message
                                 </label>
                                 <textarea
                                     rows={5}
                                     placeholder="Décrivez votre projet, vos besoins, vos questions..."
-                                    style={{ ...inputStyle, resize: 'vertical', minHeight: 120 }}
-                                    onFocus={(e) => (e.currentTarget.style.borderColor = C.accent)}
-                                    onBlur={(e) => (e.currentTarget.style.borderColor = C.divider)}
+                                    className={`${inputClasses} resize-y min-h-[120px]`}
                                 />
                             </div>
 
                             {/* Submit */}
                             <motion.button
                                 type="submit"
-                                style={{
-                                    display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-                                    fontFamily: FONT.mono, fontSize: 12, fontWeight: 600,
-                                    color: '#1C0A00', background: C.gold,
-                                    border: 'none', borderRadius: 8, padding: '16px 32px',
-                                    letterSpacing: '0.08em', textTransform: 'uppercase',
-                                    cursor: 'pointer', width: '100%',
-                                    marginTop: 8,
-                                }}
-                                whileHover={{ scale: 1.01, filter: 'brightness(1.05)' }}
+                                className="mt-4 w-full flex items-center justify-center gap-2 px-8 py-4 bg-golden-extraction text-deep-roast font-[family-name:var(--font-ibm-plex-mono)] text-sm font-bold tracking-widest uppercase rounded hover:bg-white transition-colors duration-300"
+                                whileHover={{ scale: 1.01 }}
                                 whileTap={{ scale: 0.99 }}
                             >
-                                Envoyer le message <ArrowRight size={14} />
+                                Envoyer le message <ArrowRight className="w-5 h-5" />
                             </motion.button>
                         </form>
                     </motion.div>
@@ -310,120 +259,79 @@ export default function ContactPage() {
                     <motion.div
                         initial={{ opacity: 0, y: 24 }}
                         animate={isFormInView ? { opacity: 1, y: 0 } : undefined}
-                        transition={{ duration: 0.8, delay: 0.15, ease: EASE_OUT }}
-                        style={{ display: 'flex', flexDirection: 'column', gap: 0 }}
+                        transition={{ duration: 0.8, delay: 0.15, ease: [0.25, 0.46, 0.45, 0.94] }}
+                        className="flex flex-col"
                     >
                         <h3 style={{
-                            fontFamily: FONT.display,
-                            fontSize: 18, fontWeight: 600, color: C.textPrimary,
-                            margin: '0 0 28px', letterSpacing: '-0.01em',
+                            fontFamily: "var(--font-sora, 'Georgia', serif)",
+                            fontSize: 18, fontWeight: 600, color: '#451F17',
+                            margin: '0 0 24px', letterSpacing: '-0.01em',
                         }}>
                             Informations de contact
                         </h3>
 
-                        {CONTACT_INFO.map((info, i) => {
-                            const content = (
-                                <div
-                                    key={info.label}
-                                    style={{
-                                        display: 'flex', gap: 16, alignItems: 'flex-start',
-                                        padding: '20px 0',
-                                        borderBottom: i < CONTACT_INFO.length - 1 ? `1px solid ${C.divider}` : 'none',
-                                    }}
-                                >
-                                    <div style={{
-                                        width: 40, height: 40, borderRadius: 10,
-                                        background: `rgba(200,118,58,0.1)`,
-                                        border: `1px solid rgba(200,118,58,0.15)`,
-                                        display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                        color: C.accent, flexShrink: 0,
-                                    }}>
-                                        {info.icon}
+                        <div className="flex flex-col">
+                            {CONTACT_INFO.map((info, i) => {
+                                const isLast = i === CONTACT_INFO.length - 1;
+                                const content = (
+                                    <div
+                                        className={`flex gap-5 items-start py-6 ${!isLast ? 'border-b border-deep-roast/10' : ''}`}
+                                    >
+                                        <div className="w-12 h-12 rounded bg-[#FAF2E9] border border-deep-roast/10 shadow-sm flex items-center justify-center text-deep-roast/60 hover:text-golden-extraction transition-colors duration-300 shrink-0">
+                                            {info.icon}
+                                        </div>
+                                        <div className="flex flex-col pt-[3px]">
+                                            <p className="text-[0.7rem] font-[family-name:var(--font-ibm-plex-mono)] tracking-[0.1em] text-deep-roast/50 uppercase mb-1">
+                                                {info.label}
+                                            </p>
+                                            <p className="text-[0.95rem] font-[family-name:var(--font-ibm-plex-sans)] text-deep-roast font-medium">
+                                                {info.value}
+                                            </p>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <p style={{
-                                            fontFamily: FONT.mono, fontSize: 10, letterSpacing: '0.15em',
-                                            color: C.textMuted, textTransform: 'uppercase', margin: '0 0 4px',
-                                        }}>
-                                            {info.label}
-                                        </p>
-                                        <p style={{
-                                            fontFamily: FONT.body, fontSize: 14, color: C.textPrimary,
-                                            margin: 0, lineHeight: 1.5,
-                                        }}>
-                                            {info.value}
-                                        </p>
-                                    </div>
-                                </div>
-                            );
+                                );
 
-                            return info.href ? (
-                                <a
-                                    key={info.label}
-                                    href={info.href}
-                                    target={info.href.startsWith('http') ? '_blank' : undefined}
-                                    rel={info.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                                    style={{ textDecoration: 'none', color: 'inherit' }}
-                                >
-                                    {content}
-                                </a>
-                            ) : (
-                                <div key={info.label}>{content}</div>
-                            );
-                        })}
+                                return info.href ? (
+                                    <a
+                                        key={info.label}
+                                        href={info.href}
+                                        target={info.href.startsWith('http') ? '_blank' : undefined}
+                                        rel={info.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                                        className="hover:bg-deep-roast/[0.02] transition-colors duration-200 -mx-4 px-4 rounded-xl"
+                                    >
+                                        {content}
+                                    </a>
+                                ) : (
+                                    <div key={info.label} className="-mx-4 px-4">{content}</div>
+                                );
+                            })}
+                        </div>
 
                         {/* Map placeholder */}
-                        <div
-                            style={{
-                                marginTop: 28,
-                                borderRadius: 12,
-                                overflow: 'hidden',
-                                border: `1px solid ${C.divider}`,
-                                height: 200,
-                                position: 'relative',
-                                background: C.surface,
-                            }}
-                        >
+                        <div className="mt-10 rounded-2xl overflow-hidden border border-deep-roast/10 h-[220px] relative bg-white shadow-sm ring-1 ring-black/5">
                             <iframe
                                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2545.5!2d3.227!3d50.17!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2z!5e0!3m2!1sfr!2sfr!4v1"
                                 width="100%"
                                 height="100%"
-                                style={{ border: 0, filter: 'invert(0.9) hue-rotate(180deg) saturate(0.3)', opacity: 0.7 }}
+                                className="border-0 filter grayscale opacity-80"
                                 allowFullScreen
                                 loading="lazy"
                                 referrerPolicy="no-referrer-when-downgrade"
                                 title="Localisation ANS — Proville"
                             />
+                            {/* Overlay gradient for aesthetics */}
                             <div
-                                aria-hidden
-                                style={{
-                                    position: 'absolute', inset: 0,
-                                    background: 'linear-gradient(to bottom, transparent 60%, rgba(43,18,0,0.6))',
-                                    pointerEvents: 'none',
-                                }}
+                                aria-hidden="true"
+                                className="absolute inset-0 bg-gradient-to-t from-deep-roast/40 to-transparent pointer-events-none"
                             />
-                            <div style={{
-                                position: 'absolute', bottom: 12, left: 16,
-                                fontFamily: FONT.mono, fontSize: 10, letterSpacing: '0.1em',
-                                color: C.textMuted, textTransform: 'uppercase',
-                            }}>
-                                Proville, Hauts-de-France
+                            <div className="absolute bottom-4 left-5">
+                                <span className="text-[10px] font-[family-name:var(--font-ibm-plex-mono)] tracking-[0.1em] text-white uppercase drop-shadow-md">
+                                    Proville, Hauts-de-France
+                                </span>
                             </div>
                         </div>
                     </motion.div>
                 </div>
-
-                {/* Responsive */}
-                <style>{`
-          @media (max-width: 768px) {
-            section > div[style*="grid-template-columns: 1.4fr"] {
-              grid-template-columns: 1fr !important;
-            }
-            form div[style*="grid-template-columns: 1fr 1fr"] {
-              grid-template-columns: 1fr !important;
-            }
-          }
-        `}</style>
             </section>
         </div>
     );
