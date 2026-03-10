@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import { motion, useInView, useReducedMotion, useScroll, useTransform, useSpring } from 'framer-motion';
 import Image from 'next/image';
 import { ArrowRight, ArrowLeft, Github, Globe } from 'lucide-react';
+import { ZoomParallax } from '../components/ZoomParallax';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // TYPESCRIPT INTERFACES
@@ -56,48 +57,27 @@ interface MoodboardImage {
 // ─────────────────────────────────────────────────────────────────────────────
 
 const NAV_ITEMS: NavItem[] = [
-  { label: 'Nos Valeurs', anchor: 'nos-valeurs' },
-  { label: "Rejoindre l'équipe", anchor: 'rejoindre' },
-  { label: "L'Équipe", anchor: 'equipe' }
+  { label: 'Notre Histoire', anchor: 'notre-histoire' },
+  { label: "L'Équipe", anchor: 'equipe' },
+  { label: "Rejoindre l'équipe", anchor: 'rejoindre' }
 ];
 
-const VALUES: Value[] = [
+const STORY_DATA = [
   {
-    letter: 'A',
-    title: 'Fiabilité',
-    description:
-      "Nos machines tournent. Toujours. La disponibilité n'est pas une option, c'est notre standard.",
+    title: 'Les Origines',
+    description: "Ce qui a commencé comme une modeste aventure s'est transformé en une véritable mission : redonner ses lettres de noblesse à la pause en entreprise. Dès nos premiers pas, nous avons eu la conviction que la qualité de l'expérience et le sens du service devaient primer avant tout.",
+    image: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&h=600&fit=crop&auto=format&q=80',
   },
   {
-    letter: 'B',
-    title: 'Transparence',
-    description:
-      'Reporting clair, interventions traçables. Vous savez exactement ce qui se passe sur votre parc.',
+    title: 'Le Développement',
+    description: "En rejoignant le groupement Prodia+, nous avons franchi un cap. Cette étape décisive nous a permis d'acquérir l'envergure d'un réseau national, tout en conservant jalouseusement notre esprit d'artisan et notre ancrage local. Un pont parfait entre puissance logistique et relation de proximité.",
+    image: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800&h=600&fit=crop&auto=format&q=80',
   },
   {
-    letter: 'C',
-    title: 'Réactivité',
-    description:
-      "Une panne signalée, c'est une panne résolue en moins de 4h. Nous ne laissons jamais une pause gâchée.",
-  },
-  {
-    letter: 'D',
-    title: 'Qualité',
-    description:
-      "Sélection rigoureuse des produits et des machines. Nous ne proposons que ce que nous servons nous-mêmes.",
-  },
-  {
-    letter: 'E',
-    title: 'Proximité',
-    description:
-      "Un interlocuteur dédié. Pas un call center, une vraie relation de partenariat.",
-  },
-  {
-    letter: 'F',
-    title: 'Innovation',
-    description:
-      "Nous intégrons continuellement les nouvelles technologies pour améliorer l'expérience utilisateur.",
-  },
+    title: 'Aujourd\'hui',
+    description: "Nous ne livrons plus seulement du café, nous aménageons de véritables refuges pour redynamiser vos équipes. Nos espaces de pause sont devenus les places centrales de vos bureaux, là où les silos se brisent, où soufflent les collaborateurs et où l'intelligence collective prend forme.",
+    image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=600&fit=crop&auto=format&q=80',
+  }
 ];
 
 const JOBS: Job[] = [
@@ -628,80 +608,13 @@ function MoodboardGrid() {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// SECTION 3: NOS VALEURS
+// SECTION 3: NOTRE HISTOIRE
 // ─────────────────────────────────────────────────────────────────────────────
 
-function ValueCard({ value, index }: { value: Value; index: number }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: '-40px' });
-  const [hovered, setHovered] = useState(false);
-  const shouldReduce = useReducedMotion();
-
-  return (
-    <motion.div
-      ref={ref}
-      initial={shouldReduce ? false : { opacity: 0, y: 20 }}
-      animate={isInView ? { opacity: 1, y: 0 } : undefined}
-      transition={{
-        duration: 0.8,
-        delay: index * 0.08,
-        ease: EASE_OUT,
-      }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      style={{
-        borderTop: `1px solid ${C.divider}`,
-        padding: '28px 0 32px',
-        cursor: 'default',
-      }}
-    >
-      <span
-        style={{
-          fontFamily: FONT.mono,
-          fontSize: '48px',
-          fontWeight: 700,
-          color: C.accent,
-          opacity: hovered ? 1 : 0.6,
-          transition: 'opacity 0.3s ease',
-          lineHeight: 1,
-          display: 'block',
-          marginBottom: '18px',
-        }}
-      >
-        {value.letter}
-      </span>
-      <h3
-        style={{
-          fontFamily: FONT.display,
-          fontSize: '19px',
-          fontWeight: 700,
-          color: C.textPrimary,
-          marginBottom: '10px',
-          letterSpacing: '-0.01em',
-        }}
-      >
-        {value.title}
-      </h3>
-      <p
-        style={{
-          fontFamily: FONT.body,
-          fontSize: '14px',
-          color: C.textMuted,
-          lineHeight: 1.7,
-          maxWidth: 340,
-          margin: 0,
-        }}
-      >
-        {value.description}
-      </p>
-    </motion.div>
-  );
-}
-
-function ValuesSection() {
+function StorySection() {
   return (
     <section
-      id="nos-valeurs"
+      id="notre-histoire"
       style={{
         backgroundColor: C.bg,
         padding: '128px 24px',
@@ -710,8 +623,10 @@ function ValuesSection() {
       <div style={{ maxWidth: 1280, margin: '0 auto' }}>
         <FadeIn style={{ marginBottom: '80px', position: 'relative' }}>
           <GhostNumber n="03" />
-          <div style={{ position: 'relative', zIndex: 1 }}>
-            <SectionTag index="03" label="Valeurs" />
+          <div style={{ position: 'relative', zIndex: 1, textAlign: 'center', maxWidth: 640, margin: '0 auto' }}>
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+              <SectionTag index="03" label="Histoire" />
+            </div>
             <h2
               style={{
                 fontFamily: FONT.display,
@@ -723,36 +638,148 @@ function ValuesSection() {
                 marginBottom: '18px',
               }}
             >
-              Nos Valeurs
+              Notre Histoire
             </h2>
             <p
               style={{
                 fontFamily: FONT.body,
                 fontSize: '16px',
                 color: C.textMuted,
-                maxWidth: 520,
                 lineHeight: 1.7,
                 margin: 0,
               }}
             >
-              Nous construisons des partenariats durables avec rigueur et
-              transparence.
+              Plus de 40 ans de passion à transformer l'univers du travail autour de moments chaleureux et de services irréprochables.
             </p>
           </div>
         </FadeIn>
 
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
-            gap: '0 56px',
-          }}
-        >
-          {VALUES.map((v, i) => (
-            <ValueCard key={v.letter} value={v} index={i} />
-          ))}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '96px' }}>
+          {STORY_DATA.map((item, i) => {
+            const isImageLeft = i % 2 !== 0; // 0: text left, 1: image left, 2: text left
+
+            return (
+              <FadeIn key={i}>
+                <div
+                  className="story-row"
+                  style={{
+                    display: 'flex',
+                    flexDirection: isImageLeft ? 'row-reverse' : 'row',
+                    gap: '48px',
+                    alignItems: 'center',
+                  }}
+                >
+                  <div style={{ flex: '1 1 50%', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                    <h3
+                      style={{
+                        fontFamily: FONT.display,
+                        fontSize: 'clamp(28px, 3.5vw, 42px)',
+                        fontWeight: 600,
+                        color: C.textPrimary,
+                        margin: 0,
+                        lineHeight: 1.1,
+                        letterSpacing: '-0.01em',
+                      }}
+                    >
+                      {item.title}
+                    </h3>
+                    <div style={{ width: 48, height: 2, backgroundColor: C.accent, borderRadius: 2 }} />
+                    <p
+                      style={{
+                        fontFamily: FONT.body,
+                        fontSize: '16px',
+                        color: C.textMuted,
+                        lineHeight: 1.8,
+                        margin: 0,
+                      }}
+                    >
+                      {item.description}
+                    </p>
+                  </div>
+
+                  <div style={{ flex: '1 1 50%', position: 'relative', width: '100%', display: 'flex', justifyContent: 'center' }}>
+                    {/* Outer wrapper without overflow: hidden so tape can bleed outside */}
+                    <div
+                      style={{
+                        position: 'relative',
+                        width: '100%',
+                        transform: isImageLeft ? 'rotate(-2.5deg)' : 'rotate(2.5deg)',
+                      }}
+                    >
+                      {/* Inner wrapper for aspect ratio and image */}
+                      <div
+                        style={{
+                          position: 'relative',
+                          width: '100%',
+                          paddingTop: '75%',
+                          overflow: 'hidden',
+                          boxShadow: '0 20px 40px rgba(0,0,0,0.4)',
+                          backgroundColor: '#111',
+                          borderRadius: '2px', // very subtle rounding just to soften digital edges
+                        }}
+                      >
+                        <Image
+                          src={item.image}
+                          alt={item.title}
+                          fill
+                          unoptimized
+                          style={{ objectFit: 'cover' }}
+                          sizes="(max-width: 800px) 100vw, 50vw"
+                        />
+                      </div>
+
+                      {/* Top-left tape */}
+                      <div
+                        style={{
+                          position: 'absolute',
+                          top: '-14px',
+                          left: '-42px',
+                          width: '100px',
+                          height: '24px',
+                          backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                          backdropFilter: 'blur(2px)',
+                          boxShadow: '0 1px 2px rgba(0,0,0,0.1), inset 0 0 0 1px rgba(255,255,255,0.08)',
+                          transform: 'rotate(-42deg)',
+                          zIndex: 10,
+                          // CSS mask to simulate uneven/torn tape edges
+                          maskImage: 'linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.6) 8%, black 50%, rgba(0,0,0,0.6) 92%, transparent 100%)',
+                          WebkitMaskImage: 'linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.6) 8%, black 50%, rgba(0,0,0,0.6) 92%, transparent 100%)',
+                        }}
+                      />
+
+                      {/* Bottom-right tape */}
+                      <div
+                        style={{
+                          position: 'absolute',
+                          bottom: '-14px',
+                          right: '-42px',
+                          width: '100px',
+                          height: '24px',
+                          backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                          backdropFilter: 'blur(2px)',
+                          boxShadow: '0 1px 2px rgba(0,0,0,0.1), inset 0 0 0 1px rgba(255,255,255,0.08)',
+                          transform: 'rotate(-42deg)',
+                          zIndex: 10,
+                          maskImage: 'linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.6) 8%, black 50%, rgba(0,0,0,0.6) 92%, transparent 100%)',
+                          WebkitMaskImage: 'linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.6) 8%, black 50%, rgba(0,0,0,0.6) 92%, transparent 100%)',
+                        }}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </FadeIn>
+            );
+          })}
         </div>
       </div>
+      <style>{`
+        @media (max-width: 800px) {
+          .story-row {
+            flex-direction: column !important;
+            gap: 32px !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }
@@ -931,252 +958,52 @@ function CareersSection() {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// SECTION 5: L'ÉQUIPE
+// SECTION 5: L'ÉQUIPE — Zoom Parallax
 // ─────────────────────────────────────────────────────────────────────────────
 
-// Inline X (Twitter) icon — stable across lucide-react versions
-const XIcon = ({ size = 14 }: { size?: number }) => (
-  <svg
-    width={size}
-    height={size}
-    viewBox="0 0 24 24"
-    fill="currentColor"
-    aria-hidden="true"
-  >
-    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-  </svg>
-);
-
-function TeamCard({
-  member,
-  isFirstRow,
-}: {
-  member: TeamMember;
-  isFirstRow: boolean;
-}) {
-  const [hovered, setHovered] = useState(false);
-  const hasSocial = member.twitter || member.github || member.website;
-
-  return (
-    <div
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      style={{
-        padding: '28px 28px 24px',
-        borderRight: `1px solid ${C.divider}`,
-        borderBottom: isFirstRow ? `1px solid ${C.divider}` : 'none',
-        display: 'flex',
-        flexDirection: 'column',
-        minHeight: '200px',
-        cursor: 'default',
-      }}
-    >
-      {/* Circular grayscale photo */}
-      <div
-        style={{
-          width: 52,
-          height: 52,
-          borderRadius: '50%',
-          overflow: 'hidden',
-          position: 'relative',
-          marginBottom: '20px',
-          flexShrink: 0,
-        }}
-      >
-        <Image
-          src={`https://picsum.photos/seed/${member.picId}/200/200`}
-          alt={member.name}
-          fill
-          unoptimized
-          style={{ objectFit: 'cover', filter: 'grayscale(100%)' }}
-          sizes="52px"
-        />
-      </div>
-
-      {/* Name */}
-      <p
-        style={{
-          fontFamily: FONT.display,
-          fontSize: 'clamp(16px, 1.5vw, 21px)',
-          fontWeight: 700,
-          color: hovered ? C.accent : C.textPrimary,
-          transition: 'color 0.25s',
-          margin: '0 0 6px',
-          letterSpacing: '-0.02em',
-          lineHeight: 1.15,
-        }}
-      >
-        {member.name}
-      </p>
-
-      {/* Role */}
-      <p
-        style={{
-          fontFamily: FONT.body,
-          fontSize: '12px',
-          color: C.textMuted,
-          margin: 0,
-          lineHeight: 1.5,
-        }}
-      >
-        {member.role}
-      </p>
-
-      {/* Social icons — pushed to bottom */}
-      {hasSocial && (
-        <div
-          style={{
-            marginTop: 'auto',
-            paddingTop: '20px',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '12px',
-          }}
-        >
-          {member.twitter && (
-            <a
-              href={member.twitter}
-              style={{
-                color: C.textMuted,
-                transition: 'color 0.2s',
-                display: 'flex',
-              }}
-              onMouseEnter={(e) =>
-                (e.currentTarget.style.color = C.textPrimary)
-              }
-              onMouseLeave={(e) => (e.currentTarget.style.color = C.textMuted)}
-              aria-label="X / Twitter"
-            >
-              <XIcon size={14} />
-            </a>
-          )}
-          {member.github && (
-            <a
-              href={member.github}
-              style={{
-                color: C.textMuted,
-                transition: 'color 0.2s',
-                display: 'flex',
-              }}
-              onMouseEnter={(e) =>
-                (e.currentTarget.style.color = C.textPrimary)
-              }
-              onMouseLeave={(e) => (e.currentTarget.style.color = C.textMuted)}
-              aria-label="GitHub"
-            >
-              <Github size={14} />
-            </a>
-          )}
-          {member.website && (
-            <a
-              href={member.website}
-              style={{
-                color: C.textMuted,
-                transition: 'color 0.2s',
-                display: 'flex',
-              }}
-              onMouseEnter={(e) =>
-                (e.currentTarget.style.color = C.textPrimary)
-              }
-              onMouseLeave={(e) => (e.currentTarget.style.color = C.textMuted)}
-              aria-label="Site web"
-            >
-              <Globe size={14} />
-            </a>
-          )}
-        </div>
-      )}
-    </div>
-  );
-}
-
-const CARD_COL_WIDTH = 310; // px — fixed column width drives scroll math
-
-function ScrollArrow({
-  dir,
-  disabled,
-  onClick,
-}: {
-  dir: 'left' | 'right';
-  disabled: boolean;
-  onClick: () => void;
-}) {
-  const [hovered, setHovered] = useState(false);
-  return (
-    <button
-      onClick={onClick}
-      disabled={disabled}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      aria-label={dir === 'left' ? 'Précédent' : 'Suivant'}
-      style={{
-        width: 40,
-        height: 40,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        background: 'none',
-        border: `1px solid ${hovered && !disabled ? C.accent : C.divider}`,
-        cursor: disabled ? 'default' : 'pointer',
-        opacity: disabled ? 0.25 : 1,
-        transition: 'border-color 0.2s, opacity 0.2s',
-        color: hovered && !disabled ? C.accent : C.textMuted,
-        flexShrink: 0,
-      }}
-    >
-      {dir === 'left' ? <ArrowLeft size={15} /> : <ArrowRight size={15} />}
-    </button>
-  );
-}
+const TEAM_IMAGES = [
+  {
+    src: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1280&h=720&fit=crop&auto=format&q=80',
+    alt: 'Équipe en collaboration',
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=1280&h=720&fit=crop&auto=format&q=80',
+    alt: 'Réunion d\'équipe',
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&h=800&fit=crop&auto=format&q=80',
+    alt: 'Travail en équipe',
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=1280&h=720&fit=crop&auto=format&q=80',
+    alt: 'Meeting professionnel',
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=800&h=800&fit=crop&auto=format&q=80',
+    alt: 'Collaboration créative',
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=1280&h=720&fit=crop&auto=format&q=80',
+    alt: 'Espace de travail moderne',
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=1280&h=720&fit=crop&auto=format&q=80',
+    alt: 'Esprit d\'équipe',
+  },
+];
 
 function TeamSection() {
-  const numCols = Math.ceil(TEAM_MEMBERS.length / 2);
-  const firstRow = TEAM_MEMBERS.slice(0, numCols);
-  const secondRow = TEAM_MEMBERS.slice(numCols);
-  const ordered = [...firstRow, ...secondRow];
-
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(true);
-
-  const updateArrows = () => {
-    const el = scrollRef.current;
-    if (!el) return;
-    setCanScrollLeft(el.scrollLeft > 2);
-    setCanScrollRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 2);
-  };
-
-  useEffect(() => {
-    const el = scrollRef.current;
-    if (!el) return;
-    updateArrows();
-    el.addEventListener('scroll', updateArrows, { passive: true });
-    window.addEventListener('resize', updateArrows);
-    return () => {
-      el.removeEventListener('scroll', updateArrows);
-      window.removeEventListener('resize', updateArrows);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const scroll = (dir: 'left' | 'right') => {
-    scrollRef.current?.scrollBy({
-      left: dir === 'right' ? CARD_COL_WIDTH * 2 : -CARD_COL_WIDTH * 2,
-      behavior: 'smooth',
-    });
-  };
-
   return (
     <section
       id="equipe"
-      style={{ backgroundColor: C.bg, padding: '128px 0' }}
+      style={{ backgroundColor: C.bg }}
     >
       {/* Section header */}
       <div
         style={{
           maxWidth: 1280,
           margin: '0 auto',
-          padding: '0 24px 56px',
+          padding: '128px 24px 0',
           position: 'relative',
         }}
       >
@@ -1186,133 +1013,44 @@ function TeamSection() {
             style={{
               position: 'relative',
               zIndex: 1,
-              display: 'flex',
-              alignItems: 'flex-end',
-              justifyContent: 'space-between',
-              gap: '48px',
-              flexWrap: 'wrap',
+              textAlign: 'center',
+              maxWidth: 640,
+              margin: '0 auto',
             }}
           >
-            <div>
-              <SectionTag index="05" label="Équipe" />
-              <h2
-                style={{
-                  fontFamily: FONT.display,
-                  fontSize: 'clamp(36px, 5vw, 64px)',
-                  fontWeight: 700,
-                  color: C.textPrimary,
-                  letterSpacing: '-0.03em',
-                  lineHeight: 1.1,
-                  margin: 0,
-                }}
-              >
-                L&apos;Équipe
-              </h2>
-            </div>
-
-            {/* Subtitle + arrow controls */}
-            <div
+            <SectionTag index="05" label="Équipe" />
+            <h2
               style={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'flex-end',
-                gap: '20px',
+                fontFamily: FONT.display,
+                fontSize: 'clamp(36px, 5vw, 64px)',
+                fontWeight: 700,
+                color: C.textPrimary,
+                letterSpacing: '-0.03em',
+                lineHeight: 1.1,
+                margin: '0 0 20px',
               }}
             >
-              <p
-                style={{
-                  fontFamily: FONT.body,
-                  fontSize: '15px',
-                  color: C.textMuted,
-                  maxWidth: 400,
-                  lineHeight: 1.7,
-                  margin: 0,
-                  textAlign: 'right',
-                }}
-              >
-                Techniciens, commerciaux, logisticiens, designers
-                d&apos;expérience. Tous passionnés.
-              </p>
-              <div style={{ display: 'flex', gap: '8px' }}>
-                <ScrollArrow
-                  dir="left"
-                  disabled={!canScrollLeft}
-                  onClick={() => scroll('left')}
-                />
-                <ScrollArrow
-                  dir="right"
-                  disabled={!canScrollRight}
-                  onClick={() => scroll('right')}
-                />
-              </div>
-            </div>
+              L&apos;Équipe
+            </h2>
+            <p
+              style={{
+                fontFamily: FONT.body,
+                fontSize: '15px',
+                color: C.textMuted,
+                maxWidth: 480,
+                lineHeight: 1.7,
+                margin: '0 auto',
+              }}
+            >
+              Techniciens, commerciaux, logisticiens, designers
+              d&apos;expérience. Tous passionnés.
+            </p>
           </div>
         </FadeIn>
       </div>
 
-      {/* Scrollable grid */}
-      <style>{`
-        .team-scroll::-webkit-scrollbar { display: none; }
-        .team-scroll { -ms-overflow-style: none; scrollbar-width: none; }
-      `}</style>
-      <div style={{ position: 'relative' }}>
-        {/* Left fade — shown when scrolled right */}
-        <div
-          aria-hidden
-          style={{
-            position: 'absolute',
-            left: 0,
-            top: 0,
-            bottom: 0,
-            width: 80,
-            background: `linear-gradient(to right, ${C.bg}, transparent)`,
-            pointerEvents: 'none',
-            zIndex: 10,
-            opacity: canScrollLeft ? 1 : 0,
-            transition: 'opacity 0.3s',
-          }}
-        />
-        {/* Right fade — shown when more content to the right */}
-        <div
-          aria-hidden
-          style={{
-            position: 'absolute',
-            right: 0,
-            top: 0,
-            bottom: 0,
-            width: 120,
-            background: `linear-gradient(to left, ${C.bg}, transparent)`,
-            pointerEvents: 'none',
-            zIndex: 10,
-            opacity: canScrollRight ? 1 : 0,
-            transition: 'opacity 0.3s',
-          }}
-        />
-
-        <div
-          ref={scrollRef}
-          className="team-scroll"
-          style={{
-            overflowX: 'auto',
-            paddingLeft: 80,
-          }}
-        >
-          <StaggerIn
-            style={{
-              display: 'grid',
-              gridTemplateColumns: `repeat(${numCols}, ${CARD_COL_WIDTH}px)`,
-              gridTemplateRows: 'auto auto',
-              minWidth: `${numCols * CARD_COL_WIDTH}px`,
-            }}
-          >
-            {ordered.map((member, i) => (
-              <StaggerChild key={member.name}>
-                <TeamCard member={member} isFirstRow={i < numCols} />
-              </StaggerChild>
-            ))}
-          </StaggerIn>
-        </div>
-      </div>
+      {/* Zoom Parallax Gallery */}
+      <ZoomParallax images={TEAM_IMAGES} />
     </section>
   );
 }
@@ -1422,9 +1160,10 @@ export default function AboutPage() {
       }}
     >
       <HeroMoodboardSection />
-      <ValuesSection />
-      <CareersSection />
+      {/* 3. NOTRE HISTOIRE */}
+      <StorySection />
       <TeamSection />
+      <CareersSection />
     </div>
   );
 }

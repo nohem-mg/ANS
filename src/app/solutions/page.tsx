@@ -1,8 +1,11 @@
 'use client';
 
-import { useRef } from 'react';
-import { motion, useScroll, useTransform, useSpring, useInView } from 'framer-motion';
-import { ArrowRight, Coffee, Droplets, Cookie, Sofa, ChevronDown, ClipboardCheck, FileText, Truck, Wrench, TrendingUp } from 'lucide-react';
+import Image from 'next/image';
+import { useState, useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
+import { ArrowRight } from 'lucide-react';
+import { Gallery4, type Gallery4Item } from '@/components/ui/gallery4';
+import { SOLUTIONS } from '@/app/solutions/data';
 
 // ─── Design tokens (matching global palette) ────────────────────────────────
 const C = {
@@ -23,229 +26,521 @@ const FONT = {
 
 const EASE_OUT = [0.25, 0.46, 0.45, 0.94] as const;
 
-// ─── MACHINES DATA ───────────────────────────────────────────────────────────
-const MACHINES = [
-    {
-        icon: <Coffee size={28} strokeWidth={1.5} />,
-        title: 'Distributeurs Boissons Chaudes',
-        subtitle: 'Café, thé, chocolat',
-        description: "Des machines de dernière génération avec broyeur intégré, sélection de cafés en grains premium et boissons lactées. De l'expresso corsé au cappuccino onctueux.",
-        specs: ['Grains fraîchement moulus', 'Jusqu\'à 20 recettes', 'Écran tactile intuitif', 'Technologie éco-énergétique'],
-    },
-    {
-        icon: <Droplets size={28} strokeWidth={1.5} />,
-        title: 'Fontaines à Eau',
-        subtitle: 'Micro-filtration avancée',
-        description: "Eau fraîche, tempérée ou pétillante en libre-service. Raccordement réseau avec filtration multi-étapes pour une qualité irréprochable.",
-        specs: ['Eau plate, fraîche ou gazeuse', 'Filtration 0.5 micron', 'Raccordement réseau', 'Design compact'],
-    },
-    {
-        icon: <Cookie size={28} strokeWidth={1.5} />,
-        title: 'Distributeurs Snacks & Frais',
-        subtitle: 'Alimentation variée',
-        description: "Une sélection de produits frais, snacks et boissons fraîches pour satisfaire tous les goûts et toutes les envies, à toute heure.",
-        specs: ['Produits frais quotidiens', 'Gamme bio & équitable', 'Paiement sans contact', 'Réfrigération optimale'],
-    },
-    {
-        icon: <Sofa size={28} strokeWidth={1.5} />,
-        title: 'Coffee Corners',
-        subtitle: 'Espaces clé en main',
-        description: "Conception et aménagement complet d'espaces de pause premium. Mobilier soigné, ambiance chaleureuse, machines intégrées.",
-        specs: ['Design sur-mesure', 'Mobilier inclus', 'Installation complète', 'Maintenance intégrée'],
-    },
+const PARK_GALLERY_ITEMS: Gallery4Item[] = SOLUTIONS.map((solution) => ({
+    id: solution.slug,
+    title: solution.title,
+    description: solution.summary,
+    href: `/solutions/${solution.slug}`,
+    image: solution.image,
+}));
+
+const steps = [
+  {
+    id: '01',
+    tag: 'IMMERSION TERRAIN',
+    title: 'Audit & Diagnostic',
+    subtitle: 'On vient voir, avant de proposer.',
+    description:
+      "Nous analysons vos espaces, vos flux et vos usages réels. Nombre de collaborateurs, habitudes de consommation, contraintes techniques — rien n'est laissé au hasard.",
+    photos: [
+      {
+        src: 'https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=900',
+        alt: 'Releve technique sur site',
+      },
+      {
+        src: 'https://images.unsplash.com/photo-1552664730-d307ca884978?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=900',
+        alt: 'Analyse d equipe en reunion',
+      },
+      {
+        src: 'https://images.unsplash.com/photo-1517048676732-d65bc937f952?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=900',
+        alt: 'Observation des usages en entreprise',
+      },
+    ],
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+      </svg>
+    ),
+  },
+  {
+    id: '02',
+    tag: 'PROJECTION CLAIRE',
+    title: 'Proposition Sur-Mesure',
+    subtitle: 'Une offre lisible, sans angle mort.',
+    description:
+      "Nous concevons une offre personnalisée : choix des machines, sélection des produits, plan d'implantation et budget transparent. Pas de surprise.",
+    photos: [
+      {
+        src: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=900',
+        alt: 'Presentation de proposition client',
+      },
+      {
+        src: 'https://images.unsplash.com/photo-1556740749-887f6717d7e4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=900',
+        alt: 'Budget et cadrage de projet',
+      },
+      {
+        src: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=900',
+        alt: 'Documents de recommandation',
+      },
+    ],
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <path d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+      </svg>
+    ),
+  },
+  {
+    id: '03',
+    tag: 'MISE EN PLACE',
+    title: 'Installation & Mise en Service',
+    subtitle: 'Opérationnel dès le premier jour.',
+    description:
+      "Notre équipe technique installe, configure et teste l'ensemble. Formation de vos référents incluse. Vous êtes opérationnels dès le premier jour.",
+    photos: [
+      {
+        src: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=900',
+        alt: 'Installation technique sur site',
+      },
+      {
+        src: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=900',
+        alt: 'Reglages et verification des equipements',
+      },
+      {
+        src: 'https://images.unsplash.com/photo-1516321165247-4aa89a48be28?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=900',
+        alt: 'Formation et prise en main des equipes',
+      },
+    ],
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <path d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+      </svg>
+    ),
+  },
+  {
+    id: '04',
+    tag: 'CONTINUITÉ DE SERVICE',
+    title: 'Maintenance & SAV Réactif',
+    subtitle: "Moins d'interruptions, plus de sérénité.",
+    description:
+      'Intervention en moins de 4 heures. Approvisionnement régulier, entretien préventif et curatif. Votre parc fonctionne, toujours.',
+    photos: [
+      {
+        src: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=900',
+        alt: 'Maintenance preventive en intervention',
+      },
+      {
+        src: 'https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=900',
+        alt: 'Technicien en visite rapide',
+      },
+      {
+        src: 'https://images.unsplash.com/photo-1489515217757-5fd1be406fef?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=900',
+        alt: 'Suivi operationnel et reapprovisionnement',
+      },
+    ],
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+        <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+      </svg>
+    ),
+  },
+  {
+    id: '05',
+    tag: 'PILOTAGE DANS LA DURÉE',
+    title: 'Suivi & Optimisation',
+    subtitle: 'Le dispositif évolue avec vous.',
+    description:
+      "Reporting de consommation, évolution du parc, ajustement des gammes produits. Nous pilotons votre installation dans la durée.",
+    photos: [
+      {
+        src: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=900',
+        alt: 'Analyse de donnees et reporting',
+      },
+      {
+        src: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=900',
+        alt: 'Suivi de performance et optimisation',
+      },
+      {
+        src: 'https://images.unsplash.com/photo-1552664730-d307ca884978?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=900',
+        alt: 'Recommandations annuelles en reunion',
+      },
+    ],
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+      </svg>
+    ),
+  },
 ];
 
-// ─── PROCESS STEPS ───────────────────────────────────────────────────────────
-const STEPS = [
-    {
-        icon: <ClipboardCheck size={24} strokeWidth={1.5} />,
-        num: '01',
-        title: 'Audit & Diagnostic',
-        description: "Nous analysons vos besoins, vos espaces et vos attentes. Nombre de collaborateurs, habitudes de consommation, contraintes techniques — rien n'est laissé au hasard.",
-    },
-    {
-        icon: <FileText size={24} strokeWidth={1.5} />,
-        num: '02',
-        title: 'Proposition Sur-Mesure',
-        description: "Nous concevons une offre personnalisée : choix des machines, sélection des produits, plan d'implantation et budget transparent. Pas de surprise.",
-    },
-    {
-        icon: <Truck size={24} strokeWidth={1.5} />,
-        num: '03',
-        title: 'Installation & Mise en Service',
-        description: "Notre équipe technique installe, configure et teste l'ensemble. Formation de vos référents incluse. Vous êtes opérationnels dès le premier jour.",
-    },
-    {
-        icon: <Wrench size={24} strokeWidth={1.5} />,
-        num: '04',
-        title: 'Maintenance & SAV Réactif',
-        description: "Intervention en moins de 4 heures. Approvisionnement régulier, entretien préventif et curatif. Votre parc fonctionne, toujours.",
-    },
-    {
-        icon: <TrendingUp size={24} strokeWidth={1.5} />,
-        num: '05',
-        title: 'Suivi & Optimisation',
-        description: "Reporting de consommation, évolution du parc, ajustement des gammes produits. Nous pilotons votre installation dans la durée.",
-    },
-];
+function ProcessSection() {
+  const [activeStep, setActiveStep] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
 
-// ─── MACHINE CARD ────────────────────────────────────────────────────────────
-function MachineCard({ machine, index }: { machine: typeof MACHINES[0]; index: number }) {
-    const ref = useRef<HTMLDivElement>(null);
-    const isInView = useInView(ref, { once: true, margin: '-60px' });
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setIsVisible(true);
+      },
+      { threshold: 0.1 }
+    );
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
 
-    return (
-        <motion.div
-            ref={ref}
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : undefined}
-            transition={{ duration: 0.8, delay: index * 0.1, ease: EASE_OUT }}
+  const step = steps[activeStep];
+
+  return (
+    <section
+      ref={sectionRef}
+      style={{
+        background: '#e3d0be',
+        minHeight: '100vh',
+        padding: '120px 0',
+        fontFamily: "'DM Sans', sans-serif",
+        position: 'relative',
+        overflow: 'hidden',
+      }}
+    >
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          backgroundImage:
+            'radial-gradient(ellipse 80% 60% at 70% 40%, rgba(180,100,20,0.08) 0%, transparent 60%)',
+          pointerEvents: 'none',
+        }}
+      />
+
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&family=DM+Serif+Display:ital@0;1&display=swap');
+
+        .process-nav-item { cursor: pointer; border: none; background: none; padding: 0; width: 100%; text-align: left; }
+        .process-nav-item:hover .nav-title { color: #e8c88a !important; }
+        .detail-card { transition: opacity 0.4s ease, transform 0.4s ease; }
+        .step-number { font-size: 11px; letter-spacing: 0.12em; color: rgba(200,150,60,0.5); font-weight: 500; font-family: 'DM Sans', sans-serif; }
+
+        @media (max-width: 980px) {
+          .process-main-grid { grid-template-columns: 1fr !important; gap: 48px !important; }
+        }
+
+        @media (max-width: 640px) {
+          .process-section-inner { padding: 0 20px !important; }
+          .process-detail-card { padding: 32px 24px !important; }
+        }
+      `}</style>
+
+      <div className="process-section-inner" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 40px' }}>
+        <div
+          style={{
+            marginBottom: '80px',
+            opacity: isVisible ? 1 : 0,
+            transform: isVisible ? 'none' : 'translateY(20px)',
+            transition: 'all 0.8s ease',
+          }}
+        >
+          <p
             style={{
-                background: C.surface,
-                borderRadius: 16,
-                padding: 'clamp(28px, 3vw, 40px)',
-                border: `1px solid ${C.divider}`,
-                display: 'flex',
-                flexDirection: 'column',
-                gap: 20,
+              fontSize: '11px',
+              letterSpacing: '0.18em',
+              color: '#8c4f25',
+              fontWeight: 500,
+              marginBottom: '16px',
+              textTransform: 'uppercase',
+            }}
+          >
+            NOTRE PROCESS
+          </p>
+          <h2
+            style={{
+              fontFamily: "'DM Serif Display', serif",
+              fontSize: 'clamp(40px, 5vw, 68px)',
+              color: '#24130c',
+              lineHeight: 1.05,
+              margin: 0,
+              fontWeight: 400,
+            }}
+          >
+            Du cadrage
+            <br />
+            <em style={{ color: '#8c4f25' }}>au suivi.</em>
+          </h2>
+          <p
+            style={{
+              marginTop: '24px',
+              color: 'rgba(36,19,12,0.78)',
+              fontSize: '16px',
+              lineHeight: 1.7,
+              maxWidth: '420px',
+              fontWeight: 300,
+            }}
+          >
+            Cinq étapes courtes, lisibles et documentées — pour garder votre projet simple à suivre et facile à piloter.
+          </p>
+        </div>
+
+        <div className="process-main-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '80px', alignItems: 'start' }}>
+          <div
+            style={{
+              opacity: isVisible ? 1 : 0,
+              transform: isVisible ? 'none' : 'translateX(-20px)',
+              transition: 'all 0.8s ease 0.2s',
+            }}
+          >
+            {steps.map((s, i) => (
+              <button
+                key={s.id}
+                className="process-nav-item"
+                onClick={() => setActiveStep(i)}
+                onMouseEnter={() => setActiveStep(i)}
+                onFocus={() => setActiveStep(i)}
+                style={{ borderBottom: '1px solid rgba(36,19,12,0.10)', padding: '24px 0' }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+                  <div
+                    style={{
+                      width: '3px',
+                      height: '40px',
+                      borderRadius: '2px',
+                      background: activeStep === i ? '#8c4f25' : 'rgba(36,19,12,0.16)',
+                      transition: 'background 0.3s',
+                      flexShrink: 0,
+                    }}
+                  />
+
+                  <div style={{ flex: 1 }}>
+                    <div style={{ display: 'flex', alignItems: 'baseline', gap: '12px', marginBottom: '4px' }}>
+                      <span className="step-number">{s.id}</span>
+                      <span
+                        className="nav-title"
+                        style={{
+                          fontSize: '17px',
+                          fontWeight: activeStep === i ? 600 : 400,
+                          color: activeStep === i ? '#24130c' : 'rgba(36,19,12,0.70)',
+                          transition: 'color 0.3s',
+                          letterSpacing: '-0.01em',
+                        }}
+                      >
+                        {s.title}
+                      </span>
+                    </div>
+                    <p
+                      style={{
+                        fontSize: '12px',
+                        color: 'rgba(140,79,37,0.82)',
+                        letterSpacing: '0.08em',
+                        textTransform: 'uppercase',
+                        fontWeight: 400,
+                        margin: 0,
+                      }}
+                    >
+                      {s.tag}
+                    </p>
+                  </div>
+
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style={{ opacity: activeStep === i ? 1 : 0, transition: 'opacity 0.3s', color: '#8c4f25', flexShrink: 0 }}>
+                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </div>
+              </button>
+            ))}
+
+            <div style={{ marginTop: '40px' }}>
+              <a
+                href="/contact"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '10px',
+                  padding: '14px 28px',
+                  border: '1px solid rgba(154,90,45,0.35)',
+                  borderRadius: '4px',
+                  color: '#8c4f25',
+                  fontSize: '13px',
+                  letterSpacing: '0.08em',
+                  textDecoration: 'none',
+                  fontWeight: 500,
+                  transition: 'all 0.2s',
+                  background: 'rgba(140,79,37,0.06)',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = 'rgba(140,79,37,0.12)';
+                  e.currentTarget.style.borderColor = 'rgba(140,79,37,0.55)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = 'rgba(140,79,37,0.06)';
+                  e.currentTarget.style.borderColor = 'rgba(140,79,37,0.35)';
+                }}
+              >
+                DEMANDER UN DEVIS
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <div
+            key={activeStep}
+            className="detail-card"
+            style={{
+              opacity: isVisible ? 1 : 0,
+              transform: isVisible ? 'none' : 'translateX(20px)',
+              transition: 'all 0.8s ease 0.3s',
+            }}
+          >
+            <div
+              className="process-detail-card"
+              style={{
+                border: '1px solid rgba(36,19,12,0.12)',
+                borderRadius: '12px',
+                padding: '48px',
+                background: 'rgba(255,248,242,0.56)',
+                backdropFilter: 'blur(10px)',
                 position: 'relative',
                 overflow: 'hidden',
-            }}
-            whileHover={{ borderColor: 'rgba(200,118,58,0.3)' }}
-        >
-            {/* Subtle glow */}
-            <div
-                aria-hidden
+              }}
+            >
+              <div
                 style={{
-                    position: 'absolute', top: -40, right: -40,
-                    width: 120, height: 120, borderRadius: '50%',
-                    background: `radial-gradient(circle, rgba(200,118,58,0.08) 0%, transparent 70%)`,
-                    pointerEvents: 'none',
+                  position: 'absolute',
+                  top: 0,
+                  right: 0,
+                  width: '120px',
+                  height: '120px',
+                  background: 'radial-gradient(circle at top right, rgba(140,79,37,0.12), transparent 70%)',
+                  pointerEvents: 'none',
                 }}
-            />
+              />
 
-            {/* Icon */}
-            <div style={{ color: C.accent, display: 'flex', alignItems: 'center', gap: 14 }}>
-                {machine.icon}
-                <span style={{ fontFamily: FONT.mono, fontSize: 10, letterSpacing: '0.2em', color: C.textMuted, textTransform: 'uppercase' }}>
-                    {machine.subtitle}
-                </span>
-            </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '32px' }}>
+                <div
+                  style={{
+                    width: '48px',
+                    height: '48px',
+                    borderRadius: '10px',
+                    background: 'rgba(140,79,37,0.10)',
+                    border: '1px solid rgba(140,79,37,0.20)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: '#8c4f25',
+                    flexShrink: 0,
+                  }}
+                >
+                  {step.icon}
+                </div>
+                <div>
+                  <p
+                    style={{
+                      fontSize: '10px',
+                      letterSpacing: '0.16em',
+                      color: 'rgba(140,79,37,0.9)',
+                      fontWeight: 500,
+                      textTransform: 'uppercase',
+                      margin: '0 0 2px',
+                    }}
+                  >
+                    {step.tag}
+                  </p>
+                  <p style={{ fontSize: '11px', color: 'rgba(36,19,12,0.48)', margin: 0 }}>{step.id} / 05</p>
+                </div>
+              </div>
 
-            {/* Title */}
-            <h3 style={{
-                fontFamily: FONT.display,
-                fontSize: 'clamp(18px, 2vw, 22px)',
-                fontWeight: 600,
-                color: C.textPrimary,
-                letterSpacing: '-0.01em',
-                margin: 0,
-            }}>
-                {machine.title}
-            </h3>
+              <h3
+                style={{
+                  fontFamily: "'DM Serif Display', serif",
+                  fontSize: 'clamp(28px, 3vw, 40px)',
+                  color: '#24130c',
+                  margin: '0 0 8px',
+                  fontWeight: 400,
+                  lineHeight: 1.1,
+                }}
+              >
+                {step.title}
+              </h3>
 
-            {/* Description */}
-            <p style={{
-                fontFamily: FONT.body,
-                fontSize: 14,
-                color: C.textMuted,
-                lineHeight: 1.7,
-                margin: 0,
-            }}>
-                {machine.description}
-            </p>
+              <p
+                style={{
+                  fontSize: '16px',
+                  color: '#8c4f25',
+                  margin: '0 0 24px',
+                  fontStyle: 'italic',
+                  fontFamily: "'DM Serif Display', serif",
+                }}
+              >
+                {step.subtitle}
+              </p>
 
-            {/* Specs */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginTop: 'auto' }}>
-                {machine.specs.map((spec, i) => (
-                    <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                        <div style={{
-                            width: 4, height: 4, borderRadius: '50%',
-                            background: C.accent, flexShrink: 0,
-                        }} />
-                        <span style={{
-                            fontFamily: FONT.mono,
-                            fontSize: 11,
-                            color: 'rgba(245,230,211,0.7)',
-                            letterSpacing: '0.02em',
-                        }}>
-                            {spec}
-                        </span>
-                    </div>
+              <p
+                style={{
+                  fontSize: '15px',
+                  color: 'rgba(36,19,12,0.82)',
+                  lineHeight: 1.75,
+                  margin: '0 0 36px',
+                  fontWeight: 300,
+                }}
+              >
+                {step.description}
+              </p>
+
+              <div style={{ height: '1px', background: 'rgba(36,19,12,0.12)', marginBottom: '32px' }} />
+
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(3, minmax(0, 1fr))',
+                  gap: '12px',
+                }}
+              >
+                {step.photos.map((photo, i) => (
+                  <div
+                    key={i}
+                    style={{
+                      position: 'relative',
+                      aspectRatio: '1 / 1',
+                      borderRadius: '14px',
+                      overflow: 'hidden',
+                      border: '1px solid rgba(36,19,12,0.10)',
+                      background: 'rgba(255,255,255,0.35)',
+                    }}
+                  >
+                    <Image
+                      src={photo.src}
+                      alt={photo.alt}
+                      fill
+                      sizes="(max-width: 640px) 30vw, 180px"
+                      style={{ objectFit: 'cover' }}
+                    />
+                  </div>
                 ))}
-            </div>
-        </motion.div>
-    );
-}
+              </div>
 
-// ─── PROCESS STEP ────────────────────────────────────────────────────────────
-function ProcessStep({ step, index, isLast }: { step: typeof STEPS[0]; index: number; isLast: boolean }) {
-    const ref = useRef<HTMLDivElement>(null);
-    const isInView = useInView(ref, { once: true, margin: '-40px' });
-
-    return (
-        <motion.div
-            ref={ref}
-            initial={{ opacity: 0, x: -20 }}
-            animate={isInView ? { opacity: 1, x: 0 } : undefined}
-            transition={{ duration: 0.7, delay: index * 0.12, ease: EASE_OUT }}
-            style={{ display: 'flex', gap: 'clamp(20px, 3vw, 32px)' }}
-        >
-            {/* Left: number + connector */}
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', flexShrink: 0 }}>
-                <div style={{
-                    width: 48, height: 48, borderRadius: 12,
-                    background: `linear-gradient(135deg, ${C.accent}20, ${C.accent}08)`,
-                    border: `1px solid ${C.accent}30`,
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    color: C.accent,
-                }}>
-                    {step.icon}
-                </div>
-                {!isLast && (
-                    <div style={{
-                        width: 1, flex: 1, minHeight: 40,
-                        background: `linear-gradient(to bottom, ${C.accent}40, ${C.divider})`,
-                    }} />
-                )}
+              <div style={{ display: 'flex', gap: '6px', marginTop: '40px' }}>
+                {steps.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setActiveStep(i)}
+                    style={{
+                      width: i === activeStep ? '24px' : '6px',
+                      height: '6px',
+                      borderRadius: '3px',
+                      background: i === activeStep ? '#8c4f25' : 'rgba(36,19,12,0.18)',
+                      border: 'none',
+                      cursor: 'pointer',
+                      padding: 0,
+                      transition: 'all 0.3s',
+                    }}
+                  />
+                ))}
+              </div>
             </div>
-
-            {/* Right: content */}
-            <div style={{ paddingBottom: isLast ? 0 : 40 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 8 }}>
-                    <span style={{
-                        fontFamily: FONT.mono,
-                        fontSize: 11,
-                        color: C.accent,
-                        letterSpacing: '0.15em',
-                    }}>
-                        {step.num}
-                    </span>
-                    <div style={{ width: 20, height: 1, background: C.divider }} />
-                </div>
-                <h3 style={{
-                    fontFamily: FONT.display,
-                    fontSize: 'clamp(18px, 2.2vw, 24px)',
-                    fontWeight: 600,
-                    color: C.textPrimary,
-                    letterSpacing: '-0.01em',
-                    margin: '0 0 10px',
-                }}>
-                    {step.title}
-                </h3>
-                <p style={{
-                    fontFamily: FONT.body,
-                    fontSize: 14,
-                    color: C.textMuted,
-                    lineHeight: 1.75,
-                    margin: 0,
-                    maxWidth: 520,
-                }}>
-                    {step.description}
-                </p>
-            </div>
-        </motion.div>
-    );
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 }
 
 // ─── PAGE ────────────────────────────────────────────────────────────────────
@@ -341,135 +636,13 @@ export default function SolutionsPage() {
                 </motion.div>
             </section>
 
-            {/* ── MACHINES GRID ── */}
-            <section style={{ padding: 'clamp(64px, 10vw, 128px) 24px' }}>
-                <div style={{ maxWidth: 1280, margin: '0 auto' }}>
-                    {/* Section header */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.8, ease: EASE_OUT }}
-                        style={{ marginBottom: 64 }}
-                    >
-                        <span style={{
-                            fontFamily: FONT.mono, fontSize: 10, letterSpacing: '0.22em',
-                            color: C.accent, textTransform: 'uppercase', display: 'block', marginBottom: 16,
-                        }}>
-                            Notre Parc
-                        </span>
-                        <h2 style={{
-                            fontFamily: FONT.display,
-                            fontSize: 'clamp(28px, 4vw, 48px)',
-                            fontWeight: 600,
-                            color: C.textPrimary,
-                            letterSpacing: '-0.02em',
-                            lineHeight: 1.15,
-                            margin: '0 0 16px',
-                        }}>
-                            Des Équipements de Pointe
-                        </h2>
-                        <p style={{
-                            fontFamily: FONT.body, fontSize: 15, color: C.textMuted,
-                            lineHeight: 1.7, maxWidth: 480, margin: 0,
-                        }}>
-                            Sélectionnés auprès des meilleurs fabricants européens, nos équipements
-                            allient performance, fiabilité et design.
-                        </p>
-                    </motion.div>
+            <Gallery4
+                title="Trois gammes, une meme exigence de service"
+                description="Retrouvez nos principales familles de machines pour l’entreprise. Chaque carte ouvre sur une page detaillee avec usages, points forts et type d’implantation."
+                items={PARK_GALLERY_ITEMS}
+            />
 
-                    {/* Cards grid */}
-                    <div style={{
-                        display: 'grid',
-                        gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
-                        gap: 20,
-                    }}>
-                        {MACHINES.map((machine, i) => (
-                            <MachineCard key={machine.title} machine={machine} index={i} />
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* ── PROCESS TIMELINE ── */}
-            <section style={{
-                backgroundColor: C.surface,
-                padding: 'clamp(64px, 10vw, 128px) 24px',
-            }}>
-                <div style={{ maxWidth: 1280, margin: '0 auto' }}>
-                    <div style={{
-                        display: 'grid',
-                        gridTemplateColumns: '1fr 1.5fr',
-                        gap: 'clamp(48px, 6vw, 100px)',
-                        alignItems: 'start',
-                    }}>
-                        {/* Left: section header */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.8, ease: EASE_OUT }}
-                            style={{ position: 'sticky', top: 100 }}
-                        >
-                            <span style={{
-                                fontFamily: FONT.mono, fontSize: 10, letterSpacing: '0.22em',
-                                color: C.accent, textTransform: 'uppercase', display: 'block', marginBottom: 16,
-                            }}>
-                                Notre Process
-                            </span>
-                            <h2 style={{
-                                fontFamily: FONT.display,
-                                fontSize: 'clamp(28px, 4vw, 48px)',
-                                fontWeight: 600,
-                                color: C.textPrimary,
-                                letterSpacing: '-0.02em',
-                                lineHeight: 1.15,
-                                margin: '0 0 20px',
-                            }}>
-                                Comment ça se passe<br />avec <span style={{ color: C.accent }}>ANS ?</span>
-                            </h2>
-                            <p style={{
-                                fontFamily: FONT.body, fontSize: 14, color: C.textMuted,
-                                lineHeight: 1.75, maxWidth: 360, margin: '0 0 32px',
-                            }}>
-                                De la première rencontre à la gestion quotidienne,
-                                notre process est pensé pour votre tranquillité.
-                                Chaque étape est cadrée, tracée et transparente.
-                            </p>
-                            <motion.a
-                                href="/contact"
-                                style={{
-                                    display: 'inline-flex', alignItems: 'center', gap: 8,
-                                    fontFamily: FONT.mono, fontSize: 12,
-                                    color: C.textPrimary, textDecoration: 'none',
-                                    border: `1px solid ${C.divider}`, borderRadius: 999,
-                                    padding: '10px 22px', letterSpacing: '0.06em',
-                                    transition: 'border-color 0.2s, color 0.2s',
-                                }}
-                                whileHover={{ borderColor: C.accent, color: C.accent }}
-                            >
-                                Demander un devis <ArrowRight size={13} />
-                            </motion.a>
-                        </motion.div>
-
-                        {/* Right: steps */}
-                        <div>
-                            {STEPS.map((step, i) => (
-                                <ProcessStep key={step.num} step={step} index={i} isLast={i === STEPS.length - 1} />
-                            ))}
-                        </div>
-                    </div>
-
-                    {/* Responsive: stack on mobile */}
-                    <style>{`
-            @media (max-width: 768px) {
-              #__next section > div > div[style*="grid-template-columns"] {
-                grid-template-columns: 1fr !important;
-              }
-            }
-          `}</style>
-                </div>
-            </section>
+            <ProcessSection />
 
             {/* ── CTA ── */}
             <section style={{ padding: 'clamp(64px, 10vw, 128px) 24px', position: 'relative', overflow: 'hidden' }}>
