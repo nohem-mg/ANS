@@ -195,7 +195,7 @@ function ProcessSection() {
     <section
       ref={sectionRef}
       style={{
-        background: '#e3d0be',
+        background: '#FAF2E9',
         minHeight: '100vh',
         padding: '120px 0',
         fontFamily: "'DM Sans', sans-serif",
@@ -254,17 +254,18 @@ function ProcessSection() {
           </p>
           <h2
             style={{
-              fontFamily: "'DM Serif Display', serif",
+              fontFamily: 'var(--font-sora)',
               fontSize: 'clamp(40px, 5vw, 68px)',
-              color: '#24130c',
+              color: '#451F17',
               lineHeight: 1.05,
               margin: 0,
-              fontWeight: 400,
+              fontWeight: 600,
+              letterSpacing: '-0.02em',
             }}
           >
             Du cadrage
             <br />
-            <em style={{ color: '#8c4f25' }}>au suivi.</em>
+            <span style={{ color: '#8c4f25' }}>au suivi.</span>
           </h2>
           <p
             style={{
@@ -434,12 +435,13 @@ function ProcessSection() {
 
               <h3
                 style={{
-                  fontFamily: "'DM Serif Display', serif",
+                  fontFamily: 'var(--font-sora)',
                   fontSize: 'clamp(28px, 3vw, 40px)',
-                  color: '#24130c',
+                  color: '#451F17',
                   margin: '0 0 8px',
-                  fontWeight: 400,
+                  fontWeight: 600,
                   lineHeight: 1.1,
+                  letterSpacing: '-0.02em',
                 }}
               >
                 {step.title}
@@ -447,11 +449,12 @@ function ProcessSection() {
 
               <p
                 style={{
-                  fontSize: '16px',
+                  fontSize: '17px',
                   color: '#8c4f25',
                   margin: '0 0 24px',
-                  fontStyle: 'italic',
-                  fontFamily: "'DM Serif Display', serif",
+                  fontFamily: 'var(--font-sora)',
+                  fontWeight: 500,
+                  letterSpacing: '-0.01em',
                 }}
               >
                 {step.subtitle}
