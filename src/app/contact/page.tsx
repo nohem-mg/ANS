@@ -94,7 +94,7 @@ export default function ContactPage() {
                         backgroundColor: C.bg,
                         borderRadius: 20,
                         overflow: 'hidden',
-                        boxShadow: '0 4px 48px rgba(0,0,0,0.35)',
+                        boxShadow: 'none',
                         position: 'relative',
                         display: 'flex',
                         flexDirection: 'column',

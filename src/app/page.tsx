@@ -537,7 +537,7 @@ export default function Home() {
               backgroundColor: '#2B1200',
               borderRadius: '20px',
               overflow: 'hidden',
-              boxShadow: '0 4px 48px rgba(0,0,0,0.35)',
+              boxShadow: 'none',
               position: 'relative',
               display: 'flex',
               flexDirection: 'column',

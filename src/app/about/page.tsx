@@ -623,10 +623,8 @@ function StorySection() {
       <div style={{ maxWidth: 1280, margin: '0 auto' }}>
         <FadeIn style={{ marginBottom: '80px', position: 'relative' }}>
           <GhostNumber n="03" />
-          <div style={{ position: 'relative', zIndex: 1, textAlign: 'center', maxWidth: 640, margin: '0 auto' }}>
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
-              <SectionTag index="03" label="Histoire" />
-            </div>
+          <div style={{ position: 'relative', zIndex: 1, maxWidth: 640 }}>
+            <SectionTag index="03" label="Histoire" />
             <h2
               style={{
                 fontFamily: FONT.display,
@@ -850,7 +848,7 @@ function CareersSection() {
     <section
       id="rejoindre"
       style={{
-        backgroundColor: C.surface,
+        backgroundColor: "#F6EDE5",
         padding: '96px 24px',
       }}
     >
@@ -1007,15 +1005,13 @@ function TeamSection() {
           position: 'relative',
         }}
       >
-        <FadeIn>
+        <FadeIn style={{ marginBottom: '80px', position: 'relative' }}>
           <GhostNumber n="05" />
           <div
             style={{
               position: 'relative',
               zIndex: 1,
-              textAlign: 'center',
               maxWidth: 640,
-              margin: '0 auto',
             }}
           >
             <SectionTag index="05" label="Équipe" />
@@ -1039,7 +1035,7 @@ function TeamSection() {
                 color: C.textMuted,
                 maxWidth: 480,
                 lineHeight: 1.7,
-                margin: '0 auto',
+                margin: 0,
               }}
             >
               Techniciens, commerciaux, logisticiens, designers
@@ -1099,7 +1095,7 @@ function HeroMoodboardSection() {
           top: 68,
           height: 'calc(100vh - 68px)',
           overflow: 'hidden',
-          backgroundColor: '#F2DECA',
+          backgroundColor: '#F9F1E8',
           padding: 'clamp(10px, 1.2vw, 14px) clamp(16px, 4vw, 48px)',
           boxSizing: 'border-box',
         }}
@@ -1114,7 +1110,7 @@ function HeroMoodboardSection() {
             backgroundColor: '#2B1200',
             borderRadius: '20px',
             overflow: 'hidden',
-            boxShadow: '0 4px 48px rgba(0,0,0,0.35)',
+            boxShadow: 'none',
             position: 'relative',
           }}
         >
