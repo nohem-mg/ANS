@@ -435,26 +435,26 @@ const VISION_POINTS = [
   {
     id: 'deconnexion',
     img: '/pause-evasion.png',
-    title: 'Déconnexion Totale',
-    desc: 'Offrez-vous un instant suspendu pour souffler. Nos espaces sont pensés pour créer une véritable évasion mentale hors du rythme effréné.',
+    title: 'Le "Reset" Sensoriel',
+    desc: "Une pause réussie mobilise les sens pour couper court à la fatigue des écrans. Le son du broyeur, l'arôme d'un grain fraîchement torréfié, la mousse d'un latte : un petit rituel physique qui fait chuter la charge mentale et relance immédiatement la concentration.",
   },
   {
     id: 'liens',
     img: '/convivialite-equipe.png',
-    title: 'Créateur de Liens',
-    desc: "C'est autour d'un excellent café que naissent les meilleures idées, que les silos se brisent et que la cohésion d'équipe se renforce.",
+    title: 'Le Collisionneur d\'Idées',
+    desc: "Les meilleures décisions ne naissent pas toujours en salle de réunion. Nos espaces sont conçus comme des points de rencontre privilégiés : ils provoquent ces discussions informelles entre les différents départements, brisant naturellement les silos dans l'entreprise.",
   },
   {
     id: 'bienetre',
     img: '/qualite-vie-travail.png',
-    title: 'Bien-être au Quotidien',
-    desc: "Un café premium et un espace soigné sont des preuves tangibles de l'attention que vous portez au bien-être de vos collaborateurs.",
+    title: 'Le Marqueur d\'Attention',
+    desc: "Ce que vous mettez dans la tasse de vos collaborateurs en dit long sur la façon dont vous les valorisez. Offrir une expérience digne d'un véritable coffee shop sur le lieu de travail est un levier concret et quotidien de Qualité de Vie au Travail (QVT).",
   },
   {
     id: 'serenite',
     img: '/solution-simplicite.png',
-    title: 'Sérénité Absolue',
-    desc: "Profitez de l'instant, on s'occupe du reste. Installation, entretien, réactivité : un service invisible mais toujours présent.",
+    title: 'La Fluidité Invisible',
+    desc: "Pour qu'une pause soit reposante, la logistique doit s'effacer. Grâce à nos parcs de machines connectées, nous anticipons l'entretien préventif et les réapprovisionnements avant que vous ne manquiez de quoi que ce soit. Vous ne voyez qu'un café toujours prêt.",
   },
 ];
 
@@ -489,15 +489,15 @@ const VisionSection = () => {
                 fontWeight: 600,
               }}
             >
-              Transformez la pause en un
+              La machine à café n'est plus un meuble.
               <br />
-              <span className="text-sienna-racing">véritable moment d'évasion.</span>
+              <span className="text-sienna-racing">C'est le cœur battant de vos bureaux.</span>
             </h2>
             <p
               className="text-coffee-cream/50 leading-relaxed"
               style={{ fontSize: 'clamp(0.9375rem, 1.1vw, 1.0625rem)', fontFamily: 'var(--font-ibm-plex-sans)' }}
             >
-              Oubliez la simple machine dans un coin de couloir. Nous concevons la pause comme une vraie coupure mentale dans votre journée. Un instant suspendu où l'on savoure un café de qualité, on décompresse, et on recrée du lien avec son équipe. Une vraie respiration pour repartir de l'avant.
+              Fini le café avalé à la hâte dans un couloir froid. La vraie pause est un moment stratégique invisible. C'est le sas de décompression qui préserve le capital énergie de vos équipes, et la « place du village » où se forge votre culture d'entreprise. Chez ANS, nous aménageons ces quelques mètres carrés pour en faire de véritables refuges sensoriels et conviviaux.
             </p>
           </motion.div>
 
