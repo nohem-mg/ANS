@@ -9,29 +9,29 @@ import { SOLUTIONS } from '@/app/solutions/data';
 
 // ─── Design tokens (matching global palette) ────────────────────────────────
 const C = {
-    bg: '#2B1200',
-    surface: '#3A1A06',
-    accent: '#C8763A',
-    gold: '#DE9E67',
-    textPrimary: '#F5E6D3',
-    textMuted: 'rgba(245,230,211,0.55)',
-    divider: 'rgba(245,230,211,0.12)',
+  bg: '#2B1200',
+  surface: '#3A1A06',
+  accent: '#C8763A',
+  gold: '#DE9E67',
+  textPrimary: '#F5E6D3',
+  textMuted: 'rgba(245,230,211,0.55)',
+  divider: 'rgba(245,230,211,0.12)',
 } as const;
 
 const FONT = {
-    display: "var(--font-sora, 'Georgia', serif)",
-    body: "var(--font-ibm-plex-sans, sans-serif)",
-    mono: "var(--font-ibm-plex-mono, monospace)",
+  display: "var(--font-sora, 'Georgia', serif)",
+  body: "var(--font-ibm-plex-sans, sans-serif)",
+  mono: "var(--font-ibm-plex-mono, monospace)",
 } as const;
 
 const EASE_OUT = [0.25, 0.46, 0.45, 0.94] as const;
 
 const PARK_GALLERY_ITEMS: Gallery4Item[] = SOLUTIONS.map((solution) => ({
-    id: solution.slug,
-    title: solution.title,
-    description: solution.summary,
-    href: `/solutions/${solution.slug}`,
-    image: solution.image,
+  id: solution.slug,
+  title: solution.title,
+  description: solution.summary,
+  href: `/solutions/${solution.slug}`,
+  image: solution.image,
 }));
 
 const steps = [
@@ -545,161 +545,160 @@ function ProcessSection() {
 
 // ─── PAGE ────────────────────────────────────────────────────────────────────
 export default function SolutionsPage() {
-    return (
-        <div style={{ backgroundColor: C.bg, color: C.textPrimary, fontFamily: FONT.body, minHeight: '100vh' }}>
+  return (
+    <div style={{ backgroundColor: C.bg, color: C.textPrimary, fontFamily: FONT.body, minHeight: '100vh' }}>
 
-            {/* ── HERO ── */}
-            <section
-                style={{
-                    backgroundColor: '#F2DECA',
-                    minHeight: 'calc(70vh - 68px)',
-                    padding: 'clamp(10px, 1.2vw, 14px) clamp(16px, 4vw, 48px)',
-                    boxSizing: 'border-box',
-                    display: 'flex',
-                    alignItems: 'stretch',
-                }}
+      <section
+        style={{
+          backgroundColor: '#F2DECA',
+          height: 'calc(100vh - 68px)',
+          padding: 'clamp(10px, 1.2vw, 14px) clamp(16px, 4vw, 48px)',
+          boxSizing: 'border-box',
+          display: 'flex',
+          alignItems: 'stretch',
+        }}
+      >
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
+          style={{
+            flex: 1,
+            backgroundColor: C.bg,
+            borderRadius: 20,
+            overflow: 'hidden',
+            boxShadow: '0 4px 48px rgba(0,0,0,0.35)',
+            position: 'relative',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: 'clamp(48px, 8vw, 100px) clamp(24px, 6vw, 80px)',
+          }}
+        >
+          {/* Dot grid */}
+          <div aria-hidden style={{
+            position: 'absolute', inset: 0,
+            backgroundImage: 'radial-gradient(circle, rgba(245,230,211,0.25) 1px, transparent 1px)',
+            backgroundSize: '32px 32px', opacity: 0.06, pointerEvents: 'none',
+          }} />
+          {/* Amber glow */}
+          <div aria-hidden style={{
+            position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)',
+            width: 800, height: 800, borderRadius: '50%',
+            background: 'radial-gradient(circle, rgba(200,118,58,0.1) 0%, transparent 65%)',
+            pointerEvents: 'none',
+          }} />
+
+          <div style={{ position: 'relative', zIndex: 1, textAlign: 'center', maxWidth: 800 }}>
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.7 }}
+              style={{
+                fontFamily: FONT.mono, fontSize: 11, letterSpacing: '0.22em',
+                color: C.accent, textTransform: 'uppercase', marginBottom: 36,
+              }}
             >
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
-                    style={{
-                        flex: 1,
-                        backgroundColor: C.bg,
-                        borderRadius: 20,
-                        overflow: 'hidden',
-                        boxShadow: '0 4px 48px rgba(0,0,0,0.35)',
-                        position: 'relative',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        padding: 'clamp(48px, 8vw, 100px) clamp(24px, 6vw, 80px)',
-                    }}
-                >
-                    {/* Dot grid */}
-                    <div aria-hidden style={{
-                        position: 'absolute', inset: 0,
-                        backgroundImage: 'radial-gradient(circle, rgba(245,230,211,0.25) 1px, transparent 1px)',
-                        backgroundSize: '32px 32px', opacity: 0.06, pointerEvents: 'none',
-                    }} />
-                    {/* Amber glow */}
-                    <div aria-hidden style={{
-                        position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)',
-                        width: 800, height: 800, borderRadius: '50%',
-                        background: 'radial-gradient(circle, rgba(200,118,58,0.1) 0%, transparent 65%)',
-                        pointerEvents: 'none',
-                    }} />
+              Solutions Techniques
+            </motion.div>
 
-                    <div style={{ position: 'relative', zIndex: 1, textAlign: 'center', maxWidth: 800 }}>
-                        <motion.div
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.2, duration: 0.7 }}
-                            style={{
-                                fontFamily: FONT.mono, fontSize: 11, letterSpacing: '0.22em',
-                                color: C.accent, textTransform: 'uppercase', marginBottom: 36,
-                            }}
-                        >
-                            Solutions Techniques
-                        </motion.div>
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.35, duration: 0.9, ease: EASE_OUT }}
+              style={{
+                fontSize: 'clamp(2.2rem, 5.5vw, 5rem)',
+                fontFamily: 'var(--font-sora)',
+                lineHeight: 1.1,
+                letterSpacing: '-0.02em',
+                color: C.textPrimary,
+                marginBottom: 24,
+              }}
+            >
+              La Technologie au Service<br />de la <span style={{ color: C.accent }}>Pause Parfaite.</span>
+            </motion.h1>
 
-                        <motion.h1
-                            initial={{ opacity: 0, y: 30 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.35, duration: 0.9, ease: EASE_OUT }}
-                            style={{
-                                fontSize: 'clamp(2.2rem, 5.5vw, 5rem)',
-                                fontFamily: 'var(--font-sora)',
-                                lineHeight: 1.1,
-                                letterSpacing: '-0.02em',
-                                color: C.textPrimary,
-                                marginBottom: 24,
-                            }}
-                        >
-                            La Technologie au Service<br />de la <span style={{ color: C.accent }}>Pause Parfaite.</span>
-                        </motion.h1>
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.55, duration: 0.8 }}
+              style={{
+                fontSize: 16, color: C.textMuted, lineHeight: 1.7,
+                maxWidth: 560, margin: '0 auto',
+              }}
+            >
+              Des distributeurs de dernière génération aux coffee corners sur-mesure,
+              nous déployons un parc technique adapté à votre entreprise et à vos collaborateurs.
+            </motion.p>
+          </div>
+        </motion.div>
+      </section>
 
-                        <motion.p
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 0.55, duration: 0.8 }}
-                            style={{
-                                fontSize: 16, color: C.textMuted, lineHeight: 1.7,
-                                maxWidth: 560, margin: '0 auto',
-                            }}
-                        >
-                            Des distributeurs de dernière génération aux coffee corners sur-mesure,
-                            nous déployons un parc technique adapté à votre entreprise et à vos collaborateurs.
-                        </motion.p>
-                    </div>
-                </motion.div>
-            </section>
+      <Gallery4
+        title="Trois gammes, une meme exigence de service"
+        description="Retrouvez nos principales familles de machines pour l’entreprise. Chaque carte ouvre sur une page detaillee avec usages, points forts et type d’implantation."
+        items={PARK_GALLERY_ITEMS}
+      />
 
-            <Gallery4
-                title="Trois gammes, une meme exigence de service"
-                description="Retrouvez nos principales familles de machines pour l’entreprise. Chaque carte ouvre sur une page detaillee avec usages, points forts et type d’implantation."
-                items={PARK_GALLERY_ITEMS}
-            />
+      <ProcessSection />
 
-            <ProcessSection />
-
-            {/* ── CTA ── */}
-            <section style={{ padding: 'clamp(64px, 10vw, 128px) 24px', position: 'relative', overflow: 'hidden' }}>
-                <div aria-hidden style={{
-                    position: 'absolute', bottom: 0, left: 0, width: '100%', height: '100%',
-                    background: 'linear-gradient(to top, rgba(178,111,53,0.08), transparent)',
-                    pointerEvents: 'none',
-                }} />
-                <div style={{ maxWidth: 700, margin: '0 auto', textAlign: 'center', position: 'relative', zIndex: 1 }}>
-                    <h2 style={{
-                        fontFamily: FONT.display,
-                        fontSize: 'clamp(28px, 5vw, 56px)',
-                        fontWeight: 600, color: C.textPrimary,
-                        letterSpacing: '-0.02em', marginBottom: 16,
-                    }}>
-                        Prêt à équiper vos espaces ?
-                    </h2>
-                    <p style={{
-                        fontFamily: FONT.body, fontSize: 16, color: C.textMuted,
-                        lineHeight: 1.7, maxWidth: 480, margin: '0 auto 32px',
-                    }}>
-                        Parlons de votre projet. Audit gratuit, proposition sur-mesure et installation rapide.
-                    </p>
-                    <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 12 }}>
-                        <motion.a
-                            href="/contact"
-                            style={{
-                                display: 'inline-flex', alignItems: 'center', gap: 8,
-                                fontFamily: FONT.mono, fontSize: 12, fontWeight: 600,
-                                color: '#1C0A00', background: C.gold,
-                                borderRadius: 8, padding: '14px 28px',
-                                letterSpacing: '0.08em', textTransform: 'uppercase',
-                                textDecoration: 'none',
-                            }}
-                            whileHover={{ scale: 1.03 }}
-                            whileTap={{ scale: 0.97 }}
-                        >
-                            Nous contacter <ArrowRight size={14} />
-                        </motion.a>
-                        <motion.a
-                            href="/groupe"
-                            style={{
-                                display: 'inline-flex', alignItems: 'center', gap: 8,
-                                fontFamily: FONT.mono, fontSize: 12,
-                                color: C.textPrimary,
-                                border: `1px solid ${C.divider}`, borderRadius: 8,
-                                padding: '14px 28px', letterSpacing: '0.08em',
-                                textTransform: 'uppercase', textDecoration: 'none',
-                            }}
-                            whileHover={{ scale: 1.03, borderColor: C.accent }}
-                            whileTap={{ scale: 0.97 }}
-                        >
-                            Notre Réseau Prodia+
-                        </motion.a>
-                    </div>
-                </div>
-            </section>
+      {/* ── CTA ── */}
+      <section style={{ padding: 'clamp(64px, 10vw, 128px) 24px', position: 'relative', overflow: 'hidden' }}>
+        <div aria-hidden style={{
+          position: 'absolute', bottom: 0, left: 0, width: '100%', height: '100%',
+          background: 'linear-gradient(to top, rgba(178,111,53,0.08), transparent)',
+          pointerEvents: 'none',
+        }} />
+        <div style={{ maxWidth: 700, margin: '0 auto', textAlign: 'center', position: 'relative', zIndex: 1 }}>
+          <h2 style={{
+            fontFamily: FONT.display,
+            fontSize: 'clamp(28px, 5vw, 56px)',
+            fontWeight: 600, color: C.textPrimary,
+            letterSpacing: '-0.02em', marginBottom: 16,
+          }}>
+            Prêt à équiper vos espaces ?
+          </h2>
+          <p style={{
+            fontFamily: FONT.body, fontSize: 16, color: C.textMuted,
+            lineHeight: 1.7, maxWidth: 480, margin: '0 auto 32px',
+          }}>
+            Parlons de votre projet. Audit gratuit, proposition sur-mesure et installation rapide.
+          </p>
+          <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 12 }}>
+            <motion.a
+              href="/contact"
+              style={{
+                display: 'inline-flex', alignItems: 'center', gap: 8,
+                fontFamily: FONT.mono, fontSize: 12, fontWeight: 600,
+                color: '#1C0A00', background: C.gold,
+                borderRadius: 8, padding: '14px 28px',
+                letterSpacing: '0.08em', textTransform: 'uppercase',
+                textDecoration: 'none',
+              }}
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+            >
+              Nous contacter <ArrowRight size={14} />
+            </motion.a>
+            <motion.a
+              href="/groupe"
+              style={{
+                display: 'inline-flex', alignItems: 'center', gap: 8,
+                fontFamily: FONT.mono, fontSize: 12,
+                color: C.textPrimary,
+                border: `1px solid ${C.divider}`, borderRadius: 8,
+                padding: '14px 28px', letterSpacing: '0.08em',
+                textTransform: 'uppercase', textDecoration: 'none',
+              }}
+              whileHover={{ scale: 1.03, borderColor: C.accent }}
+              whileTap={{ scale: 0.97 }}
+            >
+              Notre Réseau Prodia+
+            </motion.a>
+          </div>
         </div>
-    );
+      </section>
+    </div>
+  );
 }

@@ -173,13 +173,13 @@ const FOOTER_LEGAL = [
 // ─────────────────────────────────────────────────────────────────────────────
 
 const C = {
-  bg: '#2B1200',
-  surface: '#3A1A06',
+  bg: '#FAF2E9',
+  surface: '#FFFFFF',
   footer: '#1A0800',
   accent: '#C8763A',
-  textPrimary: '#F5E6D3',
-  textMuted: 'rgba(245,230,211,0.55)',
-  divider: 'rgba(245,230,211,0.12)',
+  textPrimary: '#2B1200',
+  textMuted: 'rgba(43,18,0,0.6)',
+  divider: 'rgba(43,18,0,0.1)',
 } as const;
 
 const FONT = {
@@ -317,7 +317,7 @@ function GhostNumber({ n }: { n: string }) {
         lineHeight: 1,
         pointerEvents: 'none',
         userSelect: 'none',
-        color: C.textPrimary,
+        color: '#2B1200',
         zIndex: 0,
       }}
     >
@@ -452,7 +452,7 @@ function HeroSection() {
             fontFamily: FONT.display,
             fontWeight: 600,
             lineHeight: 1.22,
-            color: C.textPrimary,
+            color: '#F5E6D3',
             letterSpacing: '-0.025em',
             margin: 0,
           }}
@@ -817,7 +817,7 @@ function JobRow({ job, index }: { job: Job; index: number }) {
           fontFamily: FONT.body,
           fontSize: '15px',
           fontWeight: 500,
-          color: hovered ? C.textPrimary : `rgba(245,230,211,0.85)`,
+          color: hovered ? C.textPrimary : `rgba(43,18,0,0.85)`,
           transition: 'color 0.2s',
         }}
       >
@@ -1111,7 +1111,7 @@ function HeroMoodboardSection() {
           transition={{ duration: 1.0, ease: EASE_OUT }}
           style={{
             height: '100%',
-            backgroundColor: C.bg,
+            backgroundColor: '#2B1200',
             borderRadius: '20px',
             overflow: 'hidden',
             boxShadow: '0 4px 48px rgba(0,0,0,0.35)',
