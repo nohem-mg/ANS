@@ -438,18 +438,18 @@ const VisionSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 + index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="bg-[#DCEBF3] rounded-[1rem] p-5 pb-6 xl:p-6 xl:pb-6 flex flex-col h-full hover:shadow-lg transition-all duration-300 relative overflow-hidden group"
+              className="bg-[#688125] rounded-[1rem] p-5 pb-6 xl:p-6 xl:pb-6 flex flex-col h-full hover:shadow-lg transition-all duration-300 relative overflow-hidden group"
             >
               {/* Card Number */}
-              <div className="w-8 h-8 rounded-full border border-[#0070A0] flex items-center justify-center mb-4 relative z-10 bg-transparent">
-                <span className="text-sm font-medium text-[#0070A0]">
+              <div className="w-8 h-8 rounded-full border border-[#F4F8EA] flex items-center justify-center mb-4 relative z-10 bg-transparent">
+                <span className="text-sm font-medium text-[#F4F8EA]">
                   {index + 1}
                 </span>
               </div>
 
               {/* Title */}
               <h3
-                className="text-[1.4rem] xl:text-[1.65rem] text-[#0070A0] font-medium mb-3 relative z-10 leading-tight"
+                className="text-[1.4rem] xl:text-[1.65rem] text-[#F4F8EA] font-medium mb-3 relative z-10 leading-tight"
                 style={{ fontFamily: 'var(--font-ibm-plex-sans)', letterSpacing: '-0.02em' }}
               >
                 {point.title}
@@ -457,7 +457,7 @@ const VisionSection = () => {
 
               {/* Description */}
               <p
-                className="text-[#6591A9] leading-relaxed text-[0.95rem] xl:text-[1.05rem] flex-grow relative z-10 pr-4"
+                className="text-[#EDF4DB] leading-relaxed text-[0.95rem] xl:text-[1.05rem] flex-grow relative z-10 pr-4"
                 style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}
               >
                 {point.desc}
@@ -467,46 +467,46 @@ const VisionSection = () => {
               <div className="pt-8 mt-auto relative z-10 opacity-60 group-hover:opacity-100 transition-opacity duration-500">
                 {index === 0 && (
                   <div className="flex flex-col gap-2 w-full">
-                    <div className="h-px bg-[#0070A0] w-full relative">
-                      <span className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1 w-1.5 h-1.5 border-t border-r border-[#0070A0] rotate-45 -mt-px"></span>
+                    <div className="h-px bg-[#F4F8EA] w-full relative">
+                      <span className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1 w-1.5 h-1.5 border-t border-r border-[#F4F8EA] rotate-45 -mt-px"></span>
                     </div>
-                    <div className="h-px bg-[#0070A0] w-4/5 relative">
-                      <span className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1 w-1.5 h-1.5 border-t border-r border-[#0070A0] rotate-45 -mt-px"></span>
+                    <div className="h-px bg-[#F4F8EA] w-4/5 relative">
+                      <span className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1 w-1.5 h-1.5 border-t border-r border-[#F4F8EA] rotate-45 -mt-px"></span>
                     </div>
-                    <div className="h-px bg-[#0070A0] w-[65%] relative">
-                      <span className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1 w-1.5 h-1.5 border-t border-r border-[#0070A0] rotate-45 -mt-px"></span>
+                    <div className="h-px bg-[#F4F8EA] w-[65%] relative">
+                      <span className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1 w-1.5 h-1.5 border-t border-r border-[#F4F8EA] rotate-45 -mt-px"></span>
                     </div>
                   </div>
                 )}
                 {index === 1 && (
                   <div className="flex gap-2 h-10 items-end">
                     {[...Array(6)].map((_, i) => (
-                      <div key={i} className="flex-1 border border-[#0070A0] rounded-[0.25rem] h-full relative" style={{ height: `${100 - i * 10}%` }}>
-                        {i === 2 && <span className="absolute inset-0 flex items-center justify-center text-[#0070A0]"><Lightbulb className="w-3.5 h-3.5" strokeWidth={2.5} /></span>}
-                        {i === 5 && <span className="absolute inset-0 flex items-center justify-center text-[#0070A0]"><MessageCircle className="w-2.5 h-2.5" strokeWidth={2.5} /></span>}
+                      <div key={i} className="flex-1 border border-[#F4F8EA] rounded-[0.25rem] h-full relative" style={{ height: `${100 - i * 10}%` }}>
+                        {i === 2 && <span className="absolute inset-0 flex items-center justify-center text-[#F4F8EA]"><Lightbulb className="w-3.5 h-3.5" strokeWidth={2.5} /></span>}
+                        {i === 5 && <span className="absolute inset-0 flex items-center justify-center text-[#F4F8EA]"><MessageCircle className="w-2.5 h-2.5" strokeWidth={2.5} /></span>}
                       </div>
                     ))}
                   </div>
                 )}
                 {index === 2 && (
                   <div className="flex gap-1.5 items-center h-10 w-full">
-                    <div className="flex-1 border border-[#0070A0] h-full rounded-sm" />
-                    <div className="flex-1 border border-[#0070A0] h-full skew-x-[-15deg] rounded-sm transform scale-90" />
-                    <div className="flex-1 border border-[#0070A0] h-full rounded-full mx-0.5" />
-                    <div className="flex-[0.8] border border-[#0070A0] h-full rounded-full" />
+                    <div className="flex-1 border border-[#F4F8EA] h-full rounded-sm" />
+                    <div className="flex-1 border border-[#F4F8EA] h-full skew-x-[-15deg] rounded-sm transform scale-90" />
+                    <div className="flex-1 border border-[#F4F8EA] h-full rounded-full mx-0.5" />
+                    <div className="flex-[0.8] border border-[#F4F8EA] h-full rounded-full" />
                   </div>
                 )}
                 {index === 3 && (
                   <div className="flex gap-0 items-center h-8 relative">
-                    <div className="w-1/3 h-full border border-[#0070A0] rounded-l-md rounded-r-[0.35rem] relative" />
-                    <div className="w-[15%] h-full border-t border-b border-[#0070A0] -mx-1 z-10 bg-[#DCEBF3]">
-                      <div className="absolute top-1/2 -translate-y-1/2 w-full h-[60%] border-t border-b border-[#0070A0] bg-[#DCEBF3]" />
+                    <div className="w-1/3 h-full border border-[#F4F8EA] rounded-l-md rounded-r-[0.35rem] relative" />
+                    <div className="w-[15%] h-full border-t border-b border-[#F4F8EA] -mx-1 z-10 bg-[#688125]">
+                      <div className="absolute top-1/2 -translate-y-1/2 w-full h-[60%] border-t border-b border-[#F4F8EA] bg-[#688125]" />
                     </div>
-                    <div className="w-1/3 h-full border border-[#0070A0] rounded-[0.35rem] relative" />
-                    <div className="w-[15%] h-full border-t border-b border-[#0070A0] -mx-1 z-10 bg-[#DCEBF3]">
-                      <div className="absolute top-1/2 -translate-y-1/2 w-full h-[60%] border-t border-b border-[#0070A0] bg-[#DCEBF3]" />
+                    <div className="w-1/3 h-full border border-[#F4F8EA] rounded-[0.35rem] relative" />
+                    <div className="w-[15%] h-full border-t border-b border-[#F4F8EA] -mx-1 z-10 bg-[#688125]">
+                      <div className="absolute top-1/2 -translate-y-1/2 w-full h-[60%] border-t border-b border-[#F4F8EA] bg-[#688125]" />
                     </div>
-                    <div className="w-1/6 h-full border border-[#0070A0] border-l-0 rounded-r-md rounded-l-[0.35rem] relative" />
+                    <div className="w-1/6 h-full border border-[#F4F8EA] border-l-0 rounded-r-md rounded-l-[0.35rem] relative" />
                   </div>
                 )}
               </div>
