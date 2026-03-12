@@ -52,6 +52,12 @@ interface MoodboardImage {
   h: number;
 }
 
+interface ContactDetail {
+  label: string;
+  value: string;
+  href?: string;
+}
+
 // ─────────────────────────────────────────────────────────────────────────────
 // DATA ARRAYS
 // ─────────────────────────────────────────────────────────────────────────────
@@ -85,6 +91,28 @@ const JOBS: Job[] = [
   { title: 'Responsable de Compte', location: 'Paris' },
   { title: 'Chargé(e) de Logistique', location: 'National' },
   { title: 'Commercial(e) B2B', location: 'Région Parisienne' },
+];
+
+const CONTACT_DETAILS: ContactDetail[] = [
+  {
+    label: 'Téléphone',
+    value: '03 27 37 16 84',
+    href: 'tel:+33327371684',
+  },
+  {
+    label: 'Email',
+    value: 'contact@ans-da.fr',
+    href: 'mailto:contact@ans-da.fr',
+  },
+  {
+    label: 'Adresse',
+    value: '780 rue Blaise Pascal, 59267 Proville',
+    href: 'https://maps.google.com/?q=780+rue+Blaise+Pascal+59267+Proville',
+  },
+  {
+    label: 'Horaires',
+    value: 'Lun–Ven : 8h00 – 18h00',
+  },
 ];
 
 const TEAM_MEMBERS: TeamMember[] = [
@@ -622,9 +650,9 @@ function StorySection() {
     >
       <div style={{ maxWidth: 1280, margin: '0 auto' }}>
         <FadeIn style={{ marginBottom: '80px', position: 'relative' }}>
-          <GhostNumber n="03" />
+          <GhostNumber n="01" />
           <div style={{ position: 'relative', zIndex: 1, maxWidth: 640 }}>
-            <SectionTag index="03" label="Histoire" />
+            <SectionTag index="01" label="Histoire" />
             <h2
               style={{
                 fontFamily: FONT.display,
@@ -864,9 +892,9 @@ function CareersSection() {
       >
         {/* ── Left column: heading + description + CTA ── */}
         <FadeIn style={{ position: 'relative' }}>
-          <GhostNumber n="04" />
+          <GhostNumber n="03" />
           <div style={{ position: 'relative', zIndex: 1 }}>
-            <SectionTag index="04" label="Carrières" />
+            <SectionTag index="03" label="Carrières" />
             <h2
               style={{
                 fontFamily: FONT.display,
@@ -955,6 +983,204 @@ function CareersSection() {
   );
 }
 
+function LocationSection() {
+  return (
+    <section
+      style={{
+        backgroundColor: C.bg,
+        padding: '96px 24px 128px',
+      }}
+    >
+      <div style={{ maxWidth: 1280, margin: '0 auto' }}>
+        <FadeIn style={{ marginBottom: '56px', position: 'relative' }}>
+          <GhostNumber n="04" />
+          <div style={{ position: 'relative', zIndex: 1, maxWidth: 640 }}>
+            <SectionTag index="04" label="Localisation" />
+            <h2
+              style={{
+                fontFamily: FONT.display,
+                fontSize: 'clamp(34px, 4.8vw, 58px)',
+                fontWeight: 700,
+                color: C.textPrimary,
+                letterSpacing: '-0.03em',
+                lineHeight: 1.08,
+                margin: '0 0 18px',
+              }}
+            >
+              Retrouvez-nous à Proville
+            </h2>
+            <p
+              style={{
+                fontFamily: FONT.body,
+                fontSize: '16px',
+                color: C.textMuted,
+                lineHeight: 1.75,
+                margin: 0,
+                maxWidth: 520,
+              }}
+            >
+              Notre ancrage local fait partie de notre manière de travailler :
+              proche du terrain, réactif et toujours accessible.
+            </p>
+          </div>
+        </FadeIn>
+
+        <div
+          className="about-location-grid"
+          style={{
+            display: 'grid',
+            gridTemplateColumns: '0.85fr 1.15fr',
+            gap: '32px',
+            alignItems: 'stretch',
+          }}
+        >
+          <FadeIn>
+            <div
+              style={{
+                backgroundColor: C.surface,
+                border: `1px solid ${C.divider}`,
+                borderRadius: '28px',
+                padding: '32px 30px',
+                height: '100%',
+                boxShadow: '0 18px 46px rgba(43,18,0,0.06)',
+              }}
+            >
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '22px',
+                }}
+              >
+                {CONTACT_DETAILS.map((detail, index) => {
+                  const content = (
+                    <div
+                      style={{
+                        paddingBottom: index === CONTACT_DETAILS.length - 1 ? 0 : '22px',
+                        borderBottom:
+                          index === CONTACT_DETAILS.length - 1
+                            ? 'none'
+                            : `1px solid ${C.divider}`,
+                      }}
+                    >
+                      <p
+                        style={{
+                          margin: '0 0 8px',
+                          fontFamily: FONT.mono,
+                          fontSize: '10px',
+                          letterSpacing: '0.14em',
+                          textTransform: 'uppercase',
+                          color: C.accent,
+                        }}
+                      >
+                        {detail.label}
+                      </p>
+                      <p
+                        style={{
+                          margin: 0,
+                          fontFamily: FONT.body,
+                          fontSize: '16px',
+                          lineHeight: 1.7,
+                          color: C.textPrimary,
+                        }}
+                      >
+                        {detail.value}
+                      </p>
+                    </div>
+                  );
+
+                  return detail.href ? (
+                    <a
+                      key={detail.label}
+                      href={detail.href}
+                      target={detail.href.startsWith('http') ? '_blank' : undefined}
+                      rel={detail.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                      style={{
+                        textDecoration: 'none',
+                        color: 'inherit',
+                      }}
+                    >
+                      {content}
+                    </a>
+                  ) : (
+                    <div key={detail.label}>{content}</div>
+                  );
+                })}
+              </div>
+            </div>
+          </FadeIn>
+
+          <FadeIn delay={0.08}>
+            <div
+              style={{
+                borderRadius: '28px',
+                overflow: 'hidden',
+                position: 'relative',
+                minHeight: '420px',
+                border: `1px solid ${C.divider}`,
+                boxShadow: '0 18px 46px rgba(43,18,0,0.08)',
+              }}
+            >
+              <iframe
+                src="https://www.google.com/maps?q=780+Rue+Blaise+Pascal,+59267+Proville&z=11&output=embed"
+                width="100%"
+                height="100%"
+                style={{
+                  border: 0,
+                  position: 'absolute',
+                  inset: 0,
+                }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Localisation ANS — Proville"
+              />
+              <div
+                aria-hidden
+                style={{
+                  position: 'absolute',
+                  inset: 0,
+                  background:
+                    'linear-gradient(to top, rgba(43,18,0,0.30), rgba(43,18,0,0.04) 45%, transparent 70%)',
+                  pointerEvents: 'none',
+                }}
+              />
+              <div
+                style={{
+                  position: 'absolute',
+                  left: '24px',
+                  bottom: '20px',
+                  zIndex: 1,
+                }}
+              >
+                <span
+                  style={{
+                    fontFamily: FONT.mono,
+                    fontSize: '10px',
+                    letterSpacing: '0.12em',
+                    textTransform: 'uppercase',
+                    color: '#F5E6D3',
+                  }}
+                >
+                  Proville, Hauts-de-France
+                </span>
+              </div>
+            </div>
+          </FadeIn>
+        </div>
+      </div>
+
+      <style>{`
+        @media (max-width: 900px) {
+          .about-location-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      `}</style>
+    </section>
+  );
+}
+
 // ─────────────────────────────────────────────────────────────────────────────
 // SECTION 5: L'ÉQUIPE — Zoom Parallax
 // ─────────────────────────────────────────────────────────────────────────────
@@ -1006,7 +1232,7 @@ function TeamSection() {
         }}
       >
         <FadeIn style={{ marginBottom: '80px', position: 'relative' }}>
-          <GhostNumber n="05" />
+          <GhostNumber n="02" />
           <div
             style={{
               position: 'relative',
@@ -1014,7 +1240,7 @@ function TeamSection() {
               maxWidth: 640,
             }}
           >
-            <SectionTag index="05" label="Équipe" />
+            <SectionTag index="02" label="Équipe" />
             <h2
               style={{
                 fontFamily: FONT.display,
@@ -1160,6 +1386,7 @@ export default function AboutPage() {
       <StorySection />
       <TeamSection />
       <CareersSection />
+      <LocationSection />
     </div>
   );
 }

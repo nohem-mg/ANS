@@ -28,6 +28,44 @@ const TESTIMONIALS = [
   }
 ];
 
+const FAQ_ITEMS = [
+  {
+    question: "Quelles solutions ANS peut installer dans mon entreprise ?",
+    answer:
+      "Nous installons des distributeurs automatiques modernes et fiables, proposant une large gamme de boissons chaudes (café grains, lyophilisé ou capsules, chocolats), boissons fraîches, ainsi qu'une offre snacking variée (confiseries, viennoiseries, sandwichs). Nous proposons également de la petite machine de bureau (Coffee Corner) et des fontaines à eau (réseau ou bonbonne).",
+  },
+  {
+    question: "Est-ce qu'ANS s'occupe aussi de l'installation et de la maintenance ?",
+    answer:
+      "Absolument. Nos équipes gèrent l'installation, l'approvisionnement et la maintenance préventive selon vos besoins. Notre équipe technique de 20 personnes est dédiée à nos clients au quotidien pour garantir un fonctionnement fluide et sans faille de vos espaces pause.",
+  },
+  {
+    question: "Quels moyens de paiement peuvent être proposés ?",
+    answer:
+      "Nous facilitons les paiements grâce à des technologies modernes et adaptables : lecteur de badges, clés, billets, cartes bancaires sans contact, paiement par smartphone, ou encore monnayeur standard. Vous choisissez la solution la plus adaptée aux habitudes de vos collaborateurs.",
+  },
+  {
+    question: "Dans quels environnements intervenez-vous ?",
+    answer:
+      "Nous accompagnons les entreprises et administrations (industrie, services, transport, logistique) ainsi que le grand public. Partenaire de proximité en région Hauts-de-France (Nord-Pas-de-Calais, Picardie), nous garantissons des interventions rapides, avec tous nos sites clients situés à moins de 30 minutes de nos techniciens.",
+  },
+  {
+    question: "Qu'est-ce qui différencie ANS d'un prestataire classique ?",
+    answer:
+      "Notre force repose sur l'alliance de la proximité et de la réactivité. En tant que membre du réseau indépendant Prodia+, nous allions la puissance d'un réseau national à la souplesse d'un acteur historique du nord. Nous sommes au plus proche de nos clients (interventions en moins de 30 minutes) pour offrir un suivi humain et réactif.",
+  },
+  {
+    question: "Avez-vous une démarche plus responsable ?",
+    answer:
+      "Oui, notre engagement durable est profond : cafés labellisés 'Bio' et 'Max Havelaar', matériels économes en énergie, déplacements optimisés, recyclage des matériels en fin de vie, détecteurs de mugs, gobelets en carton, et collecte de notre marc de café revalorisé à 100% en biocombustible.",
+  },
+  {
+    question: "L'offre peut-elle être personnalisée selon notre site ?",
+    answer:
+      "Tout à fait. Nous proposons des solutions sur-mesure, notamment avec la charte 'FeelGood' pour varier les plaisirs. Du choix du café (grains, capsules, bio) aux snacks, en passant par le design de machines fiables et l'intégration des meubles, nous adaptons chaque détail à votre environnement.",
+  },
+];
+
 // --- Components ---
 
 // 1. "Infusion" Loader
@@ -481,8 +519,139 @@ const VisionSection = () => {
   );
 };
 
+const FAQSection = ({
+  activeIndex,
+  onToggle,
+}: {
+  activeIndex: number;
+  onToggle: (index: number) => void;
+}) => {
+  return (
+    <section className="py-20 bg-[#FAF2E9]">
+      <div className="max-w-5xl mx-auto px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="mb-12"
+        >
+          <span
+            className="block text-[10px] font-mono uppercase tracking-[0.22em] text-golden-extraction mb-4"
+            style={{ fontFamily: 'var(--font-ibm-plex-mono)' }}
+          >
+            FAQ
+          </span>
+          <h2
+            className="text-deep-roast leading-tight mb-4"
+            style={{
+              fontFamily: 'var(--font-sora)',
+              fontSize: 'clamp(1.9rem, 3.6vw, 3rem)',
+              fontWeight: 600,
+              letterSpacing: '-0.02em',
+            }}
+          >
+            Questions frequentes
+          </h2>
+          <p
+            className="text-deep-roast/65 leading-relaxed max-w-2xl"
+            style={{
+              fontFamily: 'var(--font-ibm-plex-sans)',
+              fontSize: '1rem',
+            }}
+          >
+            Les principales reponses sur nos solutions, notre accompagnement et
+            notre maniere de travailler.
+          </p>
+        </motion.div>
+
+        <div className="border-t border-deep-roast/10">
+          <div className="flex flex-col">
+            {FAQ_ITEMS.map((item, index) => {
+              const isOpen = activeIndex === index;
+
+              return (
+                <motion.div
+                  key={item.question}
+                  initial={{ opacity: 0, y: 22 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{
+                    duration: 0.6,
+                    delay: 0.05 + index * 0.06,
+                    ease: [0.16, 1, 0.3, 1],
+                  }}
+                  className="border-b border-deep-roast/10"
+                >
+                  <button
+                    type="button"
+                    onClick={() => onToggle(index)}
+                    aria-expanded={isOpen}
+                    className="w-full text-left py-6 flex items-start gap-4"
+                  >
+                    <span
+                      className="shrink-0 pt-1 text-[11px] text-golden-extraction font-mono"
+                      style={{ fontFamily: 'var(--font-ibm-plex-mono)' }}
+                    >
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+
+                    <div className="flex-1">
+                      <h3
+                        className="text-deep-roast leading-snug"
+                        style={{
+                          fontFamily: 'var(--font-sora)',
+                          fontSize: 'clamp(1rem, 1.4vw, 1.15rem)',
+                          fontWeight: 600,
+                          letterSpacing: '-0.01em',
+                        }}
+                      >
+                        {item.question}
+                      </h3>
+
+                      <motion.div
+                        initial={false}
+                        animate={{
+                          height: isOpen ? 'auto' : 0,
+                          opacity: isOpen ? 1 : 0,
+                          marginTop: isOpen ? 16 : 0,
+                        }}
+                        transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+                        className="overflow-hidden"
+                      >
+                        <p
+                          className="text-deep-roast/70 leading-relaxed"
+                          style={{
+                            fontFamily: 'var(--font-ibm-plex-sans)',
+                            fontSize: '0.95rem',
+                          }}
+                        >
+                          {item.answer}
+                        </p>
+                      </motion.div>
+                    </div>
+
+                    <motion.div
+                      animate={{ rotate: isOpen ? 180 : 0 }}
+                      transition={{ duration: 0.25 }}
+                      className="pt-1 text-deep-roast/45"
+                    >
+                      <ChevronDown className="w-5 h-5" />
+                    </motion.div>
+                  </button>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 export default function Home() {
   const [loading, setLoading] = useState(true);
+  const [activeFaqIndex, setActiveFaqIndex] = useState(0);
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
@@ -862,6 +1031,15 @@ export default function Home() {
             <Timeline />
           </div>
         </section>
+
+        <FAQSection
+          activeIndex={activeFaqIndex}
+          onToggle={(index) =>
+            setActiveFaqIndex((currentIndex) =>
+              currentIndex === index ? -1 : index
+            )
+          }
+        />
 
 
 
