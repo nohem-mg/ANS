@@ -216,15 +216,44 @@ const Timeline = () => {
 
   return (
     <div ref={sectionRef} className="relative">
-      {/* Connecting line track */}
+      {/* Mobile: vertical timeline */}
+      <div className="md:hidden relative pl-6">
+        <div className="absolute left-[5px] top-2 bottom-2 w-px bg-deep-roast/10" />
+        <motion.div
+          className="absolute left-[5px] top-2 w-px bg-golden-extraction/40 origin-top"
+          style={{ scaleY: lineScaleX }}
+        />
+        {MILESTONES.map((m, i) => (
+          <motion.div
+            key={m.year}
+            className="relative pb-10 last:pb-0"
+            initial={{ opacity: 0, x: -16 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 + i * 0.12, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <div className="absolute -left-6 top-1 w-2.5 h-2.5 rounded-full bg-sienna-racing border-2 border-[#FAF2E9] z-10" />
+            <div className="text-sm font-mono uppercase tracking-[0.22em] text-golden-extraction mb-2" style={{ fontFamily: 'var(--font-ibm-plex-mono)', fontWeight: 600 }}>
+              {m.year}
+            </div>
+            <h3 className="text-deep-roast mb-3 leading-tight" style={{ fontFamily: 'var(--font-sora)', fontSize: '1.15rem', fontWeight: 600 }}>
+              {m.title}
+            </h3>
+            <div className="w-8 h-px bg-golden-extraction/40 mb-3" />
+            <p className="text-deep-roast/60 leading-relaxed text-[0.9375rem]" style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}>
+              {m.desc}
+            </p>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Desktop: connecting line track */}
       <div className="relative hidden md:block mb-0">
         <div className="absolute left-[16.67%] right-[16.67%] top-0 h-px bg-deep-roast/10" />
-        {/* Animated golden fill */}
         <motion.div
           className="absolute left-[16.67%] right-[16.67%] top-0 h-px bg-golden-extraction/40 origin-left"
           style={{ scaleX: lineScaleX }}
         />
-        {/* Dots at each column center */}
         {MILESTONES.map((_, i) => (
           <motion.div
             key={i}
@@ -238,8 +267,8 @@ const Timeline = () => {
         ))}
       </div>
 
-      {/* 3-column grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3">
+      {/* 3-column grid (desktop only) */}
+      <div className="hidden md:grid grid-cols-1 md:grid-cols-3">
         {MILESTONES.map((m, i) => (
           <motion.div
             key={m.year}
@@ -687,8 +716,7 @@ export default function Home() {
     return () => { document.body.style.overflow = ''; };
   }, [loading]);
 
-  const featuredTestimonial = TESTIMONIALS[0];
-  const compactTestimonials = TESTIMONIALS.slice(1);
+  const compactTestimonials = TESTIMONIALS;
 
   return (
     <>
@@ -994,102 +1022,63 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="md:hidden space-y-4 mb-12">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="bg-white border border-deep-roast/10 shadow-sm px-6 py-7 rounded-[1.25rem]"
-              >
-                <div className="flex gap-1 mb-4 text-golden-extraction">
-                  {[...Array(5)].map((_, i) => (
-                    <span key={i} className="text-sm">★</span>
-                  ))}
-                </div>
+            <div className="md:hidden space-y-3 mb-12">
+              {compactTestimonials.map((t, idx) => {
+                const isExpanded = expandedMobileTestimonial === idx;
 
-                <p
-                  className="text-deep-roast/85 italic leading-relaxed text-[1.02rem]"
-                  style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}
-                >
-                  "{featuredTestimonial.review}"
-                </p>
-
-                <div className="flex items-center gap-3 mt-6 pt-5 border-t border-deep-roast/8">
-                  <div className="w-10 h-10 rounded-full bg-[#FAF2E9] border border-golden-extraction/30 flex items-center justify-center text-golden-extraction font-bold" style={{ fontFamily: 'var(--font-sora)' }}>
-                    {featuredTestimonial.name.charAt(0)}
-                  </div>
-                  <div>
-                    <p className="text-deep-roast font-medium text-sm" style={{ fontFamily: 'var(--font-sora)' }}>{featuredTestimonial.name}</p>
-                    <p className="text-deep-roast/50 text-xs mt-0.5" style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}>Avis Google</p>
-                  </div>
-                </div>
-              </motion.div>
-
-              <div className="space-y-3">
-                {compactTestimonials.map((t, idx) => {
-                  const isExpanded = expandedMobileTestimonial === idx;
-
-                  return (
-                    <motion.div
-                      key={t.name}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.1 + idx * 0.1, duration: 0.5 }}
-                      className="bg-white border border-deep-roast/10 shadow-sm px-5 py-5 rounded-[1.1rem]"
-                    >
-                      <div className="flex items-start justify-between gap-4">
-                        <div className="min-w-0">
-                          <div className="flex gap-1 mb-3 text-golden-extraction">
-                            {[...Array(5)].map((_, i) => (
-                              <span key={i} className="text-xs">★</span>
-                            ))}
-                          </div>
-
-                          <p
-                            className="text-deep-roast/75 italic leading-relaxed text-[0.98rem]"
-                            style={
-                              isExpanded
-                                ? { fontFamily: 'var(--font-ibm-plex-sans)' }
-                                : {
-                                    fontFamily: 'var(--font-ibm-plex-sans)',
-                                    display: '-webkit-box',
-                                    WebkitLineClamp: 3,
-                                    WebkitBoxOrient: 'vertical',
-                                    overflow: 'hidden',
-                                  }
-                            }
-                          >
-                            "{t.review}"
-                          </p>
+                return (
+                  <motion.div
+                    key={t.name}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.1 + idx * 0.1, duration: 0.5 }}
+                    className="bg-white border border-deep-roast/10 shadow-sm px-5 py-5 rounded-[1.1rem]"
+                  >
+                    <div className="min-w-0">
+                        <div className="flex gap-1 mb-3 text-golden-extraction">
+                          {[...Array(5)].map((_, i) => (
+                            <span key={i} className="text-xs">★</span>
+                          ))}
                         </div>
 
-                        <div className="w-9 h-9 rounded-full bg-[#FAF2E9] border border-golden-extraction/30 flex items-center justify-center text-golden-extraction font-bold shrink-0" style={{ fontFamily: 'var(--font-sora)' }}>
-                          {t.name.charAt(0)}
-                        </div>
-                      </div>
-
-                      <div className="flex items-center justify-between gap-3 mt-4 pt-4 border-t border-deep-roast/8">
-                        <div className="min-w-0">
-                          <p className="text-deep-roast font-medium text-sm" style={{ fontFamily: 'var(--font-sora)' }}>{t.name}</p>
-                          <p className="text-deep-roast/50 text-xs mt-0.5" style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}>Avis Google</p>
-                        </div>
-
-                        <button
-                          type="button"
-                          onClick={() => setExpandedMobileTestimonial(isExpanded ? null : idx)}
-                          className="inline-flex items-center gap-2 text-[11px] tracking-[0.16em] uppercase text-golden-extraction shrink-0"
-                          style={{ fontFamily: 'var(--font-ibm-plex-mono)' }}
+                        <p
+                          className="text-deep-roast/75 italic leading-relaxed text-[0.98rem]"
+                          style={
+                            isExpanded
+                              ? { fontFamily: 'var(--font-ibm-plex-sans)' }
+                              : {
+                                  fontFamily: 'var(--font-ibm-plex-sans)',
+                                  display: '-webkit-box',
+                                  WebkitLineClamp: 3,
+                                  WebkitBoxOrient: 'vertical',
+                                  overflow: 'hidden',
+                                }
+                          }
                         >
-                          {isExpanded ? "Réduire" : "Lire l'avis"}
-                          <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`} />
-                        </button>
+                          "{t.review}"
+                        </p>
+                    </div>
+
+                    <div className="flex items-center justify-between gap-3 mt-4 pt-4 border-t border-deep-roast/8">
+                      <div className="min-w-0">
+                        <p className="text-deep-roast font-medium text-sm" style={{ fontFamily: 'var(--font-sora)' }}>{t.name}</p>
+                        <p className="text-deep-roast/50 text-xs mt-0.5" style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}>Avis Google</p>
                       </div>
-                    </motion.div>
-                  );
-                })}
-              </div>
+
+                      <button
+                        type="button"
+                        onClick={() => setExpandedMobileTestimonial(isExpanded ? null : idx)}
+                        className="inline-flex items-center gap-2 text-[11px] tracking-[0.16em] uppercase text-golden-extraction shrink-0"
+                        style={{ fontFamily: 'var(--font-ibm-plex-mono)' }}
+                      >
+                        {isExpanded ? "Réduire" : "Lire l'avis"}
+                        <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`} />
+                      </button>
+                    </div>
+                  </motion.div>
+                );
+              })}
             </div>
 
             <div className="hidden md:grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
