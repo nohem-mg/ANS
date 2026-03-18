@@ -20,16 +20,27 @@ export default function Footer() {
                 fontFamily: 'var(--font-ibm-plex-mono)',
             }}
         >
-            <div
-                style={{
-                    backgroundColor: '#2B1200',
-                    borderRadius: '20px',
-                    padding: '80px 24px 40px',
-                    boxShadow: 'none',
-                    position: 'relative',
-                    overflow: 'hidden',
-                }}
-            >
+        <style>{`
+            @media (max-width: 767px) {
+                .footer-inner { padding: 32px 20px 24px !important; }
+                .footer-logo-divider { margin-bottom: 24px !important; }
+                .footer-grid { gap: 20px !important; margin-bottom: 24px !important; }
+                .footer-bottom { padding-top: 16px !important; gap: 12px !important; }
+                .footer-col-address { display: none !important; }
+                .footer-col-nav { display: none !important; }
+            }
+        `}</style>
+        <div
+            className="footer-inner"
+            style={{
+                backgroundColor: '#2B1200',
+                borderRadius: '20px',
+                padding: '80px 24px 40px',
+                boxShadow: 'none',
+                position: 'relative',
+                overflow: 'hidden',
+            }}
+        >
                 {/* Subtle light dot grid for texture */}
                 <div
                     aria-hidden
@@ -43,7 +54,7 @@ export default function Footer() {
                 />
                 <div style={{ maxWidth: 1280, margin: '0 auto', position: 'relative', zIndex: 1 }}>
                     {/* Top divider with logo */}
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 24, marginBottom: 48 }}>
+                    <div className="footer-logo-divider" style={{ display: 'flex', alignItems: 'center', gap: 24, marginBottom: 48 }}>
                         <div style={{ flex: 1, height: 1, background: 'rgba(255,246,239,0.08)' }} />
                         <Image src="/logo-ANS.png" alt="ANS" width={28} height={28} style={{ objectFit: 'contain', opacity: 0.3 }} />
                         <div style={{ flex: 1, height: 1, background: 'rgba(255,246,239,0.08)' }} />
@@ -51,6 +62,7 @@ export default function Footer() {
 
                     {/* 3-column footer grid */}
                     <div
+                        className="footer-grid"
                         style={{
                             display: 'grid',
                             gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
@@ -89,7 +101,7 @@ export default function Footer() {
                         </div>
 
                         {/* Col 2 — Address */}
-                        <div>
+                        <div className="footer-col-address">
                             <p style={{ color: 'rgba(255,246,239,0.6)', fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase' as const, marginBottom: 16 }}>
                                 Adresse
                             </p>
@@ -108,7 +120,7 @@ export default function Footer() {
                         </div>
 
                         {/* Col 3 — Navigation */}
-                        <div>
+                        <div className="footer-col-nav">
                             <p style={{ color: 'rgba(255,246,239,0.6)', fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase' as const, marginBottom: 16 }}>
                                 Navigation
                             </p>
@@ -136,6 +148,7 @@ export default function Footer() {
 
                     {/* Bottom bar */}
                     <div
+                        className="footer-bottom"
                         style={{
                             paddingTop: 24,
                             borderTop: '1px solid rgba(255,246,239,0.08)',

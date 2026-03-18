@@ -194,6 +194,7 @@ function ProcessSection() {
   return (
     <section
       ref={sectionRef}
+      className="process-section-outer"
       style={{
         background: '#FAF2E9',
         minHeight: '100vh',
@@ -223,16 +224,20 @@ function ProcessSection() {
 
         @media (max-width: 980px) {
           .process-main-grid { grid-template-columns: 1fr !important; gap: 48px !important; }
+          .process-section-outer { padding-top: 80px !important; padding-bottom: 80px !important; }
         }
 
         @media (max-width: 640px) {
+          .process-section-outer { padding-top: 56px !important; padding-bottom: 56px !important; }
           .process-section-inner { padding: 0 20px !important; }
-          .process-detail-card { padding: 32px 24px !important; }
+          .process-detail-card { padding: 28px 20px !important; }
+          .process-header { margin-bottom: 48px !important; }
         }
       `}</style>
 
       <div className="process-section-inner" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 40px' }}>
         <div
+          className="process-header"
           style={{
             marginBottom: '80px',
             opacity: isVisible ? 1 : 0,
