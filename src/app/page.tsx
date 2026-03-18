@@ -667,6 +667,7 @@ const FAQSection = ({
 export default function Home() {
   const [loading, setLoading] = useState(true);
   const [activeFaqIndex, setActiveFaqIndex] = useState(0);
+  const [expandedMobileTestimonial, setExpandedMobileTestimonial] = useState<number | null>(null);
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
@@ -685,6 +686,10 @@ export default function Home() {
     }
     return () => { document.body.style.overflow = ''; };
   }, [loading]);
+
+  const featuredTestimonial = TESTIMONIALS[0];
+  const compactTestimonials = TESTIMONIALS.slice(1);
+
   return (
     <>
       {/* Loader overlay — always on top, fades out then unmounts */}
@@ -989,7 +994,105 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+            <div className="md:hidden space-y-4 mb-12">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="bg-white border border-deep-roast/10 shadow-sm px-6 py-7 rounded-[1.25rem]"
+              >
+                <div className="flex gap-1 mb-4 text-golden-extraction">
+                  {[...Array(5)].map((_, i) => (
+                    <span key={i} className="text-sm">★</span>
+                  ))}
+                </div>
+
+                <p
+                  className="text-deep-roast/85 italic leading-relaxed text-[1.02rem]"
+                  style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}
+                >
+                  "{featuredTestimonial.review}"
+                </p>
+
+                <div className="flex items-center gap-3 mt-6 pt-5 border-t border-deep-roast/8">
+                  <div className="w-10 h-10 rounded-full bg-[#FAF2E9] border border-golden-extraction/30 flex items-center justify-center text-golden-extraction font-bold" style={{ fontFamily: 'var(--font-sora)' }}>
+                    {featuredTestimonial.name.charAt(0)}
+                  </div>
+                  <div>
+                    <p className="text-deep-roast font-medium text-sm" style={{ fontFamily: 'var(--font-sora)' }}>{featuredTestimonial.name}</p>
+                    <p className="text-deep-roast/50 text-xs mt-0.5" style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}>Avis Google</p>
+                  </div>
+                </div>
+              </motion.div>
+
+              <div className="space-y-3">
+                {compactTestimonials.map((t, idx) => {
+                  const isExpanded = expandedMobileTestimonial === idx;
+
+                  return (
+                    <motion.div
+                      key={t.name}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.1 + idx * 0.1, duration: 0.5 }}
+                      className="bg-white border border-deep-roast/10 shadow-sm px-5 py-5 rounded-[1.1rem]"
+                    >
+                      <div className="flex items-start justify-between gap-4">
+                        <div className="min-w-0">
+                          <div className="flex gap-1 mb-3 text-golden-extraction">
+                            {[...Array(5)].map((_, i) => (
+                              <span key={i} className="text-xs">★</span>
+                            ))}
+                          </div>
+
+                          <p
+                            className="text-deep-roast/75 italic leading-relaxed text-[0.98rem]"
+                            style={
+                              isExpanded
+                                ? { fontFamily: 'var(--font-ibm-plex-sans)' }
+                                : {
+                                    fontFamily: 'var(--font-ibm-plex-sans)',
+                                    display: '-webkit-box',
+                                    WebkitLineClamp: 3,
+                                    WebkitBoxOrient: 'vertical',
+                                    overflow: 'hidden',
+                                  }
+                            }
+                          >
+                            "{t.review}"
+                          </p>
+                        </div>
+
+                        <div className="w-9 h-9 rounded-full bg-[#FAF2E9] border border-golden-extraction/30 flex items-center justify-center text-golden-extraction font-bold shrink-0" style={{ fontFamily: 'var(--font-sora)' }}>
+                          {t.name.charAt(0)}
+                        </div>
+                      </div>
+
+                      <div className="flex items-center justify-between gap-3 mt-4 pt-4 border-t border-deep-roast/8">
+                        <div className="min-w-0">
+                          <p className="text-deep-roast font-medium text-sm" style={{ fontFamily: 'var(--font-sora)' }}>{t.name}</p>
+                          <p className="text-deep-roast/50 text-xs mt-0.5" style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}>Avis Google</p>
+                        </div>
+
+                        <button
+                          type="button"
+                          onClick={() => setExpandedMobileTestimonial(isExpanded ? null : idx)}
+                          className="inline-flex items-center gap-2 text-[11px] tracking-[0.16em] uppercase text-golden-extraction shrink-0"
+                          style={{ fontFamily: 'var(--font-ibm-plex-mono)' }}
+                        >
+                          {isExpanded ? "Réduire" : "Lire l'avis"}
+                          <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`} />
+                        </button>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            </div>
+
+            <div className="hidden md:grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
               {TESTIMONIALS.map((t, idx) => (
                 <motion.div
                   key={idx}
