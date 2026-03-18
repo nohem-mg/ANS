@@ -643,6 +643,7 @@ function StorySection() {
   return (
     <section
       id="notre-histoire"
+      className="ans-story-section"
       style={{
         backgroundColor: C.bg,
         padding: '128px 24px',
@@ -805,6 +806,12 @@ function StorySection() {
             gap: 32px !important;
           }
         }
+        @media (max-width: 768px) {
+          .ans-story-section {
+            padding-top: 64px !important;
+            padding-bottom: 64px !important;
+          }
+        }
       `}</style>
     </section>
   );
@@ -875,6 +882,7 @@ function CareersSection() {
   return (
     <section
       id="rejoindre"
+      className="ans-careers-section"
       style={{
         backgroundColor: "#F6EDE5",
         padding: '96px 24px',
@@ -977,6 +985,7 @@ function CareersSection() {
       <style>{`
         @media (max-width: 768px) {
           #rejoindre > div { grid-template-columns: 1fr !important; gap: 48px !important; }
+          .ans-careers-section { padding-top: 64px !important; padding-bottom: 64px !important; }
         }
       `}</style>
     </section>
@@ -986,6 +995,7 @@ function CareersSection() {
 function LocationSection() {
   return (
     <section
+      className="ans-location-section"
       style={{
         backgroundColor: C.bg,
         padding: '96px 24px 128px',
@@ -1174,6 +1184,12 @@ function LocationSection() {
         @media (max-width: 900px) {
           .about-location-grid {
             grid-template-columns: 1fr !important;
+          }
+        }
+        @media (max-width: 768px) {
+          .ans-location-section {
+            padding-top: 64px !important;
+            padding-bottom: 72px !important;
           }
         }
       `}</style>

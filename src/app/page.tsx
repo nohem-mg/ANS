@@ -243,14 +243,14 @@ const Timeline = () => {
         {MILESTONES.map((m, i) => (
           <motion.div
             key={m.year}
-            className="relative px-12 pt-16 pb-10 md:border-r border-deep-roast/10 last:border-r-0 overflow-hidden"
+            className="relative px-5 pt-4 pb-3 md:px-12 md:pt-16 md:pb-10 md:border-r border-deep-roast/10 last:border-r-0 overflow-hidden"
             initial={{ opacity: 0, y: 32 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 + i * 0.15, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
             {/* Year label */}
-            <div className="text-[10px] font-mono uppercase tracking-[0.22em] text-golden-extraction mb-8">
+            <div className="text-2xl md:text-[10px] font-mono uppercase tracking-[0.1em] md:tracking-[0.22em] text-golden-extraction mb-4 md:mb-8" style={{ fontFamily: 'var(--font-ibm-plex-mono)', fontWeight: 600 }}>
               {m.year}
             </div>
 
@@ -321,7 +321,7 @@ const ServiceRow = ({ title, desc, icon }: { title: string, desc: string, icon: 
   return (
     <motion.div
       ref={ref}
-      style={{ opacity, y, paddingTop: 'clamp(2rem, 5vw, 4rem)', paddingBottom: 'clamp(2rem, 5vw, 4rem)' }}
+      style={{ opacity, y, paddingTop: 'clamp(1.25rem, 5vw, 4rem)', paddingBottom: 'clamp(1.25rem, 5vw, 4rem)' }}
       className="group relative flex flex-col md:flex-row md:items-center gap-5 md:gap-16 border-b border-deep-roast/10 overflow-hidden"
     >
       {/* Left column: icon + title */}
@@ -331,7 +331,7 @@ const ServiceRow = ({ title, desc, icon }: { title: string, desc: string, icon: 
         </div>
         <h3
           className="text-deep-roast font-semibold"
-          style={{ fontSize: 'clamp(0.75rem, 1.2vw, 0.9rem)', letterSpacing: '0.1em', textTransform: 'uppercase', fontFamily: 'var(--font-ibm-plex-mono)' }}
+          style={{ fontSize: 'clamp(1rem, 1.4vw, 1.15rem)', letterSpacing: '0.08em', textTransform: 'uppercase', fontFamily: 'var(--font-ibm-plex-mono)' }}
         >
           {title}
         </h3>
@@ -377,8 +377,18 @@ const VISION_POINTS = [
 ];
 
 const VisionSection = () => {
+  const [isMobile, setIsMobile] = useState(() =>
+    typeof window !== 'undefined' ? window.matchMedia('(max-width: 767px)').matches : false
+  );
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 767px)');
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mq.addEventListener('change', handler);
+    return () => mq.removeEventListener('change', handler);
+  }, []);
+
   return (
-    <section id="pause-vision" className="py-12 md:py-20 min-h-[90vh] lg:min-h-screen flex items-center relative overflow-hidden">
+    <section id="pause-vision" className="pt-10 pb-8 md:py-20 lg:min-h-screen flex items-center relative">
       <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-[#FAF2E9]/5 to-transparent pointer-events-none" />
 
       <div className="max-w-[105rem] mx-auto px-6 lg:px-12 relative z-10 w-full">
@@ -429,16 +439,17 @@ const VisionSection = () => {
           </motion.div>
         </div>
 
-        {/* 4-Column Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 xl:gap-8">
+        {/* 4-Column Cards Grid — scroll horizontal sur mobile, grille sur desktop */}
+        <div className="md:overflow-visible overflow-hidden" style={{ marginLeft: '-1.5rem', marginRight: '-1.5rem' }}>
+        <div className="flex md:grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 xl:gap-8 overflow-x-auto md:overflow-x-visible snap-x snap-mandatory md:snap-none pb-2 md:pb-0 md:px-0" style={{ paddingLeft: '1.75rem', paddingRight: '1.5rem' }}>
           {VISION_POINTS.map((point, index) => (
             <motion.div
               key={point.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              whileInView={isMobile ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 + index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="bg-[#688125] rounded-[1rem] p-5 pb-6 xl:p-6 xl:pb-6 flex flex-col h-full hover:shadow-lg transition-all duration-300 relative overflow-hidden group"
+              className="bg-[#688125] rounded-[1rem] p-5 pb-6 xl:p-6 xl:pb-6 flex flex-col hover:shadow-lg transition-all duration-300 relative overflow-hidden group snap-start shrink-0 w-[76vw] sm:w-[56vw] md:w-auto md:shrink md:h-full"
             >
               {/* Card Number */}
               <div className="w-8 h-8 rounded-full border border-[#F4F8EA] flex items-center justify-center mb-4 relative z-10 bg-transparent">
@@ -464,7 +475,7 @@ const VisionSection = () => {
               </p>
 
               {/* Decorative abstract elements at bottom */}
-              <div className="pt-8 mt-auto relative z-10 opacity-60 group-hover:opacity-100 transition-opacity duration-500">
+              <div className="hidden md:block pt-8 mt-auto relative z-10 opacity-60 group-hover:opacity-100 transition-opacity duration-500">
                 {index === 0 && (
                   <div className="flex flex-col gap-2 w-full">
                     <div className="h-px bg-[#F4F8EA] w-full relative">
@@ -513,6 +524,7 @@ const VisionSection = () => {
             </motion.div>
           ))}
         </div>
+        </div>
 
       </div>
     </section>
@@ -527,7 +539,7 @@ const FAQSection = ({
   onToggle: (index: number) => void;
 }) => {
   return (
-    <section className="py-20 bg-[#FAF2E9]">
+    <section className="pt-8 pb-8 md:py-20 bg-[#FAF2E9]">
       <div className="max-w-5xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -689,11 +701,21 @@ export default function Home() {
         />
 
         {/* Hero Section — cream frame + dark widget */}
+        <style>{`
+          @media (max-width: 767px) {
+            .hero-section { height: auto !important; min-height: 0 !important; }
+            .hero-widget { height: auto !important; min-height: 0 !important; }
+            .hero-content-area { padding-top: 28px !important; padding-bottom: 36px !important; }
+            .hero-scroll-indicator { display: none !important; }
+          }
+        `}</style>
         <section
+          className="hero-section"
           style={{
             backgroundColor: '#FAF2E9',
-            height: 'calc(100vh - 68px)',
-            padding: 'clamp(10px, 1.2vw, 14px) clamp(16px, 4vw, 48px)',
+            height: 'calc(100dvh - 68px)',
+            minHeight: '500px',
+            padding: 'clamp(8px, 1.2vw, 14px) clamp(12px, 4vw, 48px)',
             boxSizing: 'border-box',
           }}
         >
@@ -701,6 +723,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
+            className="hero-widget"
             style={{
               height: '100%',
               backgroundColor: '#2B1200',
@@ -749,15 +772,12 @@ export default function Home() {
                   repeat: Infinity,
                   repeatType: "reverse"
                 }}
-              >
-                <Image
-                  src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?q=80&w=2560&auto=format&fit=crop"
-                  alt="Extraction espresso"
-                  fill
-                  style={{ objectFit: 'cover', objectPosition: 'center' }}
-                  priority
-                />
-              </motion.div>
+                style={{
+                  backgroundImage: 'url(https://images.unsplash.com/photo-1447933601403-0c6688de566e?q=80&w=2560&auto=format&fit=crop)',
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                }}
+              />
             </div>
 
             {/* Rich gradient overlays for Deep Roast mood & readable text */}
@@ -776,22 +796,22 @@ export default function Home() {
 
             {/* Content — centered like /about hero */}
             {/* ── Stars · headline · subtitle · two pills ── */}
-            <div className="relative z-10 w-full max-w-4xl mx-auto px-8 text-center flex flex-col items-center justify-center h-full">
+            <div className="hero-content-area relative z-10 w-full max-w-4xl mx-auto px-5 sm:px-8 text-center flex flex-col items-center justify-center h-full">
 
               {/* Stars rating in a sleek badge */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.9, y: 10 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 transition={{ delay: 0.7, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                className="flex items-center justify-center gap-3 mb-10 px-5 py-2 rounded-full border border-golden-extraction/20 bg-[#2B1200]/40 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.3)]"
+                className="flex items-center justify-center gap-2.5 mb-10 px-4 py-2 rounded-full border border-golden-extraction/20 bg-[#2B1200]/40 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.3)]"
               >
-                <div className="flex gap-1" style={{ filter: 'drop-shadow(0 2px 4px rgba(200,118,58,0.4))' }}>
+                <div className="flex gap-0.5" style={{ filter: 'drop-shadow(0 2px 4px rgba(200,118,58,0.4))' }}>
                   {[...Array(5)].map((_, i) => (
-                    <span key={i} className="text-golden-extraction text-sm leading-none">★</span>
+                    <span key={i} className="text-golden-extraction text-xs leading-none">★</span>
                   ))}
                 </div>
-                <div className="w-px h-3 bg-coffee-cream/20" />
-                <span className="text-coffee-cream/80 text-[11px] font-mono tracking-[0.2em] uppercase">
+                <div className="w-px h-3 bg-coffee-cream/20 shrink-0" />
+                <span className="text-coffee-cream/80 text-[10px] font-mono tracking-[0.06em] uppercase whitespace-nowrap">
                   4.9 / 5 <span className="opacity-50">·</span> 200+ partenaires
                 </span>
               </motion.div>
@@ -803,12 +823,13 @@ export default function Home() {
                 transition={{ delay: 0.85, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
                 className="drop-shadow-[0_4px_24px_rgba(0,0,0,0.5)]"
                 style={{
-                  fontSize: 'clamp(2.8rem, 6vw, 6rem)',
+                  fontSize: 'clamp(3.2rem, 7vw, 6rem)',
                   fontFamily: 'var(--font-sora)',
                   lineHeight: 1.05,
                   letterSpacing: '-0.02em',
                   color: 'var(--color-coffee-cream)',
                   marginBottom: '1.75rem',
+                  textAlign: 'center',
                 }}
               >
                 Faites de la <span className="text-transparent bg-clip-text bg-gradient-to-br from-golden-extraction to-sienna-racing italic pr-2">pause</span>
@@ -884,7 +905,7 @@ export default function Home() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1, y: [0, 8, 0] }}
               transition={{ delay: 2, duration: 2, repeat: Infinity }}
-              className="absolute bottom-8 left-1/2 -translate-x-1/2 text-golden-extraction/40"
+              className="hero-scroll-indicator absolute bottom-8 left-1/2 -translate-x-1/2 text-golden-extraction/40"
             >
               <ChevronDown className="w-6 h-6" />
             </motion.div>
@@ -896,18 +917,18 @@ export default function Home() {
 
 
         {/* Services Section — Spec-Sheet Layout */}
-        <section id="services" className="py-20 relative">
-          <div className="max-w-7xl mx-auto px-6">
+          <section id="services" className="pt-8 pb-8 md:py-20 relative">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6">
 
             {/* Section header */}
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-6 md:mb-12">
               <div>
                 <span className="text-golden-extraction text-[10px] tracking-[0.22em] uppercase mb-5 block" style={{ fontFamily: 'var(--font-ibm-plex-mono)' }}>Notre Savoir-Faire</span>
-                <h2 className="text-4xl md:text-5xl leading-tight" style={{ fontFamily: 'var(--font-sora)', fontWeight: 600 }}>
+                <h2 className="text-deep-roast leading-tight" style={{ fontFamily: 'var(--font-sora)', fontSize: 'clamp(1.75rem, 3.5vw, 3rem)', fontWeight: 600, letterSpacing: '-0.02em' }}>
                   L'Excellence de la <span className="text-sienna-racing">Pause Technique.</span>
                 </h2>
               </div>
-              <p className="max-w-sm text-deep-roast/60 leading-relaxed text-sm md:text-right" style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}>
+              <p className="max-w-sm text-deep-roast/60 leading-relaxed md:text-right" style={{ fontFamily: 'var(--font-ibm-plex-sans)', fontSize: 'clamp(0.95rem, 1vw, 1.05rem)' }}>
                 Des équipements de pointe pilotés par une équipe humaine dédiée.{' '}
                 La technologie au service de l'humain.
               </p>
@@ -936,22 +957,33 @@ export default function Home() {
         </section>
 
         {/* Testimonials / Cas Clients Section */}
-        <section id="avis" className="py-24 relative bg-[#FAF2E9]/30">
-          <div className="max-w-7xl mx-auto px-6 relative z-10">
-            <div className="text-center mb-16">
-              <span className="block text-[10px] font-mono uppercase tracking-[0.22em] text-golden-extraction mb-4">
-                La parole à nos clients
-              </span>
-              <h2
-                className="text-deep-roast leading-tight mb-8"
-                style={{
-                  fontFamily: 'var(--font-sora)',
-                  fontSize: 'clamp(2rem, 3.5vw, 3rem)',
-                  fontWeight: 600,
-                }}
-              >
-                Une expérience appréciée
-              </h2>
+        <section id="avis" className="pt-8 pb-16 md:py-24 relative bg-[#FAF2E9]/30">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 mb-12 lg:mb-20 items-start max-w-7xl">
+              <div>
+                <span className="block text-[10px] font-mono uppercase tracking-[0.22em] text-golden-extraction mb-4" style={{ fontFamily: 'var(--font-ibm-plex-mono)' }}>
+                  La parole à nos clients
+                </span>
+                <h2
+                  className="text-deep-roast leading-tight"
+                  style={{
+                    fontFamily: 'var(--font-sora)',
+                    fontSize: 'clamp(1.75rem, 3.5vw, 3rem)',
+                    fontWeight: 600,
+                    letterSpacing: '-0.02em',
+                  }}
+                >
+                  Une expérience <span className="text-sienna-racing">appréciée</span>
+                </h2>
+              </div>
+              <div className="lg:pt-8">
+                <p
+                  className="text-deep-roast/70 leading-relaxed"
+                  style={{ fontSize: 'clamp(0.95rem, 1vw, 1.05rem)', fontFamily: 'var(--font-ibm-plex-sans)' }}
+                >
+                  Ce que nos clients disent de nous. Des entreprises de toutes tailles, unies par la même exigence de qualité et de service.
+                </p>
+              </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
@@ -999,14 +1031,14 @@ export default function Home() {
         </section>
 
         {/* ADN Section (Timeline) */}
-        <section id="adn" className="py-24 relative overflow-hidden">
-          <div className="max-w-7xl mx-auto px-10 relative z-10">
+        <section id="adn" className="pt-6 pb-4 md:py-24 relative overflow-hidden">
+          <div className="max-w-7xl mx-auto px-6 lg:px-10 relative z-10">
             {/* Header */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-20"
+              className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6 md:mb-20"
             >
               <div>
                 <span className="block text-[10px] font-mono uppercase tracking-[0.22em] text-golden-extraction mb-4">
@@ -1044,13 +1076,13 @@ export default function Home() {
 
 
         {/* Footer / Contact CTA */}
-        <section id="contact" className="py-20 relative overflow-hidden bg-[#FAF2E9]">
+        <section id="contact" className="pt-8 pb-16 md:py-20 relative overflow-hidden bg-[#FAF2E9]">
           {/* Abstract shapes */}
           <div className="absolute bottom-0 left-0 w-full h-full from-sienna-racing/10 to-transparent pointer-events-none" />
 
-          <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
-            <h2 className="text-5xl md:text-7xl mb-8 tracking-tight" style={{ fontFamily: 'var(--font-sora)', fontWeight: 600 }}>Prêt pour l'infusion ?</h2>
-            <p className="text-xl text-deep-roast/70 mb-12 max-w-2xl mx-auto" style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}>
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center relative z-10">
+            <h2 className="text-3xl sm:text-5xl md:text-7xl mb-8 tracking-tight" style={{ fontFamily: 'var(--font-sora)', fontWeight: 600 }}>Prêt pour l'infusion ?</h2>
+            <p className="text-base md:text-xl text-deep-roast/70 mb-12 max-w-2xl mx-auto" style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}>
               Discutons de votre projet d'espace détente. Nos experts sont prêts à concevoir la solution idéale pour vos collaborateurs.
             </p>
 
