@@ -71,7 +71,7 @@ export default function Header() {
                             }
                         }}
                     >
-                        <Image src="/logo-ANS.png" alt="ANS" width={36} height={36} style={{ objectFit: 'contain' }} />
+                        <Image src="/logo-ans-entier.png" alt="ANS Pause Évasion" width={112} height={48} style={{ objectFit: 'contain' }} />
                     </a>
 
                     {/* Center: nav links (desktop) — absolutely centered */}

@@ -749,9 +749,10 @@ export default function Home() {
           className="hero-section"
           style={{
             backgroundColor: '#FAF2E9',
-            height: 'calc(100dvh - 68px)',
-            minHeight: '500px',
-            padding: 'clamp(8px, 1.2vw, 14px) clamp(12px, 4vw, 48px)',
+            minHeight: 'calc(100dvh - 68px)',
+            display: 'flex',
+            flexDirection: 'column',
+            padding: 'clamp(4px, 0.8vw, 8px) clamp(12px, 4vw, 48px)',
             boxSizing: 'border-box',
           }}
         >
@@ -761,7 +762,7 @@ export default function Home() {
             transition={{ delay: 0.5, duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
             className="hero-widget"
             style={{
-              height: '100%',
+              flex: 1,
               backgroundColor: '#2B1200',
               borderRadius: '20px',
               overflow: 'hidden',
@@ -832,7 +833,7 @@ export default function Home() {
 
             {/* Content — centered like /about hero */}
             {/* ── Stars · headline · subtitle · two pills ── */}
-            <div className="hero-content-area relative z-10 w-full max-w-4xl mx-auto px-5 sm:px-8 text-center flex flex-col items-center justify-center h-full">
+            <div className="hero-content-area relative z-10 w-full max-w-4xl mx-auto px-5 sm:px-8 text-center flex flex-col items-center justify-center py-16 xl:py-24 h-full">
 
               {/* Stars rating in a sleek badge */}
               <motion.div
@@ -841,9 +842,9 @@ export default function Home() {
                 transition={{ delay: 0.7, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
                 className="flex items-center justify-center gap-2.5 mb-10 px-4 py-2 rounded-full border border-golden-extraction/20 bg-[#2B1200]/40 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.3)]"
               >
-                <div className="flex gap-0.5" style={{ filter: 'drop-shadow(0 2px 4px rgba(200,118,58,0.4))' }}>
+                <div className="flex gap-0.5 pt-[2px]" style={{ filter: 'drop-shadow(0 2px 4px rgba(200,118,58,0.4))' }}>
                   {[...Array(5)].map((_, i) => (
-                    <span key={i} className="text-golden-extraction text-xs leading-none">★</span>
+                    <span key={i} className="text-golden-extraction text-xs">★</span>
                   ))}
                 </div>
                 <div className="w-px h-3 bg-coffee-cream/20 shrink-0" />
@@ -880,7 +881,7 @@ export default function Home() {
                 className="text-[1.05rem] md:text-lg text-coffee-cream/90 leading-relaxed mx-auto max-w-xl mb-10 drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)] font-light"
                 style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}
               >
-                Depuis <span className="text-coffee-cream font-medium">40 ans</span>, nous transformons la pause café en un véritable levier de <span className="text-coffee-cream font-medium">Qualité de Vie au Travail.</span>
+                Depuis plus de <span className="text-coffee-cream font-medium">40 ans</span>, nous transformons la pause café en un véritable levier de <span className="text-coffee-cream font-medium">Qualité de Vie au Travail.</span>
                 <br className="hidden md:block" /> Service ultra-personnalisé, réactivité immédiate et engagement familial.
               </motion.p>
 
