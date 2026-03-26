@@ -52,7 +52,7 @@ const FAQ_ITEMS = [
   {
     question: "Qu'est-ce qui différencie ANS d'un prestataire classique ?",
     answer:
-      "Notre force repose sur l'alliance de la proximité et de la réactivité. En tant que membre du réseau indépendant Prodia+, nous allions la puissance d'un réseau national à la souplesse d'un acteur historique du nord. Nous sommes au plus proche de nos clients (interventions en moins de 30 minutes) pour offrir un suivi humain et réactif.",
+      "Notre force repose sur l'alliance de la proximité et de la réactivité. En tant que membre du réseau indépendant Prodia+, nous allions la puissance d'un réseau national à la souplesse d'un acteur historique du nord. Nous sommes au plus proche de nos clients (la quasi totalité des interventions sont effectuées en moins d'une heure) pour offrir un suivi humain et réactif.",
   },
   {
     question: "Avez-vous une démarche plus responsable ?",
@@ -980,7 +980,7 @@ export default function Home() {
               />
               <ServiceRow
                 title="Disponibilité Totale"
-                desc="Notre promesse : une réactivité sans faille. Une machine à l'arrêt, c'est une pause gâchée. Nous ne laissons jamais cela arriver."
+                desc="Notre promesse : une réactivité sans faille. Une machine à l'arrêt, c'est une pause gâchée. Nous agissons au plus vite pour que l'arrêt ne dure jamais."
                 icon={<MaintenanceIcon />}
               />
               <ServiceRow
