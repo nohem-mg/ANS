@@ -63,7 +63,7 @@ export default function Header() {
                     {/* Left: logo */}
                     <a
                         href="/"
-                        style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', flexShrink: 0 }}
+                        style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', flexShrink: 0, height: 68 }}
                         onClick={(e) => {
                             if (pathname === '/') {
                                 e.preventDefault();
@@ -71,7 +71,16 @@ export default function Header() {
                             }
                         }}
                     >
-                        <Image src="/logo-ans-entier.png" alt="ANS Pause Évasion" width={112} height={48} style={{ objectFit: 'contain' }} />
+                        <Image 
+                            src="/logo-ans-entier.png" 
+                            alt="ANS Pause Évasion" 
+                            width={112} 
+                            height={48} 
+                            style={{ 
+                                objectFit: 'contain',
+                                transform: 'translateY(4px)' 
+                            }} 
+                        />
                     </a>
 
                     {/* Center: nav links (desktop) — absolutely centered */}
