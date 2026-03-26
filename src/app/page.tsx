@@ -1159,6 +1159,92 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Section RSE */}
+        <section id="rse" className="pt-8 pb-8 md:py-24 relative overflow-hidden bg-[#FAF2E9]">
+          <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-sienna-racing/5 to-transparent pointer-events-none" />
+
+          <div className="max-w-7xl mx-auto px-6 lg:px-10 relative z-10 flex flex-col gap-12 lg:gap-16">
+            
+            {/* Text content - Split layout */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              className="w-full"
+            >
+              <div className="flex flex-col lg:flex-row gap-10 lg:gap-16">
+                
+                {/* Left: Title */}
+                <div className="lg:w-[40%] shrink-0">
+                  <span className="block text-[10px] font-mono uppercase tracking-[0.22em] text-golden-extraction mb-4" style={{ fontFamily: 'var(--font-ibm-plex-mono)' }}>
+                    Notre Engagement
+                  </span>
+                  <h2
+                    className="text-deep-roast leading-tight"
+                    style={{
+                      fontFamily: 'var(--font-sora)',
+                      fontSize: 'clamp(2rem, 4.5vw, 3.5rem)',
+                      fontWeight: 600,
+                      letterSpacing: '-0.02em',
+                    }}
+                  >
+                    Une démarche <span className="text-sienna-racing">durable</span> et responsable
+                  </h2>
+                </div>
+
+                {/* Right: Intro & Bullets */}
+                <div className="lg:w-[60%] flex flex-col justify-center">
+                  <p className="text-deep-roast/70 leading-relaxed mb-8" style={{ fontFamily: 'var(--font-ibm-plex-sans)', fontSize: 'clamp(0.95rem, 1vw, 1.05rem)' }}>
+                    Parce que la pause idéale doit aussi respecter notre environnement, nous nous engageons concrètement pour une distribution automatique plus verte. De la sélection rigoureuse de nos cafés à la gestion de nos déchets, chaque étape de notre service est pensée dans une démarche RSE sincère et locale.
+                  </p>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
+                    {[
+                      "Cafés labellisés Bio et Équitable",
+                      "Revalorisation à 100% du marc de café",
+                      "Machines éco-performantes",
+                      "Tournées optimisées et éco-conduite"
+                    ].map((item, i) => (
+                      <div key={i} className="flex items-start gap-3">
+                        <span className="text-golden-extraction mt-[3px] shrink-0 bg-white p-1.5 rounded-full shadow-sm">
+                          <Award className="w-4 h-4" />
+                        </span>
+                        <span className="text-deep-roast/80 leading-snug font-medium" style={{ fontFamily: 'var(--font-ibm-plex-sans)', fontSize: '0.95rem' }}>
+                          {item}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+              </div>
+            </motion.div>
+
+            {/* Panoramic Visual image */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              className="relative w-full rounded-[1.5rem] overflow-hidden group shadow-[0_12px_40px_rgba(43,18,0,0.08)]"
+            >
+              {/* Le ratio exact de 10603x3386 est environ 3.13 / 1. On utilise Tailwind aspect-ratio pour garantir sa forme */}
+              <div className="w-full relative min-h-[14rem]" style={{ aspectRatio: '10603 / 3386' }}>
+                <div className="absolute inset-0 bg-deep-roast/5 group-hover:bg-transparent transition-colors duration-500 z-10 mix-blend-multiply pointer-events-none" />
+                <Image 
+                  src="/VISUEL1jpg.png" 
+                  alt="Engagement RSE ANS - Panorama"
+                  fill
+                  sizes="(max-width: 1280px) 100vw, 1280px"
+                  style={{ objectFit: 'cover' }}
+                  className="transform group-hover:scale-[1.03] transition-transform duration-700 ease-out"
+                />
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
         <FAQSection
           activeIndex={activeFaqIndex}
           onToggle={(index) =>
