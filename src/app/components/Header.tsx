@@ -42,11 +42,14 @@ export default function Header() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.15, duration: 0.6 }}
                 style={{
-                    position: 'relative',
+                    position: 'sticky',
+                    top: 0,
                     zIndex: 50,
-                    backgroundColor: '#FAF2E9',
+                    backgroundColor: scrolled ? 'rgba(250,242,233,0.85)' : '#FAF2E9',
+                    backdropFilter: scrolled ? 'blur(12px)' : 'none',
+                    WebkitBackdropFilter: scrolled ? 'blur(12px)' : 'none',
                     borderBottom: scrolled ? '1px solid rgba(43,18,0,0.1)' : '1px solid transparent',
-                    transition: 'background-color 0.3s, border-bottom 0.3s',
+                    transition: 'background-color 0.3s, border-bottom 0.3s, backdrop-filter 0.3s',
                 }}
             >
                 <div
@@ -56,14 +59,14 @@ export default function Header() {
                         padding: '0 clamp(20px, 4vw, 56px)',
                         display: 'flex',
                         alignItems: 'center',
-                        height: 68,
+                        height: 84,
                         position: 'relative',
                     }}
                 >
                     {/* Left: logo */}
                     <a
                         href="/"
-                        style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', flexShrink: 0, height: 68 }}
+                        style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', flexShrink: 0, height: 84 }}
                         onClick={(e) => {
                             if (pathname === '/') {
                                 e.preventDefault();
@@ -74,8 +77,8 @@ export default function Header() {
                         <Image 
                             src="/logo-ans-entier.png" 
                             alt="ANS Pause Évasion" 
-                            width={112} 
-                            height={48} 
+                            width={136} 
+                            height={58} 
                             style={{ 
                                 objectFit: 'contain',
                                 transform: 'translateY(4px)' 
@@ -102,12 +105,12 @@ export default function Header() {
                                 style={{
                                     fontFamily: 'var(--font-ibm-plex-mono)',
                                     fontWeight: 600,
-                                    fontSize: 11,
+                                    fontSize: 12,
                                     letterSpacing: '0.06em',
                                     textTransform: 'uppercase' as const,
                                     color: isActive(href) ? '#2B1200' : 'rgba(43,18,0,0.5)',
-                                    padding: '0 14px',
-                                    height: 68,
+                                    padding: '0 18px',
+                                    height: 84,
                                     display: 'inline-flex',
                                     alignItems: 'center',
                                     whiteSpace: 'nowrap' as const,
@@ -137,14 +140,14 @@ export default function Header() {
                             marginLeft: 'auto',
                             fontFamily: 'var(--font-ibm-plex-mono)',
                             fontWeight: 600,
-                            fontSize: 11,
+                            fontSize: 12,
                             letterSpacing: '0.06em',
                             textTransform: 'uppercase' as const,
                             color: pathname === '/contact' ? '#FFF6EF' : '#2B1200',
                             background: pathname === '/contact' ? '#2B1200' : 'transparent',
                             border: pathname === '/contact' ? '1px solid #2B1200' : '1px solid rgba(43,18,0,0.2)',
                             borderRadius: 6,
-                            padding: '6px 16px',
+                            padding: '8px 20px',
                             textDecoration: 'none',
                             transition: 'background 0.2s, color 0.2s, border-color 0.2s',
                             whiteSpace: 'nowrap' as const,
@@ -196,7 +199,7 @@ export default function Header() {
                         transition={{ duration: 0.25 }}
                         style={{
                             position: 'fixed',
-                            top: 68,
+                            top: 84,
                             left: 0,
                             right: 0,
                             bottom: 0,

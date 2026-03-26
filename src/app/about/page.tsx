@@ -1203,32 +1203,32 @@ function LocationSection() {
 
 const TEAM_IMAGES = [
   {
-    src: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1280&h=720&fit=crop&auto=format&q=80',
-    alt: 'Équipe en collaboration',
+    src: '/bureau-ans.jpeg',
+    alt: 'Bureaux ANS',
   },
   {
-    src: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=1280&h=720&fit=crop&auto=format&q=80',
-    alt: 'Réunion d\'équipe',
+    src: '/locaux-ans.jpeg',
+    alt: 'Locaux ANS',
   },
   {
-    src: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&h=800&fit=crop&auto=format&q=80',
-    alt: 'Travail en équipe',
+    src: '/camions-ans.jpeg',
+    alt: 'Camions ANS - logistique terrain',
   },
   {
-    src: 'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=1280&h=720&fit=crop&auto=format&q=80',
-    alt: 'Meeting professionnel',
+    src: '/instant-cafe-ans.jpeg',
+    alt: 'Machine à café ANS',
   },
   {
-    src: 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=800&h=800&fit=crop&auto=format&q=80',
-    alt: 'Collaboration créative',
+    src: '/café+verdure.jpeg',
+    alt: 'Espace café et verdure',
   },
   {
-    src: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=1280&h=720&fit=crop&auto=format&q=80',
-    alt: 'Espace de travail moderne',
+    src: '/stockage-distrib.jpeg',
+    alt: 'Stockage distributeurs ANS',
   },
   {
-    src: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=1280&h=720&fit=crop&auto=format&q=80',
-    alt: 'Esprit d\'équipe',
+    src: '/distrib-auto-ans.jpeg',
+    alt: 'Distributeurs automatiques ANS',
   },
 ];
 

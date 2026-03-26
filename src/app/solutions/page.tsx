@@ -133,8 +133,8 @@ const steps = [
         alt: 'Technicien en visite rapide',
       },
       {
-        src: 'https://images.unsplash.com/photo-1489515217757-5fd1be406fef?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=900',
-        alt: 'Suivi operationnel et reapprovisionnement',
+        src: '/camions-ans.jpeg',
+        alt: 'Camions ANS - intervention et approvisionnement',
       },
     ],
     icon: (
