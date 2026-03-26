@@ -470,92 +470,92 @@ const VisionSection = () => {
 
         {/* 4-Column Cards Grid — scroll horizontal sur mobile, grille sur desktop */}
         <div className="overflow-hidden md:overflow-visible -mx-6 md:mx-0">
-        <div
-          className="flex md:grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 xl:gap-8 overflow-x-auto md:overflow-x-visible snap-x snap-mandatory md:snap-none pb-2 md:pb-0 px-6 md:px-0"
-          style={{ scrollPaddingLeft: '1.5rem', scrollPaddingRight: '1.5rem' }}
-        >
-          {VISION_POINTS.map((point, index) => (
-            <motion.div
-              key={point.id}
-              initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-              whileInView={isMobile ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.1 + index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="bg-[#688125] rounded-[1rem] p-5 pb-6 xl:p-6 xl:pb-6 flex flex-col hover:shadow-lg transition-all duration-300 relative overflow-hidden group snap-start shrink-0 w-[76vw] sm:w-[56vw] md:w-auto md:shrink md:h-full"
-            >
-              {/* Card Number */}
-              <div className="w-8 h-8 rounded-full border border-[#F4F8EA] flex items-center justify-center mb-4 relative z-10 bg-transparent">
-                <span className="text-sm font-medium text-[#F4F8EA]">
-                  {index + 1}
-                </span>
-              </div>
-
-              {/* Title */}
-              <h3
-                className="text-[1.4rem] xl:text-[1.65rem] text-[#F4F8EA] font-medium mb-3 relative z-10 leading-tight"
-                style={{ fontFamily: 'var(--font-ibm-plex-sans)', letterSpacing: '-0.02em' }}
+          <div
+            className="flex md:grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 xl:gap-8 overflow-x-auto md:overflow-x-visible snap-x snap-mandatory md:snap-none pb-2 md:pb-0 px-6 md:px-0"
+            style={{ scrollPaddingLeft: '1.5rem', scrollPaddingRight: '1.5rem' }}
+          >
+            {VISION_POINTS.map((point, index) => (
+              <motion.div
+                key={point.id}
+                initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                whileInView={isMobile ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.1 + index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                className="bg-[#688125] rounded-[1rem] p-5 pb-6 xl:p-6 xl:pb-6 flex flex-col hover:shadow-lg transition-all duration-300 relative overflow-hidden group snap-start shrink-0 w-[76vw] sm:w-[56vw] md:w-auto md:shrink md:h-full"
               >
-                {point.title}
-              </h3>
+                {/* Card Number */}
+                <div className="w-8 h-8 rounded-full border border-[#F4F8EA] flex items-center justify-center mb-4 relative z-10 bg-transparent">
+                  <span className="text-sm font-medium text-[#F4F8EA]">
+                    {index + 1}
+                  </span>
+                </div>
 
-              {/* Description */}
-              <p
-                className="text-[#EDF4DB] leading-relaxed text-[0.95rem] xl:text-[1.05rem] flex-grow relative z-10 pr-4"
-                style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}
-              >
-                {point.desc}
-              </p>
+                {/* Title */}
+                <h3
+                  className="text-[1.4rem] xl:text-[1.65rem] text-[#F4F8EA] font-medium mb-3 relative z-10 leading-tight"
+                  style={{ fontFamily: 'var(--font-ibm-plex-sans)', letterSpacing: '-0.02em' }}
+                >
+                  {point.title}
+                </h3>
 
-              {/* Decorative abstract elements at bottom */}
-              <div className="hidden md:block pt-8 mt-auto relative z-10 opacity-60 group-hover:opacity-100 transition-opacity duration-500">
-                {index === 0 && (
-                  <div className="flex flex-col gap-2 w-full">
-                    <div className="h-px bg-[#F4F8EA] w-full relative">
-                      <span className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1 w-1.5 h-1.5 border-t border-r border-[#F4F8EA] rotate-45 -mt-px"></span>
-                    </div>
-                    <div className="h-px bg-[#F4F8EA] w-4/5 relative">
-                      <span className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1 w-1.5 h-1.5 border-t border-r border-[#F4F8EA] rotate-45 -mt-px"></span>
-                    </div>
-                    <div className="h-px bg-[#F4F8EA] w-[65%] relative">
-                      <span className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1 w-1.5 h-1.5 border-t border-r border-[#F4F8EA] rotate-45 -mt-px"></span>
-                    </div>
-                  </div>
-                )}
-                {index === 1 && (
-                  <div className="flex gap-2 h-10 items-end">
-                    {[...Array(6)].map((_, i) => (
-                      <div key={i} className="flex-1 border border-[#F4F8EA] rounded-[0.25rem] h-full relative" style={{ height: `${100 - i * 10}%` }}>
-                        {i === 2 && <span className="absolute inset-0 flex items-center justify-center text-[#F4F8EA]"><Lightbulb className="w-3.5 h-3.5" strokeWidth={2.5} /></span>}
-                        {i === 5 && <span className="absolute inset-0 flex items-center justify-center text-[#F4F8EA]"><MessageCircle className="w-2.5 h-2.5" strokeWidth={2.5} /></span>}
+                {/* Description */}
+                <p
+                  className="text-[#EDF4DB] leading-relaxed text-[0.95rem] xl:text-[1.05rem] flex-grow relative z-10 pr-4"
+                  style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}
+                >
+                  {point.desc}
+                </p>
+
+                {/* Decorative abstract elements at bottom */}
+                <div className="hidden md:block pt-8 mt-auto relative z-10 opacity-60 group-hover:opacity-100 transition-opacity duration-500">
+                  {index === 0 && (
+                    <div className="flex flex-col gap-2 w-full">
+                      <div className="h-px bg-[#F4F8EA] w-full relative">
+                        <span className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1 w-1.5 h-1.5 border-t border-r border-[#F4F8EA] rotate-45 -mt-px"></span>
                       </div>
-                    ))}
-                  </div>
-                )}
-                {index === 2 && (
-                  <div className="flex gap-1.5 items-center h-10 w-full">
-                    <div className="flex-1 border border-[#F4F8EA] h-full rounded-sm" />
-                    <div className="flex-1 border border-[#F4F8EA] h-full skew-x-[-15deg] rounded-sm transform scale-90" />
-                    <div className="flex-1 border border-[#F4F8EA] h-full rounded-full mx-0.5" />
-                    <div className="flex-[0.8] border border-[#F4F8EA] h-full rounded-full" />
-                  </div>
-                )}
-                {index === 3 && (
-                  <div className="flex gap-0 items-center h-8 relative">
-                    <div className="w-1/3 h-full border border-[#F4F8EA] rounded-l-md rounded-r-[0.35rem] relative" />
-                    <div className="w-[15%] h-full border-t border-b border-[#F4F8EA] -mx-1 z-10 bg-[#688125]">
-                      <div className="absolute top-1/2 -translate-y-1/2 w-full h-[60%] border-t border-b border-[#F4F8EA] bg-[#688125]" />
+                      <div className="h-px bg-[#F4F8EA] w-4/5 relative">
+                        <span className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1 w-1.5 h-1.5 border-t border-r border-[#F4F8EA] rotate-45 -mt-px"></span>
+                      </div>
+                      <div className="h-px bg-[#F4F8EA] w-[65%] relative">
+                        <span className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1 w-1.5 h-1.5 border-t border-r border-[#F4F8EA] rotate-45 -mt-px"></span>
+                      </div>
                     </div>
-                    <div className="w-1/3 h-full border border-[#F4F8EA] rounded-[0.35rem] relative" />
-                    <div className="w-[15%] h-full border-t border-b border-[#F4F8EA] -mx-1 z-10 bg-[#688125]">
-                      <div className="absolute top-1/2 -translate-y-1/2 w-full h-[60%] border-t border-b border-[#F4F8EA] bg-[#688125]" />
+                  )}
+                  {index === 1 && (
+                    <div className="flex gap-2 h-10 items-end">
+                      {[...Array(6)].map((_, i) => (
+                        <div key={i} className="flex-1 border border-[#F4F8EA] rounded-[0.25rem] h-full relative" style={{ height: `${100 - i * 10}%` }}>
+                          {i === 2 && <span className="absolute inset-0 flex items-center justify-center text-[#F4F8EA]"><Lightbulb className="w-3.5 h-3.5" strokeWidth={2.5} /></span>}
+                          {i === 5 && <span className="absolute inset-0 flex items-center justify-center text-[#F4F8EA]"><MessageCircle className="w-2.5 h-2.5" strokeWidth={2.5} /></span>}
+                        </div>
+                      ))}
                     </div>
-                    <div className="w-1/6 h-full border border-[#F4F8EA] border-l-0 rounded-r-md rounded-l-[0.35rem] relative" />
-                  </div>
-                )}
-              </div>
-            </motion.div>
-          ))}
-        </div>
+                  )}
+                  {index === 2 && (
+                    <div className="flex gap-1.5 items-center h-10 w-full">
+                      <div className="flex-1 border border-[#F4F8EA] h-full rounded-sm" />
+                      <div className="flex-1 border border-[#F4F8EA] h-full skew-x-[-15deg] rounded-sm transform scale-90" />
+                      <div className="flex-1 border border-[#F4F8EA] h-full rounded-full mx-0.5" />
+                      <div className="flex-[0.8] border border-[#F4F8EA] h-full rounded-full" />
+                    </div>
+                  )}
+                  {index === 3 && (
+                    <div className="flex gap-0 items-center h-8 relative">
+                      <div className="w-1/3 h-full border border-[#F4F8EA] rounded-l-md rounded-r-[0.35rem] relative" />
+                      <div className="w-[15%] h-full border-t border-b border-[#F4F8EA] -mx-1 z-10 bg-[#688125]">
+                        <div className="absolute top-1/2 -translate-y-1/2 w-full h-[60%] border-t border-b border-[#F4F8EA] bg-[#688125]" />
+                      </div>
+                      <div className="w-1/3 h-full border border-[#F4F8EA] rounded-[0.35rem] relative" />
+                      <div className="w-[15%] h-full border-t border-b border-[#F4F8EA] -mx-1 z-10 bg-[#688125]">
+                        <div className="absolute top-1/2 -translate-y-1/2 w-full h-[60%] border-t border-b border-[#F4F8EA] bg-[#688125]" />
+                      </div>
+                      <div className="w-1/6 h-full border border-[#F4F8EA] border-l-0 rounded-r-md rounded-l-[0.35rem] relative" />
+                    </div>
+                  )}
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
 
       </div>
@@ -954,7 +954,7 @@ export default function Home() {
 
 
         {/* Services Section — Spec-Sheet Layout */}
-          <section id="services" className="pt-8 pb-8 md:py-20 relative">
+        <section id="services" className="pt-8 pb-8 md:py-20 relative">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
 
             {/* Section header */}
@@ -975,7 +975,7 @@ export default function Home() {
             <div className="border-t border-deep-roast/10">
               <ServiceRow
                 title="Coffee Corners"
-                desc="Architecture d'espaces de pause premium. Mobilier design et ambiance feutrée pour favoriser les échanges."
+                desc="Home staging : une mise en valeur de l'espace de pause par un aménagement subtil et chaleureux de l'espace."
                 icon={<CoffeeCornerIcon />}
               />
               <ServiceRow
@@ -1037,28 +1037,28 @@ export default function Home() {
                     className="bg-white border border-deep-roast/10 shadow-sm px-5 py-5 rounded-[1.1rem]"
                   >
                     <div className="min-w-0">
-                        <div className="flex gap-1 mb-3 text-golden-extraction">
-                          {[...Array(5)].map((_, i) => (
-                            <span key={i} className="text-xs">★</span>
-                          ))}
-                        </div>
+                      <div className="flex gap-1 mb-3 text-golden-extraction">
+                        {[...Array(5)].map((_, i) => (
+                          <span key={i} className="text-xs">★</span>
+                        ))}
+                      </div>
 
-                        <p
-                          className="text-deep-roast/75 italic leading-relaxed text-[0.98rem]"
-                          style={
-                            isExpanded
-                              ? { fontFamily: 'var(--font-ibm-plex-sans)' }
-                              : {
-                                  fontFamily: 'var(--font-ibm-plex-sans)',
-                                  display: '-webkit-box',
-                                  WebkitLineClamp: 3,
-                                  WebkitBoxOrient: 'vertical',
-                                  overflow: 'hidden',
-                                }
-                          }
-                        >
-                          "{t.review}"
-                        </p>
+                      <p
+                        className="text-deep-roast/75 italic leading-relaxed text-[0.98rem]"
+                        style={
+                          isExpanded
+                            ? { fontFamily: 'var(--font-ibm-plex-sans)' }
+                            : {
+                              fontFamily: 'var(--font-ibm-plex-sans)',
+                              display: '-webkit-box',
+                              WebkitLineClamp: 3,
+                              WebkitBoxOrient: 'vertical',
+                              overflow: 'hidden',
+                            }
+                        }
+                      >
+                        "{t.review}"
+                      </p>
                     </div>
 
                     <div className="flex items-center justify-between gap-3 mt-4 pt-4 border-t border-deep-roast/8">
@@ -1148,7 +1148,7 @@ export default function Home() {
                     fontWeight: 600,
                   }}
                 >
-                  40 Ans d'Excellence
+                  + de 40 Ans d'Excellence
                 </h2>
               </div>
               <p className="text-deep-roast/50 text-sm max-w-xs leading-relaxed md:text-right" style={{ fontFamily: 'var(--font-ibm-plex-mono)' }}>
