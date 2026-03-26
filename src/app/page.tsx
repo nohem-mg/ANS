@@ -749,7 +749,6 @@ export default function Home() {
           className="hero-section"
           style={{
             backgroundColor: '#FAF2E9',
-            minHeight: 'calc(100dvh - 68px)',
             display: 'flex',
             flexDirection: 'column',
             padding: 'clamp(4px, 0.8vw, 8px) clamp(12px, 4vw, 48px)',
@@ -762,7 +761,7 @@ export default function Home() {
             transition={{ delay: 0.5, duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
             className="hero-widget"
             style={{
-              flex: 1,
+              width: '100%',
               backgroundColor: '#2B1200',
               borderRadius: '20px',
               overflow: 'hidden',
@@ -833,14 +832,14 @@ export default function Home() {
 
             {/* Content — centered like /about hero */}
             {/* ── Stars · headline · subtitle · two pills ── */}
-            <div className="hero-content-area relative z-10 w-full max-w-4xl mx-auto px-5 sm:px-8 text-center flex flex-col items-center justify-center py-16 xl:py-24 h-full">
+            <div className="hero-content-area relative z-10 w-full max-w-4xl mx-auto px-5 sm:px-8 text-center flex flex-col items-center justify-center py-10 xl:py-14 h-full">
 
               {/* Stars rating in a sleek badge */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.9, y: 10 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 transition={{ delay: 0.7, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                className="flex items-center justify-center gap-2.5 mb-10 px-4 py-2 rounded-full border border-golden-extraction/20 bg-[#2B1200]/40 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.3)]"
+                className="flex items-center justify-center gap-2.5 mb-6 px-4 py-2 rounded-full border border-golden-extraction/20 bg-[#2B1200]/40 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.3)]"
               >
                 <div className="flex gap-0.5 pt-[2px]" style={{ filter: 'drop-shadow(0 2px 4px rgba(200,118,58,0.4))' }}>
                   {[...Array(5)].map((_, i) => (
@@ -865,7 +864,7 @@ export default function Home() {
                   lineHeight: 1.05,
                   letterSpacing: '-0.02em',
                   color: 'var(--color-coffee-cream)',
-                  marginBottom: '1.75rem',
+                  marginBottom: '1.25rem',
                   textAlign: 'center',
                 }}
               >
@@ -878,7 +877,7 @@ export default function Home() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1.05, duration: 0.8 }}
-                className="text-[1.05rem] md:text-lg text-coffee-cream/90 leading-relaxed mx-auto max-w-xl mb-10 drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)] font-light"
+                className="text-[1.05rem] md:text-lg text-coffee-cream/90 leading-relaxed mx-auto max-w-xl mb-8 drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)] font-light"
                 style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}
               >
                 Depuis plus de <span className="text-coffee-cream font-medium">40 ans</span>, nous transformons la pause café en un véritable levier de <span className="text-coffee-cream font-medium">Qualité de Vie au Travail.</span>
@@ -890,7 +889,7 @@ export default function Home() {
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1.2, duration: 0.7 }}
-                className="flex flex-wrap justify-center gap-3 md:mb-12"
+                className="flex flex-wrap justify-center gap-3 mb-8 md:mb-10"
               >
                 <motion.a
                   href="#services"
@@ -962,7 +961,7 @@ export default function Home() {
               <div>
                 <span className="text-golden-extraction text-[10px] tracking-[0.22em] uppercase mb-5 block" style={{ fontFamily: 'var(--font-ibm-plex-mono)' }}>Notre Savoir-Faire</span>
                 <h2 className="text-deep-roast leading-tight" style={{ fontFamily: 'var(--font-sora)', fontSize: 'clamp(1.75rem, 3.5vw, 3rem)', fontWeight: 600, letterSpacing: '-0.02em' }}>
-                  L'Excellence de la <span className="text-sienna-racing">Pause Technique.</span>
+                  L'Excellence de la <span className="text-sienna-racing">Pause Café.</span>
                 </h2>
               </div>
               <p className="max-w-sm text-deep-roast/60 leading-relaxed md:text-right" style={{ fontFamily: 'var(--font-ibm-plex-sans)', fontSize: 'clamp(0.95rem, 1vw, 1.05rem)' }}>
