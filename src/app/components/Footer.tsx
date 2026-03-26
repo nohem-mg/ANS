@@ -77,7 +77,7 @@ export default function Footer() {
                                 A.N.S.
                             </p>
                             <p style={{ color: 'rgba(255,246,239,0.85)', fontSize: 12, lineHeight: 1.7 }}>
-                                Depuis 1980, nous réinventons<br />la pause café en entreprise.
+                                Depuis 1981, nous réinventons<br />la pause café en entreprise.
                             </p>
                             {/* Social icons */}
                             <div style={{ display: 'flex', justifyContent: 'center', gap: 16, marginTop: 16 }}>
@@ -107,7 +107,7 @@ export default function Footer() {
                             </p>
                             <p style={{ color: 'rgba(255,246,239,0.85)', fontSize: 12, lineHeight: 1.7 }}>
                                 780 rue Blaise Pascal<br />
-                                59267 Proville — France
+                                59267 Proville France
                             </p>
                             <a
                                 href="tel:+33327371684"

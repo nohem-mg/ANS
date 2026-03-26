@@ -41,7 +41,7 @@ const steps = [
     title: 'Audit & Diagnostic',
     subtitle: 'On vient voir, avant de proposer.',
     description:
-      "Nous analysons vos espaces, vos flux et vos usages réels. Nombre de collaborateurs, habitudes de consommation, contraintes techniques — rien n'est laissé au hasard.",
+      "Nous analysons vos espaces, vos flux et vos usages réels. Nombre de collaborateurs, habitudes de consommation, contraintes techniques rien n'est laissé au hasard.",
     photos: [
       {
         src: 'https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=900',
@@ -282,7 +282,7 @@ function ProcessSection() {
               fontWeight: 300,
             }}
           >
-            Cinq étapes courtes, lisibles et documentées — pour garder votre projet simple à suivre et facile à piloter.
+            Cinq étapes courtes, lisibles et documentées pour garder votre projet simple à suivre et facile à piloter.
           </p>
         </div>
 

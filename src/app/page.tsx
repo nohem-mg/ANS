@@ -37,7 +37,7 @@ const FAQ_ITEMS = [
   {
     question: "Est-ce qu'ANS s'occupe aussi de l'installation et de la maintenance ?",
     answer:
-      "Absolument. Nos équipes gèrent l'installation, l'approvisionnement et la maintenance préventive selon vos besoins. Notre équipe technique de 20 personnes est dédiée à nos clients au quotidien pour garantir un fonctionnement fluide et sans faille de vos espaces pause.",
+      "Absolument. Nos équipes gèrent l'installation, l'approvisionnement et la maintenance préventive selon vos besoins. Notre équipe de plus de 30 personnes est dédiée à nos clients au quotidien pour garantir un fonctionnement fluide et sans faille de vos espaces pause.",
   },
   {
     question: "Quels moyens de paiement peuvent être proposés ?",
@@ -85,7 +85,7 @@ const Loader = ({ onComplete }: { onComplete: () => void }) => {
         >
           <Image
             src="/logo-ans-entier.png"
-            alt="A.N.S — Pause Évasion"
+            alt="A.N.S Pause Évasion"
             width={280}
             height={120}
             style={{ objectFit: 'contain' }}
@@ -187,7 +187,7 @@ const CapsuleButton = ({ children, href, variant = 'primary' }: { children: Reac
 // 5. Timeline — horizontal editorial 3-column design
 const MILESTONES = [
   {
-    year: '1980',
+    year: '1981',
     title: 'La Genèse',
     desc: "Fondation d'une entreprise familiale avec une mission simple : apporter de la convivialité dans les bureaux.",
   },
@@ -464,7 +464,7 @@ const VisionSection = () => {
               className="text-deep-roast/70 leading-relaxed"
               style={{ fontSize: 'clamp(0.95rem, 1vw, 1.05rem)', fontFamily: 'var(--font-ibm-plex-sans)' }}
             >
-              Fini le café avalé dans un couloir. La pause est un moment stratégique — celui où l'énergie se recharge et où la culture d'entreprise se construit. Chez ANS, on aménage cet espace pour qu'il soit à la hauteur.            </p>
+              Fini le café avalé dans un couloir. La pause est un moment stratégique celui où l'énergie se recharge et où la culture d'entreprise se construit. Chez ANS, on aménage cet espace pour qu'il soit à la hauteur.            </p>
           </motion.div>
         </div>
 

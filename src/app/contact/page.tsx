@@ -317,7 +317,7 @@ export default function ContactPage() {
                                 allowFullScreen
                                 loading="lazy"
                                 referrerPolicy="no-referrer-when-downgrade"
-                                title="Localisation ANS — Proville"
+                                title="Localisation ANS Proville"
                             />
                             {/* Overlay gradient for aesthetics */}
                             <div
