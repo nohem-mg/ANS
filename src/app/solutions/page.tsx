@@ -616,8 +616,8 @@ export default function SolutionsPage() {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.55, duration: 0.8 }}
               style={{
-                fontSize: 16, color: C.textMuted, lineHeight: 1.7,
-                maxWidth: 560, margin: '0 auto',
+                fontSize: 18, color: 'rgba(245,230,211,0.9)', lineHeight: 1.6,
+                maxWidth: 580, margin: '0 auto', fontWeight: 300,
               }}
             >
               Des distributeurs de dernière génération aux coffee corners sur-mesure,
