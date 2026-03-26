@@ -22,13 +22,12 @@ export const SOLUTIONS: SolutionDetail[] = [
   {
     slug: 'machines-cafe',
     category: 'Cafe',
-    title: 'Machines a cafe pour entreprise',
+    title: 'Machines à café pour entreprise',
     summary:
-      'Des solutions boissons chaudes premium pour offrir une pause cafe qualitative, fluide et valorisante au quotidien.',
+      'Des solutions boissons chaudes premium pour offrir une pause café qualitative, fluide et valorisante au quotidien.',
     description:
-      'Nos machines a cafe combinent design, fiabilite et qualite d’extraction pour proposer un service premium dans tous les environnements de travail. Elles s’adaptent aussi bien aux bureaux qu’aux espaces de passage ou aux zones d’accueil.',
-    image:
-      'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1400',
+      'Nos machines à café combinent design, fiabilite et qualite d’extraction pour proposer un service premium dans tous les environnements de travail. Elles s’adaptent aussi bien aux bureaux qu’aux espaces de passage ou aux zones d’accueil.',
+    image: '/instant-cafe-ans.jpeg',
     icon: Coffee,
     highlights: [
       'Broyeur integre et recettes variees',
@@ -48,42 +47,14 @@ export const SOLUTIONS: SolutionDetail[] = [
     ],
   },
   {
-    slug: 'distributeurs-automatiques',
-    category: 'Snacking',
-    title: 'Distributeurs automatiques snacks et canettes',
-    summary:
-      'Une offre complete pour les pauses rapides avec snacks, boissons fraiches et produits du quotidien.',
-    description:
-      'Nos distributeurs automatiques permettent de proposer une gamme claire, attractive et bien geree, avec des references adaptees a votre site et a vos collaborateurs. Ils repondent aux usages intensifs comme aux besoins plus ponctuels.',
-    image:
-      'https://images.unsplash.com/photo-1481833761820-0509d3217039?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1400',
-    icon: Package2,
-    highlights: [
-      'Snacks, confiseries, boissons fraiches et canettes',
-      'Selection ajustee selon votre population',
-      'Presentation claire et exploitation fiable',
-    ],
-    idealFor: [
-      'Sites industriels',
-      'Plateformes logistiques',
-      'Bureaux avec fort trafic',
-    ],
-    features: [
-      'Mix produits flexible selon vos contraintes',
-      'Suivi de rotation et optimisation des references',
-      'Paiement simple et experience utilisateur fluide',
-      'Gestion preventive pour limiter les ruptures',
-    ],
-  },
-  {
     slug: 'fontaines-a-eau',
     category: 'Hydratation',
     title: 'Fontaines a eau raccordees',
     summary:
       'Des fontaines a eau elegantes et fiables pour offrir une hydratation simple, durable et qualitative sur site.',
     description:
-      'Nos fontaines a eau s’integrent naturellement dans les espaces de travail et apportent une solution durable, esthetique et facile a vivre. Elles couvrent les besoins du quotidien avec une qualite de service constante.',
-    image: '/eau_ans.jpg',
+      `Nos fontaines a eau s'integrent naturellement dans les espaces de travail et apportent une solution durable, esthetique et facile a vivre. Elles couvrent les besoins du quotidien avec une qualite de service constante.`,
+    image: '/fontaine-eau.jpeg',
     icon: Droplets,
     highlights: [
       'Eau fraiche, temperee ou petillante selon les modeles',
@@ -100,6 +71,33 @@ export const SOLUTIONS: SolutionDetail[] = [
       'Installation propre et integration discrete',
       'Usage intensif compatible avec les environnements pros',
       'Pilotage simple et accompagnement ANS',
+    ],
+  },
+  {
+    slug: 'distributeurs-automatiques',
+    category: 'Snacking',
+    title: 'Distributeurs automatiques',
+    summary:
+      'Une offre complete pour les pauses rapides avec snacks, boissons fraiches et produits du quotidien.',
+    description:
+      'Nos distributeurs automatiques permettent de proposer une gamme claire, attractive et bien geree, avec des references adaptees a votre site et a vos collaborateurs. Ils repondent aux usages intensifs comme aux besoins plus ponctuels.',
+    image: '/distributeur-loreal.jpeg',
+    icon: Package2,
+    highlights: [
+      'Snacks, confiseries, boissons fraiches et canettes',
+      'Selection ajustee selon votre population',
+      'Presentation claire et exploitation fiable',
+    ],
+    idealFor: [
+      'Sites industriels',
+      'Plateformes logistiques',
+      'Bureaux avec fort trafic',
+    ],
+    features: [
+      'Mix produits flexible selon vos contraintes',
+      'Suivi de rotation et optimisation des references',
+      'Paiement simple et experience utilisateur fluide',
+      'Gestion preventive pour limiter les ruptures',
     ],
   },
 ];
