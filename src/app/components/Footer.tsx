@@ -56,7 +56,7 @@ export default function Footer() {
                     {/* Top divider with logo */}
                     <div className="footer-logo-divider" style={{ display: 'flex', alignItems: 'center', gap: 24, marginBottom: 48 }}>
                         <div style={{ flex: 1, height: 1, background: 'rgba(255,246,239,0.08)' }} />
-                        <Image src="/logo-ANS.png" alt="ANS" width={28} height={28} style={{ objectFit: 'contain', opacity: 0.3 }} />
+                        <Image src="/logo-ANS.png" alt="ANS" width={36} height={36} style={{ objectFit: 'contain' }} />
                         <div style={{ flex: 1, height: 1, background: 'rgba(255,246,239,0.08)' }} />
                     </div>
 
@@ -73,10 +73,10 @@ export default function Footer() {
                     >
                         {/* Col 1 — Brand */}
                         <div>
-                            <p style={{ color: 'rgba(255,246,239,0.6)', fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase' as const, marginBottom: 16 }}>
+                            <p style={{ color: 'rgba(255,246,239,0.9)', fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase' as const, marginBottom: 16 }}>
                                 A.N.S.
                             </p>
-                            <p style={{ color: 'rgba(255,246,239,0.3)', fontSize: 12, lineHeight: 1.7 }}>
+                            <p style={{ color: 'rgba(255,246,239,0.85)', fontSize: 12, lineHeight: 1.7 }}>
                                 Depuis 1980, nous réinventons<br />la pause café en entreprise.
                             </p>
                             {/* Social icons */}
@@ -90,7 +90,7 @@ export default function Footer() {
                                         key={i}
                                         href={href}
                                         aria-label={label}
-                                        style={{ color: 'rgba(255,246,239,0.25)', transition: 'color 0.2s', display: 'flex' }}
+                                        style={{ color: 'rgba(255,246,239,0.8)', transition: 'color 0.2s', display: 'flex' }}
                                         onMouseEnter={(e) => (e.currentTarget.style.color = '#DE9E67')}
                                         onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,246,239,0.25)')}
                                     >
@@ -102,16 +102,16 @@ export default function Footer() {
 
                         {/* Col 2 — Address */}
                         <div className="footer-col-address">
-                            <p style={{ color: 'rgba(255,246,239,0.6)', fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase' as const, marginBottom: 16 }}>
+                            <p style={{ color: 'rgba(255,246,239,0.9)', fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase' as const, marginBottom: 16 }}>
                                 Adresse
                             </p>
-                            <p style={{ color: 'rgba(255,246,239,0.3)', fontSize: 12, lineHeight: 1.7 }}>
+                            <p style={{ color: 'rgba(255,246,239,0.85)', fontSize: 12, lineHeight: 1.7 }}>
                                 780 rue Blaise Pascal<br />
                                 59267 Proville — France
                             </p>
                             <a
                                 href="tel:+33327371684"
-                                style={{ color: 'rgba(255,246,239,0.3)', fontSize: 12, letterSpacing: '0.04em', textDecoration: 'none', transition: 'color 0.2s', display: 'inline-block', marginTop: 4 }}
+                                style={{ color: 'rgba(255,246,239,0.85)', fontSize: 12, letterSpacing: '0.04em', textDecoration: 'none', transition: 'color 0.2s', display: 'inline-block', marginTop: 4 }}
                                 onMouseEnter={(e) => (e.currentTarget.style.color = '#DE9E67')}
                                 onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,246,239,0.3)')}
                             >
@@ -121,7 +121,7 @@ export default function Footer() {
 
                         {/* Col 3 — Navigation */}
                         <div className="footer-col-nav">
-                            <p style={{ color: 'rgba(255,246,239,0.6)', fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase' as const, marginBottom: 16 }}>
+                            <p style={{ color: 'rgba(255,246,239,0.9)', fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase' as const, marginBottom: 16 }}>
                                 Navigation
                             </p>
                             {NAV_LINKS.map(({ label, href }) => (
@@ -130,7 +130,7 @@ export default function Footer() {
                                     href={href}
                                     style={{
                                         display: 'block',
-                                        color: 'rgba(255,246,239,0.3)',
+                                        color: 'rgba(255,246,239,0.85)',
                                         fontSize: 12,
                                         letterSpacing: '0.04em',
                                         textDecoration: 'none',
@@ -159,17 +159,17 @@ export default function Footer() {
                             gap: 24,
                         }}
                     >
-                        <p style={{ color: 'rgba(255,246,239,0.2)', fontSize: 10, letterSpacing: '0.04em' }}>
+                        <p style={{ color: 'rgba(255,246,239,0.8)', fontSize: 10, letterSpacing: '0.04em' }}>
                             © {new Date().getFullYear()} A.N.S. Tous droits réservés.
                         </p>
                         <div style={{ display: 'flex', gap: 24 }}>
-                            <a href="#" style={{ color: 'rgba(255,246,239,0.2)', fontSize: 10, letterSpacing: '0.04em', textDecoration: 'none', transition: 'color 0.2s' }}
+                            <a href="#" style={{ color: 'rgba(255,246,239,0.8)', fontSize: 10, letterSpacing: '0.04em', textDecoration: 'none', transition: 'color 0.2s' }}
                                 onMouseEnter={(e) => (e.currentTarget.style.color = '#DE9E67')}
                                 onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,246,239,0.2)')}
                             >
                                 Mentions Légales
                             </a>
-                            <a href="#" style={{ color: 'rgba(255,246,239,0.2)', fontSize: 10, letterSpacing: '0.04em', textDecoration: 'none', transition: 'color 0.2s' }}
+                            <a href="#" style={{ color: 'rgba(255,246,239,0.8)', fontSize: 10, letterSpacing: '0.04em', textDecoration: 'none', transition: 'color 0.2s' }}
                                 onMouseEnter={(e) => (e.currentTarget.style.color = '#DE9E67')}
                                 onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,246,239,0.2)')}
                             >
