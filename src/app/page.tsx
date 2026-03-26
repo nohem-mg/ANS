@@ -188,18 +188,18 @@ const CapsuleButton = ({ children, href, variant = 'primary' }: { children: Reac
 const MILESTONES = [
   {
     year: '1981',
-    title: 'La Genèse',
-    desc: "Fondation d'une entreprise familiale avec une mission simple : apporter de la convivialité dans les bureaux.",
+    title: 'Pionniers QVT',
+    desc: "Fondation d'une entreprise familiale avec une conviction forte : la pause café est le premier levier de la Qualité de Vie au Travail.",
   },
   {
     year: '2000',
     title: "L'Expansion",
-    desc: "Intégration du groupement Prodia+ pour garantir une couverture nationale tout en gardant notre indépendance.",
+    desc: "Intégration du réseau Prodia+ pour garantir une couverture nationale tout en préservant notre indépendance.",
   },
   {
     year: '2024',
-    title: 'La Révolution QVT',
-    desc: "Transformation vers des solutions de bien-être global. Plus que du café, des espaces de vie.",
+    title: 'Engagements RSE',
+    desc: "Accélération de notre démarche durable : cafés responsables, revalorisation du marc et équipements éco-performants.",
   },
 ];
 
