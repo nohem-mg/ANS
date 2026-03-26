@@ -83,8 +83,7 @@ export const SOLUTIONS: SolutionDetail[] = [
       'Des fontaines a eau elegantes et fiables pour offrir une hydratation simple, durable et qualitative sur site.',
     description:
       'Nos fontaines a eau s’integrent naturellement dans les espaces de travail et apportent une solution durable, esthetique et facile a vivre. Elles couvrent les besoins du quotidien avec une qualite de service constante.',
-    image:
-      'https://images.unsplash.com/photo-1521017432531-fbd92d768814?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1400',
+    image: '/eau_ans.jpg',
     icon: Droplets,
     highlights: [
       'Eau fraiche, temperee ou petillante selon les modeles',

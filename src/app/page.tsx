@@ -37,7 +37,7 @@ const FAQ_ITEMS = [
   {
     question: "Est-ce qu'ANS s'occupe aussi de l'installation et de la maintenance ?",
     answer:
-      "Absolument. Nos équipes gèrent l'installation, l'approvisionnement et la maintenance préventive selon vos besoins. Notre équipe technique de 20 personnes est dédiée à nos clients au quotidien pour garantir un fonctionnement fluide et sans faille de vos espaces pause.",
+      "Absolument. Nos équipes gèrent l'installation, l'approvisionnement et la maintenance préventive selon vos besoins. Notre équipe de plus de 30 personnes est dédiée à nos clients au quotidien pour garantir un fonctionnement fluide et sans faille de vos espaces pause.",
   },
   {
     question: "Quels moyens de paiement peuvent être proposés ?",
@@ -52,7 +52,7 @@ const FAQ_ITEMS = [
   {
     question: "Qu'est-ce qui différencie ANS d'un prestataire classique ?",
     answer:
-      "Notre force repose sur l'alliance de la proximité et de la réactivité. En tant que membre du réseau indépendant Prodia+, nous allions la puissance d'un réseau national à la souplesse d'un acteur historique du nord. Nous sommes au plus proche de nos clients (interventions en moins de 30 minutes) pour offrir un suivi humain et réactif.",
+      "Notre force repose sur l'alliance de la proximité et de la réactivité. En tant que membre du réseau indépendant Prodia+, nous allions la puissance d'un réseau national à la souplesse d'un acteur historique du nord. Nous sommes au plus proche de nos clients (la quasi totalité des interventions sont effectuées en moins d'une heure) pour offrir un suivi humain et réactif.",
   },
   {
     question: "Avez-vous une démarche plus responsable ?",
@@ -85,7 +85,7 @@ const Loader = ({ onComplete }: { onComplete: () => void }) => {
         >
           <Image
             src="/logo-ans-entier.png"
-            alt="A.N.S — Pause Évasion"
+            alt="A.N.S Pause Évasion"
             width={280}
             height={120}
             style={{ objectFit: 'contain' }}
@@ -187,19 +187,19 @@ const CapsuleButton = ({ children, href, variant = 'primary' }: { children: Reac
 // 5. Timeline — horizontal editorial 3-column design
 const MILESTONES = [
   {
-    year: '1980',
-    title: 'La Genèse',
-    desc: "Fondation d'une entreprise familiale avec une mission simple : apporter de la convivialité dans les bureaux.",
+    year: '1981',
+    title: 'Pionniers QVT',
+    desc: "Fondation d'une entreprise familiale avec une conviction forte : la pause café est le premier levier de la Qualité de Vie au Travail.",
   },
   {
     year: '2000',
     title: "L'Expansion",
-    desc: "Intégration du groupement Prodia+ pour garantir une couverture nationale tout en gardant notre indépendance.",
+    desc: "Intégration du réseau Prodia+ pour garantir une couverture nationale tout en préservant notre indépendance.",
   },
   {
     year: '2024',
-    title: 'La Révolution QVT',
-    desc: "Transformation vers des solutions de bien-être global. Plus que du café, des espaces de vie.",
+    title: 'Engagements RSE',
+    desc: "Accélération de notre démarche durable : cafés responsables, revalorisation du marc et équipements éco-performants.",
   },
 ];
 
@@ -464,98 +464,98 @@ const VisionSection = () => {
               className="text-deep-roast/70 leading-relaxed"
               style={{ fontSize: 'clamp(0.95rem, 1vw, 1.05rem)', fontFamily: 'var(--font-ibm-plex-sans)' }}
             >
-              Fini le café avalé dans un couloir. La pause est un moment stratégique — celui où l'énergie se recharge et où la culture d'entreprise se construit. Chez ANS, on aménage cet espace pour qu'il soit à la hauteur.            </p>
+              Fini le café avalé dans un couloir. La pause est un moment stratégique celui où l'énergie se recharge et où la culture d'entreprise se construit. Chez ANS, on aménage cet espace pour qu'il soit à la hauteur.            </p>
           </motion.div>
         </div>
 
         {/* 4-Column Cards Grid — scroll horizontal sur mobile, grille sur desktop */}
         <div className="overflow-hidden md:overflow-visible -mx-6 md:mx-0">
-        <div
-          className="flex md:grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 xl:gap-8 overflow-x-auto md:overflow-x-visible snap-x snap-mandatory md:snap-none pb-2 md:pb-0 px-6 md:px-0"
-          style={{ scrollPaddingLeft: '1.5rem', scrollPaddingRight: '1.5rem' }}
-        >
-          {VISION_POINTS.map((point, index) => (
-            <motion.div
-              key={point.id}
-              initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-              whileInView={isMobile ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.1 + index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="bg-[#688125] rounded-[1rem] p-5 pb-6 xl:p-6 xl:pb-6 flex flex-col hover:shadow-lg transition-all duration-300 relative overflow-hidden group snap-start shrink-0 w-[76vw] sm:w-[56vw] md:w-auto md:shrink md:h-full"
-            >
-              {/* Card Number */}
-              <div className="w-8 h-8 rounded-full border border-[#F4F8EA] flex items-center justify-center mb-4 relative z-10 bg-transparent">
-                <span className="text-sm font-medium text-[#F4F8EA]">
-                  {index + 1}
-                </span>
-              </div>
-
-              {/* Title */}
-              <h3
-                className="text-[1.4rem] xl:text-[1.65rem] text-[#F4F8EA] font-medium mb-3 relative z-10 leading-tight"
-                style={{ fontFamily: 'var(--font-ibm-plex-sans)', letterSpacing: '-0.02em' }}
+          <div
+            className="flex md:grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 xl:gap-8 overflow-x-auto md:overflow-x-visible snap-x snap-mandatory md:snap-none pb-2 md:pb-0 px-6 md:px-0"
+            style={{ scrollPaddingLeft: '1.5rem', scrollPaddingRight: '1.5rem' }}
+          >
+            {VISION_POINTS.map((point, index) => (
+              <motion.div
+                key={point.id}
+                initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                whileInView={isMobile ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.1 + index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                className="bg-[#688125] rounded-[1rem] p-5 pb-6 xl:p-6 xl:pb-6 flex flex-col hover:shadow-lg transition-all duration-300 relative overflow-hidden group snap-start shrink-0 w-[76vw] sm:w-[56vw] md:w-auto md:shrink md:h-full"
               >
-                {point.title}
-              </h3>
+                {/* Card Number */}
+                <div className="w-8 h-8 rounded-full border border-[#F4F8EA] flex items-center justify-center mb-4 relative z-10 bg-transparent">
+                  <span className="text-sm font-medium text-[#F4F8EA]">
+                    {index + 1}
+                  </span>
+                </div>
 
-              {/* Description */}
-              <p
-                className="text-[#EDF4DB] leading-relaxed text-[0.95rem] xl:text-[1.05rem] flex-grow relative z-10 pr-4"
-                style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}
-              >
-                {point.desc}
-              </p>
+                {/* Title */}
+                <h3
+                  className="text-[1.4rem] xl:text-[1.65rem] text-[#F4F8EA] font-medium mb-3 relative z-10 leading-tight"
+                  style={{ fontFamily: 'var(--font-ibm-plex-sans)', letterSpacing: '-0.02em' }}
+                >
+                  {point.title}
+                </h3>
 
-              {/* Decorative abstract elements at bottom */}
-              <div className="hidden md:block pt-8 mt-auto relative z-10 opacity-60 group-hover:opacity-100 transition-opacity duration-500">
-                {index === 0 && (
-                  <div className="flex flex-col gap-2 w-full">
-                    <div className="h-px bg-[#F4F8EA] w-full relative">
-                      <span className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1 w-1.5 h-1.5 border-t border-r border-[#F4F8EA] rotate-45 -mt-px"></span>
-                    </div>
-                    <div className="h-px bg-[#F4F8EA] w-4/5 relative">
-                      <span className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1 w-1.5 h-1.5 border-t border-r border-[#F4F8EA] rotate-45 -mt-px"></span>
-                    </div>
-                    <div className="h-px bg-[#F4F8EA] w-[65%] relative">
-                      <span className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1 w-1.5 h-1.5 border-t border-r border-[#F4F8EA] rotate-45 -mt-px"></span>
-                    </div>
-                  </div>
-                )}
-                {index === 1 && (
-                  <div className="flex gap-2 h-10 items-end">
-                    {[...Array(6)].map((_, i) => (
-                      <div key={i} className="flex-1 border border-[#F4F8EA] rounded-[0.25rem] h-full relative" style={{ height: `${100 - i * 10}%` }}>
-                        {i === 2 && <span className="absolute inset-0 flex items-center justify-center text-[#F4F8EA]"><Lightbulb className="w-3.5 h-3.5" strokeWidth={2.5} /></span>}
-                        {i === 5 && <span className="absolute inset-0 flex items-center justify-center text-[#F4F8EA]"><MessageCircle className="w-2.5 h-2.5" strokeWidth={2.5} /></span>}
+                {/* Description */}
+                <p
+                  className="text-[#EDF4DB] leading-relaxed text-[0.95rem] xl:text-[1.05rem] flex-grow relative z-10 pr-4"
+                  style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}
+                >
+                  {point.desc}
+                </p>
+
+                {/* Decorative abstract elements at bottom */}
+                <div className="hidden md:block pt-8 mt-auto relative z-10 opacity-60 group-hover:opacity-100 transition-opacity duration-500">
+                  {index === 0 && (
+                    <div className="flex flex-col gap-2 w-full">
+                      <div className="h-px bg-[#F4F8EA] w-full relative">
+                        <span className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1 w-1.5 h-1.5 border-t border-r border-[#F4F8EA] rotate-45 -mt-px"></span>
                       </div>
-                    ))}
-                  </div>
-                )}
-                {index === 2 && (
-                  <div className="flex gap-1.5 items-center h-10 w-full">
-                    <div className="flex-1 border border-[#F4F8EA] h-full rounded-sm" />
-                    <div className="flex-1 border border-[#F4F8EA] h-full skew-x-[-15deg] rounded-sm transform scale-90" />
-                    <div className="flex-1 border border-[#F4F8EA] h-full rounded-full mx-0.5" />
-                    <div className="flex-[0.8] border border-[#F4F8EA] h-full rounded-full" />
-                  </div>
-                )}
-                {index === 3 && (
-                  <div className="flex gap-0 items-center h-8 relative">
-                    <div className="w-1/3 h-full border border-[#F4F8EA] rounded-l-md rounded-r-[0.35rem] relative" />
-                    <div className="w-[15%] h-full border-t border-b border-[#F4F8EA] -mx-1 z-10 bg-[#688125]">
-                      <div className="absolute top-1/2 -translate-y-1/2 w-full h-[60%] border-t border-b border-[#F4F8EA] bg-[#688125]" />
+                      <div className="h-px bg-[#F4F8EA] w-4/5 relative">
+                        <span className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1 w-1.5 h-1.5 border-t border-r border-[#F4F8EA] rotate-45 -mt-px"></span>
+                      </div>
+                      <div className="h-px bg-[#F4F8EA] w-[65%] relative">
+                        <span className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1 w-1.5 h-1.5 border-t border-r border-[#F4F8EA] rotate-45 -mt-px"></span>
+                      </div>
                     </div>
-                    <div className="w-1/3 h-full border border-[#F4F8EA] rounded-[0.35rem] relative" />
-                    <div className="w-[15%] h-full border-t border-b border-[#F4F8EA] -mx-1 z-10 bg-[#688125]">
-                      <div className="absolute top-1/2 -translate-y-1/2 w-full h-[60%] border-t border-b border-[#F4F8EA] bg-[#688125]" />
+                  )}
+                  {index === 1 && (
+                    <div className="flex gap-2 h-10 items-end">
+                      {[...Array(6)].map((_, i) => (
+                        <div key={i} className="flex-1 border border-[#F4F8EA] rounded-[0.25rem] h-full relative" style={{ height: `${100 - i * 10}%` }}>
+                          {i === 2 && <span className="absolute inset-0 flex items-center justify-center text-[#F4F8EA]"><Lightbulb className="w-3.5 h-3.5" strokeWidth={2.5} /></span>}
+                          {i === 5 && <span className="absolute inset-0 flex items-center justify-center text-[#F4F8EA]"><MessageCircle className="w-2.5 h-2.5" strokeWidth={2.5} /></span>}
+                        </div>
+                      ))}
                     </div>
-                    <div className="w-1/6 h-full border border-[#F4F8EA] border-l-0 rounded-r-md rounded-l-[0.35rem] relative" />
-                  </div>
-                )}
-              </div>
-            </motion.div>
-          ))}
-        </div>
+                  )}
+                  {index === 2 && (
+                    <div className="flex gap-1.5 items-center h-10 w-full">
+                      <div className="flex-1 border border-[#F4F8EA] h-full rounded-sm" />
+                      <div className="flex-1 border border-[#F4F8EA] h-full skew-x-[-15deg] rounded-sm transform scale-90" />
+                      <div className="flex-1 border border-[#F4F8EA] h-full rounded-full mx-0.5" />
+                      <div className="flex-[0.8] border border-[#F4F8EA] h-full rounded-full" />
+                    </div>
+                  )}
+                  {index === 3 && (
+                    <div className="flex gap-0 items-center h-8 relative">
+                      <div className="w-1/3 h-full border border-[#F4F8EA] rounded-l-md rounded-r-[0.35rem] relative" />
+                      <div className="w-[15%] h-full border-t border-b border-[#F4F8EA] -mx-1 z-10 bg-[#688125]">
+                        <div className="absolute top-1/2 -translate-y-1/2 w-full h-[60%] border-t border-b border-[#F4F8EA] bg-[#688125]" />
+                      </div>
+                      <div className="w-1/3 h-full border border-[#F4F8EA] rounded-[0.35rem] relative" />
+                      <div className="w-[15%] h-full border-t border-b border-[#F4F8EA] -mx-1 z-10 bg-[#688125]">
+                        <div className="absolute top-1/2 -translate-y-1/2 w-full h-[60%] border-t border-b border-[#F4F8EA] bg-[#688125]" />
+                      </div>
+                      <div className="w-1/6 h-full border border-[#F4F8EA] border-l-0 rounded-r-md rounded-l-[0.35rem] relative" />
+                    </div>
+                  )}
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
 
       </div>
@@ -954,7 +954,7 @@ export default function Home() {
 
 
         {/* Services Section — Spec-Sheet Layout */}
-          <section id="services" className="pt-8 pb-8 md:py-20 relative">
+        <section id="services" className="pt-8 pb-8 md:py-20 relative">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
 
             {/* Section header */}
@@ -975,12 +975,12 @@ export default function Home() {
             <div className="border-t border-deep-roast/10">
               <ServiceRow
                 title="Coffee Corners"
-                desc="Architecture d'espaces de pause premium. Mobilier design et ambiance feutrée pour favoriser les échanges."
+                desc="Home staging : une mise en valeur de l'espace de pause par un aménagement subtil et chaleureux de l'espace."
                 icon={<CoffeeCornerIcon />}
               />
               <ServiceRow
                 title="Disponibilité Totale"
-                desc="Notre promesse : une réactivité sans faille. Une machine à l'arrêt, c'est une pause gâchée. Nous ne laissons jamais cela arriver."
+                desc="Notre promesse : une réactivité sans faille. Une machine à l'arrêt, c'est une pause gâchée. Nous agissons au plus vite pour que l'arrêt ne dure jamais."
                 icon={<MaintenanceIcon />}
               />
               <ServiceRow
@@ -1037,28 +1037,28 @@ export default function Home() {
                     className="bg-white border border-deep-roast/10 shadow-sm px-5 py-5 rounded-[1.1rem]"
                   >
                     <div className="min-w-0">
-                        <div className="flex gap-1 mb-3 text-golden-extraction">
-                          {[...Array(5)].map((_, i) => (
-                            <span key={i} className="text-xs">★</span>
-                          ))}
-                        </div>
+                      <div className="flex gap-1 mb-3 text-golden-extraction">
+                        {[...Array(5)].map((_, i) => (
+                          <span key={i} className="text-xs">★</span>
+                        ))}
+                      </div>
 
-                        <p
-                          className="text-deep-roast/75 italic leading-relaxed text-[0.98rem]"
-                          style={
-                            isExpanded
-                              ? { fontFamily: 'var(--font-ibm-plex-sans)' }
-                              : {
-                                  fontFamily: 'var(--font-ibm-plex-sans)',
-                                  display: '-webkit-box',
-                                  WebkitLineClamp: 3,
-                                  WebkitBoxOrient: 'vertical',
-                                  overflow: 'hidden',
-                                }
-                          }
-                        >
-                          "{t.review}"
-                        </p>
+                      <p
+                        className="text-deep-roast/75 italic leading-relaxed text-[0.98rem]"
+                        style={
+                          isExpanded
+                            ? { fontFamily: 'var(--font-ibm-plex-sans)' }
+                            : {
+                              fontFamily: 'var(--font-ibm-plex-sans)',
+                              display: '-webkit-box',
+                              WebkitLineClamp: 3,
+                              WebkitBoxOrient: 'vertical',
+                              overflow: 'hidden',
+                            }
+                        }
+                      >
+                        "{t.review}"
+                      </p>
                     </div>
 
                     <div className="flex items-center justify-between gap-3 mt-4 pt-4 border-t border-deep-roast/8">
@@ -1148,7 +1148,7 @@ export default function Home() {
                     fontWeight: 600,
                   }}
                 >
-                  40 Ans d'Excellence
+                  + de 40 Ans d'Excellence
                 </h2>
               </div>
               <p className="text-deep-roast/50 text-sm max-w-xs leading-relaxed md:text-right" style={{ fontFamily: 'var(--font-ibm-plex-mono)' }}>

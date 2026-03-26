@@ -1143,7 +1143,7 @@ function LocationSection() {
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="Localisation ANS — Proville"
+                title="Localisation ANS Proville"
               />
               <div
                 aria-hidden
