@@ -646,7 +646,7 @@ function StorySection() {
       className="ans-story-section"
       style={{
         backgroundColor: C.bg,
-        padding: '128px 24px',
+        padding: '128px 24px 64px',
       }}
     >
       <div style={{ maxWidth: 1280, margin: '0 auto' }}>
@@ -725,24 +725,21 @@ function StorySection() {
                   </div>
 
                   <div style={{ flex: '1 1 50%', position: 'relative', width: '100%', display: 'flex', justifyContent: 'center' }}>
-                    {/* Outer wrapper without overflow: hidden so tape can bleed outside */}
                     <div
                       style={{
                         position: 'relative',
                         width: '100%',
-                        transform: isImageLeft ? 'rotate(-2.5deg)' : 'rotate(2.5deg)',
                       }}
                     >
-                      {/* Inner wrapper for aspect ratio and image */}
                       <div
                         style={{
                           position: 'relative',
                           width: '100%',
                           paddingTop: '75%',
                           overflow: 'hidden',
-                          boxShadow: '0 20px 40px rgba(0,0,0,0.4)',
+                          boxShadow: '0 20px 40px rgba(0,0,0,0.15)',
                           backgroundColor: '#111',
-                          borderRadius: '2px', // very subtle rounding just to soften digital edges
+                          borderRadius: '16px',
                         }}
                       >
                         <Image
@@ -754,43 +751,6 @@ function StorySection() {
                           sizes="(max-width: 800px) 100vw, 50vw"
                         />
                       </div>
-
-                      {/* Top-left tape */}
-                      <div
-                        style={{
-                          position: 'absolute',
-                          top: '-14px',
-                          left: '-42px',
-                          width: '100px',
-                          height: '24px',
-                          backgroundColor: 'rgba(255, 255, 255, 0.2)',
-                          backdropFilter: 'blur(2px)',
-                          boxShadow: '0 1px 2px rgba(0,0,0,0.1), inset 0 0 0 1px rgba(255,255,255,0.08)',
-                          transform: 'rotate(-42deg)',
-                          zIndex: 10,
-                          // CSS mask to simulate uneven/torn tape edges
-                          maskImage: 'linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.6) 8%, black 50%, rgba(0,0,0,0.6) 92%, transparent 100%)',
-                          WebkitMaskImage: 'linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.6) 8%, black 50%, rgba(0,0,0,0.6) 92%, transparent 100%)',
-                        }}
-                      />
-
-                      {/* Bottom-right tape */}
-                      <div
-                        style={{
-                          position: 'absolute',
-                          bottom: '-14px',
-                          right: '-42px',
-                          width: '100px',
-                          height: '24px',
-                          backgroundColor: 'rgba(255, 255, 255, 0.2)',
-                          backdropFilter: 'blur(2px)',
-                          boxShadow: '0 1px 2px rgba(0,0,0,0.1), inset 0 0 0 1px rgba(255,255,255,0.08)',
-                          transform: 'rotate(-42deg)',
-                          zIndex: 10,
-                          maskImage: 'linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.6) 8%, black 50%, rgba(0,0,0,0.6) 92%, transparent 100%)',
-                          WebkitMaskImage: 'linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.6) 8%, black 50%, rgba(0,0,0,0.6) 92%, transparent 100%)',
-                        }}
-                      />
                     </div>
                   </div>
                 </div>
@@ -1243,7 +1203,7 @@ function TeamSection() {
         style={{
           maxWidth: 1280,
           margin: '0 auto',
-          padding: '128px 24px 0',
+          padding: '64px 24px 0',
           position: 'relative',
         }}
       >
