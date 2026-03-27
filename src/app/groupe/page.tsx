@@ -2,7 +2,8 @@
 
 import { useRef, useEffect, useState } from 'react';
 import { motion, useInView, useScroll, useTransform } from 'framer-motion';
-import { ArrowRight, Users, MapPin, Cog, Handshake, ShieldCheck, Zap } from 'lucide-react';
+import { ArrowRight, Users, MapPin, Cog, Handshake, ShieldCheck, Zap, Headphones, Store, Coffee, Coins, Building2, Factory, HeartPulse, GraduationCap, Truck } from 'lucide-react';
+import Image from 'next/image';
 
 // ─── Design tokens ───────────────────────────────────────────────────────────
 const C = {
@@ -25,10 +26,12 @@ const EASE_OUT = [0.25, 0.46, 0.45, 0.94] as const;
 
 // ─── KEY FIGURES DATA ────────────────────────────────────────────────────────
 const FIGURES = [
-    { value: 35, suffix: '+', label: 'Membres du réseau', description: 'PME indépendantes à travers la France' },
-    { value: 96, suffix: '%', label: 'Couverture nationale', description: 'Du territoire français couvert' },
-    { value: 50000, suffix: '+', label: 'Machines installées', description: 'En service sur tout le territoire' },
-    { value: 40, suffix: '+', label: "Années d'expertise", description: "D'expérience cumulée dans la distribution" },
+    { value: 47, suffix: '', label: 'ADHÉRENTS', description: 'répartis sur toute la France\ndont 2 en Belgique', icon: <Headphones size={48} strokeWidth={1.5} /> },
+    { value: 119, suffix: '', label: 'AGENCES', description: 'dont 2 en Belgique\net 1 au Luxembourg', icon: <Store size={48} strokeWidth={1.5} /> },
+    { value: 2200, suffix: '', label: 'COLLABORATEURS', description: 'dont 680 approvisionneurs,\n160 techniciens, administratifs,\ncommerciaux, logistique,\ndirection...', icon: <Users size={48} strokeWidth={1.5} /> },
+    { value: 190, suffix: ' M€', label: "DE CHIFFRE D'AFFAIRES EN 2024", description: '', icon: <Coins size={48} strokeWidth={1.5} /> },
+    { value: 60000, suffix: '', label: 'DISTRIBUTEURS AUTOMATIQUES', description: '', icon: <Coffee size={48} strokeWidth={1.5} /> },
+    { value: 15000, suffix: '', label: 'SITES GÉRÉS', description: '', icon: <MapPin size={48} strokeWidth={1.5} /> },
 ];
 
 // ─── ADVANTAGES DATA ─────────────────────────────────────────────────────────
@@ -87,9 +90,7 @@ function AnimatedCounter({ target, suffix, duration = 2 }: { target: number; suf
         return () => clearInterval(timer);
     }, [isInView, target, duration]);
 
-    const formatted = target >= 1000
-        ? `${(count / 1000).toFixed(count >= target ? 0 : 1).replace('.0', '')}k`
-        : `${count}`;
+    const formatted = count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 
     return (
         <span ref={ref} style={{
@@ -223,49 +224,62 @@ export default function GroupePage() {
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ delay: 0.55, duration: 0.8 }}
-                            style={{
-                                fontSize: 16, color: 'rgba(245,230,211,0.55)', lineHeight: 1.7,
-                                maxWidth: 580, margin: '0 auto',
-                            }}
+                            className="text-[1.05rem] md:text-lg text-coffee-cream/90 leading-relaxed mx-auto max-w-xl mb-8 drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)] font-light"
+                            style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}
                         >
-                            Un réseau national de PME indépendantes spécialisées dans la distribution automatique.
-                            La force d&apos;un grand groupe avec la proximité et la réactivité d&apos;un acteur local.
+                            Le premier réseau français d’indépendants en distribution automatique, au service de vos espaces de pause.
                         </motion.p>
                     </div>
                 </motion.div>
             </section>
 
             {/* ── PRÉSENTATION ── */}
-            <section style={{ padding: 'clamp(64px, 10vw, 128px) 24px' }}>
+            <section style={{ padding: 'clamp(64px, 10vw, 128px) 24px clamp(32px, 5vw, 64px)' }}>
                 <div style={{ maxWidth: 1280, margin: '0 auto' }}>
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8, ease: EASE_OUT }}
+                        style={{ marginBottom: 64 }}
+                    >
+                        <span style={{
+                            fontFamily: FONT.mono, fontSize: 10, letterSpacing: '0.22em',
+                            color: C.accent, textTransform: 'uppercase', display: 'block', marginBottom: 16,
+                        }}>
+                            Qui sommes-nous
+                        </span>
+                        <h2 style={{
+                            fontFamily: FONT.display,
+                            fontSize: 'clamp(28px, 4vw, 48px)',
+                            fontWeight: 600, color: C.textPrimary,
+                            letterSpacing: '-0.02em', lineHeight: 1.15,
+                            margin: '0 0 24px',
+                        }}>
+                            Un Collectif d&apos;Experts<br />Indépendants
+                        </h2>
+                        <div style={{ width: 48, height: 2, background: C.accent }} />
+                    </motion.div>
+
                     <div style={{
                         display: 'grid',
                         gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))',
                         gap: 'clamp(40px, 6vw, 80px)',
-                        alignItems: 'start',
+                        alignItems: 'center',
                     }}>
                         <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
+                            initial={{ opacity: 0, x: -20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.8, ease: EASE_OUT }}
+                            style={{ position: 'relative', width: '100%', aspectRatio: '3/2', maxWidth: 650, margin: '0 auto' }}
                         >
-                            <span style={{
-                                fontFamily: FONT.mono, fontSize: 10, letterSpacing: '0.22em',
-                                color: C.accent, textTransform: 'uppercase', display: 'block', marginBottom: 16,
-                            }}>
-                                Qui sommes-nous
-                            </span>
-                            <h2 style={{
-                                fontFamily: FONT.display,
-                                fontSize: 'clamp(28px, 4vw, 48px)',
-                                fontWeight: 600, color: C.textPrimary,
-                                letterSpacing: '-0.02em', lineHeight: 1.15,
-                                margin: '0 0 24px',
-                            }}>
-                                Un Collectif d&apos;Experts<br />Indépendants
-                            </h2>
-                            <div style={{ width: 48, height: 2, background: C.accent, marginBottom: 24 }} />
+                            <Image 
+                                src="/Prodiaplusweb.png" 
+                                alt="Réseau Prodia+" 
+                                fill 
+                                style={{ objectFit: 'contain' }} 
+                            />
                         </motion.div>
 
                         <motion.div
@@ -273,7 +287,7 @@ export default function GroupePage() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.8, delay: 0.1, ease: EASE_OUT }}
-                            style={{ display: 'flex', flexDirection: 'column', gap: 20 }}
+                            style={{ display: 'flex', flexDirection: 'column', gap: 20, paddingTop: '20px' }}
                         >
                             <p style={{ fontFamily: FONT.body, fontSize: 15, color: C.textMuted, lineHeight: 1.8, margin: 0 }}>
                                 <strong style={{ color: C.textPrimary }}>Prodia+</strong> est un groupement de PME indépendantes
@@ -299,7 +313,7 @@ export default function GroupePage() {
             {/* ── CHIFFRES CLÉS ── */}
             <section style={{
                 backgroundColor: '#FAF2E9',
-                padding: 'clamp(64px, 10vw, 100px) 24px',
+                padding: 'clamp(32px, 5vw, 64px) 24px clamp(48px, 8vw, 80px)',
             }}>
                 <div style={{ maxWidth: 1280, margin: '0 auto' }}>
                     <motion.div
@@ -327,7 +341,7 @@ export default function GroupePage() {
 
                     <div style={{
                         display: 'grid',
-                        gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+                        gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
                         gap: 'clamp(24px, 3vw, 40px)',
                     }}>
                         {FIGURES.map((fig, i) => (
@@ -343,8 +357,12 @@ export default function GroupePage() {
                                     borderRadius: 12,
                                     border: `1px solid ${C.divider}`,
                                     background: '#FAF2E9',
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    alignItems: 'center',
                                 }}
                             >
+                                <div style={{ color: C.textPrimary, marginBottom: 16 }}>{fig.icon}</div>
                                 <AnimatedCounter target={fig.value} suffix={fig.suffix} />
                                 <p style={{
                                     fontFamily: FONT.display, fontSize: 15, fontWeight: 600,
@@ -352,20 +370,77 @@ export default function GroupePage() {
                                 }}>
                                     {fig.label}
                                 </p>
-                                <p style={{
-                                    fontFamily: FONT.body, fontSize: 12,
-                                    color: C.textMuted, margin: 0, lineHeight: 1.5,
-                                }}>
-                                    {fig.description}
-                                </p>
+                                {fig.description && (
+                                    <p style={{
+                                        fontFamily: FONT.body, fontSize: 12,
+                                        color: C.textMuted, margin: 0, lineHeight: 1.5,
+                                        whiteSpace: 'pre-line'
+                                    }}>
+                                        {fig.description}
+                                    </p>
+                                )}
                             </motion.div>
                         ))}
                     </div>
                 </div>
             </section>
 
+            {/* Bandeau Ils Nous Font Confiance (Marquee) */}
+            <section style={{ padding: 'clamp(40px, 6vw, 64px) 0', backgroundColor: '#FAF2E9', borderTop: '1px solid rgba(43,18,0,0.05)' }}>
+                <div className="w-full flex flex-col items-center overflow-hidden">
+                    <span style={{ 
+                        fontFamily: FONT.mono, fontSize: 10, letterSpacing: '0.22em', 
+                        color: 'rgba(43,18,0,0.4)', textTransform: 'uppercase', 
+                        marginBottom: 'clamp(24px, 4vw, 32px)', textAlign: 'center', display: 'block' 
+                    }}>
+                        Ils nous font confiance
+                    </span>
+                    
+                    <div 
+                      className="w-full flex overflow-hidden relative"
+                      style={{
+                        maskImage: 'linear-gradient(to right, transparent, black 15%, black 85%, transparent)',
+                        WebkitMaskImage: 'linear-gradient(to right, transparent, black 15%, black 85%, transparent)'
+                      }}
+                    >
+                      <motion.div
+                        animate={{ x: ["0%", "-50%"] }}
+                        transition={{
+                          repeat: Infinity,
+                          ease: "linear",
+                          duration: 35,
+                        }}
+                        className="flex items-center gap-16 md:gap-32 w-max"
+                      >
+                        {[...Array(2)].map((_, loopIdx) => (
+                          <div key={loopIdx} className="flex items-center gap-16 md:gap-32">
+                            {[
+                              { label: 'PME & Grands Groupes', icon: <Building2 className="w-6 h-6 sm:w-8 sm:h-8 mb-3 opacity-60 text-[#2B1200] group-hover:text-[#C8763A] group-hover:opacity-100 transition-all duration-300" /> },
+                              { label: 'Industrie', icon: <Factory className="w-6 h-6 sm:w-8 sm:h-8 mb-3 opacity-60 text-[#2B1200] group-hover:text-[#C8763A] group-hover:opacity-100 transition-all duration-300" /> },
+                              { label: 'Santé & Hôpitaux', icon: <HeartPulse className="w-6 h-6 sm:w-8 sm:h-8 mb-3 opacity-60 text-[#2B1200] group-hover:text-[#C8763A] group-hover:opacity-100 transition-all duration-300" /> },
+                              { label: 'Universités', icon: <GraduationCap className="w-6 h-6 sm:w-8 sm:h-8 mb-3 opacity-60 text-[#2B1200] group-hover:text-[#C8763A] group-hover:opacity-100 transition-all duration-300" /> },
+                              { label: 'Transport & Logistique', icon: <Truck className="w-6 h-6 sm:w-8 sm:h-8 mb-3 opacity-60 text-[#2B1200] group-hover:text-[#C8763A] group-hover:opacity-100 transition-all duration-300" /> },
+                              { label: 'Hôtellerie & Retail', icon: <Store className="w-6 h-6 sm:w-8 sm:h-8 mb-3 opacity-60 text-[#2B1200] group-hover:text-[#C8763A] group-hover:opacity-100 transition-all duration-300" /> },
+                            ].map((sector) => (
+                              <div
+                                key={`${loopIdx}-${sector.label}`}
+                                className="flex flex-col items-center text-center group cursor-default min-w-[140px]"
+                              >
+                                {sector.icon}
+                                <span className="font-medium text-xs sm:text-[0.9rem] leading-snug text-[#2B1200]/70 group-hover:text-[#2B1200] transition-colors duration-300" style={{ fontFamily: FONT.body }}>
+                                  {sector.label}
+                                </span>
+                              </div>
+                            ))}
+                          </div>
+                        ))}
+                      </motion.div>
+                    </div>
+                </div>
+            </section>
+
             {/* ── AVANTAGES DU RÉSEAU ── */}
-            <section style={{ padding: 'clamp(64px, 10vw, 128px) 24px' }}>
+            <section style={{ padding: 'clamp(48px, 6vw, 64px) 24px clamp(64px, 10vw, 128px) 24px' }}>
                 <div style={{ maxWidth: 1280, margin: '0 auto' }}>
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}

@@ -615,10 +615,8 @@ export default function SolutionsPage() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.55, duration: 0.8 }}
-              style={{
-                fontSize: 18, color: 'rgba(245,230,211,0.9)', lineHeight: 1.6,
-                maxWidth: 580, margin: '0 auto', fontWeight: 300,
-              }}
+              className="text-[1.05rem] md:text-lg text-coffee-cream/90 leading-relaxed mx-auto max-w-xl mb-8 drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)] font-light"
+              style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}
             >
               Des distributeurs de dernière génération aux coffee corners sur-mesure,
               nous déployons un parc technique adapté à votre entreprise et à vos collaborateurs.

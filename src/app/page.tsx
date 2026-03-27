@@ -992,7 +992,7 @@ export default function Home() {
         </section>
 
         {/* Testimonials / Cas Clients Section */}
-        <section id="avis" className="pt-8 pb-16 md:py-24 relative bg-[#FAF2E9]/30">
+        <section id="avis" className="pt-8 pb-8 md:pt-24 md:pb-8 relative bg-[#FAF2E9]/30">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 mb-12 lg:mb-20 items-start max-w-7xl">
               <div>
@@ -1122,10 +1122,11 @@ export default function Home() {
               </a>
             </div>
           </div>
+
         </section>
 
         {/* ADN Section (Timeline) */}
-        <section id="adn" className="pt-6 pb-4 md:py-24 relative overflow-hidden">
+        <section id="adn" className="pt-6 pb-4 md:pt-12 md:pb-24 relative overflow-hidden">
           <div className="max-w-7xl mx-auto px-6 lg:px-10 relative z-10">
             {/* Header */}
             <motion.div
@@ -1206,8 +1207,8 @@ export default function Home() {
                       "Machines éco-performantes",
                       "Tournées optimisées et éco-conduite"
                     ].map((item, i) => (
-                      <div key={i} className="flex items-start gap-3">
-                        <span className="text-golden-extraction mt-[3px] shrink-0 bg-white p-1.5 rounded-full shadow-sm">
+                      <div key={i} className="flex items-center gap-3">
+                        <span className="text-golden-extraction shrink-0 bg-white p-1.5 rounded-full shadow-sm">
                           <Award className="w-4 h-4" />
                         </span>
                         <span className="text-deep-roast/80 leading-snug font-medium" style={{ fontFamily: 'var(--font-ibm-plex-sans)', fontSize: '0.95rem' }}>
@@ -1258,8 +1259,8 @@ export default function Home() {
                 "Machines éco-performantes",
                 "Tournées optimisées et éco-conduite"
               ].map((item, i) => (
-                <div key={i} className="flex items-start gap-3">
-                  <span className="text-golden-extraction mt-[3px] shrink-0 bg-white p-1.5 rounded-full shadow-sm">
+                <div key={i} className="flex items-center gap-3">
+                  <span className="text-golden-extraction shrink-0 bg-white p-1.5 rounded-full shadow-sm">
                     <Award className="w-4 h-4" />
                   </span>
                   <span className="text-deep-roast/80 leading-snug font-medium" style={{ fontFamily: 'var(--font-ibm-plex-sans)', fontSize: '0.95rem' }}>
