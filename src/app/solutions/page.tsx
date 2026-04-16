@@ -198,7 +198,7 @@ function ProcessSection() {
       style={{
         background: '#FAF2E9',
         minHeight: '100vh',
-        padding: '120px 0',
+        padding: '120px 0 48px',
         fontFamily: "'DM Sans', sans-serif",
         position: 'relative',
         overflow: 'hidden',
@@ -535,6 +535,414 @@ function ProcessSection() {
   );
 }
 
+// ─── SHOWCASE ────────────────────────────────────────────────────────────────
+
+const SHOWCASE_EXTRA = [
+  { src: '/p1.jpg', alt: 'Réalisation ANS 1' },
+  { src: '/p2.jpg', alt: 'Réalisation ANS 2' },
+  { src: '/p3.jpg', alt: 'Réalisation ANS 3' },
+];
+
+function ShowcaseSection() {
+  const [sliderPos, setSliderPos] = useState(50);
+  const [isDragging, setIsDragging] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setIsVisible(true); },
+      { threshold: 0.1 }
+    );
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  const handleMove = (clientX: number) => {
+    if (!containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    const x = Math.max(0, Math.min(clientX - rect.left, rect.width));
+    setSliderPos((x / rect.width) * 100);
+  };
+
+  return (
+    <section
+      ref={sectionRef}
+      style={{ background: '#FAF2E9', padding: '48px 0 120px' }}
+    >
+      <style>{`
+        .showcase-handle {
+          cursor: ew-resize;
+          transition: transform 0.15s;
+        }
+        .showcase-handle:hover { transform: translateX(-50%) scale(1.1); }
+        .showcase-extra-card { overflow: hidden; border-radius: 16px; }
+        .showcase-extra-card img { transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94); }
+        .showcase-extra-card:hover img { transform: scale(1.05); }
+        .showcase-compare * { user-select: none !important; -webkit-user-select: none !important; }
+        .showcase-compare img { pointer-events: none !important; -webkit-user-drag: none !important; }
+        @media (max-width: 768px) {
+        .showcase-layout { grid-template-columns: 1fr !important; }
+        .showcase-compare { border-radius: 14px !important; }
+        }
+      `}</style>
+
+      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 40px' }}>
+
+        {/* ── Header ── */}
+        <div
+          style={{
+            marginBottom: 72,
+            opacity: isVisible ? 1 : 0,
+            transform: isVisible ? 'none' : 'translateY(20px)',
+            transition: 'all 0.8s ease',
+          }}
+        >
+          <p style={{
+            fontSize: 11,
+            letterSpacing: '0.18em',
+            color: '#8c4f25',
+            fontWeight: 500,
+            marginBottom: 16,
+            textTransform: 'uppercase',
+            fontFamily: FONT.mono,
+          }}>
+            RÉALISATIONS
+          </p>
+          <h2 style={{
+            fontFamily: FONT.display,
+            fontSize: 'clamp(36px, 4.5vw, 60px)',
+            color: '#451F17',
+            lineHeight: 1.06,
+            margin: 0,
+            fontWeight: 600,
+            letterSpacing: '-0.025em',
+          }}>
+            Avant & Après —
+            <br />
+            <span style={{ color: '#8c4f25' }}>la transformation en images.</span>
+          </h2>
+          <p style={{
+            marginTop: 20,
+            color: 'rgba(36,19,12,0.65)',
+            fontSize: 15,
+            lineHeight: 1.75,
+            maxWidth: 480,
+            fontFamily: FONT.body,
+          }}>
+            Un espace pause ordinaire peut devenir un vrai lieu de vie. Faites glisser
+            pour comparer l&apos;avant et l&apos;après d&apos;une installation type.
+          </p>
+        </div>
+
+
+        {/* ── Before / After slider ── */}
+        <div
+          style={{
+            opacity: isVisible ? 1 : 0,
+            transform: isVisible ? 'none' : 'translateY(28px)',
+            transition: 'all 0.9s ease 0.15s',
+            marginBottom: 20,
+          }}
+        >
+          <div
+            ref={containerRef}
+            className="showcase-compare"
+            onMouseDown={() => setIsDragging(true)}
+            onMouseUp={() => setIsDragging(false)}
+            onMouseLeave={() => setIsDragging(false)}
+            onMouseMove={(e) => isDragging && handleMove(e.clientX)}
+            onTouchStart={() => setIsDragging(true)}
+            onTouchEnd={() => setIsDragging(false)}
+            onTouchMove={(e) => isDragging && handleMove(e.touches[0].clientX)}
+            style={{
+              position: 'relative',
+              width: '100%',
+              aspectRatio: '2048 / 1150',
+              borderRadius: 20,
+              overflow: 'hidden',
+              userSelect: 'none',
+              WebkitUserSelect: 'none',
+              cursor: 'ew-resize',
+              boxShadow: '0 24px 60px rgba(43,18,0,0.14)',
+            }}
+          >
+            {/* AFTER */}
+            <div style={{ position: 'absolute', inset: 0 }}>
+              <Image
+                src="/photoap-flou.jpg"
+                alt="Après : espace pause aménagé"
+                fill
+                unoptimized
+                draggable={false}
+                onDragStart={(e) => e.preventDefault()}
+                style={{ objectFit: 'cover', objectPosition: 'center', pointerEvents: 'none' }}
+                sizes="100vw"
+              />
+              <div style={{
+                position: 'absolute', top: 20, right: 20,
+                background: 'rgba(140,79,37,0.92)', backdropFilter: 'blur(8px)',
+                borderRadius: 6, padding: '6px 14px',
+                fontFamily: FONT.mono, fontSize: 10, letterSpacing: '0.16em',
+                color: '#FFF6EF', textTransform: 'uppercase', pointerEvents: 'none',
+              }}>APRÈS</div>
+            </div>
+
+            {/* BEFORE */}
+            <div style={{
+              position: 'absolute', inset: 0,
+              clipPath: `inset(0 ${100 - sliderPos}% 0 0)`,
+              transition: isDragging ? 'none' : 'clip-path 0.05s',
+            }}>
+              <Image
+                src="/photoav-flou.png"
+                alt="Avant : coin café basique"
+                fill
+                unoptimized
+                draggable={false}
+                onDragStart={(e) => e.preventDefault()}
+                style={{ objectFit: 'cover', objectPosition: 'center', pointerEvents: 'none' }}
+                sizes="100vw"
+              />
+              <div style={{
+                position: 'absolute', inset: 0,
+                background: 'rgba(0,0,0,0.08)', filter: 'saturate(0.6)', pointerEvents: 'none',
+              }} />
+              <div style={{
+                position: 'absolute', top: 20, left: 20,
+                background: 'rgba(36,19,12,0.78)', backdropFilter: 'blur(8px)',
+                borderRadius: 6, padding: '6px 14px',
+                fontFamily: FONT.mono, fontSize: 10, letterSpacing: '0.16em',
+                color: 'rgba(245,230,211,0.9)', textTransform: 'uppercase', pointerEvents: 'none',
+              }}>AVANT</div>
+            </div>
+
+            {/* Label centré en bas */}
+            <div style={{
+              position: 'absolute', bottom: 16, left: '50%', transform: 'translateX(-50%)',
+              fontFamily: FONT.mono, fontSize: 9, letterSpacing: '0.14em',
+              color: 'rgba(255,255,255,0.55)', textTransform: 'uppercase',
+              pointerEvents: 'none', whiteSpace: 'nowrap',
+            }}>
+              Faites glisser pour comparer
+            </div>
+
+            {/* Handle */}
+            <div
+              className="showcase-handle"
+              style={{
+                position: 'absolute', top: 0, bottom: 0,
+                left: `${sliderPos}%`, transform: 'translateX(-50%)',
+                width: 2, background: 'rgba(255,255,255,0.85)', pointerEvents: 'none',
+              }}
+            >
+              <div style={{
+                position: 'absolute', top: '50%', left: '50%',
+                transform: 'translate(-50%, -50%)',
+                width: 40, height: 40, borderRadius: '50%',
+                background: '#FAF2E9', border: '2px solid rgba(140,79,37,0.4)',
+                boxShadow: '0 4px 16px rgba(0,0,0,0.2)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+              }}>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8c4f25" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M9 18l-6-6 6-6" /><path d="M15 6l6 6-6 6" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* ── 3 photos en grille ── */}
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(3, 1fr)',
+            gap: 20,
+            opacity: isVisible ? 1 : 0,
+            transform: isVisible ? 'none' : 'translateY(28px)',
+            transition: 'all 0.9s ease 0.3s',
+          }}
+        >
+          {SHOWCASE_EXTRA.map((photo, i) => (
+            <div
+              key={i}
+              className="showcase-extra-card"
+              style={{
+                position: 'relative',
+                aspectRatio: '4 / 3',
+                border: '1px solid rgba(36,19,12,0.1)',
+                boxShadow: '0 12px 36px rgba(43,18,0,0.08)',
+              }}
+            >
+              <Image
+                src={photo.src}
+                alt={photo.alt}
+                fill
+                unoptimized
+                style={{ objectFit: 'cover' }}
+                sizes="(max-width: 768px) 100vw, 33vw"
+              />
+            </div>
+          ))}
+        </div>
+
+
+      </div>
+    </section>
+  );
+}
+
+function TourneesSection() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setIsVisible(true); },
+      { threshold: 0.08 }
+    );
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  const tags = ['Anticipation', 'Fiabilité', 'Qualité constante', 'Zéro gestion'];
+
+  return (
+    <section
+      ref={sectionRef}
+      style={{ background: '#FAF2E9', padding: 'clamp(72px, 10vw, 120px) 0', overflow: 'hidden' }}
+    >
+      <style>{`
+        .tournees-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+        .tournee-tag {
+          display: inline-flex; align-items: center; gap: 8px;
+          padding: 10px 18px; border: 1px solid rgba(140,79,37,0.25);
+          border-radius: 100px; color: #8c4f25;
+          font-family: var(--font-ibm-plex-mono); font-size: 11px;
+          letter-spacing: 0.1em; text-transform: uppercase;
+          background: rgba(140,79,37,0.05);
+          transition: background 0.25s, border-color 0.25s;
+        }
+        .tournee-tag:hover { background: rgba(140,79,37,0.12); border-color: rgba(140,79,37,0.45); }
+        .tournees-photo-wrap { position: relative; border-radius: 20px; overflow: hidden; }
+        .tournees-photo-wrap img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 8s ease; }
+        .tournees-photo-wrap:hover img { transform: scale(1.04); }
+        @media (max-width: 860px) {
+          .tournees-grid { grid-template-columns: 1fr !important; gap: 48px !important; }
+        }
+      `}</style>
+
+      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 clamp(20px, 5vw, 48px)' }}>
+        <div
+          className="tournees-grid"
+          style={{
+            opacity: isVisible ? 1 : 0,
+            transform: isVisible ? 'none' : 'translateY(32px)',
+            transition: 'all 0.9s cubic-bezier(0.16,1,0.3,1)',
+          }}
+        >
+          {/* ── Photo ── */}
+          <div
+            className="tournees-photo-wrap"
+            style={{ aspectRatio: '4 / 5', boxShadow: '0 32px 80px rgba(43,18,0,0.14)' }}
+          >
+            <img
+              src="/camions-ans.jpeg"
+              alt="Tournées ANS — fiabilité de service"
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+            />
+            <div style={{
+              position: 'absolute', inset: 0,
+              background: 'linear-gradient(to top, rgba(36,19,12,0.68) 0%, rgba(36,19,12,0.1) 40%, transparent 65%)',
+              pointerEvents: 'none',
+            }} />
+            {/* Quote */}
+            <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: 'clamp(20px, 4vw, 36px)' }}>
+              <p style={{
+                fontFamily: 'var(--font-sora)',
+                fontSize: 'clamp(0.9rem, 1.6vw, 1.15rem)',
+                fontWeight: 600, color: '#F5E6D3',
+                lineHeight: 1.4, margin: '0 0 10px', letterSpacing: '-0.01em',
+                fontStyle: 'italic',
+              }}>
+                &ldquo;Vous ne remarquez jamais notre passage. Et c&apos;est exactement le but.&rdquo;
+              </p>
+              <span style={{
+                fontFamily: 'var(--font-ibm-plex-mono)',
+                fontSize: 9, letterSpacing: '0.18em',
+                textTransform: 'uppercase', color: 'rgba(222,158,103,0.75)',
+              }}>
+                — Équipe ANS
+              </span>
+            </div>
+            {/* Badge */}
+            <div style={{
+              position: 'absolute', top: 18, left: 18,
+              background: 'rgba(140,79,37,0.88)', backdropFilter: 'blur(8px)',
+              borderRadius: 6, padding: '5px 12px',
+              fontFamily: 'var(--font-ibm-plex-mono)', fontSize: 9,
+              letterSpacing: '0.18em', color: '#FFF6EF', textTransform: 'uppercase',
+            }}>
+              Nos Tournées
+            </div>
+          </div>
+
+          {/* ── Contenu ── */}
+          <div>
+            <p style={{
+              fontFamily: 'var(--font-ibm-plex-mono)', fontSize: 11,
+              letterSpacing: '0.18em', color: '#8c4f25',
+              fontWeight: 500, textTransform: 'uppercase', margin: '0 0 18px',
+            }}>
+              Continuité de Service
+            </p>
+
+            <h2 style={{
+              fontFamily: 'var(--font-sora)',
+              fontSize: 'clamp(2rem, 3.5vw, 3rem)',
+              color: '#451F17', lineHeight: 1.08,
+              fontWeight: 600, letterSpacing: '-0.025em', margin: '0 0 20px',
+            }}>
+              Un service qui fonctionne,{' '}
+              <span style={{ color: '#8c4f25' }}>tout le temps.</span>
+            </h2>
+
+            <p style={{
+              fontFamily: 'var(--font-ibm-plex-sans)',
+              fontSize: 'clamp(0.95rem, 1.1vw, 1.05rem)',
+              color: 'rgba(36,19,12,0.65)', lineHeight: 1.75,
+              margin: '0 0 40px', maxWidth: 440,
+            }}>
+              Nos tournées systématiques anticipent vos besoins avant même qu&apos;ils se posent.
+            </p>
+
+            {/* 4 tags */}
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
+              {tags.map((tag, i) => (
+                <span
+                  key={i}
+                  className="tournee-tag"
+                  style={{
+                    opacity: isVisible ? 1 : 0,
+                    transform: isVisible ? 'none' : 'translateY(8px)',
+                    transition: `all 0.5s cubic-bezier(0.16,1,0.3,1) ${0.15 + i * 0.07}s`,
+                  }}
+                >
+                  <svg width="8" height="8" viewBox="0 0 8 8" fill="currentColor">
+                    <circle cx="4" cy="4" r="4" />
+                  </svg>
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // ─── PAGE ────────────────────────────────────────────────────────────────────
 export default function SolutionsPage() {
   return (
@@ -632,6 +1040,10 @@ export default function SolutionsPage() {
       />
 
       <ProcessSection />
+
+      <ShowcaseSection />
+
+      <TourneesSection />
 
       {/* ── CTA ── */}
       <section style={{ padding: 'clamp(64px, 10vw, 128px) 24px', position: 'relative', overflow: 'hidden' }}>
