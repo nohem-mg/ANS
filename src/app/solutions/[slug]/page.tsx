@@ -196,7 +196,7 @@ export default async function SolutionDetailPage({
 
       <section
         style={{
-          padding: '0 clamp(20px, 4vw, 48px) clamp(72px, 10vw, 120px)',
+          padding: '0 clamp(20px, 4vw, 48px) clamp(40px, 5vw, 56px)',
         }}
       >
         <div
@@ -225,9 +225,9 @@ export default async function SolutionDetailPage({
 
       <section
         style={{
-          backgroundColor: C.surface,
+          backgroundColor: C.bg,
           padding:
-            'clamp(56px, 8vw, 88px) clamp(20px, 4vw, 48px) clamp(72px, 10vw, 120px)',
+            'clamp(40px, 5vw, 56px) clamp(20px, 4vw, 48px) clamp(72px, 10vw, 120px)',
         }}
       >
         <div

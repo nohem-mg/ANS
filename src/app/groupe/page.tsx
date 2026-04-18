@@ -217,7 +217,7 @@ export default function GroupePage() {
                                 marginBottom: 24,
                             }}
                         >
-                            Le Groupe <span style={{ color: C.accent }}>Prodia+</span>
+                            Le Groupe <span style={{ color: C.accent, fontStyle: 'italic' }}>Prodia+</span>
                         </motion.h1>
 
                         <motion.p

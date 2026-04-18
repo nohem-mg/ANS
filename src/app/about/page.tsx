@@ -456,9 +456,9 @@ function HeroSection() {
         }}
       >
         <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.35, ease: 'easeOut' }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           style={{
             fontFamily: FONT.mono,
             fontSize: '11px',
@@ -472,9 +472,9 @@ function HeroSection() {
         </motion.div>
 
         <motion.p
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.1, delay: 0.6, ease: EASE_OUT }}
+          transition={{ duration: 1.2, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
           style={{
             fontSize: 'clamp(26px, 3.8vw, 50px)',
             fontFamily: FONT.display,
@@ -490,9 +490,9 @@ function HeroSection() {
         </motion.p>
 
         <motion.p
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.1, delay: 0.85, ease: EASE_OUT }}
+          transition={{ duration: 1.2, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
           style={{
             fontSize: 'clamp(26px, 3.8vw, 50px)',
             fontFamily: FONT.display,
@@ -508,18 +508,6 @@ function HeroSection() {
           parfait.
         </motion.p>
 
-        <motion.div
-          initial={{ scaleY: 0, opacity: 0 }}
-          animate={{ scaleY: 1, opacity: 0.45 }}
-          transition={{ duration: 1.2, delay: 1.1, ease: 'easeOut' }}
-          style={{
-            width: 1,
-            height: 52,
-            backgroundColor: C.accent,
-            margin: '52px auto 0',
-            transformOrigin: 'top',
-          }}
-        />
       </div>
     </div>
   );
@@ -1273,23 +1261,19 @@ function HeroMoodboardSection() {
     offset: ['start start', 'end end'],
   });
 
-  // Spring-smoothed progress — adds gentle lag so the animation feels physical
   const smoothProgress = useSpring(scrollYProgress, {
     stiffness: 60,
     damping: 22,
     restDelta: 0.0005,
   });
 
-  // Hero: long hold, then gentle fade + barely-noticeable scale-down over ~40 % of scroll
   const heroOpacity = useTransform(smoothProgress, [0, 0.28, 0.68], [1, 1, 0]);
   const heroScale = useTransform(smoothProgress, [0.28, 0.68], [1, 0.97]);
 
-  // Moodboard: starts drifting in while hero is still fading — long overlap zone
   const moodOpacity = useTransform(smoothProgress, [0.38, 0.75], [0, 1]);
   const moodY = useTransform(smoothProgress, [0.38, 0.75], ['4%', '0%']);
 
   return (
-    // 200 vh scroll space — the sticky frame fills one viewport the whole time
     <div ref={containerRef} style={{ height: '200vh', position: 'relative' }}>
       <div
         style={{
@@ -1302,7 +1286,6 @@ function HeroMoodboardSection() {
           boxSizing: 'border-box',
         }}
       >
-        {/* Single dark rounded widget */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -1316,7 +1299,6 @@ function HeroMoodboardSection() {
             position: 'relative',
           }}
         >
-          {/* ── Hero panel (z-index above moodboard so it covers it while visible) ── */}
           <motion.div
             style={{
               position: 'absolute',
@@ -1329,7 +1311,6 @@ function HeroMoodboardSection() {
             <HeroSection />
           </motion.div>
 
-          {/* ── Moodboard panel (revealed beneath the hero) ── */}
           <motion.div
             style={{
               position: 'absolute',

@@ -41,21 +41,12 @@ const steps = [
     title: 'Audit & Diagnostic',
     subtitle: 'On vient voir, avant de proposer.',
     description:
-      "Nous analysons vos espaces, vos flux et vos usages réels. Nombre de collaborateurs, habitudes de consommation, contraintes techniques rien n'est laissé au hasard.",
-    photos: [
-      {
-        src: 'https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=900',
-        alt: 'Releve technique sur site',
-      },
-      {
-        src: 'https://images.unsplash.com/photo-1552664730-d307ca884978?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=900',
-        alt: 'Analyse d equipe en reunion',
-      },
-      {
-        src: 'https://images.unsplash.com/photo-1517048676732-d65bc937f952?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=900',
-        alt: 'Observation des usages en entreprise',
-      },
-    ],
+      "Nous analysons vos espaces, vos flux et vos usages réels. Nombre de collaborateurs, habitudes de consommation, contraintes techniques — rien n'est laissé au hasard.",
+    photo: {
+      src: '/bureau-ans.jpeg',
+      alt: 'Bureau ANS — audit et diagnostic terrain',
+    },
+    keyPoints: ['Visite sur site', 'Analyse des flux', 'Relevé technique'],
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
         <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
@@ -69,20 +60,11 @@ const steps = [
     subtitle: 'Une offre lisible, sans angle mort.',
     description:
       "Nous concevons une offre personnalisée : choix des machines, sélection des produits, plan d'implantation et budget transparent. Pas de surprise.",
-    photos: [
-      {
-        src: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=900',
-        alt: 'Presentation de proposition client',
-      },
-      {
-        src: 'https://images.unsplash.com/photo-1556740749-887f6717d7e4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=900',
-        alt: 'Budget et cadrage de projet',
-      },
-      {
-        src: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=900',
-        alt: 'Documents de recommandation',
-      },
-    ],
+    photo: {
+      src: '/distributeur-dans-entrepot.JPG',
+      alt: 'Distributeur dans entrepôt ANS — sélection sur-mesure',
+    },
+    keyPoints: ['Choix machines', 'Budget transparent', 'Plan d\'implantation'],
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
         <path d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -96,20 +78,11 @@ const steps = [
     subtitle: 'Opérationnel dès le premier jour.',
     description:
       "Notre équipe technique installe, configure et teste l'ensemble. Formation de vos référents incluse. Vous êtes opérationnels dès le premier jour.",
-    photos: [
-      {
-        src: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=900',
-        alt: 'Installation technique sur site',
-      },
-      {
-        src: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=900',
-        alt: 'Reglages et verification des equipements',
-      },
-      {
-        src: 'https://images.unsplash.com/photo-1516321165247-4aa89a48be28?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=900',
-        alt: 'Formation et prise en main des equipes',
-      },
-    ],
+    photo: {
+      src: '/entreprot2.jpg',
+      alt: 'Installation et mise en service des équipements',
+    },
+    keyPoints: ['Installation complète', 'Configuration', 'Formation incluse'],
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
         <path d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
@@ -123,20 +96,11 @@ const steps = [
     subtitle: "Moins d'interruptions, plus de sérénité.",
     description:
       'Intervention en moins de 4 heures. Approvisionnement régulier, entretien préventif et curatif. Votre parc fonctionne, toujours.',
-    photos: [
-      {
-        src: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=900',
-        alt: 'Maintenance preventive en intervention',
-      },
-      {
-        src: 'https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=900',
-        alt: 'Technicien en visite rapide',
-      },
-      {
-        src: '/camions-ans.jpeg',
-        alt: 'Camions ANS - intervention et approvisionnement',
-      },
-    ],
+    photo: {
+      src: '/entrepot1.JPG',
+      alt: 'Entrepôt ANS — intervention rapide',
+    },
+    keyPoints: ['Réponse < 4h', 'Entretien préventif', 'Approvisionnement'],
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
         <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
@@ -151,20 +115,11 @@ const steps = [
     subtitle: 'Le dispositif évolue avec vous.',
     description:
       "Reporting de consommation, évolution du parc, ajustement des gammes produits. Nous pilotons votre installation dans la durée.",
-    photos: [
-      {
-        src: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=900',
-        alt: 'Analyse de donnees et reporting',
-      },
-      {
-        src: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=900',
-        alt: 'Suivi de performance et optimisation',
-      },
-      {
-        src: 'https://images.unsplash.com/photo-1552664730-d307ca884978?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=900',
-        alt: 'Recommandations annuelles en reunion',
-      },
-    ],
+    photo: {
+      src: '/véhicules.JPG',
+      alt: 'Flotte de véhicules ANS — suivi et pilotage continu',
+    },
+    keyPoints: ['Reporting détaillé', 'Évolution du parc', 'Ajustement gammes'],
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
         <path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
@@ -176,6 +131,7 @@ const steps = [
 function ProcessSection() {
   const [activeStep, setActiveStep] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
+  const [photoLoaded, setPhotoLoaded] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -189,6 +145,12 @@ function ProcessSection() {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    setPhotoLoaded(false);
+    const timer = setTimeout(() => setPhotoLoaded(true), 60);
+    return () => clearTimeout(timer);
+  }, [activeStep]);
+
   const step = steps[activeStep];
 
   return (
@@ -198,7 +160,7 @@ function ProcessSection() {
       style={{
         background: '#FAF2E9',
         minHeight: '100vh',
-        padding: '120px 0 48px',
+        padding: '120px 0 80px',
         fontFamily: "'DM Sans', sans-serif",
         position: 'relative',
         overflow: 'hidden',
@@ -209,33 +171,47 @@ function ProcessSection() {
           position: 'absolute',
           inset: 0,
           backgroundImage:
-            'radial-gradient(ellipse 80% 60% at 70% 40%, rgba(180,100,20,0.08) 0%, transparent 60%)',
+            'radial-gradient(ellipse 80% 60% at 70% 40%, rgba(180,100,20,0.06) 0%, transparent 60%)',
           pointerEvents: 'none',
         }}
       />
 
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&family=DM+Serif+Display:ital@0;1&display=swap');
-
         .process-nav-item { cursor: pointer; border: none; background: none; padding: 0; width: 100%; text-align: left; }
-        .process-nav-item:hover .nav-title { color: #e8c88a !important; }
-        .detail-card { transition: opacity 0.4s ease, transform 0.4s ease; }
-        .step-number { font-size: 11px; letter-spacing: 0.12em; color: rgba(200,150,60,0.5); font-weight: 500; font-family: 'DM Sans', sans-serif; }
+        .process-nav-item:hover .nav-title { color: #8c4f25 !important; }
+        .process-photo-main {
+          transition: opacity 0.5s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1);
+        }
+        .process-photo-main img { transition: transform 6s ease !important; }
+        .process-photo-main:hover img { transform: scale(1.05) !important; }
+        .process-kp-tag {
+          display: inline-flex; align-items: center; gap: 6px;
+          padding: 6px 14px;
+          border: 1px solid rgba(140,79,37,0.2);
+          border-radius: 100px;
+          font-size: 11px; letter-spacing: 0.06em;
+          color: #8c4f25; background: rgba(140,79,37,0.05);
+          font-family: var(--font-ibm-plex-mono);
+          white-space: nowrap;
+        }
 
-        @media (max-width: 980px) {
+        @media (max-width: 1024px) {
           .process-main-grid { grid-template-columns: 1fr !important; gap: 48px !important; }
-          .process-section-outer { padding-top: 80px !important; padding-bottom: 80px !important; }
+          .process-section-outer { padding-top: 80px !important; padding-bottom: 64px !important; }
+          .process-detail-right { position: static !important; }
         }
 
         @media (max-width: 640px) {
-          .process-section-outer { padding-top: 56px !important; padding-bottom: 56px !important; }
+          .process-section-outer { padding-top: 56px !important; padding-bottom: 48px !important; }
           .process-section-inner { padding: 0 20px !important; }
-          .process-detail-card { padding: 28px 20px !important; }
+          .process-detail-card { padding: 24px 20px !important; }
           .process-header { margin-bottom: 48px !important; }
+          .process-kp-row { flex-wrap: wrap !important; }
         }
       `}</style>
 
       <div className="process-section-inner" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 40px' }}>
+        {/* Header */}
         <div
           className="process-header"
           style={{
@@ -251,8 +227,9 @@ function ProcessSection() {
               letterSpacing: '0.18em',
               color: '#8c4f25',
               fontWeight: 500,
-              marginBottom: '16px',
               textTransform: 'uppercase',
+              margin: '0 0 20px',
+              fontFamily: 'var(--font-ibm-plex-mono)',
             }}
           >
             NOTRE PROCESS
@@ -275,18 +252,21 @@ function ProcessSection() {
           <p
             style={{
               marginTop: '24px',
-              color: 'rgba(36,19,12,0.78)',
+              color: 'rgba(36,19,12,0.65)',
               fontSize: '16px',
               lineHeight: 1.7,
-              maxWidth: '420px',
+              maxWidth: '460px',
               fontWeight: 300,
+              fontFamily: 'var(--font-ibm-plex-sans)',
             }}
           >
             Cinq étapes courtes, lisibles et documentées pour garder votre projet simple à suivre et facile à piloter.
           </p>
         </div>
 
-        <div className="process-main-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '80px', alignItems: 'start' }}>
+        {/* Main grid */}
+        <div className="process-main-grid" style={{ display: 'grid', gridTemplateColumns: '340px 1fr', gap: '60px', alignItems: 'start' }}>
+          {/* Left nav */}
           <div
             style={{
               opacity: isVisible ? 1 : 0,
@@ -301,58 +281,75 @@ function ProcessSection() {
                 onClick={() => setActiveStep(i)}
                 onMouseEnter={() => setActiveStep(i)}
                 onFocus={() => setActiveStep(i)}
-                style={{ borderBottom: '1px solid rgba(36,19,12,0.10)', padding: '24px 0' }}
+                style={{
+                  borderBottom: '1px solid rgba(36,19,12,0.08)',
+                  padding: '20px 0',
+                  transition: 'background 0.2s',
+                  borderRadius: activeStep === i ? '8px' : '0',
+                  background: activeStep === i ? 'rgba(140,79,37,0.04)' : 'transparent',
+                  paddingLeft: activeStep === i ? '16px' : '0',
+                  paddingRight: activeStep === i ? '16px' : '0',
+                }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
                   <div
                     style={{
-                      width: '3px',
-                      height: '40px',
-                      borderRadius: '2px',
-                      background: activeStep === i ? '#8c4f25' : 'rgba(36,19,12,0.16)',
-                      transition: 'background 0.3s',
+                      width: '36px',
+                      height: '36px',
+                      borderRadius: '10px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      background: activeStep === i ? '#8c4f25' : 'rgba(36,19,12,0.06)',
+                      color: activeStep === i ? '#FFF6EF' : 'rgba(36,19,12,0.35)',
+                      transition: 'all 0.3s',
                       flexShrink: 0,
+                      fontSize: '13px',
+                      fontWeight: 600,
+                      fontFamily: 'var(--font-ibm-plex-mono)',
                     }}
-                  />
+                  >
+                    {s.id}
+                  </div>
 
                   <div style={{ flex: 1 }}>
-                    <div style={{ display: 'flex', alignItems: 'baseline', gap: '12px', marginBottom: '4px' }}>
-                      <span className="step-number">{s.id}</span>
-                      <span
-                        className="nav-title"
-                        style={{
-                          fontSize: '17px',
-                          fontWeight: activeStep === i ? 600 : 400,
-                          color: activeStep === i ? '#24130c' : 'rgba(36,19,12,0.70)',
-                          transition: 'color 0.3s',
-                          letterSpacing: '-0.01em',
-                        }}
-                      >
-                        {s.title}
-                      </span>
-                    </div>
-                    <p
+                    <span
+                      className="nav-title"
                       style={{
-                        fontSize: '12px',
-                        color: 'rgba(140,79,37,0.82)',
-                        letterSpacing: '0.08em',
+                        fontSize: '15px',
+                        fontWeight: activeStep === i ? 600 : 400,
+                        color: activeStep === i ? '#24130c' : 'rgba(36,19,12,0.55)',
+                        transition: 'all 0.3s',
+                        letterSpacing: '-0.01em',
+                        display: 'block',
+                        marginBottom: '2px',
+                      }}
+                    >
+                      {s.title}
+                    </span>
+                    <span
+                      style={{
+                        fontSize: '11px',
+                        color: activeStep === i ? 'rgba(140,79,37,0.8)' : 'rgba(36,19,12,0.3)',
+                        letterSpacing: '0.06em',
                         textTransform: 'uppercase',
                         fontWeight: 400,
-                        margin: 0,
+                        transition: 'color 0.3s',
+                        fontFamily: 'var(--font-ibm-plex-mono)',
                       }}
                     >
                       {s.tag}
-                    </p>
+                    </span>
                   </div>
 
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style={{ opacity: activeStep === i ? 1 : 0, transition: 'opacity 0.3s', color: '#8c4f25', flexShrink: 0 }}>
-                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ opacity: activeStep === i ? 1 : 0, transition: 'opacity 0.3s', color: '#8c4f25', flexShrink: 0 }}>
+                    <path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </div>
               </button>
             ))}
 
-            <div style={{ marginTop: '40px' }}>
+            <div style={{ marginTop: '36px' }}>
               <a
                 href="/contact"
                 style={{
@@ -361,14 +358,16 @@ function ProcessSection() {
                   gap: '10px',
                   padding: '14px 28px',
                   border: '1px solid rgba(154,90,45,0.35)',
-                  borderRadius: '4px',
+                  borderRadius: '8px',
                   color: '#8c4f25',
-                  fontSize: '13px',
+                  fontSize: '12px',
                   letterSpacing: '0.08em',
                   textDecoration: 'none',
-                  fontWeight: 500,
-                  transition: 'all 0.2s',
+                  fontWeight: 600,
+                  transition: 'all 0.25s',
                   background: 'rgba(140,79,37,0.06)',
+                  fontFamily: 'var(--font-ibm-plex-mono)',
+                  textTransform: 'uppercase',
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.background = 'rgba(140,79,37,0.12)';
@@ -379,7 +378,7 @@ function ProcessSection() {
                   e.currentTarget.style.borderColor = 'rgba(140,79,37,0.35)';
                 }}
               >
-                DEMANDER UN DEVIS
+                Demander un devis
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                   <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
@@ -387,145 +386,186 @@ function ProcessSection() {
             </div>
           </div>
 
+          {/* Right: photo + detail card */}
           <div
-            key={activeStep}
-            className="detail-card"
+            className="process-detail-right"
             style={{
               opacity: isVisible ? 1 : 0,
               transform: isVisible ? 'none' : 'translateX(20px)',
               transition: 'all 0.8s ease 0.3s',
+              position: 'sticky',
+              top: '100px',
             }}
           >
+            {/* Large photo */}
             <div
-              className="process-detail-card"
+              className="process-photo-main"
               style={{
-                border: '1px solid rgba(36,19,12,0.12)',
-                borderRadius: '12px',
-                padding: '48px',
-                background: 'rgba(255,248,242,0.56)',
-                backdropFilter: 'blur(10px)',
                 position: 'relative',
+                width: '100%',
+                aspectRatio: '16 / 8',
+                borderRadius: '16px',
                 overflow: 'hidden',
+                marginBottom: '0',
+                boxShadow: '0 20px 60px rgba(43,18,0,0.15)',
+                opacity: photoLoaded ? 1 : 0,
+                transform: photoLoaded ? 'translateY(0)' : 'translateY(8px)',
               }}
             >
+              <Image
+                src={step.photo.src}
+                alt={step.photo.alt}
+                fill
+                sizes="(max-width: 1024px) 100vw, 55vw"
+                style={{ objectFit: 'cover' }}
+                unoptimized
+              />
               <div
                 style={{
                   position: 'absolute',
-                  top: 0,
-                  right: 0,
-                  width: '120px',
-                  height: '120px',
-                  background: 'radial-gradient(circle at top right, rgba(140,79,37,0.12), transparent 70%)',
+                  inset: 0,
+                  background: 'linear-gradient(to top, rgba(36,19,12,0.65) 0%, rgba(36,19,12,0.1) 35%, transparent 55%)',
                   pointerEvents: 'none',
                 }}
               />
 
-              <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '32px' }}>
-                <div>
-                  <p
-                    style={{
-                      fontSize: '10px',
-                      letterSpacing: '0.16em',
-                      color: 'rgba(140,79,37,0.9)',
-                      fontWeight: 500,
-                      textTransform: 'uppercase',
-                      margin: '0 0 2px',
-                    }}
-                  >
-                    {step.tag}
-                  </p>
-                  <p style={{ fontSize: '11px', color: 'rgba(36,19,12,0.48)', margin: 0 }}>{step.id} / 05</p>
-                </div>
+              {/* Step badge on photo */}
+              <div
+                style={{
+                  position: 'absolute',
+                  top: '16px',
+                  left: '16px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  background: 'rgba(140,79,37,0.9)',
+                  backdropFilter: 'blur(12px)',
+                  borderRadius: '8px',
+                  padding: '7px 14px',
+                }}
+              >
+                <span
+                  style={{
+                    fontFamily: 'var(--font-ibm-plex-mono)',
+                    fontSize: '10px',
+                    letterSpacing: '0.14em',
+                    color: '#FFF6EF',
+                    textTransform: 'uppercase',
+                    fontWeight: 500,
+                  }}
+                >
+                  Étape {step.id}
+                </span>
               </div>
 
-              <h3
+              {/* Title overlay at bottom */}
+              <div
                 style={{
-                  fontFamily: 'var(--font-sora)',
-                  fontSize: 'clamp(28px, 3vw, 40px)',
-                  color: '#451F17',
-                  margin: '0 0 8px',
-                  fontWeight: 600,
-                  lineHeight: 1.1,
-                  letterSpacing: '-0.02em',
+                  position: 'absolute',
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  padding: '28px 24px 22px',
                 }}
               >
-                {step.title}
-              </h3>
+                <h3
+                  style={{
+                    fontFamily: 'var(--font-sora)',
+                    fontSize: 'clamp(22px, 2.5vw, 32px)',
+                    color: '#F5E6D3',
+                    margin: '0 0 4px',
+                    fontWeight: 600,
+                    lineHeight: 1.15,
+                    letterSpacing: '-0.02em',
+                  }}
+                >
+                  {step.title}
+                </h3>
+                <p
+                  style={{
+                    fontSize: '14px',
+                    color: 'rgba(222,158,103,0.9)',
+                    margin: 0,
+                    fontFamily: 'var(--font-sora)',
+                    fontWeight: 500,
+                    letterSpacing: '-0.01em',
+                  }}
+                >
+                  {step.subtitle}
+                </p>
+              </div>
+            </div>
 
-              <p
-                style={{
-                  fontSize: '17px',
-                  color: '#8c4f25',
-                  margin: '0 0 24px',
-                  fontFamily: 'var(--font-sora)',
-                  fontWeight: 500,
-                  letterSpacing: '-0.01em',
-                }}
-              >
-                {step.subtitle}
-              </p>
-
+            {/* Detail card below photo */}
+            <div
+              className="process-detail-card"
+              style={{
+                border: '1px solid rgba(36,19,12,0.10)',
+                borderTop: 'none',
+                borderRadius: '0 0 16px 16px',
+                padding: '24px 24px 22px',
+                background: 'rgba(255,250,245,0.7)',
+                backdropFilter: 'blur(10px)',
+                opacity: photoLoaded ? 1 : 0,
+                transform: photoLoaded ? 'translateY(0)' : 'translateY(6px)',
+                transition: 'opacity 0.4s ease 0.1s, transform 0.4s ease 0.1s',
+              }}
+            >
               <p
                 style={{
                   fontSize: '15px',
-                  color: 'rgba(36,19,12,0.82)',
+                  color: 'rgba(36,19,12,0.75)',
                   lineHeight: 1.75,
-                  margin: '0 0 36px',
+                  margin: '0 0 24px',
                   fontWeight: 300,
+                  fontFamily: 'var(--font-ibm-plex-sans)',
                 }}
               >
                 {step.description}
               </p>
 
-              <div style={{ height: '1px', background: 'rgba(36,19,12,0.12)', marginBottom: '32px' }} />
-
-              <div
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(3, minmax(0, 1fr))',
-                  gap: '12px',
-                }}
-              >
-                {step.photos.map((photo, i) => (
-                  <div
-                    key={i}
-                    style={{
-                      position: 'relative',
-                      aspectRatio: '1 / 1',
-                      borderRadius: '14px',
-                      overflow: 'hidden',
-                      border: '1px solid rgba(36,19,12,0.10)',
-                      background: 'rgba(255,255,255,0.35)',
-                    }}
-                  >
-                    <Image
-                      src={photo.src}
-                      alt={photo.alt}
-                      fill
-                      sizes="(max-width: 640px) 30vw, 180px"
-                      style={{ objectFit: 'cover' }}
-                    />
-                  </div>
+              {/* Key points as tags */}
+              <div className="process-kp-row" style={{ display: 'flex', gap: '8px', marginBottom: '24px', flexWrap: 'wrap' }}>
+                {step.keyPoints.map((kp, i) => (
+                  <span key={i} className="process-kp-tag">
+                    <svg width="6" height="6" viewBox="0 0 6 6" fill="currentColor" style={{ opacity: 0.6 }}>
+                      <circle cx="3" cy="3" r="3" />
+                    </svg>
+                    {kp}
+                  </span>
                 ))}
               </div>
 
-              <div style={{ display: 'flex', gap: '6px', marginTop: '40px' }}>
+              {/* Pagination dots */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                 {steps.map((_, i) => (
                   <button
                     key={i}
                     onClick={() => setActiveStep(i)}
+                    aria-label={`Étape ${i + 1}`}
                     style={{
-                      width: i === activeStep ? '24px' : '6px',
+                      width: i === activeStep ? '28px' : '6px',
                       height: '6px',
                       borderRadius: '3px',
-                      background: i === activeStep ? '#8c4f25' : 'rgba(36,19,12,0.18)',
+                      background: i === activeStep ? '#8c4f25' : 'rgba(36,19,12,0.15)',
                       border: 'none',
                       cursor: 'pointer',
                       padding: 0,
-                      transition: 'all 0.3s',
+                      transition: 'all 0.35s cubic-bezier(0.16,1,0.3,1)',
                     }}
                   />
                 ))}
+                <span
+                  style={{
+                    marginLeft: 'auto',
+                    fontFamily: 'var(--font-ibm-plex-mono)',
+                    fontSize: '11px',
+                    color: 'rgba(36,19,12,0.35)',
+                    letterSpacing: '0.06em',
+                  }}
+                >
+                  {step.id} / 05
+                </span>
               </div>
             </div>
           </div>
@@ -976,17 +1016,13 @@ export default function SolutionsPage() {
             padding: 'clamp(48px, 8vw, 100px) clamp(24px, 6vw, 80px)',
           }}
         >
-          {/* Dot grid */}
+          {/* Background Image */}
           <div aria-hidden style={{
             position: 'absolute', inset: 0,
-            backgroundImage: 'radial-gradient(circle, rgba(245,230,211,0.25) 1px, transparent 1px)',
-            backgroundSize: '32px 32px', opacity: 0.06, pointerEvents: 'none',
-          }} />
-          {/* Amber glow */}
-          <div aria-hidden style={{
-            position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)',
-            width: 800, height: 800, borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(200,118,58,0.1) 0%, transparent 65%)',
+            backgroundImage: 'url(/hero-ans-line-art-v3.png)',
+            backgroundSize: '93%',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
             pointerEvents: 'none',
           }} />
 
@@ -1016,7 +1052,7 @@ export default function SolutionsPage() {
                 marginBottom: 24,
               }}
             >
-              La Technologie au Service<br />de la <span style={{ color: C.accent }}>Pause Parfaite.</span>
+              La Technologie au Service<br />de la <span style={{ color: C.accent, fontStyle: 'italic' }}>Pause Parfaite.</span>
             </motion.h1>
 
             <motion.p
@@ -1046,12 +1082,7 @@ export default function SolutionsPage() {
       <TourneesSection />
 
       {/* ── CTA ── */}
-      <section style={{ padding: 'clamp(64px, 10vw, 128px) 24px', position: 'relative', overflow: 'hidden' }}>
-        <div aria-hidden style={{
-          position: 'absolute', bottom: 0, left: 0, width: '100%', height: '100%',
-          background: 'linear-gradient(to top, rgba(178,111,53,0.08), transparent)',
-          pointerEvents: 'none',
-        }} />
+      <section style={{ padding: 'clamp(64px, 10vw, 128px) 24px', position: 'relative', overflow: 'hidden', backgroundColor: '#2B1200' }}>
         <div style={{ maxWidth: 700, margin: '0 auto', textAlign: 'center', position: 'relative', zIndex: 1 }}>
           <h2 style={{
             fontFamily: FONT.display,
