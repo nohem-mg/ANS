@@ -731,7 +731,12 @@ const FAQSection = ({
 };
 
 export default function Home() {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return !sessionStorage.getItem('ans-loaded');
+    }
+    return true;
+  });
   const [activeFaqIndex, setActiveFaqIndex] = useState(0);
   const [expandedMobileTestimonial, setExpandedMobileTestimonial] = useState<number | null>(null);
   const containerRef = useRef(null);
@@ -742,13 +747,13 @@ export default function Home() {
     restDelta: 0.001
   });
 
-  // Force scroll to top and lock body during loader
   useEffect(() => {
-    window.scrollTo(0, 0);
     if (loading) {
+      window.scrollTo(0, 0);
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
+      sessionStorage.setItem('ans-loaded', '1');
     }
     return () => { document.body.style.overflow = ''; };
   }, [loading]);
@@ -950,27 +955,16 @@ export default function Home() {
                   Découvrir notre approche
                 </motion.a>
                 <motion.a
-                  href="#adn"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    const target = document.getElementById('adn');
-                    if (target) {
-                      const y = target.getBoundingClientRect().top + window.scrollY;
-                      animate(window.scrollY, y, {
-                        duration: 1.2,
-                        ease: [0.16, 1, 0.3, 1],
-                        onUpdate: (value) => window.scrollTo(0, value),
-                      });
-                    }
-                  }}
+                  href="/contact"
                   className="inline-flex items-center gap-2 px-7 py-3 text-sm font-medium text-coffee-cream border border-coffee-cream/20"
                   style={{ borderRadius: 999 }}
                   whileHover={{ scale: 1.03, borderColor: 'rgba(245,230,211,0.5)' }}
                   whileTap={{ scale: 0.97 }}
                 >
-                  Notre Histoire
+                  Demander un devis
                 </motion.a>
               </motion.div>
+
             </div>
 
             {/* Scroll indicator */}
@@ -1026,6 +1020,74 @@ export default function Home() {
               />
             </div>
 
+          </div>
+        </section>
+
+        {/* CTA Band */}
+        <section className="py-0 bg-[#FAF2E9]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              className="relative overflow-hidden rounded-2xl"
+              style={{
+                background: 'linear-gradient(135deg, #2B1200 0%, #3A1A06 100%)',
+                padding: 'clamp(32px, 5vw, 56px) clamp(24px, 4vw, 48px)',
+              }}
+            >
+              <div
+                aria-hidden
+                className="absolute inset-0 pointer-events-none"
+                style={{
+                  backgroundImage: 'radial-gradient(circle at 80% 30%, rgba(200,118,58,0.15), transparent 60%)',
+                }}
+              />
+              <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
+                <div>
+                  <h3
+                    className="text-[#F5E6D3] mb-2"
+                    style={{
+                      fontFamily: 'var(--font-sora)',
+                      fontSize: 'clamp(1.4rem, 2.5vw, 2rem)',
+                      fontWeight: 600,
+                      letterSpacing: '-0.02em',
+                      lineHeight: 1.2,
+                    }}
+                  >
+                    Un projet d'espace pause ?
+                  </h3>
+                  <p
+                    className="text-[#F5E6D3]/60"
+                    style={{ fontFamily: 'var(--font-ibm-plex-sans)', fontSize: '15px', lineHeight: 1.6 }}
+                  >
+                    Audit gratuit, proposition sur-mesure et installation rapide.
+                  </p>
+                </div>
+                <div className="flex flex-wrap items-center gap-3 shrink-0">
+                  <motion.a
+                    href="/contact"
+                    className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-[#1C0A00] bg-[#DE9E67] rounded-lg"
+                    style={{ fontFamily: 'var(--font-ibm-plex-mono)', letterSpacing: '0.06em', textTransform: 'uppercase', fontSize: '12px' }}
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.97 }}
+                  >
+                    Demander un devis <ArrowRight size={14} />
+                  </motion.a>
+                  <a
+                    href="tel:0327371684"
+                    className="inline-flex items-center gap-2 px-6 py-3 text-sm text-[#F5E6D3] border border-[#F5E6D3]/20 rounded-lg hover:border-[#DE9E67]/50 transition-colors"
+                    style={{ fontFamily: 'var(--font-ibm-plex-mono)', letterSpacing: '0.06em', fontSize: '12px' }}
+                  >
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" />
+                    </svg>
+                    03 27 37 16 84
+                  </a>
+                </div>
+              </div>
+            </motion.div>
           </div>
         </section>
 
@@ -1320,35 +1382,46 @@ export default function Home() {
           }
         />
 
-
-
         {/* Footer / Contact CTA */}
         <section id="contact" className="pt-8 pb-16 md:py-20 relative overflow-hidden bg-[#FAF2E9]">
-          {/* Abstract shapes */}
           <div className="absolute bottom-0 left-0 w-full h-full from-sienna-racing/10 to-transparent pointer-events-none" />
 
           <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center relative z-10">
-            <h2 className="text-3xl sm:text-5xl md:text-7xl mb-8 tracking-tight" style={{ fontFamily: 'var(--font-sora)', fontWeight: 600 }}>Prêt pour l'infusion ?</h2>
-            <p className="text-base md:text-xl text-deep-roast/70 mb-12 max-w-2xl mx-auto" style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}>
-              Discutons de votre projet d'espace détente. Nos experts sont prêts à concevoir la solution idéale pour vos collaborateurs.
+            <h2 className="text-3xl sm:text-5xl md:text-7xl mb-6 tracking-tight" style={{ fontFamily: 'var(--font-sora)', fontWeight: 600 }}>Prêt pour l&apos;infusion ?</h2>
+            <p className="text-base md:text-xl text-deep-roast/70 mb-10 max-w-2xl mx-auto" style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}>
+              Discutons de votre projet d&apos;espace détente. Nos experts sont prêts à concevoir la solution idéale pour vos collaborateurs.
             </p>
 
-            <form className="max-w-md mx-auto space-y-4 text-left">
-              <div className="relative group">
-                <input
-                  type="email"
-                  placeholder="Votre email professionnel"
-                  className="w-full bg-white border border-deep-roast/20 shadow-inner rounded px-6 py-4 text-deep-roast text-sm focus:outline-none focus:border-golden-extraction/50 transition-colors"
-                  style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}
-                />
-                <div className="absolute inset-0 rounded bg-gradient-to-r from-sienna-racing/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
-              </div>
-              <button className="w-full bg-golden-extraction text-deep-roast font-bold py-4 rounded text-sm tracking-widest uppercase hover:bg-white transition-colors flex items-center justify-center gap-2" style={{ fontFamily: 'var(--font-ibm-plex-mono)' }}>
-                Lancer la discussion <ArrowRight className="w-5 h-5" />
-              </button>
-            </form>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
+              <motion.a
+                href="/contact"
+                className="inline-flex items-center gap-2 px-8 py-4 text-sm font-bold text-deep-roast bg-golden-extraction rounded-lg"
+                style={{ fontFamily: 'var(--font-ibm-plex-mono)', letterSpacing: '0.08em', textTransform: 'uppercase' }}
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+              >
+                Nous contacter <ArrowRight className="w-4 h-4" />
+              </motion.a>
+              <motion.a
+                href="tel:0327371684"
+                className="inline-flex items-center gap-2.5 px-8 py-4 text-sm text-deep-roast border border-deep-roast/20 rounded-lg hover:border-golden-extraction/50 transition-colors"
+                style={{ fontFamily: 'var(--font-ibm-plex-mono)', letterSpacing: '0.06em' }}
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" />
+                </svg>
+                03 27 37 16 84
+              </motion.a>
+            </div>
 
-
+            <p
+              className="text-deep-roast/40 text-xs"
+              style={{ fontFamily: 'var(--font-ibm-plex-mono)', letterSpacing: '0.1em', textTransform: 'uppercase' }}
+            >
+              Audit gratuit · Réponse sous 24h · Hauts-de-France
+            </p>
           </div>
         </section>
 
