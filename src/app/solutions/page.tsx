@@ -988,7 +988,34 @@ export default function SolutionsPage() {
   return (
     <div style={{ backgroundColor: C.bg, color: C.textPrimary, fontFamily: FONT.body, minHeight: '100vh' }}>
 
+      <style>{`
+        @media (max-width: 767px) {
+          .solutions-hero-section { height: auto !important; min-height: 0 !important; }
+          .solutions-hero-widget { height: auto !important; min-height: 0 !important; }
+          .solutions-hero-bg {
+            background-image: url(/hero-ans-line-art-mobile.png) !important;
+            background-size: cover !important;
+            background-position: center !important;
+            background-repeat: no-repeat !important;
+          }
+          .solutions-hero-content {
+            padding-top: 38% !important;
+            padding-bottom: 36% !important;
+            padding-left: 20px !important;
+            padding-right: 20px !important;
+          }
+          .solutions-hero-label { margin-bottom: 12px !important; }
+          .solutions-hero-h1 {
+            font-size: clamp(1.9rem, 7.5vw, 2.4rem) !important;
+            margin-bottom: 14px !important;
+            line-height: 1.15 !important;
+          }
+          .solutions-hero-desc { font-size: 0.92rem !important; line-height: 1.6 !important; margin-bottom: 0 !important; }
+        }
+      `}</style>
+
       <section
+        className="solutions-hero-section"
         style={{
           backgroundColor: '#FAF2E9',
           height: 'calc(100vh - 68px)',
@@ -1002,6 +1029,7 @@ export default function SolutionsPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
+          className="solutions-hero-widget"
           style={{
             flex: 1,
             backgroundColor: C.bg,
@@ -1017,7 +1045,7 @@ export default function SolutionsPage() {
           }}
         >
           {/* Background Image */}
-          <div aria-hidden style={{
+          <div aria-hidden className="solutions-hero-bg" style={{
             position: 'absolute', inset: 0,
             backgroundImage: 'url(/hero-ans-line-art-v3.png)',
             backgroundSize: '93%',
@@ -1026,11 +1054,12 @@ export default function SolutionsPage() {
             pointerEvents: 'none',
           }} />
 
-          <div style={{ position: 'relative', zIndex: 1, textAlign: 'center', maxWidth: 800 }}>
+          <div className="solutions-hero-content" style={{ position: 'relative', zIndex: 1, textAlign: 'center', maxWidth: 800 }}>
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.7 }}
+              className="solutions-hero-label"
               style={{
                 fontFamily: FONT.mono, fontSize: 11, letterSpacing: '0.22em',
                 color: C.accent, textTransform: 'uppercase', marginBottom: 36,
@@ -1043,6 +1072,7 @@ export default function SolutionsPage() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.35, duration: 0.9, ease: EASE_OUT }}
+              className="solutions-hero-h1"
               style={{
                 fontSize: 'clamp(2.2rem, 5.5vw, 5rem)',
                 fontFamily: 'var(--font-sora)',
@@ -1059,7 +1089,7 @@ export default function SolutionsPage() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.55, duration: 0.8 }}
-              className="text-[1.05rem] md:text-lg text-coffee-cream/90 leading-relaxed mx-auto max-w-xl mb-8 drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)] font-light"
+              className="solutions-hero-desc text-[1.05rem] md:text-lg text-coffee-cream/90 leading-relaxed mx-auto max-w-xl mb-8 drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)] font-light"
               style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}
             >
               Des distributeurs de dernière génération aux coffee corners sur-mesure,
