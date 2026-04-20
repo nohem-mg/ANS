@@ -495,7 +495,7 @@ const VisionSection = () => {
         <div className="overflow-hidden md:overflow-visible -mx-6 md:mx-0">
           <div
             className="flex md:grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 xl:gap-8 overflow-x-auto md:overflow-x-visible snap-x snap-mandatory md:snap-none pb-2 md:pb-0 px-6 md:px-0"
-            style={{ scrollPaddingLeft: '1.5rem', scrollPaddingRight: '1.5rem', touchAction: 'pan-x' }}
+            style={{ scrollPaddingLeft: '1.5rem', scrollPaddingRight: '1.5rem' }}
           >
             {VISION_POINTS.map((point, index) => (
               <motion.div
