@@ -407,12 +407,46 @@ const VISION_POINTS = [
 
 const VisionSection = () => {
   const [isMobile, setIsMobile] = useState(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     const mq = window.matchMedia('(max-width: 767px)');
     setIsMobile(mq.matches);
     const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
     mq.addEventListener('change', handler);
     return () => mq.removeEventListener('change', handler);
+  }, []);
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    let startX = 0;
+    let startY = 0;
+    let isHorizontal: boolean | null = null;
+
+    const onTouchStart = (e: TouchEvent) => {
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+      isHorizontal = null;
+    };
+
+    const onTouchMove = (e: TouchEvent) => {
+      const dx = Math.abs(e.touches[0].clientX - startX);
+      const dy = Math.abs(e.touches[0].clientY - startY);
+      if (isHorizontal === null) {
+        isHorizontal = dx > dy;
+      }
+      if (isHorizontal) {
+        e.preventDefault();
+      }
+    };
+
+    el.addEventListener('touchstart', onTouchStart, { passive: true });
+    el.addEventListener('touchmove', onTouchMove, { passive: false });
+    return () => {
+      el.removeEventListener('touchstart', onTouchStart);
+      el.removeEventListener('touchmove', onTouchMove);
+    };
   }, []);
 
   return (
@@ -492,7 +526,7 @@ const VisionSection = () => {
           .flip-card-back { transform: rotateY(180deg); }
         `}</style>
 
-        <div className="overflow-hidden md:overflow-visible -mx-6 md:mx-0" style={{ touchAction: "pan-x" }}>
+        <div ref={scrollRef} className="overflow-hidden md:overflow-visible -mx-6 md:mx-0" style={{ touchAction: "pan-x" }}>
           <div
             className="flex md:grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 xl:gap-8 overflow-x-auto md:overflow-x-visible snap-x snap-mandatory md:snap-none pb-2 md:pb-0 px-6 md:px-0"
             style={{ scrollPaddingLeft: '1.5rem', scrollPaddingRight: '1.5rem', overscrollBehaviorX: 'contain', touchAction: 'pan-x' }}
