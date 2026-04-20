@@ -416,13 +416,12 @@ const VisionSection = () => {
   }, []);
 
   return (
-    <section id="pause-vision" className="pt-10 pb-8 md:py-20 lg:min-h-screen flex items-center relative">
+    <section id="pause-vision" className="pt-10 pb-8 md:py-20 lg:min-h-screen flex flex-col items-stretch relative">
       <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-[#FAF2E9]/5 to-transparent pointer-events-none" />
 
-      <div className="max-w-[105rem] mx-auto px-6 lg:px-12 relative z-10 w-full">
-
-        {/* Top Header - 2 Columns */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 mb-12 lg:mb-20 items-start max-w-7xl">
+      {/* Top Header - aligned with Services section container */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 w-full mb-12 lg:mb-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start">
           {/* Left Title */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -466,7 +465,9 @@ const VisionSection = () => {
               Fini le café avalé dans un couloir. La pause est un moment stratégique celui où l'énergie se recharge et où la culture d'entreprise se construit. Chez ANS, on aménage cet espace pour qu'il soit à la hauteur.            </p>
           </motion.div>
         </div>
+      </div>
 
+      <div className="max-w-[105rem] mx-auto px-6 lg:px-12 relative z-10 w-full">
         {/* 4-Column Cards Grid — flip on hover (desktop), scroll horizontal (mobile) */}
         <style>{`
           .flip-card { perspective: 1000px; }
@@ -503,8 +504,7 @@ const VisionSection = () => {
                 whileInView={isMobile ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.1 + index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                className="flip-card snap-start shrink-0 w-[76vw] sm:w-[56vw] md:w-auto md:shrink"
-                style={{ minHeight: '420px' }}
+                className="flip-card snap-start shrink-0 w-[76vw] sm:w-[56vw] md:w-auto md:shrink min-h-[300px] md:min-h-[420px]"
               >
                 <div className="flip-card-inner w-full h-full">
 
