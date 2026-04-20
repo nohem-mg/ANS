@@ -492,10 +492,10 @@ const VisionSection = () => {
           .flip-card-back { transform: rotateY(180deg); }
         `}</style>
 
-        <div className="overflow-hidden md:overflow-visible -mx-6 md:mx-0">
+        <div className="overflow-hidden md:overflow-visible -mx-6 md:mx-0" style={{ touchAction: "pan-x" }}>
           <div
             className="flex md:grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 xl:gap-8 overflow-x-auto md:overflow-x-visible snap-x snap-mandatory md:snap-none pb-2 md:pb-0 px-6 md:px-0"
-            style={{ scrollPaddingLeft: '1.5rem', scrollPaddingRight: '1.5rem' }}
+            style={{ scrollPaddingLeft: '1.5rem', scrollPaddingRight: '1.5rem', overscrollBehaviorX: 'contain', touchAction: 'pan-x' }}
           >
             {VISION_POINTS.map((point, index) => (
               <motion.div
@@ -504,7 +504,7 @@ const VisionSection = () => {
                 whileInView={isMobile ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.1 + index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                className="flip-card snap-start shrink-0 w-[76vw] sm:w-[56vw] md:w-auto md:shrink min-h-[300px] md:min-h-[420px]"
+                className="flip-card snap-start shrink-0 w-[76vw] sm:w-[56vw] md:w-auto md:shrink min-h-[300px] md:min-h-[420px]" style={{ touchAction: "pan-x" }}
               >
                 <div className="flip-card-inner w-full h-full">
 
