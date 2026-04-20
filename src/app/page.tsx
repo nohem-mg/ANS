@@ -422,22 +422,29 @@ const VisionSection = () => {
     if (!el) return;
     let startX = 0;
     let startY = 0;
+    let startScrollLeft = 0;
     let isHorizontal: boolean | null = null;
 
     const onTouchStart = (e: TouchEvent) => {
       startX = e.touches[0].clientX;
       startY = e.touches[0].clientY;
+      startScrollLeft = el.scrollLeft;
       isHorizontal = null;
     };
 
     const onTouchMove = (e: TouchEvent) => {
-      const dx = Math.abs(e.touches[0].clientX - startX);
-      const dy = Math.abs(e.touches[0].clientY - startY);
-      if (isHorizontal === null) {
-        isHorizontal = dx > dy;
+      const dx = e.touches[0].clientX - startX;
+      const dy = e.touches[0].clientY - startY;
+      if (isHorizontal === null && (Math.abs(dx) > 5 || Math.abs(dy) > 5)) {
+        isHorizontal = Math.abs(dx) > Math.abs(dy);
       }
-      if (isHorizontal) {
+      if (isHorizontal === true) {
         e.preventDefault();
+        // Manually drive horizontal scroll so native scroll isn't needed
+        const scrollContainer = el.querySelector('.carousel-scroll') as HTMLElement;
+        if (scrollContainer) {
+          scrollContainer.scrollLeft = startScrollLeft - dx;
+        }
       }
     };
 
@@ -528,7 +535,7 @@ const VisionSection = () => {
 
         <div ref={scrollRef} className="overflow-hidden md:overflow-visible -mx-6 md:mx-0" style={{ touchAction: "pan-x" }}>
           <div
-            className="flex md:grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 xl:gap-8 overflow-x-auto md:overflow-x-visible snap-x snap-mandatory md:snap-none pb-2 md:pb-0 px-6 md:px-0"
+            className="carousel-scroll flex md:grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 xl:gap-8 overflow-x-auto md:overflow-x-visible snap-x snap-mandatory md:snap-none pb-2 md:pb-0 px-6 md:px-0"
             style={{ scrollPaddingLeft: '1.5rem', scrollPaddingRight: '1.5rem', overscrollBehaviorX: 'contain', touchAction: 'pan-x' }}
           >
             {VISION_POINTS.map((point, index) => (
