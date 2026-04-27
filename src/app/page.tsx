@@ -1083,12 +1083,13 @@ export default function Home() {
                       fontWeight: 600,
                       letterSpacing: '-0.02em',
                       lineHeight: 1.2,
+                      textAlign: 'center'
                     }}
                   >
                     Un projet d'espace-pause ?
                   </h3>
                   <p
-                    className="text-[#F5E6D3]/60"
+                    className="text-[#F5E6D3]/60 text-center"
                     style={{ fontFamily: 'var(--font-ibm-plex-sans)', fontSize: '15px', lineHeight: 1.6 }}
                   >
                     Audit gratuit, proposition sur-mesure et installation rapide.
@@ -1443,10 +1444,10 @@ export default function Home() {
               Discutons de votre projet d&apos;espace détente. Nos experts sont prêts à concevoir la solution idéale pour vos collaborateurs.
             </p>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
+            <div className="flex items-center justify-center gap-3 sm:gap-4 mb-10">
               <motion.a
                 href="/contact"
-                className="inline-flex items-center gap-2 px-8 py-4 text-sm font-bold text-deep-roast bg-golden-extraction rounded-lg"
+                className="inline-flex items-center gap-2 px-4 sm:px-8 py-3 sm:py-4 text-xs sm:text-sm font-bold text-deep-roast bg-golden-extraction rounded-lg whitespace-nowrap"
                 style={{ fontFamily: 'var(--font-ibm-plex-mono)', letterSpacing: '0.08em', textTransform: 'uppercase' }}
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
@@ -1455,7 +1456,7 @@ export default function Home() {
               </motion.a>
               <motion.a
                 href="tel:0327371684"
-                className="inline-flex items-center gap-2.5 px-8 py-4 text-sm text-deep-roast border border-deep-roast/20 rounded-lg hover:border-golden-extraction/50 transition-colors"
+                className="inline-flex items-center gap-2.5 px-4 sm:px-8 py-3 sm:py-4 text-xs sm:text-sm text-deep-roast border border-deep-roast/20 rounded-lg hover:border-golden-extraction/50 transition-colors whitespace-nowrap"
                 style={{ fontFamily: 'var(--font-ibm-plex-mono)', letterSpacing: '0.06em' }}
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
@@ -1468,7 +1469,7 @@ export default function Home() {
             </div>
 
             <p
-              className="text-deep-roast/40 text-xs"
+              className="text-deep-roast/40 text-[9px] sm:text-xs whitespace-nowrap"
               style={{ fontFamily: 'var(--font-ibm-plex-mono)', letterSpacing: '0.1em', textTransform: 'uppercase' }}
             >
               Audit gratuit · Réponse sous 24h · Hauts-de-France
