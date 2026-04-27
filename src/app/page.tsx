@@ -1063,7 +1063,7 @@ export default function Home() {
               className="relative overflow-hidden rounded-2xl"
               style={{
                 background: 'linear-gradient(135deg, #2B1200 0%, #3A1A06 100%)',
-                padding: 'clamp(32px, 5vw, 56px) clamp(24px, 4vw, 48px)',
+                padding: 'clamp(32px, 5vw, 56px) clamp(16px, 4vw, 48px)',
               }}
             >
               <div
@@ -1073,7 +1073,7 @@ export default function Home() {
                   backgroundImage: 'radial-gradient(circle at 80% 30%, rgba(200,118,58,0.15), transparent 60%)',
                 }}
               />
-              <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
+              <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6 px-4 md:px-0">
                 <div>
                   <h3
                     className="text-[#F5E6D3] mb-2"
@@ -1095,10 +1095,10 @@ export default function Home() {
                     Audit gratuit, proposition sur-mesure et installation rapide.
                   </p>
                 </div>
-                <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+                <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0 w-full sm:w-auto">
                   <motion.a
                     href="/contact"
-                    className="inline-flex items-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 text-sm font-semibold text-[#1C0A00] bg-[#DE9E67] rounded-lg whitespace-nowrap"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-semibold text-[#1C0A00] bg-[#DE9E67] rounded-lg whitespace-nowrap w-full sm:w-auto"
                     style={{ fontFamily: 'var(--font-ibm-plex-mono)', letterSpacing: '0.06em', textTransform: 'uppercase', fontSize: '12px' }}
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.97 }}
@@ -1107,7 +1107,7 @@ export default function Home() {
                   </motion.a>
                   <a
                     href="tel:0327371684"
-                    className="inline-flex items-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 text-sm text-[#F5E6D3] border border-[#F5E6D3]/20 rounded-lg hover:border-[#DE9E67]/50 transition-colors whitespace-nowrap"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3 text-sm text-[#F5E6D3] border border-[#F5E6D3]/20 rounded-lg hover:border-[#DE9E67]/50 transition-colors whitespace-nowrap w-full sm:w-auto"
                     style={{ fontFamily: 'var(--font-ibm-plex-mono)', letterSpacing: '0.06em', fontSize: '12px' }}
                   >
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -1246,10 +1246,10 @@ export default function Home() {
                   Notre Histoire
                 </span>
                 <h2
-                  className="text-deep-roast leading-tight whitespace-nowrap"
+                  className="text-deep-roast leading-tight"
                   style={{
                     fontFamily: 'var(--font-sora)',
-                    fontSize: 'clamp(1.85rem, 4vw, 3.5rem)',
+                    fontSize: 'clamp(1rem, 6.2vw, 3.5rem)',
                     fontWeight: 600,
                   }}
                 >
@@ -1325,13 +1325,13 @@ export default function Home() {
                   </div>
 
                   {/* Mobile Marquee — visible on mobile only */}
-                  <div className="md:hidden mt-8 -mx-8 relative overflow-hidden flex flex-col gap-3">
+                  <div className="md:hidden mt-8 -mx-8 relative overflow-hidden flex flex-col gap-3 py-2">
                     {/* Fade Edges */}
                     <div className="absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-coffee-cream to-transparent z-10 pointer-events-none"></div>
                     <div className="absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-coffee-cream to-transparent z-10 pointer-events-none"></div>
 
                     {/* Line 1: Right-moving */}
-                    <div className="flex">
+                    <div className="flex py-1">
                       <motion.div
                         className="flex gap-3 shrink-0 px-2"
                         animate={{ x: ["-50%", "0%"] }}
@@ -1360,7 +1360,7 @@ export default function Home() {
                     </div>
 
                     {/* Line 2: Left-moving */}
-                    <div className="flex">
+                    <div className="flex py-1">
                       <motion.div
                         className="flex gap-3 shrink-0 px-2"
                         animate={{ x: ["0%", "-50%"] }}
