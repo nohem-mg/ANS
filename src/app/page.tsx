@@ -407,6 +407,9 @@ const VISION_POINTS = [
 
 const VisionSection = () => {
   const [isMobile, setIsMobile] = useState(false);
+  const [activeVisionDot, setActiveVisionDot] = useState(0);
+  const visionScrollRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     const mq = window.matchMedia('(max-width: 767px)');
     setIsMobile(mq.matches);
@@ -414,6 +417,14 @@ const VisionSection = () => {
     mq.addEventListener('change', handler);
     return () => mq.removeEventListener('change', handler);
   }, []);
+
+  const handleVisionScroll = () => {
+    const el = visionScrollRef.current;
+    if (!el) return;
+    const cardWidth = (el.firstElementChild as HTMLElement)?.offsetWidth ?? 1;
+    const gap = 16;
+    setActiveVisionDot(Math.round(el.scrollLeft / (cardWidth + gap)));
+  };
 
   return (
     <section id="pause-vision" className="pt-10 pb-8 md:py-20 lg:min-h-screen flex flex-col items-stretch relative">
@@ -494,8 +505,10 @@ const VisionSection = () => {
 
         <div className="overflow-hidden md:overflow-visible -mx-6 md:mx-0" style={{ touchAction: "pan-x" }}>
           <div
+            ref={visionScrollRef}
+            onScroll={handleVisionScroll}
             className="flex md:grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 xl:gap-8 overflow-x-auto md:overflow-x-visible snap-x snap-mandatory md:snap-none pb-2 md:pb-0 px-6 md:px-0"
-            style={{ scrollPaddingLeft: '1.5rem', scrollPaddingRight: '1.5rem', overscrollBehaviorX: 'contain', touchAction: 'pan-x' }}
+            style={{ scrollPaddingLeft: '1.5rem', scrollPaddingRight: '1.5rem', overscrollBehaviorX: 'contain', touchAction: 'pan-x', scrollbarWidth: 'none' }}
           >
             {VISION_POINTS.map((point, index) => (
               <motion.div
@@ -591,6 +604,14 @@ const VisionSection = () => {
 
                 </div>
               </motion.div>
+            ))}
+          </div>
+          <div className="flex md:hidden justify-center gap-2 mt-4 px-6">
+            {VISION_POINTS.map((_, idx) => (
+              <div
+                key={idx}
+                className={`h-1.5 rounded-full transition-all duration-300 ${activeVisionDot === idx ? 'w-6 bg-[#688125]' : 'w-1.5 bg-deep-roast/20'}`}
+              />
             ))}
           </div>
         </div>
@@ -733,7 +754,8 @@ const FAQSection = ({
 export default function Home() {
   const [loading, setLoading] = useState(true);
   const [activeFaqIndex, setActiveFaqIndex] = useState(0);
-  const [expandedMobileTestimonial, setExpandedMobileTestimonial] = useState<number | null>(null);
+  const [activeTestimonialDot, setActiveTestimonialDot] = useState(0);
+  const testimonialScrollRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
@@ -759,7 +781,13 @@ export default function Home() {
     }
   }, [loading]);
 
-  const compactTestimonials = TESTIMONIALS;
+  const handleTestimonialScroll = () => {
+    const el = testimonialScrollRef.current;
+    if (!el) return;
+    const cardWidth = (el.firstElementChild as HTMLElement)?.offsetWidth ?? 1;
+    const gap = 16;
+    setActiveTestimonialDot(Math.round(el.scrollLeft / (cardWidth + gap)));
+  };
 
   return (
     <>
@@ -1122,63 +1150,44 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="md:hidden space-y-3 mb-12">
-              {compactTestimonials.map((t, idx) => {
-                const isExpanded = expandedMobileTestimonial === idx;
-
-                return (
-                  <motion.div
+            <div className="md:hidden mb-12">
+              <div
+                ref={testimonialScrollRef}
+                onScroll={handleTestimonialScroll}
+                className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 -mx-4 px-4"
+                style={{ scrollPaddingLeft: '1rem', overscrollBehaviorX: 'contain', touchAction: 'pan-x', scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}
+              >
+                {TESTIMONIALS.map((t) => (
+                  <div
                     key={t.name}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.1 + idx * 0.1, duration: 0.5 }}
-                    className="bg-white border border-deep-roast/10 shadow-sm px-5 py-5 rounded-[1.1rem]"
+                    className="snap-start shrink-0 w-[85vw] bg-white border border-deep-roast/10 shadow-sm px-5 py-5 rounded-[1.1rem] flex flex-col"
                   >
-                    <div className="min-w-0">
-                      <div className="flex gap-1 mb-3 text-golden-extraction">
-                        {[...Array(5)].map((_, i) => (
-                          <span key={i} className="text-xs">★</span>
-                        ))}
-                      </div>
-
-                      <p
-                        className="text-deep-roast/75 italic leading-relaxed text-[0.98rem]"
-                        style={
-                          isExpanded
-                            ? { fontFamily: 'var(--font-ibm-plex-sans)' }
-                            : {
-                              fontFamily: 'var(--font-ibm-plex-sans)',
-                              display: '-webkit-box',
-                              WebkitLineClamp: 3,
-                              WebkitBoxOrient: 'vertical',
-                              overflow: 'hidden',
-                            }
-                        }
-                      >
-                        "{t.review}"
-                      </p>
+                    <div className="flex gap-1 mb-3 text-golden-extraction">
+                      {[...Array(5)].map((_, i) => (
+                        <span key={i} className="text-xs">★</span>
+                      ))}
                     </div>
-
-                    <div className="flex items-center justify-between gap-3 mt-4 pt-4 border-t border-deep-roast/8">
-                      <div className="min-w-0">
-                        <p className="text-deep-roast font-medium text-sm" style={{ fontFamily: 'var(--font-sora)' }}>{t.name}</p>
-                        <p className="text-deep-roast/50 text-xs mt-0.5" style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}>Avis Google</p>
-                      </div>
-
-                      <button
-                        type="button"
-                        onClick={() => setExpandedMobileTestimonial(isExpanded ? null : idx)}
-                        className="inline-flex items-center gap-2 text-[11px] tracking-[0.16em] uppercase text-golden-extraction shrink-0"
-                        style={{ fontFamily: 'var(--font-ibm-plex-mono)' }}
-                      >
-                        {isExpanded ? "Réduire" : "Lire l'avis"}
-                        <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`} />
-                      </button>
+                    <p
+                      className="text-deep-roast/75 italic leading-relaxed text-[0.98rem] flex-grow"
+                      style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}
+                    >
+                      &ldquo;{t.review}&rdquo;
+                    </p>
+                    <div className="mt-4 pt-4 border-t border-deep-roast/8">
+                      <p className="text-deep-roast font-medium text-sm" style={{ fontFamily: 'var(--font-sora)' }}>{t.name}</p>
+                      <p className="text-deep-roast/50 text-xs mt-0.5" style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}>Avis Google</p>
                     </div>
-                  </motion.div>
-                );
-              })}
+                  </div>
+                ))}
+              </div>
+              <div className="flex justify-center gap-2 mt-3">
+                {TESTIMONIALS.map((_, idx) => (
+                  <div
+                    key={idx}
+                    className={`h-1.5 rounded-full transition-all duration-300 ${activeTestimonialDot === idx ? 'w-6 bg-golden-extraction' : 'w-1.5 bg-deep-roast/20'}`}
+                  />
+                ))}
+              </div>
             </div>
 
             <div className="hidden md:grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
@@ -1199,14 +1208,9 @@ export default function Home() {
                   <p className="text-deep-roast/80 italic mb-6 flex-grow leading-relaxed" style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}>
                     "{t.review}"
                   </p>
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-[#FAF2E9] border border-golden-extraction/30 flex items-center justify-center text-golden-extraction font-bold" style={{ fontFamily: 'var(--font-sora)' }}>
-                      {t.name.charAt(0)}
-                    </div>
-                    <div>
-                      <p className="text-deep-roast font-medium text-sm" style={{ fontFamily: 'var(--font-sora)' }}>{t.name}</p>
-                      <p className="text-deep-roast/50 text-xs mt-0.5" style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}>Avis Google</p>
-                    </div>
+                  <div>
+                    <p className="text-deep-roast font-medium text-sm" style={{ fontFamily: 'var(--font-sora)' }}>{t.name}</p>
+                    <p className="text-deep-roast/50 text-xs mt-0.5" style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}>Avis Google</p>
                   </div>
                 </motion.div>
               ))}

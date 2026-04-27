@@ -1261,17 +1261,13 @@ function HeroMoodboardSection() {
     offset: ['start start', 'end end'],
   });
 
-  const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 60,
-    damping: 22,
-    restDelta: 0.0005,
-  });
+  // Phase 1: text fades out first
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
+  const heroScale = useTransform(scrollYProgress, [0, 0.4], [1, 0.97]);
 
-  const heroOpacity = useTransform(smoothProgress, [0, 0.28, 0.68], [1, 1, 0]);
-  const heroScale = useTransform(smoothProgress, [0.28, 0.68], [1, 0.97]);
-
-  const moodOpacity = useTransform(smoothProgress, [0.38, 0.75], [0, 1]);
-  const moodY = useTransform(smoothProgress, [0.38, 0.75], ['4%', '0%']);
+  // Phase 2: moodboard appears only after text is gone
+  const moodOpacity = useTransform(scrollYProgress, [0.45, 0.85], [0, 1]);
+  const moodY = useTransform(scrollYProgress, [0.45, 0.85], ['4%', '0%']);
 
   return (
     <div ref={containerRef} style={{ height: '200vh', position: 'relative' }}>
