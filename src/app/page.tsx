@@ -1246,14 +1246,14 @@ export default function Home() {
                   Notre Histoire
                 </span>
                 <h2
-                  className="text-deep-roast leading-tight"
+                  className="text-deep-roast leading-tight whitespace-nowrap"
                   style={{
                     fontFamily: 'var(--font-sora)',
-                    fontSize: 'clamp(2rem, 4vw, 3.5rem)',
+                    fontSize: 'clamp(1.85rem, 4vw, 3.5rem)',
                     fontWeight: 600,
                   }}
                 >
-                  + de 40 Ans d'Excellence
+                  + de 40 Ans <span className="text-sienna-racing">d&apos;Excellence</span>
                 </h2>
               </div>
               <p className="text-deep-roast/50 text-sm max-w-xs leading-relaxed md:text-right" style={{ fontFamily: 'var(--font-ibm-plex-mono)' }}>
