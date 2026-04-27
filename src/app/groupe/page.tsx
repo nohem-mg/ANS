@@ -146,13 +146,29 @@ function AdvantageCard({ adv, index }: { adv: typeof ADVANTAGES[0]; index: numbe
 
 // ─── PAGE ────────────────────────────────────────────────────────────────────
 export default function GroupePage() {
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     return (
         <div style={{ backgroundColor: C.bg, color: C.textPrimary, fontFamily: FONT.body, minHeight: '100vh' }}>
 
+            <style>{`
+                @media (max-width: 767px) {
+                    .groupe-hero-section { height: auto !important; min-height: 0 !important; }
+                    .groupe-hero-widget { height: auto !important; min-height: 0 !important; }
+                }
+                @media (min-width: 768px) and (max-height: 900px) {
+                    .groupe-hero-widget { padding-top: 24px !important; padding-bottom: 24px !important; }
+                }
+            `}</style>
             <section
+                className="groupe-hero-section"
                 style={{
                     backgroundColor: '#F9F1E8',
-                    height: 'calc(100vh - 68px)',
+                    height: 'calc(100vh - 84px)',
+                    maxHeight: 'calc(100vh - 84px)',
+                    overflow: 'hidden',
                     padding: 'clamp(10px, 1.2vw, 14px) clamp(16px, 4vw, 48px)',
                     boxSizing: 'border-box',
                     display: 'flex',
@@ -163,8 +179,10 @@ export default function GroupePage() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
+                    className="groupe-hero-widget"
                     style={{
                         flex: 1,
+                        minHeight: 0,
                         backgroundColor: '#2B1200',
                         borderRadius: 20,
                         overflow: 'hidden',
@@ -174,7 +192,7 @@ export default function GroupePage() {
                         flexDirection: 'column',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        padding: 'clamp(48px, 8vw, 100px) clamp(24px, 6vw, 80px)',
+                        padding: 'clamp(32px, 4vw, 72px) clamp(24px, 6vw, 80px)',
                     }}
                 >
                     {/* Dot grid */}

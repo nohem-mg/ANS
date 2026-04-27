@@ -731,12 +731,7 @@ const FAQSection = ({
 };
 
 export default function Home() {
-  const [loading, setLoading] = useState(() => {
-    if (typeof window !== 'undefined') {
-      return !sessionStorage.getItem('ans-loaded');
-    }
-    return true;
-  });
+  const [loading, setLoading] = useState(true);
   const [activeFaqIndex, setActiveFaqIndex] = useState(0);
   const [expandedMobileTestimonial, setExpandedMobileTestimonial] = useState<number | null>(null);
   const containerRef = useRef(null);
@@ -748,14 +743,20 @@ export default function Home() {
   });
 
   useEffect(() => {
-    if (loading) {
-      window.scrollTo(0, 0);
-      document.body.style.overflow = 'hidden';
-    } else {
+    if (sessionStorage.getItem('ans-loaded')) {
+      setLoading(false);
+      return;
+    }
+    window.scrollTo(0, 0);
+    document.body.style.overflow = 'hidden';
+    return () => { document.body.style.overflow = ''; };
+  }, []);
+
+  useEffect(() => {
+    if (!loading) {
       document.body.style.overflow = '';
       sessionStorage.setItem('ans-loaded', '1');
     }
-    return () => { document.body.style.overflow = ''; };
   }, [loading]);
 
   const compactTestimonials = TESTIMONIALS;
