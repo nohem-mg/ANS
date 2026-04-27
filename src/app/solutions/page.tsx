@@ -47,11 +47,6 @@ const steps = [
       alt: 'Bureau ANS — audit et diagnostic terrain',
     },
     keyPoints: ['Visite sur site', 'Analyse des flux', 'Relevé technique'],
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
-      </svg>
-    ),
   },
   {
     id: '02',
@@ -65,11 +60,6 @@ const steps = [
       alt: 'Distributeur dans entrepôt ANS — sélection sur-mesure',
     },
     keyPoints: ['Choix machines', 'Budget transparent', 'Plan d\'implantation'],
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <path d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-      </svg>
-    ),
   },
   {
     id: '03',
@@ -83,11 +73,6 @@ const steps = [
       alt: 'Installation et mise en service des équipements',
     },
     keyPoints: ['Installation complète', 'Configuration', 'Formation incluse'],
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <path d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
-      </svg>
-    ),
   },
   {
     id: '04',
@@ -101,12 +86,6 @@ const steps = [
       alt: 'Entrepôt ANS — intervention rapide',
     },
     keyPoints: ['Réponse < 4h', 'Entretien préventif', 'Approvisionnement'],
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-        <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-      </svg>
-    ),
   },
   {
     id: '05',
@@ -120,11 +99,6 @@ const steps = [
       alt: 'Flotte de véhicules ANS — suivi et pilotage continu',
     },
     keyPoints: ['Reporting détaillé', 'Évolution du parc', 'Ajustement gammes'],
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-      </svg>
-    ),
   },
 ];
 
@@ -246,8 +220,8 @@ function ProcessSection() {
             }}
           >
             Du cadrage
-            <br />
-            <span style={{ color: '#8c4f25' }}>au suivi.</span>
+
+            <span style={{ color: '#8c4f25' }}> au suivi.</span>
           </h2>
           <p
             style={{
@@ -341,10 +315,6 @@ function ProcessSection() {
                       {s.tag}
                     </span>
                   </div>
-
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ opacity: activeStep === i ? 1 : 0, transition: 'opacity 0.3s', color: '#8c4f25', flexShrink: 0 }}>
-                    <path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
                 </div>
               </button>
             ))}
@@ -528,9 +498,6 @@ function ProcessSection() {
               <div className="process-kp-row" style={{ display: 'flex', gap: '8px', marginBottom: '24px', flexWrap: 'wrap' }}>
                 {step.keyPoints.map((kp, i) => (
                   <span key={i} className="process-kp-tag">
-                    <svg width="6" height="6" viewBox="0 0 6 6" fill="currentColor" style={{ opacity: 0.6 }}>
-                      <circle cx="3" cy="3" r="3" />
-                    </svg>
                     {kp}
                   </span>
                 ))}
@@ -659,9 +626,8 @@ function ShowcaseSection() {
             fontWeight: 600,
             letterSpacing: '-0.025em',
           }}>
-            Avant & Après —
-            <br />
-            <span style={{ color: '#8c4f25' }}>la transformation en images.</span>
+            Avant & Après
+
           </h2>
           <p style={{
             marginTop: 20,
@@ -671,8 +637,7 @@ function ShowcaseSection() {
             maxWidth: 480,
             fontFamily: FONT.body,
           }}>
-            Un espace pause ordinaire peut devenir un vrai lieu de vie. Faites glisser
-            pour comparer l&apos;avant et l&apos;après d&apos;une installation type.
+            Un espace pause ordinaire peut devenir un vrai lieu de vie. Faites glisser pour comparer l&apos;avant et l&apos;après d&apos;une installation type.
           </p>
         </div>
 
@@ -785,9 +750,6 @@ function ShowcaseSection() {
                 boxShadow: '0 4px 16px rgba(0,0,0,0.2)',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
               }}>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8c4f25" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M9 18l-6-6 6-6" /><path d="M15 6l6 6-6 6" />
-                </svg>
               </div>
             </div>
           </div>
@@ -969,9 +931,7 @@ function TourneesSection() {
                     transition: `all 0.5s cubic-bezier(0.16,1,0.3,1) ${0.15 + i * 0.07}s`,
                   }}
                 >
-                  <svg width="8" height="8" viewBox="0 0 8 8" fill="currentColor">
-                    <circle cx="4" cy="4" r="4" />
-                  </svg>
+
                   {tag}
                 </span>
               ))}
@@ -1128,7 +1088,7 @@ export default function SolutionsPage() {
         <div style={{ maxWidth: 700, margin: '0 auto', textAlign: 'center', position: 'relative', zIndex: 1 }}>
           <h2 style={{
             fontFamily: FONT.display,
-            fontSize: 'clamp(28px, 5vw, 56px)',
+            fontSize: 'clamp(26px, 5vw, 48px)',
             fontWeight: 600, color: C.textPrimary,
             letterSpacing: '-0.02em', marginBottom: 16,
           }}>
