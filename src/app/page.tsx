@@ -470,7 +470,7 @@ const VisionSection = () => {
             className="lg:pt-8 flex justify-end"
           >
             <p
-              className="text-deep-roast/70 leading-relaxed max-w-sm"
+              className="text-deep-roast/70 leading-relaxed max-w-sm text-justify"
               style={{ fontSize: 'clamp(0.95rem, 1vw, 1.05rem)', fontFamily: 'var(--font-ibm-plex-sans)' }}
             >
               Fini le café avalé dans un couloir. La pause est un moment stratégique celui où l'énergie se recharge et où la culture d'entreprise se construit. Chez ANS, on aménage cet espace pour qu'il soit à la hauteur.            </p>
@@ -507,7 +507,7 @@ const VisionSection = () => {
           <div
             ref={visionScrollRef}
             onScroll={handleVisionScroll}
-            className="flex md:grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 xl:gap-8 overflow-x-auto md:overflow-x-visible snap-x snap-mandatory md:snap-none pb-2 md:pb-0 px-6 md:px-0"
+            className="flex md:grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 xl:gap-8 overflow-x-auto overflow-y-hidden md:overflow-x-visible snap-x snap-mandatory md:snap-none pb-2 md:pb-0 px-6 md:px-0"
             style={{ scrollPaddingLeft: '1.5rem', scrollPaddingRight: '1.5rem', overscrollBehaviorX: 'contain', touchAction: 'pan-x', scrollbarWidth: 'none' }}
           >
             {VISION_POINTS.map((point, index) => (
@@ -653,7 +653,7 @@ const FAQSection = ({
               letterSpacing: '-0.02em',
             }}
           >
-            Questions frequentes
+            Questions fréquentes
           </h2>
           <p
             className="text-deep-roast/65 leading-relaxed max-w-2xl"
@@ -705,7 +705,7 @@ const FAQSection = ({
                           fontFamily: 'var(--font-sora)',
                           fontSize: 'clamp(1rem, 1.4vw, 1.15rem)',
                           fontWeight: 600,
-                          letterSpacing: '-0.01em',
+                          letterSpacing: '-0.01em'
                         }}
                       >
                         {item.question}
@@ -1085,7 +1085,7 @@ export default function Home() {
                       lineHeight: 1.2,
                     }}
                   >
-                    Un projet d'espace pause ?
+                    Un projet d'espace-pause ?
                   </h3>
                   <p
                     className="text-[#F5E6D3]/60"
@@ -1094,10 +1094,10 @@ export default function Home() {
                     Audit gratuit, proposition sur-mesure et installation rapide.
                   </p>
                 </div>
-                <div className="flex flex-wrap items-center gap-3 shrink-0">
+                <div className="flex items-center gap-2 sm:gap-3 shrink-0">
                   <motion.a
                     href="/contact"
-                    className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-[#1C0A00] bg-[#DE9E67] rounded-lg"
+                    className="inline-flex items-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 text-sm font-semibold text-[#1C0A00] bg-[#DE9E67] rounded-lg whitespace-nowrap"
                     style={{ fontFamily: 'var(--font-ibm-plex-mono)', letterSpacing: '0.06em', textTransform: 'uppercase', fontSize: '12px' }}
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.97 }}
@@ -1106,7 +1106,7 @@ export default function Home() {
                   </motion.a>
                   <a
                     href="tel:0327371684"
-                    className="inline-flex items-center gap-2 px-6 py-3 text-sm text-[#F5E6D3] border border-[#F5E6D3]/20 rounded-lg hover:border-[#DE9E67]/50 transition-colors"
+                    className="inline-flex items-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 text-sm text-[#F5E6D3] border border-[#F5E6D3]/20 rounded-lg hover:border-[#DE9E67]/50 transition-colors whitespace-nowrap"
                     style={{ fontFamily: 'var(--font-ibm-plex-mono)', letterSpacing: '0.06em', fontSize: '12px' }}
                   >
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -1300,7 +1300,7 @@ export default function Home() {
 
                 {/* Right: Intro + Bullets (desktop only — bullets hidden on mobile) */}
                 <div className="lg:w-[60%] flex flex-col justify-center">
-                  <p className="text-deep-roast/70 leading-relaxed md:mb-8" style={{ fontFamily: 'var(--font-ibm-plex-sans)', fontSize: 'clamp(0.95rem, 1vw, 1.05rem)' }}>
+                  <p className="text-deep-roast/70 leading-relaxed md:mb-8 text-justify" style={{ fontFamily: 'var(--font-ibm-plex-sans)', fontSize: 'clamp(0.95rem, 1vw, 1.05rem)' }}>
                     Nous n'avons pas attendu que ce soit dans l'air du temps. Dès le départ, nous nous sommes posé une question simple : serions-nous fiers de montrer comment nous travaillons à nos enfants ? C'est cette exigence qui oriente nos choix, des cafés que nous sélectionnons jusqu'aux tournées que nous planifions. Pas une posture, une conviction !
                   </p>
 
@@ -1321,6 +1321,71 @@ export default function Home() {
                         </span>
                       </div>
                     ))}
+                  </div>
+
+                  {/* Mobile Marquee — visible on mobile only */}
+                  <div className="md:hidden mt-8 -mx-8 relative overflow-hidden flex flex-col gap-3">
+                    {/* Fade Edges */}
+                    <div className="absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-coffee-cream to-transparent z-10 pointer-events-none"></div>
+                    <div className="absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-coffee-cream to-transparent z-10 pointer-events-none"></div>
+
+                    {/* Line 1: Right-moving */}
+                    <div className="flex">
+                      <motion.div
+                        className="flex gap-3 shrink-0 px-2"
+                        animate={{ x: ["-50%", "0%"] }}
+                        transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+                      >
+                        {[
+                          "Cafés labellisés Bio et Équitable",
+                          "Revalorisation à 100% du marc de café",
+                          "Cafés labellisés Bio et Équitable",
+                          "Revalorisation à 100% du marc de café",
+                          "Cafés labellisés Bio et Équitable",
+                          "Revalorisation à 100% du marc de café",
+                          "Cafés labellisés Bio et Équitable",
+                          "Revalorisation à 100% du marc de café"
+                        ].map((item, i) => (
+                          <div key={i} className="flex items-center gap-2 bg-white/60 border border-border px-4 py-2 rounded-full whitespace-nowrap shadow-sm">
+                            <span className="text-golden-extraction shrink-0 bg-white p-1 rounded-full shadow-sm">
+                              <Award className="w-3.5 h-3.5" />
+                            </span>
+                            <span className="text-deep-roast/80 leading-snug font-medium text-sm" style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}>
+                              {item}
+                            </span>
+                          </div>
+                        ))}
+                      </motion.div>
+                    </div>
+
+                    {/* Line 2: Left-moving */}
+                    <div className="flex">
+                      <motion.div
+                        className="flex gap-3 shrink-0 px-2"
+                        animate={{ x: ["0%", "-50%"] }}
+                        transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+                      >
+                        {[
+                          "Machines éco-performantes",
+                          "Tournées optimisées et éco-conduite",
+                          "Machines éco-performantes",
+                          "Tournées optimisées et éco-conduite",
+                          "Machines éco-performantes",
+                          "Tournées optimisées et éco-conduite",
+                          "Machines éco-performantes",
+                          "Tournées optimisées et éco-conduite"
+                        ].map((item, i) => (
+                          <div key={i} className="flex items-center gap-2 bg-white/60 border border-border px-4 py-2 rounded-full whitespace-nowrap shadow-sm">
+                            <span className="text-golden-extraction shrink-0 bg-white p-1 rounded-full shadow-sm">
+                              <Award className="w-3.5 h-3.5" />
+                            </span>
+                            <span className="text-deep-roast/80 leading-snug font-medium text-sm" style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}>
+                              {item}
+                            </span>
+                          </div>
+                        ))}
+                      </motion.div>
+                    </div>
                   </div>
                 </div>
 
@@ -1355,25 +1420,6 @@ export default function Home() {
                 />
               </div>
             </motion.div>
-
-            {/* Bullets — mobile only, below the image */}
-            <div className="grid md:hidden grid-cols-1 gap-y-4">
-              {[
-                "Cafés labellisés Bio et Équitable",
-                "Revalorisation à 100% du marc de café",
-                "Machines éco-performantes",
-                "Tournées optimisées et éco-conduite"
-              ].map((item, i) => (
-                <div key={i} className="flex items-center gap-3">
-                  <span className="text-golden-extraction shrink-0 bg-white p-1.5 rounded-full shadow-sm">
-                    <Award className="w-4 h-4" />
-                  </span>
-                  <span className="text-deep-roast/80 leading-snug font-medium" style={{ fontFamily: 'var(--font-ibm-plex-sans)', fontSize: '0.95rem' }}>
-                    {item}
-                  </span>
-                </div>
-              ))}
-            </div>
 
           </div>
         </section>
