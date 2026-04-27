@@ -414,7 +414,7 @@ function HeroSection() {
         justifyContent: 'center',
         position: 'relative',
         overflow: 'hidden',
-        padding: 'clamp(48px, 8vw, 100px) clamp(24px, 6vw, 80px)',
+        padding: 'clamp(32px, 4vw, 72px) clamp(24px, 6vw, 80px)',
       }}
     >
       {/* Light dot grid on dark */}
@@ -1278,8 +1278,8 @@ function HeroMoodboardSection() {
       <div
         style={{
           position: 'sticky',
-          top: 68,
-          height: 'calc(100vh - 68px)',
+          top: 84,
+          height: 'calc(100vh - 84px)',
           overflow: 'hidden',
           backgroundColor: '#F9F1E8',
           padding: 'clamp(10px, 1.2vw, 14px) clamp(16px, 4vw, 48px)',
@@ -1329,6 +1329,10 @@ function HeroMoodboardSection() {
 }
 
 export default function AboutPage() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div
       style={{

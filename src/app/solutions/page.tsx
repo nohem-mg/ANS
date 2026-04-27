@@ -985,6 +985,10 @@ function TourneesSection() {
 
 // ─── PAGE ────────────────────────────────────────────────────────────────────
 export default function SolutionsPage() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div style={{ backgroundColor: C.bg, color: C.textPrimary, fontFamily: FONT.body, minHeight: '100vh' }}>
 
@@ -1012,13 +1016,20 @@ export default function SolutionsPage() {
           }
           .solutions-hero-desc { font-size: 0.92rem !important; line-height: 1.6 !important; margin-bottom: 0 !important; }
         }
+        @media (min-width: 768px) and (max-height: 900px) {
+          .solutions-hero-widget { padding-top: 24px !important; padding-bottom: 24px !important; }
+          .solutions-hero-label { margin-bottom: 16px !important; }
+          .solutions-hero-h1 { margin-bottom: 16px !important; }
+        }
       `}</style>
 
       <section
         className="solutions-hero-section"
         style={{
           backgroundColor: '#FAF2E9',
-          height: 'calc(100vh - 68px)',
+          height: 'calc(100vh - 84px)',
+          maxHeight: 'calc(100vh - 84px)',
+          overflow: 'hidden',
           padding: 'clamp(10px, 1.2vw, 14px) clamp(16px, 4vw, 48px)',
           boxSizing: 'border-box',
           display: 'flex',
@@ -1032,6 +1043,7 @@ export default function SolutionsPage() {
           className="solutions-hero-widget"
           style={{
             flex: 1,
+            minHeight: 0,
             backgroundColor: C.bg,
             borderRadius: 20,
             overflow: 'hidden',
@@ -1041,7 +1053,7 @@ export default function SolutionsPage() {
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
-            padding: 'clamp(48px, 8vw, 100px) clamp(24px, 6vw, 80px)',
+            padding: 'clamp(32px, 4vw, 72px) clamp(24px, 6vw, 80px)',
           }}
         >
           {/* Background Image */}
