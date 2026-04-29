@@ -1,8 +1,8 @@
 'use client';
 
-import { useRef, useEffect, useState } from 'react';
-import { motion, useInView, useScroll, useTransform } from 'framer-motion';
-import { ArrowRight, Users, MapPin, Cog, Handshake, ShieldCheck, Zap, Headphones, Store, Coffee, Coins, Building2, Factory, HeartPulse, GraduationCap, Truck } from 'lucide-react';
+import { useRef, useEffect, type ReactNode } from 'react';
+import { motion } from 'framer-motion';
+import { ArrowRight, Users, MapPin, Headphones, Store, Building2, Factory, HeartPulse, GraduationCap, Truck } from 'lucide-react';
 import Image from 'next/image';
 
 // ─── Design tokens ───────────────────────────────────────────────────────────
@@ -24,123 +24,380 @@ const FONT = {
 
 const EASE_OUT = [0.25, 0.46, 0.45, 0.94] as const;
 
-// ─── KEY FIGURES DATA ────────────────────────────────────────────────────────
-const FIGURES = [
-    { value: 47, suffix: '', label: 'ADHÉRENTS', description: 'répartis sur toute la France\ndont 2 en Belgique', icon: <Headphones size={48} strokeWidth={1.5} /> },
-    { value: 119, suffix: '', label: 'AGENCES', description: 'dont 2 en Belgique\net 1 au Luxembourg', icon: <Store size={48} strokeWidth={1.5} /> },
-    { value: 2200, suffix: '', label: 'COLLABORATEURS', description: 'dont 680 approvisionneurs,\n160 techniciens, administratifs,\ncommerciaux, logistique,\ndirection...', icon: <Users size={48} strokeWidth={1.5} /> },
-    { value: 190, suffix: ' M€', label: "DE CHIFFRE D'AFFAIRES EN 2024", description: '', icon: <Coins size={48} strokeWidth={1.5} /> },
-    { value: 60000, suffix: '', label: 'DISTRIBUTEURS AUTOMATIQUES', description: '', icon: <Coffee size={48} strokeWidth={1.5} /> },
-    { value: 15000, suffix: '', label: 'SITES GÉRÉS', description: '', icon: <MapPin size={48} strokeWidth={1.5} /> },
+/** Titres seuls — section « Pourquoi Prodia+ fait la différence » (schéma à part) */
+const AVANTAGE_TITLES = [
+    'Pouvoir de négociation',
+    'Mutualisation logistique',
+    'Standards de qualité',
+    "Partage d'expertise",
+    'Proximité locale',
+    'Innovation continue',
+] as const;
+
+/** Bento « en chiffres » : 1 carte mise en avant + 4 cartes (indices 01–04 / 05 ; la mise en avant porte « * »). */
+const KEY_FIGURES_TOTAL = 5;
+
+const FEATURED_CHIFFRE = {
+    value: 60000 as const,
+    suffix: '',
+    label: 'Distributeurs automatiques',
+    headline: 'Le parc le plus dense du marché.',
+    description: 'déployés et exploités en France et au Benelux par les membres du réseau.',
+};
+
+const CHIFFRES_BENTO_PETITS: readonly {
+    value: number;
+    suffix: string;
+    label: string;
+    description: string;
+    icon: ReactNode;
+}[] = [
+    { value: 47, suffix: '', label: 'Adhérents', description: 'répartis sur toute la France, dont 2 en Belgique.', icon: <Headphones size={22} strokeWidth={1.5} aria-hidden /> },
+    { value: 119, suffix: '', label: 'Agences', description: 'dont 2 en Belgique et 1 au Luxembourg.', icon: <Store size={22} strokeWidth={1.5} aria-hidden /> },
+    { value: 2200, suffix: '', label: 'Collaborateurs', description: '680 approvisionneurs, 160 techniciens, administratifs, commerciaux, logistique, direction...', icon: <Users size={22} strokeWidth={1.5} aria-hidden /> },
+    { value: 15000, suffix: '', label: 'Sites gérés', description: 'sièges, sites industriels, hôpitaux, universités, hôtels, plateformes…', icon: <MapPin size={22} strokeWidth={1.5} aria-hidden /> },
 ];
 
-// ─── ADVANTAGES DATA ─────────────────────────────────────────────────────────
-const ADVANTAGES = [
-    {
-        icon: <Handshake size={24} strokeWidth={1.5} />,
-        title: 'Pouvoir de Négociation',
-        description: "La force du collectif : des conditions d'achat négociées auprès des plus grands fabricants européens, répercutées sur chaque membre.",
-    },
-    {
-        icon: <Cog size={24} strokeWidth={1.5} />,
-        title: 'Mutualisation Logistique',
-        description: "Partage des infrastructures logistiques, des outils de gestion et des plateformes d'approvisionnement pour une efficacité maximale.",
-    },
-    {
-        icon: <ShieldCheck size={24} strokeWidth={1.5} />,
-        title: 'Standards de Qualité',
-        description: "Un cahier des charges commun exigeant garantit un niveau de service homogène sur tout le territoire, quelle que soit l'entreprise membre.",
-    },
-    {
-        icon: <Users size={24} strokeWidth={1.5} />,
-        title: "Partage d'Expertise",
-        description: "Séminaires, formations croisées et retours d'expérience permanents. Chaque membre bénéficie du savoir-faire de l'ensemble du réseau.",
-    },
-    {
-        icon: <MapPin size={24} strokeWidth={1.5} />,
-        title: 'Proximité Locale',
-        description: "Chaque membre est ancré dans son territoire. Vous bénéficiez de la réactivité d'un acteur local adossé à un réseau national.",
-    },
-    {
-        icon: <Zap size={24} strokeWidth={1.5} />,
-        title: 'Innovation Continue',
-        description: "Veille technologique mutualisée : nouvelles machines connectées, paiement sans contact, solutions éco-responsables déployées en priorité.",
-    },
-];
-
-// ─── ANIMATED COUNTER ────────────────────────────────────────────────────────
-function AnimatedCounter({ target, suffix, duration = 2 }: { target: number; suffix: string; duration?: number }) {
-    const ref = useRef<HTMLSpanElement>(null);
-    const isInView = useInView(ref, { once: true, margin: '-40px' });
-    const [count, setCount] = useState(0);
-
-    useEffect(() => {
-        if (!isInView) return;
-        let start = 0;
-        const step = target / (duration * 60);
-        const timer = setInterval(() => {
-            start += step;
-            if (start >= target) {
-                setCount(target);
-                clearInterval(timer);
-            } else {
-                setCount(Math.floor(start));
-            }
-        }, 1000 / 60);
-        return () => clearInterval(timer);
-    }, [isInView, target, duration]);
-
-    const formatted = count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+// ─── Chiffres statiques (pas d’animation « compteur ») ─────────────────────────
+function StatNumber({
+    value,
+    suffix,
+    color,
+    fontSize,
+}: {
+    value: number;
+    suffix: string;
+    color: string;
+    fontSize: string;
+}) {
+    const formatted = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
 
     return (
-        <span ref={ref} style={{
+        <span style={{
             fontFamily: FONT.display,
-            fontSize: 'clamp(36px, 6vw, 64px)',
+            fontSize,
             fontWeight: 700,
-            color: C.accent,
-            letterSpacing: '-0.03em',
+            color,
+            letterSpacing: '-0.035em',
             lineHeight: 1,
+            fontVariantNumeric: 'tabular-nums',
         }}>
             {formatted}{suffix}
         </span>
     );
 }
-// ─── ADVANTAGE CARD ──────────────────────────────────────────────────────────
-function AdvantageCard({ adv, index }: { adv: typeof ADVANTAGES[0]; index: number }) {
-    const ref = useRef<HTMLDivElement>(null);
-    const isInView = useInView(ref, { once: true, margin: '-40px' });
+
+function BentoFeaturedSection() {
+    const rootRef = useRef<HTMLElement>(null);
+
+    useEffect(() => {
+        const el = rootRef.current;
+        if (!el) return () => {};
+        const observer = new IntersectionObserver(
+            ([e]) => {
+                if (e?.isIntersecting) el.classList.add('kf-bento-in');
+            },
+            { threshold: 0.12 },
+        );
+        observer.observe(el);
+        return () => observer.disconnect();
+    }, []);
 
     return (
-        <motion.div
-            ref={ref}
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : undefined}
-            transition={{ duration: 0.7, delay: index * 0.08, ease: EASE_OUT }}
-            style={{
-                padding: 'clamp(28px, 3vw, 40px)',
-                borderBottom: `1px solid ${C.divider}`,
-                borderRight: `1px solid ${C.divider}`,
-            }}
-        >
-            <div style={{ color: C.accent, marginBottom: 16 }}>
-                {adv.icon}
-            </div>
-            <h3 style={{
-                fontFamily: FONT.display,
-                fontSize: 17, fontWeight: 600,
-                color: C.textPrimary,
-                margin: '0 0 10px',
-                letterSpacing: '-0.01em',
-            }}>
-                {adv.title}
-            </h3>
-            <p style={{
-                fontFamily: FONT.body, fontSize: 13,
-                color: C.textMuted, lineHeight: 1.7, margin: 0,
-            }}>
-                {adv.description}
-            </p>
-        </motion.div>
+        <>
+            <style>{`
+                .kf-bento-wrap {
+                    display: grid;
+                    grid-template-columns: 1fr;
+                    gap: clamp(10px, 1.1vw, 14px);
+                    align-items: stretch;
+                }
+                @media (min-width: 1024px) {
+                    .kf-bento-wrap {
+                        grid-template-columns: 1fr 1fr;
+                    }
+                    .kf-bento-cluster {
+                        display: grid;
+                        grid-template-columns: 1fr 1fr;
+                        grid-auto-rows: 1fr;
+                        gap: clamp(10px, 1.1vw, 14px);
+                    }
+                    .kf-bento-featured {
+                        min-height: 0;
+                    }
+                }
+                @media (min-width: 640px) and (max-width: 1023px) {
+                    .kf-bento-cluster {
+                        display: grid;
+                        grid-template-columns: repeat(2, minmax(0, 1fr));
+                        gap: clamp(10px, 1.2vw, 14px);
+                    }
+                }
+                @media (max-width: 639px) {
+                    .kf-bento-cluster {
+                        display: grid;
+                        grid-template-columns: 1fr;
+                        gap: clamp(10px, 1.2vw, 14px);
+                    }
+                }
+
+                .kf-bento-featured {
+                    position: relative;
+                    border-radius: 18px;
+                    padding: clamp(22px, 2.8vw, 34px);
+                    background: radial-gradient(ellipse at 42% 32%, rgba(90,52,38,1) 0%, #231008 62%, #1a0c06 100%);
+                    border: 1px solid rgba(245, 230, 211, 0.06);
+                    color: #F5E6D3;
+                    overflow: hidden;
+                    isolation: isolate;
+                    display: flex;
+                    flex-direction: column;
+                    min-height: clamp(280px, 52vw, 420px);
+                }
+                .kf-bento-featured-dot {
+                    position: absolute;
+                    inset: 0;
+                    background-image: radial-gradient(circle, rgba(245,230,211,0.12) 1px, transparent 1px);
+                    background-size: 28px 28px;
+                    opacity: 0.28;
+                    pointer-events: none;
+                    z-index: 0;
+                }
+                .kf-bento-featured-glow {
+                    position: absolute;
+                    width: min(460px, 90vw);
+                    height: min(460px, 90vw);
+                    border-radius: 50%;
+                    right: -18%;
+                    top: -30%;
+                    background: radial-gradient(circle, rgba(200,118,58,0.28) 0%, transparent 65%);
+                    filter: blur(10px);
+                    pointer-events: none;
+                    z-index: 0;
+                }
+                .kf-bento-featured > .kf-inner { position: relative; z-index: 1; flex: 1; display: flex; flex-direction: column; gap: clamp(14px, 2vw, 20px); }
+                .kf-bento-fe-index {
+                    align-self: flex-end;
+                    font-family: ${FONT.mono};
+                    font-size: 10px;
+                    letter-spacing: 0.2em;
+                    color: rgba(245,230,211,0.45);
+                    text-transform: uppercase;
+                }
+                .kf-bento-fe-num { line-height: 0.94; margin-top: 4px; }
+                .kf-bento-fe-label {
+                    font-family: ${FONT.display};
+                    font-size: clamp(16px, 1.85vw, 22px);
+                    font-weight: 600;
+                    color: #F5E6D3;
+                    margin: 0;
+                    letter-spacing: -0.02em;
+                }
+                .kf-bento-fe-headline {
+                    font-family: ${FONT.display};
+                    font-size: clamp(13px, 1.35vw, 17px);
+                    font-style: italic;
+                    color: ${C.gold};
+                    margin: 0;
+                    line-height: 1.35;
+                }
+                .kf-bento-fe-desc {
+                    font-family: ${FONT.body};
+                    font-size: 13px;
+                    line-height: 1.6;
+                    color: rgba(245,230,211,0.72);
+                    margin: 0;
+                    margin-top: auto;
+                    padding-top: 8px;
+                    max-width: 46ch;
+                }
+                .kf-bento-fe-bar {
+                    position: absolute;
+                    left: 0;
+                    bottom: 0;
+                    height: 2px;
+                    width: 0%;
+                    background: linear-gradient(90deg, ${C.accent}, ${C.gold});
+                    transition: width 1.2s cubic-bezier(0.16,1,0.3,1) 0.1s;
+                    z-index: 2;
+                }
+                .kf-bento-in .kf-bento-fe-bar { width: 56%; }
+
+                .kf-bento-cell {
+                    position: relative;
+                    background: #FFFBF4;
+                    border: 1px solid ${C.divider};
+                    border-radius: 14px;
+                    padding: clamp(16px, 1.9vw, 22px);
+                    display: flex;
+                    flex-direction: column;
+                    gap: clamp(12px, 1.7vw, 16px);
+                    overflow: hidden;
+                    transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), box-shadow 0.4s, border-color 0.4s;
+                }
+                .kf-bento-cell:hover {
+                    transform: translateY(-3px);
+                    box-shadow: 0 14px 32px rgba(43,18,0,0.065);
+                    border-color: rgba(200,118,58,0.28);
+                }
+                .kf-bento-cell-top {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    gap: 10px;
+                }
+                .kf-bento-cell-ic {
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 32px;
+                    height: 32px;
+                    border-radius: 8px;
+                    background: rgba(200,118,58,0.1);
+                    color: ${C.accent};
+                    flex-shrink: 0;
+                }
+                .kf-bento-cell-ic svg { width: 16px; height: 16px; }
+                .kf-bento-cell-index {
+                    font-family: ${FONT.mono};
+                    font-size: 9px;
+                    letter-spacing: 0.16em;
+                    color: rgba(43,18,0,0.42);
+                    text-transform: uppercase;
+                    white-space: nowrap;
+                }
+                .kf-bento-cell-num { line-height: 0.94; text-align: left; }
+                .kf-bento-cell-label {
+                    font-family: ${FONT.display};
+                    font-size: clamp(13px, 1.22vw, 15px);
+                    font-weight: 600;
+                    color: ${C.textPrimary};
+                    margin: 0;
+                    letter-spacing: -0.015em;
+                }
+                .kf-bento-cell-desc {
+                    font-family: ${FONT.body};
+                    font-size: 11.8px;
+                    color: ${C.textMuted};
+                    line-height: 1.5;
+                    margin: 0;
+                }
+                .kf-bento-ce-bar {
+                    position: absolute;
+                    left: 0;
+                    bottom: 0;
+                    height: 2px;
+                    width: 0%;
+                    background: linear-gradient(90deg, ${C.accent}, ${C.gold});
+                    transition: width 1s cubic-bezier(0.16,1,0.3,1);
+                }
+                .kf-bento-cell:hover .kf-bento-ce-bar { width: 100%; }
+                .kf-bento-in .kf-bento-ce-bar { width: 52%; }
+
+                .kf-bento-star-lbl { letter-spacing: 0.2em; }
+            `}</style>
+
+            <section
+                ref={rootRef}
+                id="kf-bento-anchor"
+                className="kf-bento-block"
+                style={{
+                    padding: 'clamp(48px, 8vw, 92px) clamp(20px, 4vw, 36px)',
+                    backgroundColor: C.bg,
+                }}
+            >
+                <div style={{ maxWidth: 1280, margin: '0 auto' }}>
+                    <motion.div
+                        initial={{ opacity: 0, y: 16 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.7, ease: EASE_OUT }}
+                        style={{ marginBottom: 'clamp(36px, 7vw, 52px)', textAlign: 'center' }}
+                    >
+                        <span style={{
+                            fontFamily: FONT.mono, fontSize: 10, letterSpacing: '0.22em',
+                            color: C.accent, textTransform: 'uppercase', display: 'block', marginBottom: 16,
+                        }}>
+                            En chiffres
+                        </span>
+                        <h2 style={{
+                            fontFamily: FONT.display,
+                            fontSize: 'clamp(28px, 4vw, 44px)',
+                            fontWeight: 600, color: C.textPrimary,
+                            letterSpacing: '-0.02em', margin: 0,
+                        }}>
+                            La Force du Réseau
+                        </h2>
+                    </motion.div>
+
+                    <div className="kf-bento-wrap">
+                        <motion.article
+                            className="kf-bento-featured"
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.75, ease: EASE_OUT }}
+                        >
+                            <div className="kf-bento-featured-dot" aria-hidden />
+                            <div className="kf-bento-featured-glow" aria-hidden />
+
+                            <div className="kf-inner">
+                                <div className="kf-bento-fe-index" aria-hidden>
+                                    <span className="kf-bento-star-lbl"><span aria-hidden>*</span> / {String(KEY_FIGURES_TOTAL).padStart(2, '0')}</span>
+                                </div>
+                                <div className="kf-bento-fe-num">
+                                    <StatNumber
+                                        value={FEATURED_CHIFFRE.value}
+                                        suffix={FEATURED_CHIFFRE.suffix}
+                                        color="#F5E6D3"
+                                        fontSize="clamp(42px, 7vw, 92px)"
+                                    />
+                                </div>
+                                <p className="kf-bento-fe-label">{FEATURED_CHIFFRE.label}</p>
+                                <p className="kf-bento-fe-headline">{FEATURED_CHIFFRE.headline}</p>
+                                <p className="kf-bento-fe-desc">{FEATURED_CHIFFRE.description}</p>
+                            </div>
+                            <span className="kf-bento-fe-bar" aria-hidden />
+                        </motion.article>
+
+                        <div className="kf-bento-cluster" role="list">
+                            {CHIFFRES_BENTO_PETITS.map((fig, idx) => {
+                                const idxStr = String(idx + 1).padStart(2, '0');
+                                const totalStr = String(KEY_FIGURES_TOTAL).padStart(2, '0');
+
+                                return (
+                                    <motion.article
+                                        key={fig.label}
+                                        role="listitem"
+                                        className="kf-bento-cell"
+                                        initial={{ opacity: 0, y: 16 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true }}
+                                        transition={{ duration: 0.65, delay: idx * 0.06, ease: EASE_OUT }}
+                                    >
+                                        <div className="kf-bento-cell-top">
+                                            <span className="kf-bento-cell-ic">{fig.icon}</span>
+                                            <span className="kf-bento-cell-index">{idxStr} / {totalStr}</span>
+                                        </div>
+                                        <div className="kf-bento-cell-num">
+                                            <StatNumber
+                                                value={fig.value}
+                                                suffix={fig.suffix}
+                                                color="#2B1200"
+                                                fontSize="clamp(26px, 3.6vw, 44px)"
+                                            />
+                                        </div>
+                                        <p className="kf-bento-cell-label">{fig.label}</p>
+                                        <p className="kf-bento-cell-desc">{fig.description}</p>
+                                        <span className="kf-bento-ce-bar" aria-hidden />
+                                    </motion.article>
+                                );
+                            })}
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </>
     );
 }
 
@@ -328,144 +585,79 @@ export default function GroupePage() {
                 </div>
             </section>
 
-            {/* ── CHIFFRES CLÉS ── */}
+            <BentoFeaturedSection />
+
+            {/* ── AVANTAGES DU RÉSEAU (titres + schéma) ── */}
             <section style={{
-                backgroundColor: '#FAF2E9',
-                padding: 'clamp(32px, 5vw, 64px) 24px clamp(48px, 8vw, 80px)',
+                padding: 'clamp(40px, 5vw, 64px) clamp(20px, 4vw, 32px) clamp(72px, 10vw, 120px)',
+                backgroundColor: C.bg,
             }}>
-                <div style={{ maxWidth: 1280, margin: '0 auto' }}>
+                <style>{`
+                    .adv-simple {
+                        display: grid;
+                        grid-template-columns: 1fr;
+                        gap: clamp(32px, 5vw, 48px);
+                        align-items: center;
+                    }
+                    @media (min-width: 768px) {
+                        .adv-simple {
+                            grid-template-columns: minmax(0, 1fr) minmax(200px, 280px);
+                            gap: clamp(40px, 6vw, 64px);
+                        }
+                    }
+                    .adv-simple-list {
+                        list-style: none;
+                        margin: 0;
+                        padding: 0;
+                        display: flex;
+                        flex-direction: column;
+                        gap: clamp(14px, 2vw, 18px);
+                    }
+                    .adv-simple-row {
+                        display: flex;
+                        align-items: baseline;
+                        gap: 14px;
+                        padding-bottom: clamp(12px, 1.5vw, 16px);
+                        border-bottom: 1px solid rgba(43,18,0,0.07);
+                    }
+                    .adv-simple-row:last-child { border-bottom: none; padding-bottom: 0; }
+                    .adv-simple-idx {
+                        font-family: ${FONT.mono};
+                        font-size: 10px;
+                        letter-spacing: 0.14em;
+                        color: ${C.accent};
+                        opacity: 0.85;
+                        min-width: 1.5em;
+                        flex-shrink: 0;
+                    }
+                    .adv-simple-title {
+                        font-family: ${FONT.display};
+                        font-size: clamp(15px, 1.5vw, 18px);
+                        font-weight: 600;
+                        color: ${C.textPrimary};
+                        letter-spacing: -0.02em;
+                        line-height: 1.35;
+                    }
+                    .adv-simple-schema {
+                        width: 100%;
+                        max-width: 260px;
+                        margin: 0 auto;
+                        aspect-ratio: 1;
+                    }
+                    .adv-simple-schema svg {
+                        width: 100%;
+                        height: auto;
+                        display: block;
+                    }
+                `}</style>
+
+                <div style={{ maxWidth: 960, margin: '0 auto' }}>
                     <motion.div
                         initial={{ opacity: 0, y: 16 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.7, ease: EASE_OUT }}
-                        style={{ textAlign: 'center', marginBottom: 64 }}
-                    >
-                        <span style={{
-                            fontFamily: FONT.mono, fontSize: 10, letterSpacing: '0.22em',
-                            color: C.accent, textTransform: 'uppercase', display: 'block', marginBottom: 16,
-                        }}>
-                            En chiffres
-                        </span>
-                        <h2 style={{
-                            fontFamily: FONT.display,
-                            fontSize: 'clamp(28px, 4vw, 44px)',
-                            fontWeight: 600, color: C.textPrimary,
-                            letterSpacing: '-0.02em', margin: 0,
-                        }}>
-                            La Force du Réseau
-                        </h2>
-                    </motion.div>
-
-                    <div style={{
-                        display: 'grid',
-                        gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-                        gap: 'clamp(24px, 3vw, 40px)',
-                    }}>
-                        {FIGURES.map((fig, i) => (
-                            <motion.div
-                                key={fig.label}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: i * 0.1, duration: 0.7, ease: EASE_OUT }}
-                                style={{
-                                    textAlign: 'center',
-                                    padding: '32px 16px',
-                                    borderRadius: 12,
-                                    border: `1px solid ${C.divider}`,
-                                    background: '#FAF2E9',
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    alignItems: 'center',
-                                }}
-                            >
-                                <div style={{ color: C.textPrimary, marginBottom: 16 }}>{fig.icon}</div>
-                                <AnimatedCounter target={fig.value} suffix={fig.suffix} />
-                                <p style={{
-                                    fontFamily: FONT.display, fontSize: 15, fontWeight: 600,
-                                    color: C.textPrimary, margin: '16px 0 6px',
-                                }}>
-                                    {fig.label}
-                                </p>
-                                {fig.description && (
-                                    <p style={{
-                                        fontFamily: FONT.body, fontSize: 12,
-                                        color: C.textMuted, margin: 0, lineHeight: 1.5,
-                                        whiteSpace: 'pre-line'
-                                    }}>
-                                        {fig.description}
-                                    </p>
-                                )}
-                            </motion.div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* Bandeau Ils Nous Font Confiance (Marquee) */}
-            <section style={{ padding: 'clamp(40px, 6vw, 64px) 0', backgroundColor: '#FAF2E9', borderTop: '1px solid rgba(43,18,0,0.05)' }}>
-                <div className="w-full flex flex-col items-center overflow-hidden">
-                    <span style={{ 
-                        fontFamily: FONT.mono, fontSize: 10, letterSpacing: '0.22em', 
-                        color: 'rgba(43,18,0,0.4)', textTransform: 'uppercase', 
-                        marginBottom: 'clamp(24px, 4vw, 32px)', textAlign: 'center', display: 'block' 
-                    }}>
-                        Ils nous font confiance
-                    </span>
-                    
-                    <div 
-                      className="w-full flex overflow-hidden relative"
-                      style={{
-                        maskImage: 'linear-gradient(to right, transparent, black 15%, black 85%, transparent)',
-                        WebkitMaskImage: 'linear-gradient(to right, transparent, black 15%, black 85%, transparent)'
-                      }}
-                    >
-                      <motion.div
-                        animate={{ x: ["0%", "-50%"] }}
-                        transition={{
-                          repeat: Infinity,
-                          ease: "linear",
-                          duration: 35,
-                        }}
-                        className="flex items-center gap-16 md:gap-32 w-max"
-                      >
-                        {[...Array(2)].map((_, loopIdx) => (
-                          <div key={loopIdx} className="flex items-center gap-16 md:gap-32">
-                            {[
-                              { label: 'PME & Grands Groupes', icon: <Building2 className="w-6 h-6 sm:w-8 sm:h-8 mb-3 opacity-60 text-[#2B1200] group-hover:text-[#C8763A] group-hover:opacity-100 transition-all duration-300" /> },
-                              { label: 'Industrie', icon: <Factory className="w-6 h-6 sm:w-8 sm:h-8 mb-3 opacity-60 text-[#2B1200] group-hover:text-[#C8763A] group-hover:opacity-100 transition-all duration-300" /> },
-                              { label: 'Santé & Hôpitaux', icon: <HeartPulse className="w-6 h-6 sm:w-8 sm:h-8 mb-3 opacity-60 text-[#2B1200] group-hover:text-[#C8763A] group-hover:opacity-100 transition-all duration-300" /> },
-                              { label: 'Universités', icon: <GraduationCap className="w-6 h-6 sm:w-8 sm:h-8 mb-3 opacity-60 text-[#2B1200] group-hover:text-[#C8763A] group-hover:opacity-100 transition-all duration-300" /> },
-                              { label: 'Transport & Logistique', icon: <Truck className="w-6 h-6 sm:w-8 sm:h-8 mb-3 opacity-60 text-[#2B1200] group-hover:text-[#C8763A] group-hover:opacity-100 transition-all duration-300" /> },
-                              { label: 'Hôtellerie & Retail', icon: <Store className="w-6 h-6 sm:w-8 sm:h-8 mb-3 opacity-60 text-[#2B1200] group-hover:text-[#C8763A] group-hover:opacity-100 transition-all duration-300" /> },
-                            ].map((sector) => (
-                              <div
-                                key={`${loopIdx}-${sector.label}`}
-                                className="flex flex-col items-center text-center group cursor-default min-w-[140px]"
-                              >
-                                {sector.icon}
-                                <span className="font-medium text-xs sm:text-[0.9rem] leading-snug text-[#2B1200]/70 group-hover:text-[#2B1200] transition-colors duration-300" style={{ fontFamily: FONT.body }}>
-                                  {sector.label}
-                                </span>
-                              </div>
-                            ))}
-                          </div>
-                        ))}
-                      </motion.div>
-                    </div>
-                </div>
-            </section>
-
-            {/* ── AVANTAGES DU RÉSEAU ── */}
-            <section style={{ padding: 'clamp(48px, 6vw, 64px) 24px clamp(64px, 10vw, 128px) 24px' }}>
-                <div style={{ maxWidth: 1280, margin: '0 auto' }}>
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.8, ease: EASE_OUT }}
-                        style={{ marginBottom: 64 }}
+                        transition={{ duration: 0.6, ease: EASE_OUT }}
+                        style={{ marginBottom: 'clamp(36px, 6vw, 48px)' }}
                     >
                         <span style={{
                             fontFamily: FONT.mono, fontSize: 10, letterSpacing: '0.22em',
@@ -475,26 +667,85 @@ export default function GroupePage() {
                         </span>
                         <h2 style={{
                             fontFamily: FONT.display,
-                            fontSize: 'clamp(28px, 4vw, 48px)',
+                            fontSize: 'clamp(26px, 3.6vw, 44px)',
                             fontWeight: 600, color: C.textPrimary,
                             letterSpacing: '-0.02em', lineHeight: 1.15,
-                            margin: '0 0 16px',
+                            margin: 0,
                         }}>
                             Pourquoi Prodia+ fait la différence
                         </h2>
                     </motion.div>
 
-                    <div style={{
-                        display: 'grid',
-                        gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))',
-                        gap: 0,
-                    }}>
-                        {ADVANTAGES.map((adv, i) => (
-                            <AdvantageCard key={adv.title} adv={adv} index={i} />
-                        ))}
+                    <div className="adv-simple">
+                        <ul className="adv-simple-list">
+                            {AVANTAGE_TITLES.map((title, i) => (
+                                <motion.li
+                                    key={title}
+                                    className="adv-simple-row"
+                                    initial={{ opacity: 0, x: -8 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.4, delay: i * 0.05, ease: EASE_OUT }}
+                                >
+                                    <span className="adv-simple-idx">{String(i + 1).padStart(2, '0')}</span>
+                                    <span className="adv-simple-title">{title}</span>
+                                </motion.li>
+                            ))}
+                        </ul>
+
+                        <motion.div
+                            className="adv-simple-schema"
+                            initial={{ opacity: 0, scale: 0.97 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.55, ease: EASE_OUT }}
+                            aria-hidden
+                        >
+                            <svg viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="110" cy="110" r="88" stroke="rgba(200,118,58,0.12)" strokeWidth="1" />
+                                {[0, 60, 120, 180, 240, 300].map((deg) => {
+                                    const r = 78;
+                                    const a = (deg * Math.PI) / 180;
+                                    const x2 = 110 + r * Math.cos(a - Math.PI / 2);
+                                    const y2 = 110 + r * Math.sin(a - Math.PI / 2);
+                                    return (
+                                        <line
+                                            key={deg}
+                                            x1="110"
+                                            y1="110"
+                                            x2={x2}
+                                            y2={y2}
+                                            stroke="rgba(200,118,58,0.25)"
+                                            strokeWidth="1"
+                                            strokeDasharray="3 4"
+                                        />
+                                    );
+                                })}
+                                <circle cx="110" cy="110" r="22" fill="rgba(200,118,58,0.12)" stroke="#C8763A" strokeWidth="1.4" />
+                                <circle cx="110" cy="110" r="5" fill="#C8763A" opacity="0.35" />
+                                {[0, 60, 120, 180, 240, 300].map((deg) => {
+                                    const r = 78;
+                                    const a = (deg * Math.PI) / 180 - Math.PI / 2;
+                                    const cx = 110 + r * Math.cos(a);
+                                    const cy = 110 + r * Math.sin(a);
+                                    return (
+                                        <circle
+                                            key={`n-${deg}`}
+                                            cx={cx}
+                                            cy={cy}
+                                            r="6"
+                                            fill="#FFFBF4"
+                                            stroke="#C8763A"
+                                            strokeWidth="1.2"
+                                        />
+                                    );
+                                })}
+                            </svg>
+                        </motion.div>
                     </div>
                 </div>
             </section>
+
 
             {/* ── ANS DANS LE RÉSEAU ── */}
             <section style={{
@@ -566,6 +817,64 @@ export default function GroupePage() {
                             </motion.a>
                         </div>
                     </motion.div>
+                </div>
+            </section>
+
+            {/* Bandeau « Ils nous font confiance » — bas de page */}
+            <section style={{
+                padding: 'clamp(36px, 6vw, 64px) 0 clamp(44px, 7vw, 80px)',
+                backgroundColor: '#FAF2E9',
+                borderTop: '1px solid rgba(43,18,0,0.06)',
+            }}>
+                <div className="w-full flex flex-col items-center overflow-hidden">
+                    <span style={{
+                        fontFamily: FONT.mono, fontSize: 10, letterSpacing: '0.22em',
+                        color: 'rgba(43,18,0,0.4)', textTransform: 'uppercase',
+                        marginBottom: 'clamp(24px, 4vw, 32px)', textAlign: 'center', display: 'block',
+                    }}>
+                        Ils nous font confiance
+                    </span>
+
+                    <div
+                        className="w-full flex overflow-hidden relative"
+                        style={{
+                            maskImage: 'linear-gradient(to right, transparent, black 15%, black 85%, transparent)',
+                            WebkitMaskImage: 'linear-gradient(to right, transparent, black 15%, black 85%, transparent)',
+                        }}
+                    >
+                        <motion.div
+                            animate={{ x: ['0%', '-50%'] }}
+                            transition={{
+                                repeat: Infinity,
+                                ease: 'linear',
+                                duration: 35,
+                            }}
+                            className="flex items-center gap-16 md:gap-32 w-max"
+                        >
+                            {[...Array(2)].map((_, loopIdx) => (
+                                <div key={loopIdx} className="flex items-center gap-16 md:gap-32">
+                                    {[
+                                        { label: 'PME & Grands Groupes', icon: <Building2 className="w-6 h-6 sm:w-8 sm:h-8 mb-3 opacity-60 text-[#2B1200] group-hover:text-[#C8763A] group-hover:opacity-100 transition-all duration-300" /> },
+                                        { label: 'Industrie', icon: <Factory className="w-6 h-6 sm:w-8 sm:h-8 mb-3 opacity-60 text-[#2B1200] group-hover:text-[#C8763A] group-hover:opacity-100 transition-all duration-300" /> },
+                                        { label: 'Santé & Hôpitaux', icon: <HeartPulse className="w-6 h-6 sm:w-8 sm:h-8 mb-3 opacity-60 text-[#2B1200] group-hover:text-[#C8763A] group-hover:opacity-100 transition-all duration-300" /> },
+                                        { label: 'Universités', icon: <GraduationCap className="w-6 h-6 sm:w-8 sm:h-8 mb-3 opacity-60 text-[#2B1200] group-hover:text-[#C8763A] group-hover:opacity-100 transition-all duration-300" /> },
+                                        { label: 'Transport & Logistique', icon: <Truck className="w-6 h-6 sm:w-8 sm:h-8 mb-3 opacity-60 text-[#2B1200] group-hover:text-[#C8763A] group-hover:opacity-100 transition-all duration-300" /> },
+                                        { label: 'Hôtellerie & Retail', icon: <Store className="w-6 h-6 sm:w-8 sm:h-8 mb-3 opacity-60 text-[#2B1200] group-hover:text-[#C8763A] group-hover:opacity-100 transition-all duration-300" /> },
+                                    ].map((sector) => (
+                                        <div
+                                            key={`${loopIdx}-${sector.label}`}
+                                            className="flex flex-col items-center text-center group cursor-default min-w-[140px]"
+                                        >
+                                            {sector.icon}
+                                            <span className="font-medium text-xs sm:text-[0.9rem] leading-snug text-[#2B1200]/70 group-hover:text-[#2B1200] transition-colors duration-300" style={{ fontFamily: FONT.body }}>
+                                                {sector.label}
+                                            </span>
+                                        </div>
+                                    ))}
+                                </div>
+                            ))}
+                        </motion.div>
+                    </div>
                 </div>
             </section>
         </div>

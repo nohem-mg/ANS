@@ -134,11 +134,9 @@ function ProcessSection() {
       className="process-section-outer"
       style={{
         background: '#FAF2E9',
-        minHeight: '100vh',
-        padding: '120px 0 52px',
+        padding: '120px 0 40px',
         fontFamily: "'DM Sans', sans-serif",
         position: 'relative',
-        overflow: 'hidden',
       }}
     >
       <div
@@ -172,12 +170,12 @@ function ProcessSection() {
 
         @media (max-width: 1024px) {
           .process-main-grid { grid-template-columns: 1fr !important; gap: 48px !important; }
-          .process-section-outer { padding-top: 80px !important; padding-bottom: 52px !important; }
+          .process-section-outer { padding-top: 80px !important; padding-bottom: 40px !important; }
           .process-detail-right { position: static !important; }
         }
 
         @media (max-width: 640px) {
-          .process-section-outer { padding-top: 56px !important; padding-bottom: 52px !important; }
+          .process-section-outer { padding-top: 56px !important; padding-bottom: 40px !important; }
           .process-section-inner { padding: 0 20px !important; }
           .process-detail-card { padding: 22px 18px !important; }
           .process-header { margin-bottom: 40px !important; }
@@ -187,6 +185,12 @@ function ProcessSection() {
           .process-photo-overlay { padding: 22px 18px 18px !important; }
           .process-photo-title { font-size: clamp(20px, 5vw, 26px) !important; }
           .process-nav-cta { width: 100% !important; justify-content: center !important; }
+          /* Hide left nav on mobile */
+          .process-left-nav { display: none !important; }
+          /* Show mobile nav arrows */
+          .process-mobile-nav { display: flex !important; }
+          /* Full width on mobile */
+          .process-main-grid { grid-template-columns: 1fr !important; gap: 0 !important; }
         }
       `}</style>
 
@@ -248,8 +252,7 @@ function ProcessSection() {
         {/* Main grid */}
         <div className="process-main-grid" style={{ display: 'grid', gridTemplateColumns: '340px 1fr', gap: '60px', alignItems: 'start' }}>
           {/* Left nav */}
-          <div
-            style={{
+          <div className="process-left-nav" style={{
               opacity: isVisible ? 1 : 0,
               transform: isVisible ? 'none' : 'translateX(-20px)',
               transition: 'all 0.8s ease 0.2s',
@@ -436,6 +439,67 @@ function ProcessSection() {
                 </span>
               </div>
 
+              {/* Mobile prev/next arrows — hidden on desktop */}
+              <div
+                className="process-mobile-nav"
+                style={{
+                  display: 'none',
+                  position: 'absolute',
+                  top: '50%',
+                  left: 0,
+                  right: 0,
+                  transform: 'translateY(-50%)',
+                  justifyContent: 'space-between',
+                  padding: '0 12px',
+                  pointerEvents: 'none',
+                }}
+              >
+                <button
+                  onClick={() => setActiveStep(i => Math.max(0, i - 1))}
+                  disabled={activeStep === 0}
+                  aria-label="Étape précédente"
+                  style={{
+                    pointerEvents: 'all',
+                    width: '40px', height: '40px',
+                    borderRadius: '50%',
+                    border: 'none',
+                    background: activeStep === 0 ? 'rgba(255,255,255,0.15)' : 'rgba(255,255,255,0.85)',
+                    color: activeStep === 0 ? 'rgba(43,18,0,0.3)' : '#2B1200',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    cursor: activeStep === 0 ? 'default' : 'pointer',
+                    boxShadow: '0 2px 12px rgba(0,0,0,0.2)',
+                    transition: 'all 0.2s',
+                    flexShrink: 0,
+                  }}
+                >
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M10 3L5 8l5 5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </button>
+                <button
+                  onClick={() => setActiveStep(i => Math.min(steps.length - 1, i + 1))}
+                  disabled={activeStep === steps.length - 1}
+                  aria-label="Étape suivante"
+                  style={{
+                    pointerEvents: 'all',
+                    width: '40px', height: '40px',
+                    borderRadius: '50%',
+                    border: 'none',
+                    background: activeStep === steps.length - 1 ? 'rgba(255,255,255,0.15)' : 'rgba(255,255,255,0.85)',
+                    color: activeStep === steps.length - 1 ? 'rgba(43,18,0,0.3)' : '#2B1200',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    cursor: activeStep === steps.length - 1 ? 'default' : 'pointer',
+                    boxShadow: '0 2px 12px rgba(0,0,0,0.2)',
+                    transition: 'all 0.2s',
+                    flexShrink: 0,
+                  }}
+                >
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M6 3l5 5-5 5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </button>
+              </div>
+
               {/* Title overlay at bottom */}
               <div
                 className="process-photo-overlay"
@@ -580,7 +644,7 @@ function ShowcaseSection() {
   return (
     <section
       ref={sectionRef}
-      style={{ background: '#FAF2E9', padding: 'clamp(22px, 4vw, 34px) 0 52px' }}
+      style={{ background: '#FAF2E9', padding: '0 0 52px' }}
     >
       <style>{`
         .showcase-handle {
@@ -888,10 +952,12 @@ export default function SolutionsPage() {
             background-repeat: no-repeat !important;
           }
           .solutions-hero-content {
-            padding-top: 32% !important;
-            padding-bottom: 32% !important;
-            padding-left: 8px !important;
-            padding-right: 8px !important;
+            padding-top: 18% !important;
+            padding-bottom: 18% !important;
+            padding-left: 12px !important;
+            padding-right: 12px !important;
+            background: radial-gradient(ellipse 85% 60% at 50% 50%, rgba(36, 14, 0, 0.82) 30%, rgba(36, 14, 0, 0.5) 60%, transparent 100%) !important;
+            border-radius: 12px !important;
           }
           .solutions-hero-label { margin-bottom: 12px !important; font-size: 10px !important; letter-spacing: 0.2em !important; }
           .solutions-hero-h1 {
