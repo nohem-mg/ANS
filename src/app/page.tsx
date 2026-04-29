@@ -820,8 +820,12 @@ export default function Home() {
           className="hero-section"
           style={{
             backgroundColor: '#FAF2E9',
+            height: 'calc(100vh - 84px)',
+            maxHeight: 'calc(100vh - 84px)',
+            overflow: 'hidden',
             display: 'flex',
             flexDirection: 'column',
+            alignItems: 'stretch',
             padding: 'clamp(4px, 0.8vw, 8px) clamp(12px, 4vw, 48px)',
             boxSizing: 'border-box',
           }}
@@ -832,7 +836,8 @@ export default function Home() {
             transition={{ delay: 0.5, duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
             className="hero-widget"
             style={{
-              width: '100%',
+              flex: 1,
+              minHeight: 0,
               backgroundColor: '#2B1200',
               borderRadius: '20px',
               overflow: 'hidden',
@@ -910,7 +915,7 @@ export default function Home() {
                 initial={{ opacity: 0, scale: 0.9, y: 10 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 transition={{ delay: 0.7, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                className="flex items-center justify-center gap-2.5 mb-6 px-4 py-2 rounded-full border border-golden-extraction/20 bg-[#2B1200]/40 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.3)]"
+                className="flex items-center justify-center gap-2.5 mb-6 mt-10 px-4 py-2 rounded-full border border-golden-extraction/20 bg-[#2B1200]/40 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.3)]"
               >
                 <div className="flex gap-0.5 pt-[2px]" style={{ filter: 'drop-shadow(0 2px 4px rgba(200,118,58,0.4))' }}>
                   {[...Array(5)].map((_, i) => (
