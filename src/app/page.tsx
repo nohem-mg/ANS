@@ -1340,7 +1340,7 @@ export default function Home() {
                       <motion.div
                         className="flex gap-3 shrink-0 px-2"
                         animate={{ x: ["-50%", "0%"] }}
-                        transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+                        transition={{ duration: 36, repeat: Infinity, ease: "linear" }}
                       >
                         {[
                           "Cafés labellisés Bio et Équitable",
@@ -1369,7 +1369,7 @@ export default function Home() {
                       <motion.div
                         className="flex gap-3 shrink-0 px-2"
                         animate={{ x: ["0%", "-50%"] }}
-                        transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+                        transition={{ duration: 36, repeat: Infinity, ease: "linear" }}
                       >
                         {[
                           "Machines éco-performantes",
