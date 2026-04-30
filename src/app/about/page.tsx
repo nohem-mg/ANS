@@ -1269,7 +1269,7 @@ function AboutHeroSection() {
     <>
       <style>{`
         @media (max-width: 767px) {
-          .about-hero-section { height: 70vh !important; max-height: 70vh !important; }
+          .about-hero-section { min-height: 70vh !important; height: auto !important; max-height: none !important; }
         }
       `}</style>
       <section
