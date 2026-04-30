@@ -302,7 +302,7 @@ function BentoFeaturedSection() {
                 id="kf-bento-anchor"
                 className="kf-bento-block"
                 style={{
-                    padding: 'clamp(48px, 8vw, 92px) clamp(20px, 4vw, 36px)',
+                    padding: 'clamp(24px, 4vw, 40px) clamp(20px, 4vw, 36px)',
                     backgroundColor: C.bg,
                 }}
             >
@@ -312,7 +312,7 @@ function BentoFeaturedSection() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.7, ease: EASE_OUT }}
-                        style={{ marginBottom: 'clamp(36px, 7vw, 52px)', textAlign: 'center' }}
+                        style={{ marginBottom: 'clamp(24px, 4vw, 32px)', textAlign: 'center' }}
                     >
                         <span style={{
                             fontFamily: FONT.mono, fontSize: 10, letterSpacing: '0.22em',
@@ -509,14 +509,14 @@ export default function GroupePage() {
             </section>
 
             {/* ── PRÉSENTATION ── */}
-            <section style={{ padding: 'clamp(64px, 10vw, 128px) 24px clamp(32px, 5vw, 64px)' }}>
+            <section style={{ padding: 'clamp(64px, 10vw, 128px) 24px clamp(16px, 3vw, 32px)' }}>
                 <div style={{ maxWidth: 1280, margin: '0 auto' }}>
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.8, ease: EASE_OUT }}
-                        style={{ marginBottom: 64 }}
+                        style={{ marginBottom: 40 }}
                     >
                         <span style={{
                             fontFamily: FONT.mono, fontSize: 10, letterSpacing: '0.22em',
@@ -536,12 +536,27 @@ export default function GroupePage() {
                         <div style={{ width: 48, height: 2, background: C.accent }} />
                     </motion.div>
 
-                    <div style={{
-                        display: 'grid',
-                        gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))',
-                        gap: 'clamp(40px, 6vw, 80px)',
-                        alignItems: 'center',
-                    }}>
+                    <div 
+                        className="presentation-grid"
+                        style={{
+                            display: 'grid',
+                            alignItems: 'center',
+                        }}
+                    >
+                        <style>{`
+                            .presentation-grid {
+                                grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+                                gap: clamp(24px, 6vw, 80px);
+                            }
+                            @media (max-width: 768px) {
+                                .presentation-grid {
+                                    gap: 20px;
+                                }
+                                .presentation-text {
+                                    padding-top: 0 !important;
+                                }
+                            }
+                        `}</style>
                         <motion.div
                             initial={{ opacity: 0, x: -20 }}
                             whileInView={{ opacity: 1, x: 0 }}
@@ -562,6 +577,7 @@ export default function GroupePage() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.8, delay: 0.1, ease: EASE_OUT }}
+                            className="presentation-text"
                             style={{ display: 'flex', flexDirection: 'column', gap: 20, paddingTop: '20px' }}
                         >
                             <p style={{ fontFamily: FONT.body, fontSize: 15, color: C.textMuted, lineHeight: 1.8, margin: 0 }}>
@@ -589,7 +605,7 @@ export default function GroupePage() {
 
             {/* ── AVANTAGES DU RÉSEAU (titres + schéma) ── */}
             <section style={{
-                padding: 'clamp(40px, 5vw, 64px) clamp(20px, 4vw, 32px) clamp(72px, 10vw, 120px)',
+                padding: 'clamp(20px, 3vw, 32px) clamp(20px, 4vw, 32px) clamp(32px, 5vw, 48px)',
                 backgroundColor: C.bg,
             }}>
                 <style>{`
@@ -657,7 +673,7 @@ export default function GroupePage() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.6, ease: EASE_OUT }}
-                        style={{ marginBottom: 'clamp(36px, 6vw, 48px)' }}
+                        style={{ marginBottom: 'clamp(24px, 4vw, 32px)' }}
                     >
                         <span style={{
                             fontFamily: FONT.mono, fontSize: 10, letterSpacing: '0.22em',
@@ -750,7 +766,7 @@ export default function GroupePage() {
             {/* ── ANS DANS LE RÉSEAU ── */}
             <section style={{
                 backgroundColor: '#FAF2E9',
-                padding: 'clamp(64px, 10vw, 100px) 24px',
+                padding: 'clamp(32px, 5vw, 48px) 24px',
             }}>
                 <div style={{ maxWidth: 900, margin: '0 auto', textAlign: 'center' }}>
                     <motion.div
@@ -822,7 +838,7 @@ export default function GroupePage() {
 
             {/* Bandeau « Ils nous font confiance » — bas de page */}
             <section style={{
-                padding: 'clamp(36px, 6vw, 64px) 0 clamp(44px, 7vw, 80px)',
+                padding: 'clamp(18px, 3vw, 32px) 0 clamp(24px, 4vw, 40px)',
                 backgroundColor: '#FAF2E9',
                 borderTop: '1px solid rgba(43,18,0,0.06)',
             }}>

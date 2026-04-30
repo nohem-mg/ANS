@@ -407,8 +407,8 @@ function HeroSection() {
   return (
     /* Hero fills its absolutely-positioned container */
     <div
+      className="h-auto md:h-full py-24 md:py-0"
       style={{
-        height: '100%',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -1195,7 +1195,7 @@ function TeamSection() {
           position: 'relative',
         }}
       >
-        <FadeIn style={{ marginBottom: '80px', position: 'relative' }}>
+        <FadeIn style={{ marginBottom: 'clamp(24px, 5vw, 80px)', position: 'relative' }}>
           <GhostNumber n="02" />
           <div
             style={{
@@ -1252,79 +1252,32 @@ function TeamSection() {
 // HERO + MOODBOARD — scroll-driven cross-fade inside a single sticky widget
 // ─────────────────────────────────────────────────────────────────────────────
 
-function HeroMoodboardSection() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const shouldReduce = useReducedMotion();
-
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ['start start', 'end end'],
-  });
-
-  const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 60,
-    damping: 22,
-    restDelta: 0.0005,
-  });
-
-  const heroOpacity = useTransform(smoothProgress, [0, 0.28, 0.68], [1, 1, 0]);
-  const heroScale = useTransform(smoothProgress, [0.28, 0.68], [1, 0.97]);
-
-  const moodOpacity = useTransform(smoothProgress, [0.38, 0.75], [0, 1]);
-  const moodY = useTransform(smoothProgress, [0.38, 0.75], ['4%', '0%']);
-
+function AboutHeroSection() {
   return (
-    <div ref={containerRef} style={{ height: '200vh', position: 'relative' }}>
-      <div
+    <section
+      className="h-auto md:h-[calc(100vh-84px)] md:max-h-[calc(100vh-84px)]"
+      style={{
+        backgroundColor: '#F9F1E8',
+        padding: 'clamp(10px, 1.2vw, 14px) clamp(16px, 4vw, 48px)',
+        boxSizing: 'border-box',
+      }}
+    >
+      <motion.div
+        className="h-auto md:h-full"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.0, ease: EASE_OUT }}
         style={{
-          position: 'sticky',
-          top: 84,
-          height: 'calc(100vh - 84px)',
+          backgroundColor: '#2B1200',
+          borderRadius: '20px',
           overflow: 'hidden',
-          backgroundColor: '#F9F1E8',
-          padding: 'clamp(10px, 1.2vw, 14px) clamp(16px, 4vw, 48px)',
-          boxSizing: 'border-box',
+          boxShadow: 'none',
+          position: 'relative',
         }}
       >
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.0, ease: EASE_OUT }}
-          style={{
-            height: '100%',
-            backgroundColor: '#2B1200',
-            borderRadius: '20px',
-            overflow: 'hidden',
-            boxShadow: 'none',
-            position: 'relative',
-          }}
-        >
-          <motion.div
-            style={{
-              position: 'absolute',
-              inset: 0,
-              zIndex: 2,
-              opacity: shouldReduce ? 1 : heroOpacity,
-              scale: shouldReduce ? 1 : heroScale,
-            }}
-          >
-            <HeroSection />
-          </motion.div>
-
-          <motion.div
-            style={{
-              position: 'absolute',
-              inset: 0,
-              zIndex: 1,
-              opacity: shouldReduce ? 1 : moodOpacity,
-              y: shouldReduce ? 0 : moodY,
-            }}
-          >
-            <MoodboardGrid />
-          </motion.div>
-        </motion.div>
-      </div>
-    </div>
+        <HeroSection />
+      </motion.div>
+    </section>
   );
 }
 
@@ -1342,7 +1295,7 @@ export default function AboutPage() {
         minHeight: '100vh',
       }}
     >
-      <HeroMoodboardSection />
+      <AboutHeroSection />
       {/* 3. NOTRE HISTOIRE */}
       <StorySection />
       <TeamSection />

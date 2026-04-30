@@ -19,13 +19,17 @@ interface ZoomParallaxProps {
  * (eventually filling the viewport), while surrounding images scale faster
  * (1→5 to 1→9) and fly out of the viewport — creating a "zoom into center" effect.
  */
+/**
+ * Positions for satellite images (index 1–6) around the center image (index 0).
+ * Desktop (md:) uses the original spread. Mobile uses a tighter, vertically-oriented cluster.
+ */
 const POSITIONS: Record<number, string> = {
-    1: '[&>div]:!-top-[30vh] [&>div]:!left-[5vw] [&>div]:!h-[30vh] [&>div]:!w-[35vw]',
-    2: '[&>div]:!-top-[10vh] [&>div]:!-left-[25vw] [&>div]:!h-[45vh] [&>div]:!w-[20vw]',
-    3: '[&>div]:!left-[27.5vw] [&>div]:!h-[25vh] [&>div]:!w-[25vw]',
-    4: '[&>div]:!top-[27.5vh] [&>div]:!left-[5vw] [&>div]:!h-[25vh] [&>div]:!w-[20vw]',
-    5: '[&>div]:!top-[27.5vh] [&>div]:!-left-[22.5vw] [&>div]:!h-[25vh] [&>div]:!w-[30vw]',
-    6: '[&>div]:!top-[22.5vh] [&>div]:!left-[25vw] [&>div]:!h-[15vh] [&>div]:!w-[15vw]',
+    1: '[&>div]:!-top-[22vh] [&>div]:!-left-[15vw] [&>div]:!h-[18vh] [&>div]:!w-[45vw] md:[&>div]:!-top-[30vh] md:[&>div]:!left-[5vw] md:[&>div]:!h-[30vh] md:[&>div]:!w-[35vw]',
+    2: '[&>div]:!top-[22vh] [&>div]:!left-[15vw] [&>div]:!h-[18vh] [&>div]:!w-[45vw] md:[&>div]:!-top-[10vh] md:[&>div]:!-left-[25vw] md:[&>div]:!h-[45vh] md:[&>div]:!w-[20vw]',
+    3: '[&>div]:!top-[2vh] [&>div]:!left-[22vw] [&>div]:!h-[15vh] [&>div]:!w-[35vw] md:[&>div]:!top-[0vh] md:[&>div]:!left-[27.5vw] md:[&>div]:!h-[25vh] md:[&>div]:!w-[25vw]',
+    4: 'hidden md:flex md:[&>div]:!top-[27.5vh] md:[&>div]:!left-[5vw] md:[&>div]:!h-[25vh] md:[&>div]:!w-[20vw]',
+    5: 'hidden md:flex md:[&>div]:!top-[27.5vh] md:[&>div]:!-left-[22.5vw] md:[&>div]:!h-[25vh] md:[&>div]:!w-[30vw]',
+    6: 'hidden md:flex md:[&>div]:!top-[22.5vh] md:[&>div]:!left-[25vw] md:[&>div]:!h-[15vh] md:[&>div]:!w-[15vw]',
 };
 
 export function ZoomParallax({ images }: ZoomParallaxProps) {
@@ -48,28 +52,73 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
     const scales = [scaleCenter, scale5, scale6, scale5, scale6, scale8, scale9];
 
     return (
-        <div ref={container} className="relative h-[300vh]">
-            <div className="sticky top-[68px] h-[calc(100vh-68px)] overflow-hidden">
-                {images.map(({ src, alt }, index) => {
-                    const scale = scales[index % scales.length];
+        <div className="relative md:h-[300vh] h-auto w-full">
+            
+            {/* ── DESKTOP : Effet Zoom Parallax ── */}
+            <div ref={container} className="hidden md:block absolute inset-0 w-full">
+                <div className="sticky top-[68px] h-[calc(100vh-68px)] overflow-hidden">
+                    {images.map(({ src, alt }, index) => {
+                        const scale = scales[index % scales.length];
 
-                    return (
-                        <motion.div
-                            key={index}
-                            style={{ scale }}
-                            className={`absolute top-0 flex h-full w-full items-center justify-center ${POSITIONS[index] || ''}`}
-                        >
-                            <div className="relative h-[25vh] w-[25vw]">
-                                <img
-                                    src={src}
-                                    alt={alt || `Parallax image ${index + 1}`}
-                                    className="h-full w-full rounded-sm object-cover"
-                                />
-                            </div>
-                        </motion.div>
-                    );
-                })}
+                        return (
+                            <motion.div
+                                key={index}
+                                style={{ scale }}
+                                className={`absolute top-0 flex h-full w-full items-center justify-center ${POSITIONS[index] || ''}`}
+                            >
+                                <div className="relative h-[25vh] w-[25vw] shadow-2xl">
+                                    <img
+                                        src={src}
+                                        alt={alt || `Parallax image ${index + 1}`}
+                                        className="h-full w-full rounded-sm object-cover"
+                                    />
+                                </div>
+                            </motion.div>
+                        );
+                    })}
+                </div>
             </div>
+
+            {/* ── MOBILE : Carrousel Horizontal Fluide ── */}
+            <div className="block md:hidden w-full pb-8 pt-0">
+                {/* Style pour cacher la scrollbar sur mobile tout en gardant le scroll */}
+                <style>{`
+                    .hide-scrollbar::-webkit-scrollbar { display: none; }
+                    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+                `}</style>
+                
+                <div className="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar px-6 pb-8 gap-4 items-center">
+                    {images.map(({ src, alt }, index) => (
+                        <motion.div 
+                            key={index}
+                            initial={{ opacity: 0, scale: 0.95 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.5, delay: index * 0.05 }}
+                            className="shrink-0 snap-center relative overflow-hidden rounded-2xl shadow-lg bg-black/5"
+                            style={{ 
+                                width: '85vw', 
+                                height: index % 2 === 0 ? '55vh' : '45vh',
+                                maxWidth: '340px'
+                            }}
+                        >
+                            <img 
+                                src={src} 
+                                alt={alt || `Image ${index + 1}`} 
+                                className="w-full h-full object-cover" 
+                            />
+                        </motion.div>
+                    ))}
+                </div>
+                
+                <div className="flex justify-center gap-2 mt-2">
+                    {/* Indicateur visuel pour faire comprendre le swipe */}
+                    <span className="text-[10px] uppercase tracking-widest text-amber-800/40 font-mono">
+                        ← Glisser pour explorer →
+                    </span>
+                </div>
+            </div>
+
         </div>
     );
 }
