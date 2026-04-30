@@ -159,11 +159,10 @@ function ProcessSection() {
         .process-photo-main:hover img { transform: scale(1.05) !important; }
         .process-kp-tag {
           display: inline-flex; align-items: center; gap: 6px;
-          padding: 6px 14px;
-          border: 1px solid rgba(140,79,37,0.2);
-          border-radius: 100px;
+          padding: 6px 12px;
+          border-radius: 6px;
           font-size: 11px; letter-spacing: 0.06em;
-          color: #8c4f25; background: rgba(140,79,37,0.05);
+          color: #8c4f25; background: rgba(140,79,37,0.08);
           font-family: var(--font-ibm-plex-mono);
           white-space: nowrap;
         }
