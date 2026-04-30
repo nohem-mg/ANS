@@ -343,7 +343,7 @@ function BentoFeaturedSection() {
 
                             <div className="kf-inner">
                                 <div className="kf-bento-fe-index" aria-hidden>
-                                    <span className="kf-bento-star-lbl"><span aria-hidden>*</span> / {String(KEY_FIGURES_TOTAL).padStart(2, '0')}</span>
+                                    <span className="kf-bento-star-lbl"><span aria-hidden>01</span> / {String(KEY_FIGURES_TOTAL).padStart(2, '0')}</span>
                                 </div>
                                 <div className="kf-bento-fe-num">
                                     <StatNumber
@@ -362,7 +362,7 @@ function BentoFeaturedSection() {
 
                         <div className="kf-bento-cluster" role="list">
                             {CHIFFRES_BENTO_PETITS.map((fig, idx) => {
-                                const idxStr = String(idx + 1).padStart(2, '0');
+                                const idxStr = String(idx + 2).padStart(2, '0');
                                 const totalStr = String(KEY_FIGURES_TOTAL).padStart(2, '0');
 
                                 return (
