@@ -412,8 +412,7 @@ export default function GroupePage() {
 
             <style>{`
                 @media (max-width: 767px) {
-                    .groupe-hero-section { height: auto !important; min-height: 0 !important; }
-                    .groupe-hero-widget { height: auto !important; min-height: 0 !important; }
+                    /* Suppression de la limite de hauteur sur mobile */
                 }
                 @media (min-width: 768px) and (max-height: 900px) {
                     .groupe-hero-widget { padding-top: 24px !important; padding-bottom: 24px !important; }
@@ -465,6 +464,18 @@ export default function GroupePage() {
                         background: 'radial-gradient(circle, rgba(200,118,58,0.1) 0%, transparent 65%)',
                         pointerEvents: 'none',
                     }} />
+                    {/* Background Image & Gradients */}
+                    <div aria-hidden className="absolute inset-0 z-0 pointer-events-none overflow-hidden rounded-[20px]">
+                        {/* Image */}
+                        <div className="absolute inset-0" style={{
+                            backgroundImage: 'url(https://images.unsplash.com/photo-1447933601403-0c6688de566e?q=80&w=2560&auto=format&fit=crop)',
+                            backgroundSize: 'cover', backgroundPosition: 'center',
+                        }} />
+                        {/* Rich gradient overlays for Deep Roast mood & readable text */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#2B1200] via-[#2B1200]/70 to-transparent" />
+                        <div className="absolute inset-0 bg-gradient-to-b from-[#2B1200]/90 via-transparent to-[#2B1200]/40" />
+                        <div className="absolute inset-0 bg-gradient-to-r from-[#2B1200]/60 via-transparent to-[#2B1200]/60" />
+                    </div>
 
                     <div style={{ position: 'relative', zIndex: 1, textAlign: 'center', maxWidth: 800 }}>
                         <motion.div

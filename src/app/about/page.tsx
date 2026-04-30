@@ -407,8 +407,8 @@ function HeroSection() {
   return (
     /* Hero fills its absolutely-positioned container */
     <div
-      className="h-auto md:h-full py-24 md:py-0"
       style={{
+        height: '100%',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -446,6 +446,18 @@ function HeroSection() {
           pointerEvents: 'none',
         }}
       />
+      {/* Background Image & Gradients */}
+      <div aria-hidden className="absolute inset-0 z-0 pointer-events-none overflow-hidden rounded-[20px]">
+          {/* Image */}
+          <div className="absolute inset-0" style={{
+              backgroundImage: 'url(https://images.unsplash.com/photo-1447933601403-0c6688de566e?q=80&w=2560&auto=format&fit=crop)',
+              backgroundSize: 'cover', backgroundPosition: 'center',
+          }} />
+          {/* Rich gradient overlays for Deep Roast mood & readable text */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#2B1200] via-[#2B1200]/70 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#2B1200]/90 via-transparent to-[#2B1200]/40" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#2B1200]/60 via-transparent to-[#2B1200]/60" />
+      </div>
 
       <div
         style={{
@@ -1255,19 +1267,20 @@ function TeamSection() {
 function AboutHeroSection() {
   return (
     <section
-      className="h-auto md:h-[calc(100vh-84px)] md:max-h-[calc(100vh-84px)]"
       style={{
+        height: 'calc(100vh - 84px)',
+        maxHeight: 'calc(100vh - 84px)',
         backgroundColor: '#F9F1E8',
         padding: 'clamp(10px, 1.2vw, 14px) clamp(16px, 4vw, 48px)',
         boxSizing: 'border-box',
       }}
     >
       <motion.div
-        className="h-auto md:h-full"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.0, ease: EASE_OUT }}
         style={{
+          height: '100%',
           backgroundColor: '#2B1200',
           borderRadius: '20px',
           overflow: 'hidden',
