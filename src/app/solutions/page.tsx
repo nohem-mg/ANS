@@ -942,8 +942,8 @@ export default function SolutionsPage() {
 
       <style>{`
         @media (max-width: 767px) {
-          .solutions-hero-section { height: 70vh !important; max-height: 70vh !important; padding: 8px 12px !important; }
-          .solutions-hero-widget { border-radius: 14px !important; padding: 28px 22px !important; }
+          .solutions-hero-section { min-height: 70vh !important; height: auto !important; max-height: none !important; padding: 8px 12px !important; }
+          .solutions-hero-widget { border-radius: 14px !important; padding: 28px 22px !important; min-height: 100% !important; height: auto !important; }
           .solutions-hero-content {
             padding-top: 18% !important;
             padding-bottom: 18% !important;

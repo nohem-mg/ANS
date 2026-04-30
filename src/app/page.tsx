@@ -810,8 +810,8 @@ export default function Home() {
         {/* Hero Section — cream frame + dark widget */}
         <style>{`
           @media (max-width: 767px) {
-            .hero-section { height: 70vh !important; max-height: 70vh !important; min-height: 0 !important; }
-            .hero-widget { height: 100% !important; min-height: 0 !important; }
+            .hero-section { min-height: 70vh !important; height: auto !important; max-height: none !important; }
+            .hero-widget { min-height: 100% !important; height: auto !important; }
             .hero-content-area { padding-top: 28px !important; padding-bottom: 36px !important; }
             .hero-scroll-indicator { display: none !important; }
           }
