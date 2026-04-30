@@ -812,7 +812,7 @@ export default function Home() {
           @media (max-width: 767px) {
             .hero-section { min-height: 70vh !important; height: auto !important; max-height: none !important; }
             .hero-widget { min-height: 100% !important; height: auto !important; }
-            .hero-content-area { padding-top: 28px !important; padding-bottom: 36px !important; }
+            .hero-content-area { padding-top: clamp(16px, 4vw, 24px) !important; padding-bottom: clamp(20px, 5vw, 32px) !important; }
             .hero-scroll-indicator { display: none !important; }
           }
         `}</style>
@@ -908,14 +908,14 @@ export default function Home() {
 
             {/* Content — centered like /about hero */}
             {/* ── Stars · headline · subtitle · two pills ── */}
-            <div className="hero-content-area relative z-10 w-full max-w-4xl mx-auto px-5 sm:px-8 text-center flex flex-col items-center justify-center py-10 xl:py-14 h-full">
+            <div className="hero-content-area relative z-10 w-full max-w-4xl mx-auto px-5 sm:px-8 text-center flex flex-col items-center justify-center py-4 xl:py-8 h-full">
 
               {/* Stars rating in a sleek badge */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.9, y: 10 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 transition={{ delay: 0.7, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                className="flex items-center justify-center gap-2.5 mb-6 mt-10 px-4 py-2 rounded-full border border-golden-extraction/20 bg-[#2B1200]/40 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.3)]"
+                className="flex items-center justify-center gap-2.5 mb-6 mt-4 px-4 py-2 rounded-full border border-golden-extraction/20 bg-[#2B1200]/40 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.3)]"
               >
                 <div className="flex gap-0.5 pt-[2px]" style={{ filter: 'drop-shadow(0 2px 4px rgba(200,118,58,0.4))' }}>
                   {[...Array(5)].map((_, i) => (
