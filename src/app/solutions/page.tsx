@@ -942,21 +942,13 @@ export default function SolutionsPage() {
 
       <style>{`
         @media (max-width: 767px) {
-          .solutions-hero-section { height: auto !important; min-height: 0 !important; padding: 8px 12px !important; }
-          .solutions-hero-widget { height: auto !important; min-height: 0 !important; border-radius: 14px !important; padding: 28px 22px !important; }
-          .solutions-hero-bg {
-            background-image: url(/hero-ans-line-art-mobile.png) !important;
-            background-size: cover !important;
-            background-position: center !important;
-            background-repeat: no-repeat !important;
-          }
+          .solutions-hero-section { padding: 8px 12px !important; }
+          .solutions-hero-widget { border-radius: 14px !important; padding: 28px 22px !important; }
           .solutions-hero-content {
             padding-top: 18% !important;
             padding-bottom: 18% !important;
             padding-left: 12px !important;
             padding-right: 12px !important;
-            background: radial-gradient(ellipse 85% 60% at 50% 50%, rgba(36, 14, 0, 0.82) 30%, rgba(36, 14, 0, 0.5) 60%, transparent 100%) !important;
-            border-radius: 12px !important;
           }
           .solutions-hero-label { margin-bottom: 12px !important; font-size: 10px !important; letter-spacing: 0.2em !important; }
           .solutions-hero-h1 {
@@ -1006,15 +998,18 @@ export default function SolutionsPage() {
             padding: 'clamp(32px, 4vw, 72px) clamp(24px, 6vw, 80px)',
           }}
         >
-          {/* Background Image */}
-          <div aria-hidden className="solutions-hero-bg" style={{
-            position: 'absolute', inset: 0,
-            backgroundImage: 'url(/hero-ans-line-art-v3.png)',
-            backgroundSize: '93%',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-            pointerEvents: 'none',
-          }} />
+          {/* Background Image & Gradients */}
+          <div aria-hidden className="absolute inset-0 z-0 pointer-events-none overflow-hidden rounded-[20px]">
+              {/* Image */}
+              <div className="absolute inset-0" style={{
+                  backgroundImage: 'url(https://images.unsplash.com/photo-1447933601403-0c6688de566e?q=80&w=2560&auto=format&fit=crop)',
+                  backgroundSize: 'cover', backgroundPosition: 'center',
+              }} />
+              {/* Rich gradient overlays for Deep Roast mood & readable text */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#2B1200] via-[#2B1200]/70 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-b from-[#2B1200]/90 via-transparent to-[#2B1200]/40" />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#2B1200]/60 via-transparent to-[#2B1200]/60" />
+          </div>
 
           <div className="solutions-hero-content" style={{ position: 'relative', zIndex: 1, textAlign: 'center', maxWidth: 800 }}>
             <motion.div
