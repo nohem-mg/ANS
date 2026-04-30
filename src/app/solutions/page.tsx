@@ -942,7 +942,7 @@ export default function SolutionsPage() {
 
       <style>{`
         @media (max-width: 767px) {
-          .solutions-hero-section { padding: 8px 12px !important; }
+          .solutions-hero-section { height: 70vh !important; max-height: 70vh !important; padding: 8px 12px !important; }
           .solutions-hero-widget { border-radius: 14px !important; padding: 28px 22px !important; }
           .solutions-hero-content {
             padding-top: 18% !important;
@@ -1031,11 +1031,11 @@ export default function SolutionsPage() {
               transition={{ delay: 0.35, duration: 0.9, ease: EASE_OUT }}
               className="solutions-hero-h1"
               style={{
-                fontSize: 'clamp(2.2rem, 5.5vw, 5rem)',
+                fontSize: 'clamp(3.2rem, 7vw, 6rem)',
                 fontFamily: 'var(--font-sora)',
                 lineHeight: 1.1,
                 letterSpacing: '-0.02em',
-                color: C.textPrimary,
+                color: '#F5E6D3',
                 marginBottom: 24,
               }}
             >

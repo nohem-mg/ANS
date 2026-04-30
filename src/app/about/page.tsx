@@ -488,7 +488,7 @@ function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
           style={{
-            fontSize: 'clamp(26px, 3.8vw, 50px)',
+            fontSize: 'clamp(2.5rem, 5vw, 4.5rem)',
             fontFamily: FONT.display,
             fontWeight: 600,
             lineHeight: 1.22,
@@ -506,7 +506,7 @@ function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
           style={{
-            fontSize: 'clamp(26px, 3.8vw, 50px)',
+            fontSize: 'clamp(2.5rem, 5vw, 4.5rem)',
             fontFamily: FONT.display,
             fontWeight: 300,
             lineHeight: 1.22,
@@ -1266,8 +1266,15 @@ function TeamSection() {
 
 function AboutHeroSection() {
   return (
-    <section
-      style={{
+    <>
+      <style>{`
+        @media (max-width: 767px) {
+          .about-hero-section { height: 70vh !important; max-height: 70vh !important; }
+        }
+      `}</style>
+      <section
+        className="about-hero-section"
+        style={{
         height: 'calc(100vh - 84px)',
         maxHeight: 'calc(100vh - 84px)',
         backgroundColor: '#F9F1E8',
@@ -1291,6 +1298,7 @@ function AboutHeroSection() {
         <HeroSection />
       </motion.div>
     </section>
+    </>
   );
 }
 

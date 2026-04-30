@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useEffect, type ReactNode } from 'react';
+import { useRef, useEffect, useState, type ReactNode } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Users, MapPin, Headphones, Store, Building2, Factory, HeartPulse, GraduationCap, Truck } from 'lucide-react';
 import Image from 'next/image';
@@ -403,6 +403,8 @@ function BentoFeaturedSection() {
 
 // ─── PAGE ────────────────────────────────────────────────────────────────────
 export default function GroupePage() {
+    const [activeIndex, setActiveIndex] = useState<number | null>(null);
+
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
@@ -412,7 +414,7 @@ export default function GroupePage() {
 
             <style>{`
                 @media (max-width: 767px) {
-                    /* Suppression de la limite de hauteur sur mobile */
+                    .groupe-hero-section { height: 70vh !important; max-height: 70vh !important; }
                 }
                 @media (min-width: 768px) and (max-height: 900px) {
                     .groupe-hero-widget { padding-top: 24px !important; padding-bottom: 24px !important; }
@@ -495,7 +497,7 @@ export default function GroupePage() {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.35, duration: 0.9, ease: EASE_OUT }}
                             style={{
-                                fontSize: 'clamp(2.2rem, 5.5vw, 5rem)',
+                                fontSize: 'clamp(3.2rem, 7vw, 6rem)',
                                 fontFamily: 'var(--font-sora)',
                                 lineHeight: 1.1,
                                 letterSpacing: '-0.02em',
@@ -709,19 +711,30 @@ export default function GroupePage() {
                                 <motion.li
                                     key={title}
                                     className="adv-simple-row"
+                                    onMouseEnter={() => setActiveIndex(i)}
+                                    onMouseLeave={() => setActiveIndex(null)}
+                                    style={{ cursor: 'pointer' }}
                                     initial={{ opacity: 0, x: -8 }}
                                     whileInView={{ opacity: 1, x: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ duration: 0.4, delay: i * 0.05, ease: EASE_OUT }}
                                 >
-                                    <span className="adv-simple-idx">{String(i + 1).padStart(2, '0')}</span>
-                                    <span className="adv-simple-title">{title}</span>
+                                    <span className="adv-simple-idx" style={{ color: activeIndex === i ? C.accent : 'rgba(43,18,0,0.42)', transition: 'color 0.3s' }}>
+                                        {String(i + 1).padStart(2, '0')}
+                                    </span>
+                                    <span className="adv-simple-title" style={{ 
+                                        color: activeIndex === i ? C.accent : C.textPrimary, 
+                                        transform: activeIndex === i ? 'translateX(6px)' : 'none', 
+                                        transition: 'all 0.3s ease' 
+                                    }}>
+                                        {title}
+                                    </span>
                                 </motion.li>
                             ))}
                         </ul>
 
                         <motion.div
-                            className="adv-simple-schema"
+                            className="adv-simple-schema hidden md:block"
                             initial={{ opacity: 0, scale: 0.97 }}
                             whileInView={{ opacity: 1, scale: 1 }}
                             viewport={{ once: true }}
@@ -730,11 +743,12 @@ export default function GroupePage() {
                         >
                             <svg viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <circle cx="110" cy="110" r="88" stroke="rgba(200,118,58,0.12)" strokeWidth="1" />
-                                {[0, 60, 120, 180, 240, 300].map((deg) => {
+                                {[0, 60, 120, 180, 240, 300].map((deg, index) => {
                                     const r = 78;
                                     const a = (deg * Math.PI) / 180;
                                     const x2 = 110 + r * Math.cos(a - Math.PI / 2);
                                     const y2 = 110 + r * Math.sin(a - Math.PI / 2);
+                                    const isActive = activeIndex === index;
                                     return (
                                         <line
                                             key={deg}
@@ -742,28 +756,33 @@ export default function GroupePage() {
                                             y1="110"
                                             x2={x2}
                                             y2={y2}
-                                            stroke="rgba(200,118,58,0.25)"
-                                            strokeWidth="1"
-                                            strokeDasharray="3 4"
+                                            stroke={isActive ? C.accent : "rgba(200,118,58,0.25)"}
+                                            strokeWidth={isActive ? "2" : "1"}
+                                            strokeDasharray={isActive ? "none" : "3 4"}
+                                            style={{ transition: 'all 0.3s ease' }}
                                         />
                                     );
                                 })}
-                                <circle cx="110" cy="110" r="22" fill="rgba(200,118,58,0.12)" stroke="#C8763A" strokeWidth="1.4" />
-                                <circle cx="110" cy="110" r="5" fill="#C8763A" opacity="0.35" />
-                                {[0, 60, 120, 180, 240, 300].map((deg) => {
+                                <circle cx="110" cy="110" r={activeIndex !== null ? "26" : "22"} fill="rgba(200,118,58,0.12)" stroke="#C8763A" strokeWidth="1.4" style={{ transition: 'all 0.3s ease' }} />
+                                <circle cx="110" cy="110" r={activeIndex !== null ? "8" : "5"} fill="#C8763A" opacity={activeIndex !== null ? "0.6" : "0.35"} style={{ transition: 'all 0.3s ease' }} />
+                                {[0, 60, 120, 180, 240, 300].map((deg, index) => {
                                     const r = 78;
                                     const a = (deg * Math.PI) / 180 - Math.PI / 2;
                                     const cx = 110 + r * Math.cos(a);
                                     const cy = 110 + r * Math.sin(a);
+                                    const isActive = activeIndex === index;
                                     return (
                                         <circle
                                             key={`n-${deg}`}
                                             cx={cx}
                                             cy={cy}
-                                            r="6"
-                                            fill="#FFFBF4"
+                                            r={isActive ? "9" : "6"}
+                                            fill={isActive ? C.accent : "#FFFBF4"}
                                             stroke="#C8763A"
                                             strokeWidth="1.2"
+                                            style={{ transition: 'all 0.3s ease', cursor: 'pointer' }}
+                                            onMouseEnter={() => setActiveIndex(index)}
+                                            onMouseLeave={() => setActiveIndex(null)}
                                         />
                                     );
                                 })}
