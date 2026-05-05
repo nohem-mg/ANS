@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const NAV_LINKS = [
     { label: 'Accueil', href: '/' },
@@ -13,6 +14,7 @@ const NAV_LINKS = [
     { label: 'À Propos', href: '/about' },
 ];
 
+const MotionLink = motion.create(Link);
 
 export default function Header() {
     const pathname = usePathname();
@@ -27,8 +29,20 @@ export default function Header() {
 
     // Close mobile menu on route change
     useEffect(() => {
-        setMobileOpen(false);
+        const timeout = window.setTimeout(() => setMobileOpen(false), 0);
+        return () => window.clearTimeout(timeout);
     }, [pathname]);
+
+    useEffect(() => {
+        if (!mobileOpen) return;
+
+        const previousOverflow = document.body.style.overflow;
+        document.body.style.overflow = 'hidden';
+
+        return () => {
+            document.body.style.overflow = previousOverflow;
+        };
+    }, [mobileOpen]);
 
     const isActive = (href: string) => {
         if (href === '/') return pathname === '/';
@@ -64,7 +78,7 @@ export default function Header() {
                     }}
                 >
                     {/* Left: logo */}
-                    <a
+                    <Link
                         href="/"
                         style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', flexShrink: 0, height: 84 }}
                         onClick={(e) => {
@@ -84,7 +98,7 @@ export default function Header() {
                                 transform: 'translateY(4px)' 
                             }} 
                         />
-                    </a>
+                    </Link>
 
                     {/* Center: nav links (desktop) — absolutely centered */}
                     <div
@@ -99,7 +113,7 @@ export default function Header() {
                         }}
                     >
                         {NAV_LINKS.map(({ label, href }) => (
-                            <a
+                            <Link
                                 key={href}
                                 href={href}
                                 style={{
@@ -128,12 +142,12 @@ export default function Header() {
                                 }}
                             >
                                 {label}
-                            </a>
+                            </Link>
                         ))}
                     </div>
 
                     {/* Right: Contact CTA (desktop) */}
-                    <a
+                    <Link
                         className="header-desktop-nav"
                         href="/contact"
                         style={{
@@ -166,13 +180,15 @@ export default function Header() {
                         }}
                     >
                         Contact
-                    </a>
+                    </Link>
 
                     {/* Mobile hamburger */}
                     <button
                         className="header-mobile-toggle"
                         onClick={() => setMobileOpen(!mobileOpen)}
                         aria-label="Menu"
+                        aria-controls="header-mobile-menu"
+                        aria-expanded={mobileOpen}
                         style={{
                             display: 'none',
                             marginLeft: 'auto',
@@ -192,6 +208,7 @@ export default function Header() {
             <AnimatePresence>
                 {mobileOpen && (
                     <motion.div
+                        id="header-mobile-menu"
                         className="header-mobile-menu"
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -203,10 +220,15 @@ export default function Header() {
                             left: 0,
                             right: 0,
                             bottom: 0,
+                            width: '100vw',
+                            maxWidth: '100vw',
                             zIndex: 49,
                             backgroundColor: 'rgba(28,10,0,0.98)',
                             backdropFilter: 'blur(20px)',
                             WebkitBackdropFilter: 'blur(20px)',
+                            boxSizing: 'border-box',
+                            overflow: 'hidden',
+                            padding: '24px',
                             display: 'flex',
                             flexDirection: 'column',
                             alignItems: 'center',
@@ -215,7 +237,7 @@ export default function Header() {
                         }}
                     >
                         {NAV_LINKS.map(({ label, href }, i) => (
-                            <motion.a
+                            <MotionLink
                                 key={href}
                                 href={href}
                                 initial={{ opacity: 0, y: 16 }}
@@ -229,23 +251,29 @@ export default function Header() {
                                     textDecoration: 'none',
                                     padding: '14px 24px',
                                     letterSpacing: '-0.01em',
+                                    maxWidth: '100%',
+                                    textAlign: 'center',
+                                    boxSizing: 'border-box',
                                 }}
                                 onClick={(e) => {
                                     if (href === '/' && pathname === '/') {
                                         e.preventDefault();
                                         window.scrollTo({ top: 0, behavior: 'smooth' });
                                         setMobileOpen(false);
+                                    } else {
+                                        setMobileOpen(false);
                                     }
                                 }}
                             >
                                 {label}
-                            </motion.a>
+                            </MotionLink>
                         ))}
-                        <motion.a
+                        <MotionLink
                             href="/contact"
                             initial={{ opacity: 0, y: 16 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.05 + NAV_LINKS.length * 0.06 }}
+                            onClick={() => setMobileOpen(false)}
                             style={{
                                 fontFamily: 'var(--font-ibm-plex-mono)',
                                 fontSize: 13,
@@ -261,7 +289,7 @@ export default function Header() {
                             }}
                         >
                             Contact
-                        </motion.a>
+                        </MotionLink>
                     </motion.div>
                 )}
             </AnimatePresence>
