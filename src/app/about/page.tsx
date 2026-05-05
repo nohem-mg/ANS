@@ -407,14 +407,17 @@ function HeroSection() {
   return (
     /* Hero fills its absolutely-positioned container */
     <div
+      className="about-hero-content"
       style={{
-        height: '100%',
+        minHeight: '100%',
+        height: 'auto',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         position: 'relative',
         overflow: 'hidden',
-        padding: 'clamp(32px, 4vw, 72px) clamp(24px, 6vw, 80px)',
+        padding: 'clamp(24px, 5vw, 72px) clamp(16px, 4vw, 80px)',
+        boxSizing: 'border-box',
       }}
     >
       {/* Light dot grid on dark */}
@@ -477,7 +480,7 @@ function HeroSection() {
             letterSpacing: '0.22em',
             color: C.accent,
             textTransform: 'uppercase',
-            marginBottom: '44px',
+            marginBottom: 'clamp(16px, 4vw, 32px)',
           }}
         >
           À Propos · ANS
@@ -488,10 +491,10 @@ function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
           style={{
-            fontSize: 'clamp(2.5rem, 5vw, 4.5rem)',
+            fontSize: 'clamp(1.8rem, 4vw, 3.2rem)',
             fontFamily: FONT.display,
             fontWeight: 600,
-            lineHeight: 1.22,
+            lineHeight: 1.1,
             color: '#F5E6D3',
             letterSpacing: '-0.025em',
             margin: 0,
@@ -506,13 +509,13 @@ function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
           style={{
-            fontSize: 'clamp(2.5rem, 5vw, 4.5rem)',
+            fontSize: 'clamp(1.4rem, 3vw, 2.4rem)',
             fontFamily: FONT.display,
             fontWeight: 300,
-            lineHeight: 1.22,
+            lineHeight: 1.2,
             color: C.accent,
-            letterSpacing: '-0.025em',
-            marginTop: '14px',
+            letterSpacing: '-0.02em',
+            marginTop: 'clamp(12px, 3vw, 20px)',
             marginBottom: 0,
           }}
         >
@@ -676,7 +679,7 @@ function StorySection() {
                 margin: 0,
               }}
             >
-              Plus de 40 ans de passion à transformer l'univers du travail autour de moments chaleureux et de services irréprochables.
+              Plus de 40 ans de passion à transformer l&apos;univers du travail autour de moments chaleureux et de services irréprochables.
             </p>
           </div>
         </FadeIn>
@@ -768,7 +771,7 @@ function StorySection() {
         }
         @media (max-width: 768px) {
           .ans-story-section {
-            padding-top: 64px !important;
+            padding-top: 40px !important;
             padding-bottom: 64px !important;
           }
         }
@@ -1269,35 +1272,54 @@ function AboutHeroSection() {
     <>
       <style>{`
         @media (max-width: 767px) {
-          .about-hero-section { min-height: 70vh !important; height: auto !important; max-height: none !important; }
+          .about-hero-section {
+            min-height: 0 !important;
+            height: auto !important;
+            max-height: none !important;
+            padding-bottom: 18px !important;
+            overflow: hidden !important;
+          }
+          .about-hero-card {
+            min-height: 0 !important;
+            height: auto !important;
+          }
+          .about-hero-content {
+            min-height: 0 !important;
+          }
         }
       `}</style>
       <section
         className="about-hero-section"
         style={{
-        height: 'calc(100vh - 84px)',
-        maxHeight: 'calc(100vh - 84px)',
-        backgroundColor: '#F9F1E8',
-        padding: 'clamp(10px, 1.2vw, 14px) clamp(16px, 4vw, 48px)',
-        boxSizing: 'border-box',
-      }}
-    >
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.0, ease: EASE_OUT }}
-        style={{
-          height: '100%',
-          backgroundColor: '#2B1200',
-          borderRadius: '20px',
+          height: 'calc(100vh - 84px)',
+          maxHeight: 'calc(100vh - 84px)',
+          backgroundColor: '#F9F1E8',
+          padding: 'clamp(10px, 1.2vw, 14px) clamp(16px, 4vw, 48px)',
+          boxSizing: 'border-box',
           overflow: 'hidden',
-          boxShadow: 'none',
-          position: 'relative',
+          display: 'flex',
+          alignItems: 'stretch',
         }}
       >
-        <HeroSection />
-      </motion.div>
-    </section>
+        <motion.div
+          className="about-hero-card"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.0, ease: EASE_OUT }}
+          style={{
+            flex: 1,
+            minHeight: '100%',
+            height: 'auto',
+            backgroundColor: '#2B1200',
+            borderRadius: '20px',
+            overflow: 'hidden',
+            boxShadow: 'none',
+            position: 'relative',
+          }}
+        >
+          <HeroSection />
+        </motion.div>
+      </section>
     </>
   );
 }
