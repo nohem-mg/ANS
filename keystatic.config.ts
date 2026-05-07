@@ -1,10 +1,21 @@
 // keystatic.config.ts
 import { config, fields, singleton } from '@keystatic/core';
 
+// Pour utiliser GitHub en production et le mode local en développement :
+const isProd = process.env.NODE_ENV === 'production';
+
 export default config({
-  storage: {
-    kind: 'local',
-  },
+  storage: isProd
+    ? {
+        kind: 'github',
+        repo: {
+          owner: 'nohem-mg',
+          name: 'ANS',
+        },
+      }
+    : {
+        kind: 'local',
+      },
 
   singletons: {
     // ── 1. Hero ─────────────────────────────────────────────────────────────
