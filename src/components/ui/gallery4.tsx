@@ -72,8 +72,8 @@ const Gallery4 = ({
   items = data,
 }: Gallery4Props) => {
   return (
-    <section className="py-32">
-      <div className="container mx-auto px-6">
+    <section className="pt-10 pb-20 md:pt-14 md:pb-28 lg:pt-16 lg:pb-32">
+      <div className="container mx-auto px-5 md:px-6">
         <div className="mb-10 max-w-3xl md:mb-14 lg:mb-16">
           <div className="flex flex-col gap-4">
             <span
@@ -96,27 +96,38 @@ const Gallery4 = ({
             </p>
           </div>
         </div>
-        <div className="grid grid-cols-1 gap-5 lg:grid-cols-3">
+        <div
+          className="gallery4-scroll flex flex-nowrap gap-5 overflow-x-auto overflow-y-hidden pb-4 -mx-5 px-5 pt-1 scroll-smooth snap-x snap-mandatory scroll-pl-5 scroll-pr-5 lg:mx-0 lg:grid lg:w-full lg:grid-cols-3 lg:gap-5 lg:overflow-visible lg:p-0 lg:pb-0 lg:scroll-pl-0 lg:scroll-pr-0"
+          role="region"
+          aria-label="Familles de solutions du parc"
+          style={{
+            scrollbarWidth: 'none',
+            WebkitOverflowScrolling: 'touch',
+            overscrollBehaviorX: 'contain',
+          }}
+        >
+          <style>{`
+            .gallery4-scroll::-webkit-scrollbar { display: none; }
+          `}</style>
           {items.map((item) => (
             <Link
               key={item.id}
               href={item.href}
-              className="group block rounded-2xl"
+              className="group block shrink-0 snap-start rounded-2xl w-[min(85vw,22rem)] max-w-[22rem] sm:w-[min(85vw,24rem)] sm:max-w-[24rem] lg:w-auto lg:max-w-none lg:min-w-0 lg:snap-none"
               aria-label={item.title}
             >
-              <div className="relative min-h-[30rem] overflow-hidden rounded-2xl border border-white/10 bg-card shadow-[0_22px_70px_rgba(0,0,0,0.28)] lg:min-h-[32rem]">
+              <div className="relative min-h-[22rem] overflow-hidden rounded-2xl border border-white/10 bg-card shadow-[0_22px_70px_rgba(0,0,0,0.28)] sm:min-h-[26rem] md:min-h-[30rem] lg:min-h-[32rem]">
                 <Image
                   src={item.image}
                   alt={item.title}
                   fill
-                  sizes="(max-width: 1024px) 100vw, 33vw"
+                  sizes="(max-width: 1023px) 85vw, 33vw"
                   className="absolute h-full w-full object-cover object-center transition-transform duration-300 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-black/10" />
-                <div className="absolute inset-x-0 bottom-0 p-6 md:p-8">
-                  <div className="rounded-2xl border border-white/12 bg-[#140c08] p-6 text-white">
+                <div className="absolute inset-x-0 bottom-0 p-4 md:p-8">
+                  <div className="rounded-2xl border border-white/12 bg-[#140c08] p-5 text-white md:p-6">
                     <div
-                      className="mb-3 text-xl font-semibold md:text-2xl"
+                      className="mb-3 text-lg font-semibold sm:text-xl md:text-2xl"
                       style={{ fontFamily: 'var(--font-sora)' }}
                     >
                       {item.title}

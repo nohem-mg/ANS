@@ -5,6 +5,7 @@ import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { Gallery4, type Gallery4Item } from '@/components/ui/gallery4';
+import { ImageAutoSlider } from '@/components/ui/image-auto-slider';
 import { SOLUTIONS } from '@/app/solutions/data';
 
 // ─── Design tokens (matching global palette) ────────────────────────────────
@@ -41,7 +42,7 @@ const steps = [
     title: 'Audit & Diagnostic',
     subtitle: 'On vient voir, avant de proposer.',
     description:
-      "Nous analysons vos espaces, vos flux et vos usages réels. Nombre de collaborateurs, habitudes de consommation, contraintes techniques — rien n'est laissé au hasard.",
+      "Nous analysons vos espaces, vos flux et vos usages réels. Nombre de collaborateurs, habitudes de consommation, contraintes techniques, rien n'est laissé au hasard.",
     photo: {
       src: '/bureau-ans.jpeg',
       alt: 'Bureau ANS — audit et diagnostic terrain',
@@ -56,7 +57,7 @@ const steps = [
     description:
       "Nous concevons une offre personnalisée : choix des machines, sélection des produits, plan d'implantation et budget transparent. Pas de surprise.",
     photo: {
-      src: '/distributeur-dans-entrepot.JPG',
+      src: '/projec.jpg',
       alt: 'Distributeur dans entrepôt ANS — sélection sur-mesure',
     },
     keyPoints: ['Choix machines', 'Budget transparent', 'Plan d\'implantation'],
@@ -69,8 +70,8 @@ const steps = [
     description:
       "Notre équipe technique installe, configure et teste l'ensemble. Formation de vos référents incluse. Vous êtes opérationnels dès le premier jour.",
     photo: {
-      src: '/entreprot2.jpg',
-      alt: 'Installation et mise en service des équipements',
+      src: '/ddg.png',
+      alt: 'Installation et mise en service des équipements ANS',
     },
     keyPoints: ['Installation complète', 'Configuration', 'Formation incluse'],
   },
@@ -82,8 +83,8 @@ const steps = [
     description:
       'Intervention en moins de 4 heures. Approvisionnement régulier, entretien préventif et curatif. Votre parc fonctionne, toujours.',
     photo: {
-      src: '/entrepot1.JPG',
-      alt: 'Entrepôt ANS — intervention rapide',
+      src: '/camp.jpg',
+      alt: 'Maintenance ANS — intervention rapide sur site',
     },
     keyPoints: ['Réponse < 4h', 'Entretien préventif', 'Approvisionnement'],
   },
@@ -95,8 +96,8 @@ const steps = [
     description:
       "Reporting de consommation, évolution du parc, ajustement des gammes produits. Nous pilotons votre installation dans la durée.",
     photo: {
-      src: '/véhicules.JPG',
-      alt: 'Flotte de véhicules ANS — suivi et pilotage continu',
+      src: '/bureau-ans.jpeg',
+      alt: 'Bureau ANS — suivi et optimisation continue',
     },
     keyPoints: ['Reporting détaillé', 'Évolution du parc', 'Ajustement gammes'],
   },
@@ -133,11 +134,9 @@ function ProcessSection() {
       className="process-section-outer"
       style={{
         background: '#FAF2E9',
-        minHeight: '100vh',
-        padding: '120px 0 80px',
+        padding: '120px 0 40px',
         fontFamily: "'DM Sans', sans-serif",
         position: 'relative',
-        overflow: 'hidden',
       }}
     >
       <div
@@ -160,27 +159,37 @@ function ProcessSection() {
         .process-photo-main:hover img { transform: scale(1.05) !important; }
         .process-kp-tag {
           display: inline-flex; align-items: center; gap: 6px;
-          padding: 6px 14px;
-          border: 1px solid rgba(140,79,37,0.2);
-          border-radius: 100px;
+          padding: 6px 12px;
+          border-radius: 6px;
           font-size: 11px; letter-spacing: 0.06em;
-          color: #8c4f25; background: rgba(140,79,37,0.05);
+          color: #8c4f25; background: rgba(140,79,37,0.08);
           font-family: var(--font-ibm-plex-mono);
           white-space: nowrap;
         }
 
         @media (max-width: 1024px) {
           .process-main-grid { grid-template-columns: 1fr !important; gap: 48px !important; }
-          .process-section-outer { padding-top: 80px !important; padding-bottom: 64px !important; }
+          .process-section-outer { padding-top: 80px !important; padding-bottom: 40px !important; }
           .process-detail-right { position: static !important; }
         }
 
         @media (max-width: 640px) {
-          .process-section-outer { padding-top: 56px !important; padding-bottom: 48px !important; }
+          .process-section-outer { padding-top: 56px !important; padding-bottom: 40px !important; }
           .process-section-inner { padding: 0 20px !important; }
-          .process-detail-card { padding: 24px 20px !important; }
-          .process-header { margin-bottom: 48px !important; }
+          .process-detail-card { padding: 22px 18px !important; }
+          .process-header { margin-bottom: 40px !important; }
+          .process-header .process-h2 { font-size: clamp(30px, 8vw, 44px) !important; }
           .process-kp-row { flex-wrap: wrap !important; }
+          .process-photo-main { aspect-ratio: 4 / 3 !important; }
+          .process-photo-overlay { padding: 22px 18px 18px !important; }
+          .process-photo-title { font-size: clamp(20px, 5vw, 26px) !important; }
+          .process-nav-cta { width: 100% !important; justify-content: center !important; }
+          /* Hide left nav on mobile */
+          .process-left-nav { display: none !important; }
+          /* Show mobile nav arrows */
+          .process-mobile-nav { display: flex !important; }
+          /* Full width on mobile */
+          .process-main-grid { grid-template-columns: 1fr !important; gap: 0 !important; }
         }
       `}</style>
 
@@ -209,6 +218,7 @@ function ProcessSection() {
             NOTRE PROCESS
           </p>
           <h2
+            className="process-h2"
             style={{
               fontFamily: 'var(--font-sora)',
               fontSize: 'clamp(40px, 5vw, 68px)',
@@ -241,8 +251,7 @@ function ProcessSection() {
         {/* Main grid */}
         <div className="process-main-grid" style={{ display: 'grid', gridTemplateColumns: '340px 1fr', gap: '60px', alignItems: 'start' }}>
           {/* Left nav */}
-          <div
-            style={{
+          <div className="process-left-nav" style={{
               opacity: isVisible ? 1 : 0,
               transform: isVisible ? 'none' : 'translateX(-20px)',
               transition: 'all 0.8s ease 0.2s',
@@ -321,6 +330,7 @@ function ProcessSection() {
 
             <div style={{ marginTop: '36px' }}>
               <a
+                className="process-nav-cta"
                 href="/contact"
                 style={{
                   display: 'inline-flex',
@@ -428,8 +438,70 @@ function ProcessSection() {
                 </span>
               </div>
 
+              {/* Mobile prev/next arrows — hidden on desktop */}
+              <div
+                className="process-mobile-nav"
+                style={{
+                  display: 'none',
+                  position: 'absolute',
+                  top: '50%',
+                  left: 0,
+                  right: 0,
+                  transform: 'translateY(-50%)',
+                  justifyContent: 'space-between',
+                  padding: '0 12px',
+                  pointerEvents: 'none',
+                }}
+              >
+                <button
+                  onClick={() => setActiveStep(i => Math.max(0, i - 1))}
+                  disabled={activeStep === 0}
+                  aria-label="Étape précédente"
+                  style={{
+                    pointerEvents: 'all',
+                    width: '40px', height: '40px',
+                    borderRadius: '50%',
+                    border: 'none',
+                    background: activeStep === 0 ? 'rgba(255,255,255,0.15)' : 'rgba(255,255,255,0.85)',
+                    color: activeStep === 0 ? 'rgba(43,18,0,0.3)' : '#2B1200',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    cursor: activeStep === 0 ? 'default' : 'pointer',
+                    boxShadow: '0 2px 12px rgba(0,0,0,0.2)',
+                    transition: 'all 0.2s',
+                    flexShrink: 0,
+                  }}
+                >
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M10 3L5 8l5 5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </button>
+                <button
+                  onClick={() => setActiveStep(i => Math.min(steps.length - 1, i + 1))}
+                  disabled={activeStep === steps.length - 1}
+                  aria-label="Étape suivante"
+                  style={{
+                    pointerEvents: 'all',
+                    width: '40px', height: '40px',
+                    borderRadius: '50%',
+                    border: 'none',
+                    background: activeStep === steps.length - 1 ? 'rgba(255,255,255,0.15)' : 'rgba(255,255,255,0.85)',
+                    color: activeStep === steps.length - 1 ? 'rgba(43,18,0,0.3)' : '#2B1200',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    cursor: activeStep === steps.length - 1 ? 'default' : 'pointer',
+                    boxShadow: '0 2px 12px rgba(0,0,0,0.2)',
+                    transition: 'all 0.2s',
+                    flexShrink: 0,
+                  }}
+                >
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M6 3l5 5-5 5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </button>
+              </div>
+
               {/* Title overlay at bottom */}
               <div
+                className="process-photo-overlay"
                 style={{
                   position: 'absolute',
                   bottom: 0,
@@ -439,6 +511,7 @@ function ProcessSection() {
                 }}
               >
                 <h3
+                  className="process-photo-title"
                   style={{
                     fontFamily: 'var(--font-sora)',
                     fontSize: 'clamp(22px, 2.5vw, 32px)',
@@ -544,12 +617,6 @@ function ProcessSection() {
 
 // ─── SHOWCASE ────────────────────────────────────────────────────────────────
 
-const SHOWCASE_EXTRA = [
-  { src: '/p1.jpg', alt: 'Réalisation ANS 1' },
-  { src: '/p2.jpg', alt: 'Réalisation ANS 2' },
-  { src: '/p3.jpg', alt: 'Réalisation ANS 3' },
-];
-
 function ShowcaseSection() {
   const [sliderPos, setSliderPos] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
@@ -576,7 +643,7 @@ function ShowcaseSection() {
   return (
     <section
       ref={sectionRef}
-      style={{ background: '#FAF2E9', padding: '48px 0 120px' }}
+      style={{ background: '#FAF2E9', padding: '0 0 52px' }}
     >
       <style>{`
         .showcase-handle {
@@ -584,23 +651,30 @@ function ShowcaseSection() {
           transition: transform 0.15s;
         }
         .showcase-handle:hover { transform: translateX(-50%) scale(1.1); }
-        .showcase-extra-card { overflow: hidden; border-radius: 16px; }
-        .showcase-extra-card img { transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94); }
-        .showcase-extra-card:hover img { transform: scale(1.05); }
         .showcase-compare * { user-select: none !important; -webkit-user-select: none !important; }
         .showcase-compare img { pointer-events: none !important; -webkit-user-drag: none !important; }
+        .showcase-compare { touch-action: pan-y; }
         @media (max-width: 768px) {
-        .showcase-layout { grid-template-columns: 1fr !important; }
-        .showcase-compare { border-radius: 14px !important; }
+          .showcase-inner { padding: 0 20px !important; }
+          .showcase-header { margin-bottom: 32px !important; }
+          .showcase-h2 { font-size: clamp(28px, 8vw, 40px) !important; }
+          .showcase-desc { font-size: 14px !important; line-height: 1.7 !important; }
+          .showcase-compare { border-radius: 14px !important; }
+          .showcase-badge { top: 12px !important; padding: 5px 10px !important; font-size: 9px !important; }
+          .showcase-badge-left { left: 12px !important; }
+          .showcase-badge-right { right: 12px !important; }
+          .showcase-handle-knob { width: 32px !important; height: 32px !important; }
+          .showcase-hint { font-size: 8px !important; bottom: 10px !important; }
         }
       `}</style>
 
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 40px' }}>
+      <div className="showcase-inner" style={{ maxWidth: 1200, margin: '0 auto', padding: '0 40px' }}>
 
         {/* ── Header ── */}
         <div
+          className="showcase-header"
           style={{
-            marginBottom: 72,
+            marginBottom: 52,
             opacity: isVisible ? 1 : 0,
             transform: isVisible ? 'none' : 'translateY(20px)',
             transition: 'all 0.8s ease',
@@ -617,26 +691,32 @@ function ShowcaseSection() {
           }}>
             RÉALISATIONS
           </p>
-          <h2 style={{
-            fontFamily: FONT.display,
-            fontSize: 'clamp(36px, 4.5vw, 60px)',
-            color: '#451F17',
-            lineHeight: 1.06,
-            margin: 0,
-            fontWeight: 600,
-            letterSpacing: '-0.025em',
-          }}>
+          <h2
+            className="showcase-h2"
+            style={{
+              fontFamily: FONT.display,
+              fontSize: 'clamp(36px, 4.5vw, 60px)',
+              color: '#451F17',
+              lineHeight: 1.06,
+              margin: 0,
+              fontWeight: 600,
+              letterSpacing: '-0.025em',
+            }}
+          >
             Avant & Après
 
           </h2>
-          <p style={{
-            marginTop: 20,
-            color: 'rgba(36,19,12,0.65)',
-            fontSize: 15,
-            lineHeight: 1.75,
-            maxWidth: 480,
-            fontFamily: FONT.body,
-          }}>
+          <p
+            className="showcase-desc"
+            style={{
+              marginTop: 20,
+              color: 'rgba(36,19,12,0.65)',
+              fontSize: 15,
+              lineHeight: 1.75,
+              maxWidth: 480,
+              fontFamily: FONT.body,
+            }}
+          >
             Un espace pause ordinaire peut devenir un vrai lieu de vie. Faites glisser pour comparer l&apos;avant et l&apos;après d&apos;une installation type.
           </p>
         </div>
@@ -664,6 +744,7 @@ function ShowcaseSection() {
             style={{
               position: 'relative',
               width: '100%',
+              maxWidth: 920,
               aspectRatio: '2048 / 1150',
               borderRadius: 20,
               overflow: 'hidden',
@@ -685,13 +766,16 @@ function ShowcaseSection() {
                 style={{ objectFit: 'cover', objectPosition: 'center', pointerEvents: 'none' }}
                 sizes="100vw"
               />
-              <div style={{
-                position: 'absolute', top: 20, right: 20,
-                background: 'rgba(140,79,37,0.92)', backdropFilter: 'blur(8px)',
-                borderRadius: 6, padding: '6px 14px',
-                fontFamily: FONT.mono, fontSize: 10, letterSpacing: '0.16em',
-                color: '#FFF6EF', textTransform: 'uppercase', pointerEvents: 'none',
-              }}>APRÈS</div>
+              <div
+                className="showcase-badge showcase-badge-right"
+                style={{
+                  position: 'absolute', top: 20, right: 20,
+                  background: 'rgba(140,79,37,0.92)', backdropFilter: 'blur(8px)',
+                  borderRadius: 6, padding: '6px 14px',
+                  fontFamily: FONT.mono, fontSize: 10, letterSpacing: '0.16em',
+                  color: '#FFF6EF', textTransform: 'uppercase', pointerEvents: 'none',
+                }}
+              >APRÈS</div>
             </div>
 
             {/* BEFORE */}
@@ -714,22 +798,28 @@ function ShowcaseSection() {
                 position: 'absolute', inset: 0,
                 background: 'rgba(0,0,0,0.08)', filter: 'saturate(0.6)', pointerEvents: 'none',
               }} />
-              <div style={{
-                position: 'absolute', top: 20, left: 20,
-                background: 'rgba(36,19,12,0.78)', backdropFilter: 'blur(8px)',
-                borderRadius: 6, padding: '6px 14px',
-                fontFamily: FONT.mono, fontSize: 10, letterSpacing: '0.16em',
-                color: 'rgba(245,230,211,0.9)', textTransform: 'uppercase', pointerEvents: 'none',
-              }}>AVANT</div>
+              <div
+                className="showcase-badge showcase-badge-left"
+                style={{
+                  position: 'absolute', top: 20, left: 20,
+                  background: 'rgba(36,19,12,0.78)', backdropFilter: 'blur(8px)',
+                  borderRadius: 6, padding: '6px 14px',
+                  fontFamily: FONT.mono, fontSize: 10, letterSpacing: '0.16em',
+                  color: 'rgba(245,230,211,0.9)', textTransform: 'uppercase', pointerEvents: 'none',
+                }}
+              >AVANT</div>
             </div>
 
             {/* Label centré en bas */}
-            <div style={{
-              position: 'absolute', bottom: 16, left: '50%', transform: 'translateX(-50%)',
-              fontFamily: FONT.mono, fontSize: 9, letterSpacing: '0.14em',
-              color: 'rgba(255,255,255,0.55)', textTransform: 'uppercase',
-              pointerEvents: 'none', whiteSpace: 'nowrap',
-            }}>
+            <div
+              className="showcase-hint"
+              style={{
+                position: 'absolute', bottom: 16, left: '50%', transform: 'translateX(-50%)',
+                fontFamily: FONT.mono, fontSize: 9, letterSpacing: '0.14em',
+                color: 'rgba(255,255,255,0.55)', textTransform: 'uppercase',
+                pointerEvents: 'none', whiteSpace: 'nowrap',
+              }}
+            >
               Faites glisser pour comparer
             </div>
 
@@ -742,201 +832,99 @@ function ShowcaseSection() {
                 width: 2, background: 'rgba(255,255,255,0.85)', pointerEvents: 'none',
               }}
             >
-              <div style={{
-                position: 'absolute', top: '50%', left: '50%',
-                transform: 'translate(-50%, -50%)',
-                width: 40, height: 40, borderRadius: '50%',
-                background: '#FAF2E9', border: '2px solid rgba(140,79,37,0.4)',
-                boxShadow: '0 4px 16px rgba(0,0,0,0.2)',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-              }}>
+              <div
+                className="showcase-handle-knob"
+                style={{
+                  position: 'absolute', top: '50%', left: '50%',
+                  transform: 'translate(-50%, -50%)',
+                  width: 40, height: 40, borderRadius: '50%',
+                  background: '#FAF2E9', border: '2px solid rgba(140,79,37,0.4)',
+                  boxShadow: '0 4px 16px rgba(0,0,0,0.2)',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                }}
+              >
               </div>
             </div>
           </div>
         </div>
-
-        {/* ── 3 photos en grille ── */}
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(3, 1fr)',
-            gap: 20,
-            opacity: isVisible ? 1 : 0,
-            transform: isVisible ? 'none' : 'translateY(28px)',
-            transition: 'all 0.9s ease 0.3s',
-          }}
-        >
-          {SHOWCASE_EXTRA.map((photo, i) => (
-            <div
-              key={i}
-              className="showcase-extra-card"
-              style={{
-                position: 'relative',
-                aspectRatio: '4 / 3',
-                border: '1px solid rgba(36,19,12,0.1)',
-                boxShadow: '0 12px 36px rgba(43,18,0,0.08)',
-              }}
-            >
-              <Image
-                src={photo.src}
-                alt={photo.alt}
-                fill
-                unoptimized
-                style={{ objectFit: 'cover' }}
-                sizes="(max-width: 768px) 100vw, 33vw"
-              />
-            </div>
-          ))}
-        </div>
-
 
       </div>
     </section>
   );
 }
 
-function TourneesSection() {
+function AutresRealisationsSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => { if (entry.isIntersecting) setIsVisible(true); },
-      { threshold: 0.08 }
+      { threshold: 0.1 }
     );
     if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
   }, []);
 
-  const tags = ['Anticipation', 'Fiabilité', 'Qualité constante', 'Zéro gestion'];
-
   return (
     <section
       ref={sectionRef}
-      style={{ background: '#FAF2E9', padding: 'clamp(72px, 10vw, 120px) 0', overflow: 'hidden' }}
+      className="autres-section"
+      style={{
+        background: '#FAF2E9',
+        padding: 'clamp(22px, 4vw, 34px) 0 clamp(72px, 12vw, 120px)',
+      }}
     >
       <style>{`
-        .tournees-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-        .tournee-tag {
-          display: inline-flex; align-items: center; gap: 8px;
-          padding: 10px 18px; border: 1px solid rgba(140,79,37,0.25);
-          border-radius: 100px; color: #8c4f25;
-          font-family: var(--font-ibm-plex-mono); font-size: 11px;
-          letter-spacing: 0.1em; text-transform: uppercase;
-          background: rgba(140,79,37,0.05);
-          transition: background 0.25s, border-color 0.25s;
-        }
-        .tournee-tag:hover { background: rgba(140,79,37,0.12); border-color: rgba(140,79,37,0.45); }
-        .tournees-photo-wrap { position: relative; border-radius: 20px; overflow: hidden; }
-        .tournees-photo-wrap img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 8s ease; }
-        .tournees-photo-wrap:hover img { transform: scale(1.04); }
-        @media (max-width: 860px) {
-          .tournees-grid { grid-template-columns: 1fr !important; gap: 48px !important; }
+        @media (max-width: 768px) {
+          .autres-inner { padding: 0 20px !important; }
+          .autres-header { margin-bottom: 28px !important; }
+          .autres-h2 { font-size: clamp(24px, 7.5vw, 40px) !important; }
         }
       `}</style>
 
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 clamp(20px, 5vw, 48px)' }}>
+      <div
+        className="autres-inner process-section-inner"
+        style={{
+          maxWidth: 1200,
+          margin: '0 auto',
+          padding: '0 40px',
+        }}
+      >
         <div
-          className="tournees-grid"
+          className="autres-header"
           style={{
+            marginBottom: 48,
             opacity: isVisible ? 1 : 0,
-            transform: isVisible ? 'none' : 'translateY(32px)',
-            transition: 'all 0.9s cubic-bezier(0.16,1,0.3,1)',
+            transform: isVisible ? 'none' : 'translateY(16px)',
+            transition: 'all 0.75s ease',
           }}
         >
-          {/* ── Photo ── */}
-          <div
-            className="tournees-photo-wrap"
-            style={{ aspectRatio: '4 / 5', boxShadow: '0 32px 80px rgba(43,18,0,0.14)' }}
+          <h2
+            className="autres-h2"
+            style={{
+              fontFamily: FONT.display,
+              fontSize: 'clamp(28px, 3.8vw, 48px)',
+              color: '#451F17',
+              lineHeight: 1.08,
+              margin: 0,
+              fontWeight: 600,
+              letterSpacing: '-0.025em',
+            }}
           >
-            <img
-              src="/camions-ans.jpeg"
-              alt="Tournées ANS — fiabilité de service"
-              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-            />
-            <div style={{
-              position: 'absolute', inset: 0,
-              background: 'linear-gradient(to top, rgba(36,19,12,0.68) 0%, rgba(36,19,12,0.1) 40%, transparent 65%)',
-              pointerEvents: 'none',
-            }} />
-            {/* Quote */}
-            <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: 'clamp(20px, 4vw, 36px)' }}>
-              <p style={{
-                fontFamily: 'var(--font-sora)',
-                fontSize: 'clamp(0.9rem, 1.6vw, 1.15rem)',
-                fontWeight: 600, color: '#F5E6D3',
-                lineHeight: 1.4, margin: '0 0 10px', letterSpacing: '-0.01em',
-                fontStyle: 'italic',
-              }}>
-                &ldquo;Vous ne remarquez jamais notre passage. Et c&apos;est exactement le but.&rdquo;
-              </p>
-              <span style={{
-                fontFamily: 'var(--font-ibm-plex-mono)',
-                fontSize: 9, letterSpacing: '0.18em',
-                textTransform: 'uppercase', color: 'rgba(222,158,103,0.75)',
-              }}>
-                — Équipe ANS
-              </span>
-            </div>
-            {/* Badge */}
-            <div style={{
-              position: 'absolute', top: 18, left: 18,
-              background: 'rgba(140,79,37,0.88)', backdropFilter: 'blur(8px)',
-              borderRadius: 6, padding: '5px 12px',
-              fontFamily: 'var(--font-ibm-plex-mono)', fontSize: 9,
-              letterSpacing: '0.18em', color: '#FFF6EF', textTransform: 'uppercase',
-            }}>
-              Nos Tournées
-            </div>
-          </div>
+            Autres réalisations
+          </h2>
+        </div>
 
-          {/* ── Contenu ── */}
-          <div>
-            <p style={{
-              fontFamily: 'var(--font-ibm-plex-mono)', fontSize: 11,
-              letterSpacing: '0.18em', color: '#8c4f25',
-              fontWeight: 500, textTransform: 'uppercase', margin: '0 0 18px',
-            }}>
-              Continuité de Service
-            </p>
-
-            <h2 style={{
-              fontFamily: 'var(--font-sora)',
-              fontSize: 'clamp(2rem, 3.5vw, 3rem)',
-              color: '#451F17', lineHeight: 1.08,
-              fontWeight: 600, letterSpacing: '-0.025em', margin: '0 0 20px',
-            }}>
-              Un service qui fonctionne,{' '}
-              <span style={{ color: '#8c4f25' }}>tout le temps.</span>
-            </h2>
-
-            <p style={{
-              fontFamily: 'var(--font-ibm-plex-sans)',
-              fontSize: 'clamp(0.95rem, 1.1vw, 1.05rem)',
-              color: 'rgba(36,19,12,0.65)', lineHeight: 1.75,
-              margin: '0 0 40px', maxWidth: 440,
-            }}>
-              Nos tournées systématiques anticipent vos besoins avant même qu&apos;ils se posent.
-            </p>
-
-            {/* 4 tags */}
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
-              {tags.map((tag, i) => (
-                <span
-                  key={i}
-                  className="tournee-tag"
-                  style={{
-                    opacity: isVisible ? 1 : 0,
-                    transform: isVisible ? 'none' : 'translateY(8px)',
-                    transition: `all 0.5s cubic-bezier(0.16,1,0.3,1) ${0.15 + i * 0.07}s`,
-                  }}
-                >
-
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </div>
+        <div
+          style={{
+            overflow: 'hidden',
+            opacity: isVisible ? 1 : 0,
+            transform: isVisible ? 'none' : 'translateY(24px)',
+            transition: 'all 0.85s ease 0.12s',
+          }}
+        >
+          <ImageAutoSlider />
         </div>
       </div>
     </section>
@@ -954,27 +942,21 @@ export default function SolutionsPage() {
 
       <style>{`
         @media (max-width: 767px) {
-          .solutions-hero-section { height: auto !important; min-height: 0 !important; }
-          .solutions-hero-widget { height: auto !important; min-height: 0 !important; }
-          .solutions-hero-bg {
-            background-image: url(/hero-ans-line-art-mobile.png) !important;
-            background-size: cover !important;
-            background-position: center !important;
-            background-repeat: no-repeat !important;
-          }
+          .solutions-hero-section { min-height: 70vh !important; height: auto !important; max-height: none !important; padding: 8px 12px !important; }
+          .solutions-hero-widget { border-radius: 14px !important; padding: 28px 22px !important; min-height: 100% !important; height: auto !important; }
           .solutions-hero-content {
-            padding-top: 38% !important;
-            padding-bottom: 36% !important;
-            padding-left: 20px !important;
-            padding-right: 20px !important;
+            padding-top: 18% !important;
+            padding-bottom: 18% !important;
+            padding-left: 12px !important;
+            padding-right: 12px !important;
           }
-          .solutions-hero-label { margin-bottom: 12px !important; }
+          .solutions-hero-label { margin-bottom: 12px !important; font-size: 10px !important; letter-spacing: 0.2em !important; }
           .solutions-hero-h1 {
-            font-size: clamp(1.9rem, 7.5vw, 2.4rem) !important;
+            font-size: clamp(1.6rem, 7.5vw, 2.2rem) !important;
             margin-bottom: 14px !important;
-            line-height: 1.15 !important;
+            line-height: 1.18 !important;
           }
-          .solutions-hero-desc { font-size: 0.92rem !important; line-height: 1.6 !important; margin-bottom: 0 !important; }
+          .solutions-hero-desc { font-size: 0.9rem !important; line-height: 1.6 !important; margin-bottom: 0 !important; }
         }
         @media (min-width: 768px) and (max-height: 900px) {
           .solutions-hero-widget { padding-top: 24px !important; padding-bottom: 24px !important; }
@@ -1016,15 +998,18 @@ export default function SolutionsPage() {
             padding: 'clamp(32px, 4vw, 72px) clamp(24px, 6vw, 80px)',
           }}
         >
-          {/* Background Image */}
-          <div aria-hidden className="solutions-hero-bg" style={{
-            position: 'absolute', inset: 0,
-            backgroundImage: 'url(/hero-ans-line-art-v3.png)',
-            backgroundSize: '93%',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-            pointerEvents: 'none',
-          }} />
+          {/* Background Image & Gradients */}
+          <div aria-hidden className="absolute inset-0 z-0 pointer-events-none overflow-hidden rounded-[20px]">
+              {/* Image */}
+              <div className="absolute inset-0" style={{
+                  backgroundImage: 'url(https://images.unsplash.com/photo-1447933601403-0c6688de566e?q=80&w=2560&auto=format&fit=crop)',
+                  backgroundSize: 'cover', backgroundPosition: 'center',
+              }} />
+              {/* Rich gradient overlays for Deep Roast mood & readable text */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#2B1200] via-[#2B1200]/70 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-b from-[#2B1200]/90 via-transparent to-[#2B1200]/40" />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#2B1200]/60 via-transparent to-[#2B1200]/60" />
+          </div>
 
           <div className="solutions-hero-content" style={{ position: 'relative', zIndex: 1, textAlign: 'center', maxWidth: 800 }}>
             <motion.div
@@ -1046,11 +1031,11 @@ export default function SolutionsPage() {
               transition={{ delay: 0.35, duration: 0.9, ease: EASE_OUT }}
               className="solutions-hero-h1"
               style={{
-                fontSize: 'clamp(2.2rem, 5.5vw, 5rem)',
+                fontSize: 'clamp(3.2rem, 7vw, 6rem)',
                 fontFamily: 'var(--font-sora)',
                 lineHeight: 1.1,
                 letterSpacing: '-0.02em',
-                color: C.textPrimary,
+                color: '#F5E6D3',
                 marginBottom: 24,
               }}
             >
@@ -1081,26 +1066,41 @@ export default function SolutionsPage() {
 
       <ShowcaseSection />
 
-      <TourneesSection />
+      <AutresRealisationsSection />
 
       {/* ── CTA ── */}
-      <section style={{ padding: 'clamp(64px, 10vw, 128px) 24px', position: 'relative', overflow: 'hidden', backgroundColor: '#2B1200' }}>
+      <section
+        className="solutions-cta"
+        style={{
+          padding: 'clamp(56px, 10vw, 128px) clamp(20px, 5vw, 24px)',
+          position: 'relative',
+          overflow: 'hidden',
+          backgroundColor: '#2B1200',
+        }}
+      >
+        <style>{`
+          @media (max-width: 600px) {
+            .solutions-cta-actions { flex-direction: column !important; align-items: stretch !important; }
+            .solutions-cta-actions a { justify-content: center !important; width: 100% !important; }
+          }
+        `}</style>
         <div style={{ maxWidth: 700, margin: '0 auto', textAlign: 'center', position: 'relative', zIndex: 1 }}>
           <h2 style={{
             fontFamily: FONT.display,
-            fontSize: 'clamp(26px, 5vw, 48px)',
+            fontSize: 'clamp(24px, 5vw, 48px)',
             fontWeight: 600, color: C.textPrimary,
             letterSpacing: '-0.02em', marginBottom: 16,
+            lineHeight: 1.15,
           }}>
             Prêt à équiper vos espaces ?
           </h2>
           <p style={{
-            fontFamily: FONT.body, fontSize: 16, color: C.textMuted,
+            fontFamily: FONT.body, fontSize: 'clamp(14px, 2.4vw, 16px)', color: C.textMuted,
             lineHeight: 1.7, maxWidth: 480, margin: '0 auto 32px',
           }}>
             Parlons de votre projet. Audit gratuit, proposition sur-mesure et installation rapide.
           </p>
-          <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 12 }}>
+          <div className="solutions-cta-actions" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 12 }}>
             <motion.a
               href="/contact"
               style={{

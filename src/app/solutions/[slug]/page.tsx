@@ -93,6 +93,7 @@ export default async function SolutionDetailPage({
           </Link>
 
           <div
+            className="solution-hero-grid"
             style={{
               display: 'grid',
               gridTemplateColumns: '1.05fr 0.95fr',
@@ -200,6 +201,7 @@ export default async function SolutionDetailPage({
         }}
       >
         <div
+          className="solution-info-grid"
           style={{
             maxWidth: 1280,
             margin: '0 auto',
@@ -309,12 +311,19 @@ export default async function SolutionDetailPage({
       </section>
 
       <style>{`
-        @media (max-width: 980px) {
-          section div[style*="grid-template-columns: 1.05fr 0.95fr"] {
+        .solution-hero-grid {
+          display: grid;
+          grid-template-columns: 1.05fr 0.95fr;
+        }
+        .solution-info-grid {
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+        @media (max-width: 768px) {
+          .solution-hero-grid {
             grid-template-columns: 1fr !important;
           }
-
-          section div[style*="grid-template-columns: repeat(3, minmax(0, 1fr))"] {
+          .solution-info-grid {
             grid-template-columns: 1fr !important;
           }
         }

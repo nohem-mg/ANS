@@ -407,14 +407,17 @@ function HeroSection() {
   return (
     /* Hero fills its absolutely-positioned container */
     <div
+      className="about-hero-content"
       style={{
-        height: '100%',
+        minHeight: '100%',
+        height: 'auto',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         position: 'relative',
         overflow: 'hidden',
-        padding: 'clamp(32px, 4vw, 72px) clamp(24px, 6vw, 80px)',
+        padding: 'clamp(24px, 5vw, 72px) clamp(16px, 4vw, 80px)',
+        boxSizing: 'border-box',
       }}
     >
       {/* Light dot grid on dark */}
@@ -446,6 +449,18 @@ function HeroSection() {
           pointerEvents: 'none',
         }}
       />
+      {/* Background Image & Gradients */}
+      <div aria-hidden className="absolute inset-0 z-0 pointer-events-none overflow-hidden rounded-[20px]">
+          {/* Image */}
+          <div className="absolute inset-0" style={{
+              backgroundImage: 'url(https://images.unsplash.com/photo-1447933601403-0c6688de566e?q=80&w=2560&auto=format&fit=crop)',
+              backgroundSize: 'cover', backgroundPosition: 'center',
+          }} />
+          {/* Rich gradient overlays for Deep Roast mood & readable text */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#2B1200] via-[#2B1200]/70 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#2B1200]/90 via-transparent to-[#2B1200]/40" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#2B1200]/60 via-transparent to-[#2B1200]/60" />
+      </div>
 
       <div
         style={{
@@ -465,7 +480,7 @@ function HeroSection() {
             letterSpacing: '0.22em',
             color: C.accent,
             textTransform: 'uppercase',
-            marginBottom: '44px',
+            marginBottom: 'clamp(16px, 4vw, 32px)',
           }}
         >
           À Propos · ANS
@@ -476,10 +491,10 @@ function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
           style={{
-            fontSize: 'clamp(26px, 3.8vw, 50px)',
+            fontSize: 'clamp(1.8rem, 4vw, 3.2rem)',
             fontFamily: FONT.display,
             fontWeight: 600,
-            lineHeight: 1.22,
+            lineHeight: 1.1,
             color: '#F5E6D3',
             letterSpacing: '-0.025em',
             margin: 0,
@@ -494,13 +509,13 @@ function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
           style={{
-            fontSize: 'clamp(26px, 3.8vw, 50px)',
+            fontSize: 'clamp(1.4rem, 3vw, 2.4rem)',
             fontFamily: FONT.display,
             fontWeight: 300,
-            lineHeight: 1.22,
+            lineHeight: 1.2,
             color: C.accent,
-            letterSpacing: '-0.025em',
-            marginTop: '14px',
+            letterSpacing: '-0.02em',
+            marginTop: 'clamp(12px, 3vw, 20px)',
             marginBottom: 0,
           }}
         >
@@ -664,7 +679,7 @@ function StorySection() {
                 margin: 0,
               }}
             >
-              Plus de 40 ans de passion à transformer l'univers du travail autour de moments chaleureux et de services irréprochables.
+              Plus de 40 ans de passion à transformer l&apos;univers du travail autour de moments chaleureux et de services irréprochables.
             </p>
           </div>
         </FadeIn>
@@ -756,7 +771,7 @@ function StorySection() {
         }
         @media (max-width: 768px) {
           .ans-story-section {
-            padding-top: 64px !important;
+            padding-top: 40px !important;
             padding-bottom: 64px !important;
           }
         }
@@ -1195,7 +1210,7 @@ function TeamSection() {
           position: 'relative',
         }}
       >
-        <FadeIn style={{ marginBottom: '80px', position: 'relative' }}>
+        <FadeIn style={{ marginBottom: 'clamp(24px, 5vw, 80px)', position: 'relative' }}>
           <GhostNumber n="02" />
           <div
             style={{
@@ -1252,46 +1267,49 @@ function TeamSection() {
 // HERO + MOODBOARD — scroll-driven cross-fade inside a single sticky widget
 // ─────────────────────────────────────────────────────────────────────────────
 
-function HeroMoodboardSection() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const shouldReduce = useReducedMotion();
-
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ['start start', 'end end'],
-  });
-
-  const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 60,
-    damping: 22,
-    restDelta: 0.0005,
-  });
-
-  const heroOpacity = useTransform(smoothProgress, [0, 0.28, 0.68], [1, 1, 0]);
-  const heroScale = useTransform(smoothProgress, [0.28, 0.68], [1, 0.97]);
-
-  const moodOpacity = useTransform(smoothProgress, [0.38, 0.75], [0, 1]);
-  const moodY = useTransform(smoothProgress, [0.38, 0.75], ['4%', '0%']);
-
+function AboutHeroSection() {
   return (
-    <div ref={containerRef} style={{ height: '200vh', position: 'relative' }}>
-      <div
+    <>
+      <style>{`
+        @media (max-width: 767px) {
+          .about-hero-section {
+            min-height: 0 !important;
+            height: auto !important;
+            max-height: none !important;
+            padding-bottom: 18px !important;
+            overflow: hidden !important;
+          }
+          .about-hero-card {
+            min-height: 0 !important;
+            height: auto !important;
+          }
+          .about-hero-content {
+            min-height: 0 !important;
+          }
+        }
+      `}</style>
+      <section
+        className="about-hero-section"
         style={{
-          position: 'sticky',
-          top: 84,
           height: 'calc(100vh - 84px)',
-          overflow: 'hidden',
+          maxHeight: 'calc(100vh - 84px)',
           backgroundColor: '#F9F1E8',
           padding: 'clamp(10px, 1.2vw, 14px) clamp(16px, 4vw, 48px)',
           boxSizing: 'border-box',
+          overflow: 'hidden',
+          display: 'flex',
+          alignItems: 'stretch',
         }}
       >
         <motion.div
+          className="about-hero-card"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.0, ease: EASE_OUT }}
           style={{
-            height: '100%',
+            flex: 1,
+            minHeight: '100%',
+            height: 'auto',
             backgroundColor: '#2B1200',
             borderRadius: '20px',
             overflow: 'hidden',
@@ -1299,32 +1317,10 @@ function HeroMoodboardSection() {
             position: 'relative',
           }}
         >
-          <motion.div
-            style={{
-              position: 'absolute',
-              inset: 0,
-              zIndex: 2,
-              opacity: shouldReduce ? 1 : heroOpacity,
-              scale: shouldReduce ? 1 : heroScale,
-            }}
-          >
-            <HeroSection />
-          </motion.div>
-
-          <motion.div
-            style={{
-              position: 'absolute',
-              inset: 0,
-              zIndex: 1,
-              opacity: shouldReduce ? 1 : moodOpacity,
-              y: shouldReduce ? 0 : moodY,
-            }}
-          >
-            <MoodboardGrid />
-          </motion.div>
+          <HeroSection />
         </motion.div>
-      </div>
-    </div>
+      </section>
+    </>
   );
 }
 
@@ -1342,7 +1338,7 @@ export default function AboutPage() {
         minHeight: '100vh',
       }}
     >
-      <HeroMoodboardSection />
+      <AboutHeroSection />
       {/* 3. NOTRE HISTOIRE */}
       <StorySection />
       <TeamSection />

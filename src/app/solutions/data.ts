@@ -27,7 +27,7 @@ export const SOLUTIONS: SolutionDetail[] = [
       'Des solutions boissons chaudes premium pour offrir une pause café qualitative, fluide et valorisante au quotidien.',
     description:
       'Nos machines à café combinent design, fiabilite et qualite d’extraction pour proposer un service premium dans tous les environnements de travail. Elles s’adaptent aussi bien aux bureaux qu’aux espaces de passage ou aux zones d’accueil.',
-    image: '/instant-cafe-ans.jpeg',
+    image: '/machcaf.png',
     icon: Coffee,
     highlights: [
       'Broyeur integre et recettes variees',
@@ -81,7 +81,7 @@ export const SOLUTIONS: SolutionDetail[] = [
       'Une offre complete pour les pauses rapides avec snacks, boissons fraiches et produits du quotidien.',
     description:
       'Nos distributeurs automatiques permettent de proposer une gamme claire, attractive et bien geree, avec des references adaptees a votre site et a vos collaborateurs. Ils repondent aux usages intensifs comme aux besoins plus ponctuels.',
-    image: '/distributeur-loreal.jpeg',
+    image: '/snacks.png',
     icon: Package2,
     highlights: [
       'Snacks, confiseries, boissons fraiches et canettes',
