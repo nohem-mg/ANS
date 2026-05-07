@@ -1,0 +1,10 @@
+section_label: "La parole à nos clients"
+title: "Une expérience appréciée"
+description: "Ce que nos clients disent de nous. Des entreprises de toutes tailles, unies par la même exigence de qualité et de service."
+items:
+  - name: "Thomas D."
+    review: "Un service irréprochable et régulier. Les machines sont modernes, le café d'excellente qualité, et les équipes très réactives au moindre souci. Un vrai plus pour la pause !"
+  - name: "Sandrine L."
+    review: "Nous avons fait installer un espace détente complet avec ANS. Rien à dire, c'est design, le passage du technicien est très discret et nos collaborateurs sont ravis de la qualité des produits."
+  - name: "Michel B."
+    review: "Entreprise à l'écoute et très pro. On sent l'esprit familial et l'envie de bien faire. Ça change vraiment des gros prestataires classiques impersonnels. Je recommande."
