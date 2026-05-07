@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { Linkedin, Instagram, Mail } from 'lucide-react';
+import { usePathname } from 'next/navigation';
 
 const NAV_LINKS = [
     { label: 'Accueil', href: '/' },
@@ -12,6 +13,9 @@ const NAV_LINKS = [
 ];
 
 export default function Footer() {
+    const pathname = usePathname();
+    if (pathname.startsWith('/keystatic')) return null;
+
     return (
         <footer
             style={{
