@@ -103,7 +103,6 @@ export default async function Image() {
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
-            gap: 20,
             position: 'relative',
             zIndex: 1,
           }}
@@ -111,68 +110,13 @@ export default async function Image() {
           {/* ANS Logo */}
           <img
             src={logoData as unknown as string}
-            width={500}
-            height={214}
+            width={800}
+            height={342}
             alt="ANS Pause Évasion"
             style={{
               objectFit: 'contain',
             }}
           />
-
-          {/* Divider */}
-          <div
-            style={{
-              width: 80,
-              height: 2,
-              backgroundColor: '#C8763A',
-              borderRadius: 2,
-              marginTop: 4,
-              marginBottom: 4,
-              display: 'flex',
-            }}
-          />
-
-          {/* Tagline */}
-          <span
-            style={{
-              fontSize: 22,
-              color: '#F5E6D3',
-              opacity: 0.8,
-              maxWidth: 700,
-              textAlign: 'center',
-              lineHeight: 1.5,
-            }}
-          >
-            Expert en solutions de pause café & distribution automatique pour
-            entreprises
-          </span>
-
-          {/* Bottom badge */}
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 12,
-              marginTop: 12,
-              padding: '10px 24px',
-              borderRadius: 999,
-              backgroundColor: 'rgba(245, 230, 211, 0.08)',
-              border: '1px solid rgba(200,118,58,0.3)',
-            }}
-          >
-            <span
-              style={{
-                fontSize: 13,
-                color: '#C8763A',
-                fontWeight: 600,
-                letterSpacing: '0.12em',
-                textTransform: 'uppercase',
-                display: 'flex',
-              }}
-            >
-              Hauts-de-France · Depuis 1981 · Réseau Prodia+
-            </span>
-          </div>
         </div>
       </div>
     ),
