@@ -42,13 +42,138 @@ const ibmPlexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ANS - La Pause Café Réinventée",
-  description: "Expert en solutions de pause café et distribution automatique pour entreprises. Qualité de Vie au Travail, convivialité et service sur-mesure depuis 40 ans.",
+  metadataBase: new URL('https://www.anspauseevasion.fr'),
+
+  title: {
+    default: 'ANS – Pause Évasion | Distributeurs automatiques & café pour entreprises',
+    template: '%s | ANS – Pause Évasion',
+  },
+  description:
+    'ANS, expert en solutions de pause café et distribution automatique pour entreprises en Hauts-de-France. Machines à café, fontaines à eau, distributeurs automatiques. Qualité de Vie au Travail et service sur-mesure depuis 1981.',
+
+  keywords: [
+    'distributeur automatique',
+    'machine à café entreprise',
+    'fontaine à eau entreprise',
+    'pause café entreprise',
+    'distribution automatique Hauts-de-France',
+    'distributeur boissons chaudes',
+    'distributeur snacking',
+    'ANS',
+    'Prodia+',
+    'qualité de vie au travail',
+    'coffee corner entreprise',
+    'machine à café bureau',
+    'distributeur automatique Nord',
+    'Cambrai',
+    'Proville',
+  ],
+
+  authors: [{ name: 'ANS – Automatique Nord Service' }],
+  creator: 'ANS – Automatique Nord Service',
+  publisher: 'ANS – Automatique Nord Service',
+
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+
+  alternates: {
+    canonical: '/',
+  },
+
+  openGraph: {
+    type: 'website',
+    locale: 'fr_FR',
+    url: 'https://www.anspauseevasion.fr',
+    siteName: 'ANS – Pause Évasion',
+    title: 'ANS – Pause Évasion | Distributeurs automatiques & café pour entreprises',
+    description:
+      'Expert en solutions de pause café et distribution automatique pour entreprises en Hauts-de-France. Service sur-mesure depuis 1981.',
+  },
+
+  twitter: {
+    card: 'summary_large_image',
+    title: 'ANS – Pause Évasion | Distributeurs automatiques & café pour entreprises',
+    description:
+      'Expert en solutions de pause café et distribution automatique pour entreprises en Hauts-de-France. Service sur-mesure depuis 1981.',
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+
+  verification: {
+    google: 'PhykVo__RQ3epdItFHzBxU90a2frVv5nFii6koiLjaw',
+  },
 };
 
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
+  themeColor: '#2B1200',
+};
+
+// JSON-LD Structured Data for Local Business SEO
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: 'ANS – Automatique Nord Service',
+  alternateName: 'ANS Pause Évasion',
+  description:
+    'Expert en solutions de pause café et distribution automatique pour entreprises en Hauts-de-France. Machines à café, fontaines à eau, distributeurs automatiques depuis 1981.',
+  url: 'https://www.anspauseevasion.fr',
+  logo: 'https://www.anspauseevasion.fr/logo-ans-entier.png',
+  image: 'https://www.anspauseevasion.fr/logo-ans-entier.png',
+  telephone: '+33327371684',
+  email: 'contact@ans-da.fr',
+  foundingDate: '1981',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: '780 rue Blaise Pascal',
+    addressLocality: 'Proville',
+    postalCode: '59267',
+    addressRegion: 'Hauts-de-France',
+    addressCountry: 'FR',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: 50.1598,
+    longitude: 3.2274,
+  },
+  areaServed: {
+    '@type': 'GeoCircle',
+    geoMidpoint: {
+      '@type': 'GeoCoordinates',
+      latitude: 50.1598,
+      longitude: 3.2274,
+    },
+    geoRadius: '100000',
+  },
+  openingHoursSpecification: {
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+    opens: '08:00',
+    closes: '18:00',
+  },
+  sameAs: [],
+  priceRange: '€€',
+  serviceType: [
+    'Distribution automatique',
+    'Machine à café pour entreprise',
+    'Fontaine à eau',
+    'Distributeur automatique de boissons',
+    'Distributeur automatique de snacks',
+  ],
 };
 
 export default function RootLayout({
@@ -58,6 +183,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${playfairDisplay.variable} ${sora.variable} ${ibmPlexSans.variable} ${ibmPlexMono.variable} antialiased`}
         suppressHydrationWarning

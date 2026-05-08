@@ -41,8 +41,16 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${solution.title} · ANS`,
+    title: solution.title,
     description: solution.summary,
+    alternates: {
+      canonical: `/solutions/${slug}`,
+    },
+    openGraph: {
+      title: `${solution.title} · ANS – Pause Évasion`,
+      description: solution.summary,
+      url: `/solutions/${slug}`,
+    },
   };
 }
 
