@@ -114,6 +114,9 @@ export const metadata: Metadata = {
 
   verification: {
     google: 'PhykVo__RQ3epdItFHzBxU90a2frVv5nFii6koiLjaw',
+    other: {
+      'facebook-domain-verification': 'uws9w84n7umm6p8rsk5ko7cr7ayg4y',
+    },
   },
 };
 
