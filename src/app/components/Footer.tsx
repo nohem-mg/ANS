@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { Linkedin, Instagram, Mail } from 'lucide-react';
 
 const NAV_LINKS = [
@@ -163,18 +164,18 @@ export default function Footer() {
                             © {new Date().getFullYear()} A.N.S. Tous droits réservés.
                         </p>
                         <div style={{ display: 'flex', gap: 24 }}>
-                            <a href="#" style={{ color: 'rgba(255,246,239,0.8)', fontSize: 10, letterSpacing: '0.04em', textDecoration: 'none', transition: 'color 0.2s' }}
+                            <Link href="/mentions-legales" style={{ color: 'rgba(255,246,239,0.8)', fontSize: 10, letterSpacing: '0.04em', textDecoration: 'none', transition: 'color 0.2s' }}
                                 onMouseEnter={(e) => (e.currentTarget.style.color = '#DE9E67')}
                                 onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,246,239,0.2)')}
                             >
                                 Mentions Légales
-                            </a>
-                            <a href="#" style={{ color: 'rgba(255,246,239,0.8)', fontSize: 10, letterSpacing: '0.04em', textDecoration: 'none', transition: 'color 0.2s' }}
+                            </Link>
+                            <Link href="/confidentialite" style={{ color: 'rgba(255,246,239,0.8)', fontSize: 10, letterSpacing: '0.04em', textDecoration: 'none', transition: 'color 0.2s' }}
                                 onMouseEnter={(e) => (e.currentTarget.style.color = '#DE9E67')}
                                 onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,246,239,0.2)')}
                             >
                                 Confidentialité
-                            </a>
+                            </Link>
                         </div>
                     </div>
                 </div>
