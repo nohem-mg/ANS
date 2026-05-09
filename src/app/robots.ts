@@ -8,6 +8,10 @@ export default function robots(): MetadataRoute.Robots {
         allow: '/',
         disallow: ['/api/', '/_next/'],
       },
+      {
+        userAgent: ['GPTBot', 'ClaudeBot', 'Claude-Web', 'PerplexityBot', 'Google-Extended', 'OAI-SearchBot'],
+        allow: '/',
+      },
     ],
     sitemap: 'https://www.anspauseevasion.fr/sitemap.xml',
   };
