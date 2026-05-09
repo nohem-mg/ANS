@@ -45,8 +45,8 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://www.anspauseevasion.fr'),
 
   title: {
-    default: 'ANS (Automatique Nord Service) | Pause Évasion & Distributeurs automatiques',
-    template: '%s | ANS (Automatique Nord Service)',
+    default: 'Automatique Nord Service (ANS) | Distributeurs automatiques',
+    template: '%s | Automatique Nord Service',
   },
   description:
     'ANS, expert en solutions de pause café et distribution automatique pour entreprises en Hauts-de-France. Machines à café, fontaines à eau, distributeurs automatiques. Qualité de Vie au Travail et service sur-mesure depuis 1981.',
@@ -87,8 +87,8 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'fr_FR',
     url: 'https://www.anspauseevasion.fr',
-    siteName: 'ANS (Automatique Nord Service)',
-    title: 'ANS (Automatique Nord Service) | Pause Évasion & Distributeurs automatiques',
+    siteName: 'Automatique Nord Service',
+    title: 'Automatique Nord Service (ANS) | Distributeurs automatiques',
     description:
       'Expert en solutions de pause café et distribution automatique pour entreprises en Hauts-de-France. Service sur-mesure depuis 1981.',
     images: [
@@ -96,14 +96,14 @@ export const metadata: Metadata = {
         url: 'https://www.anspauseevasion.fr/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'ANS (Automatique Nord Service) | Pause Évasion',
+        alt: 'Automatique Nord Service (ANS)',
       },
     ],
   },
 
   twitter: {
     card: 'summary_large_image',
-    title: 'ANS (Automatique Nord Service) | Pause Évasion & Distributeurs',
+    title: 'Automatique Nord Service (ANS) | Distributeurs automatiques',
     description:
       'Expert en solutions de pause café et distribution automatique pour entreprises en Hauts-de-France. Service sur-mesure depuis 1981.',
     images: ['https://www.anspauseevasion.fr/og-image.jpg'],
