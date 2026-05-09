@@ -127,6 +127,13 @@ export const metadata: Metadata = {
       'facebook-domain-verification': 'uws9w84n7umm6p8rsk5ko7cr7ayg4y',
     },
   },
+
+  other: {
+    'geo.region': 'FR-HDF',
+    'geo.placename': 'Proville, Hauts-de-France',
+    'geo.position': '50.1598;3.2274',
+    ICBM: '50.1598, 3.2274',
+  },
 };
 
 export const viewport: Viewport = {
@@ -177,7 +184,10 @@ const jsonLd = {
     opens: '08:00',
     closes: '18:00',
   },
-  sameAs: [],
+  sameAs: [
+    'https://www.facebook.com/profile.php?id=100054402254843',
+    'https://share.google/USgidx9oQizjzjCxt',
+  ],
   priceRange: '€€',
   serviceType: [
     'Distribution automatique',
