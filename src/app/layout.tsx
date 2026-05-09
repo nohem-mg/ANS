@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://www.anspauseevasion.fr'),
 
   title: {
-    default: 'Automatique Nord Service (ANS) | Distributeurs automatiques',
+    default: 'Automatique Nord Service (ANS)',
     template: '%s | Automatique Nord Service',
   },
   description:
