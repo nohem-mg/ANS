@@ -1,0 +1,73 @@
+{
+    "hero": {
+        "tag": "Le Réseau",
+        "title": "Le Groupe Prodia+",
+        "description": "Le premier réseau français d'indépendants en distribution automatique, au service de vos espaces de pause."
+    },
+    "presentation": {
+        "tag": "Qui sommes-nous",
+        "title": "Un Collectif d'Experts Indépendants",
+        "paragraph_1": "Prodia+ est un groupement de PME indépendantes spécialisées dans la distribution automatique et les solutions de pause en entreprise. Chaque membre est un entrepreneur local, ancré dans son territoire, qui partage les mêmes valeurs d'excellence et de proximité.",
+        "paragraph_2": "En rejoignant Prodia+ il y a plus de 20 ans, ANS a renforcé sa capacité à proposer les meilleurs équipements aux meilleures conditions, tout en conservant son indépendance et sa culture familiale. Le réseau mutualise les achats, la logistique et les innovations technologiques.",
+        "paragraph_3": "Résultat : nos clients bénéficient de la force d'un réseau national avec le service personnalisé d'une entreprise locale qui connaît le terrain."
+    },
+    "key_figures": {
+        "tag": "En chiffres",
+        "title": "La Force du Réseau",
+        "featured_value": "60 000",
+        "featured_label": "Distributeurs automatiques",
+        "featured_headline": "Le parc le plus dense du marché.",
+        "featured_description": "déployés et exploités en France et au Benelux par les membres du réseau.",
+        "small_figures": [
+            {
+                "value": "47",
+                "label": "Adhérents",
+                "description": "répartis sur toute la France, dont 2 en Belgique."
+            },
+            {
+                "value": "119",
+                "label": "Agences",
+                "description": "dont 2 en Belgique et 1 au Luxembourg."
+            },
+            {
+                "value": "2 200",
+                "label": "Collaborateurs",
+                "description": "680 approvisionneurs, 160 techniciens, administratifs, commerciaux, logistique, direction..."
+            },
+            {
+                "value": "15 000",
+                "label": "Sites gérés",
+                "description": "sièges, sites industriels, hôpitaux, universités, hôtels, plateformes…"
+            }
+        ]
+    },
+    "advantages": {
+        "tag": "Avantages",
+        "title": "Pourquoi Prodia+ fait la différence",
+        "items": [
+            {
+                "title": "Pouvoir de négociation"
+            },
+            {
+                "title": "Mutualisation logistique"
+            },
+            {
+                "title": "Standards de qualité"
+            },
+            {
+                "title": "Partage d'expertise"
+            },
+            {
+                "title": "Proximité locale"
+            },
+            {
+                "title": "Innovation continue"
+            }
+        ]
+    },
+    "ans_network": {
+        "tag": "ANS × Prodia+",
+        "title": "Membre du réseau depuis 2000, ANS incarne la promesse Prodia+.",
+        "description": "Notre appartenance au groupement nous permet de proposer les meilleurs équipements du marché tout en conservant notre ADN familial. Vous travaillez avec ANS, vous bénéficiez de la puissance Prodia+."
+    }
+}

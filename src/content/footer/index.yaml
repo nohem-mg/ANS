@@ -1,0 +1,46 @@
+{
+    "brand": {
+        "name": "A.N.S.",
+        "tagline": "Depuis 1981, nous réinventons la pause café en entreprise."
+    },
+    "contact": {
+        "address_line1": "780 rue Blaise Pascal",
+        "address_line2": "59267 Proville France",
+        "phone": "03 27 37 16 84",
+        "phone_href": "tel:+33327371684"
+    },
+    "nav_links": [
+        {
+            "label": "Accueil",
+            "href": "/"
+        },
+        {
+            "label": "Nos Solutions",
+            "href": "/solutions"
+        },
+        {
+            "label": "Groupe Prodia+",
+            "href": "/groupe"
+        },
+        {
+            "label": "À Propos",
+            "href": "/about"
+        },
+        {
+            "label": "Contact",
+            "href": "/contact"
+        }
+    ],
+    "social": {
+        "linkedin_href": "#",
+        "instagram_href": "#",
+        "email_href": "mailto:contact@ans-da.fr"
+    },
+    "legal": {
+        "copyright_name": "A.N.S.",
+        "mentions_label": "Mentions Légales",
+        "mentions_href": "/mentions-legales",
+        "confidentialite_label": "Confidentialité",
+        "confidentialite_href": "/confidentialite"
+    }
+}
