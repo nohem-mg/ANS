@@ -595,10 +595,12 @@ const VisionSection = () => {
 
                   {/* ── BACK FACE — image ── */}
                   <div className="flip-card-back overflow-hidden shadow-lg bg-[#688125]">
-                    <img
+                    <Image
                       src={`/carte${index + 1}.png`}
                       alt={point.title}
-                      className="w-full h-full object-cover"
+                      fill
+                      sizes="(max-width: 768px) 80vw, (max-width: 1200px) 25vw, 20vw"
+                      className="object-cover"
                     />
                   </div>
 
@@ -884,12 +886,16 @@ export default function Home() {
                   repeat: Infinity,
                   repeatType: "reverse"
                 }}
-                style={{
-                  backgroundImage: 'url(https://images.unsplash.com/photo-1447933601403-0c6688de566e?q=80&w=2560&auto=format&fit=crop)',
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                }}
-              />
+              >
+                <Image
+                  src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?q=80&auto=format&fit=crop"
+                  alt="Pause Évasion Background"
+                  fill
+                  priority
+                  sizes="100vw"
+                  className="object-cover object-center"
+                />
+              </motion.div>
             </div>
 
             {/* Rich gradient overlays for Deep Roast mood & readable text */}
