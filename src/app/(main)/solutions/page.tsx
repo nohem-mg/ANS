@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { Gallery4, type Gallery4Item } from '@/components/ui/gallery4';
 import { ImageAutoSlider } from '@/components/ui/image-auto-slider';
-import { SOLUTIONS } from '@/app/solutions/data';
+import { SOLUTIONS } from '@/app/(main)/solutions/data';
 
 // ─── Design tokens (matching global palette) ────────────────────────────────
 const C = {

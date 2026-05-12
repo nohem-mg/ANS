@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import { ArrowLeft, ArrowRight, CheckCircle2 } from 'lucide-react';
 
-import { getSolutionBySlug, SOLUTIONS } from '@/app/solutions/data';
+import { getSolutionBySlug, SOLUTIONS } from '@/app/(main)/solutions/data';
 
 type SolutionDetailPageProps = {
   params: Promise<{
