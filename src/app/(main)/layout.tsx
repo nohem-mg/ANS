@@ -1,16 +1,25 @@
+import { createReader } from '@keystatic/core/reader';
+import keystaticConfig from '../../../keystatic.config';
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
-export default function MainLayout({
+const reader = createReader(process.cwd(), keystaticConfig);
+
+export default async function MainLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const [navData, footerData] = await Promise.all([
+    reader.singletons.navigation.read(),
+    reader.singletons.footer.read(),
+  ]);
+
   return (
     <>
-      <Header />
+      <Header navData={navData ?? null} />
       <main>{children}</main>
-      <Footer />
+      <Footer footerData={footerData ?? null} />
     </>
   );
 }

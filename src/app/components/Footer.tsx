@@ -12,7 +12,27 @@ const NAV_LINKS = [
     { label: 'Contact', href: '/contact' },
 ];
 
-export default function Footer() {
+export default function Footer({ footerData }: { footerData?: any }) {
+    const brandName = footerData?.brand?.name ?? 'A.N.S.';
+    const brandTagline = footerData?.brand?.tagline ?? 'Depuis 1981, nous réinventons\nla pause café en entreprise.';
+    
+    const contactAddress1 = footerData?.contact?.address_line1 ?? '780 rue Blaise Pascal';
+    const contactAddress2 = footerData?.contact?.address_line2 ?? '59267 Proville France';
+    const contactPhone = footerData?.contact?.phone ?? '03 27 37 16 84';
+    const contactPhoneHref = footerData?.contact?.phone_href ?? 'tel:+33327371684';
+
+    const navLinks = footerData?.nav_links?.length ? footerData.nav_links : NAV_LINKS;
+
+    const linkedinHref = footerData?.social?.linkedin_href ?? '#';
+    const instagramHref = footerData?.social?.instagram_href ?? '#';
+    const emailHref = footerData?.social?.email_href ?? 'mailto:contact@ans-da.fr';
+
+    const copyrightName = footerData?.legal?.copyright_name ?? 'A.N.S.';
+    const mentionsLabel = footerData?.legal?.mentions_label ?? 'Mentions Légales';
+    const mentionsHref = footerData?.legal?.mentions_href ?? '/mentions-legales';
+    const confLabel = footerData?.legal?.confidentialite_label ?? 'Confidentialité';
+    const confHref = footerData?.legal?.confidentialite_href ?? '/confidentialite';
+
     return (
         <footer
             style={{
@@ -75,17 +95,17 @@ export default function Footer() {
                         {/* Col 1 — Brand */}
                         <div>
                             <p style={{ color: 'rgba(255,246,239,0.9)', fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase' as const, marginBottom: 16 }}>
-                                A.N.S.
+                                {brandName}
                             </p>
-                            <p style={{ color: 'rgba(255,246,239,0.85)', fontSize: 12, lineHeight: 1.7 }}>
-                                Depuis 1981, nous réinventons<br />la pause café en entreprise.
+                            <p style={{ color: 'rgba(255,246,239,0.85)', fontSize: 12, lineHeight: 1.7, whiteSpace: 'pre-line' }}>
+                                {brandTagline}
                             </p>
                             {/* Social icons */}
                             <div style={{ display: 'flex', justifyContent: 'center', gap: 16, marginTop: 16 }}>
                                 {[
-                                    { icon: <Linkedin size={13} />, href: '#', label: 'LinkedIn' },
-                                    { icon: <Instagram size={13} />, href: '#', label: 'Instagram' },
-                                    { icon: <Mail size={13} />, href: '#', label: 'Email' },
+                                    { icon: <Linkedin size={13} />, href: linkedinHref, label: 'LinkedIn' },
+                                    { icon: <Instagram size={13} />, href: instagramHref, label: 'Instagram' },
+                                    { icon: <Mail size={13} />, href: emailHref, label: 'Email' },
                                 ].map(({ icon, href, label }, i) => (
                                     <a
                                         key={i}
@@ -107,16 +127,16 @@ export default function Footer() {
                                 Adresse
                             </p>
                             <p style={{ color: 'rgba(255,246,239,0.85)', fontSize: 12, lineHeight: 1.7 }}>
-                                780 rue Blaise Pascal<br />
-                                59267 Proville France
+                                {contactAddress1}<br />
+                                {contactAddress2}
                             </p>
                             <a
-                                href="tel:+33327371684"
+                                href={contactPhoneHref}
                                 style={{ color: 'rgba(255,246,239,0.85)', fontSize: 12, letterSpacing: '0.04em', textDecoration: 'none', transition: 'color 0.2s', display: 'inline-block', marginTop: 4 }}
                                 onMouseEnter={(e) => (e.currentTarget.style.color = '#DE9E67')}
                                 onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,246,239,0.3)')}
                             >
-                                03 27 37 16 84
+                                {contactPhone}
                             </a>
                         </div>
 
@@ -125,7 +145,7 @@ export default function Footer() {
                             <p style={{ color: 'rgba(255,246,239,0.9)', fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase' as const, marginBottom: 16 }}>
                                 Navigation
                             </p>
-                            {NAV_LINKS.map(({ label, href }) => (
+                            {navLinks.map(({ label, href }: { label: string, href: string }) => (
                                 <a
                                     key={href}
                                     href={href}
@@ -161,20 +181,20 @@ export default function Footer() {
                         }}
                     >
                         <p style={{ color: 'rgba(255,246,239,0.8)', fontSize: 10, letterSpacing: '0.04em' }}>
-                            © {new Date().getFullYear()} A.N.S. Tous droits réservés.
+                            © {new Date().getFullYear()} {copyrightName}. Tous droits réservés.
                         </p>
                         <div style={{ display: 'flex', gap: 24 }}>
-                            <Link href="/mentions-legales" style={{ color: 'rgba(255,246,239,0.8)', fontSize: 10, letterSpacing: '0.04em', textDecoration: 'none', transition: 'color 0.2s' }}
+                            <Link href={mentionsHref} style={{ color: 'rgba(255,246,239,0.8)', fontSize: 10, letterSpacing: '0.04em', textDecoration: 'none', transition: 'color 0.2s' }}
                                 onMouseEnter={(e) => (e.currentTarget.style.color = '#DE9E67')}
                                 onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,246,239,0.2)')}
                             >
-                                Mentions Légales
+                                {mentionsLabel}
                             </Link>
-                            <Link href="/confidentialite" style={{ color: 'rgba(255,246,239,0.8)', fontSize: 10, letterSpacing: '0.04em', textDecoration: 'none', transition: 'color 0.2s' }}
+                            <Link href={confHref} style={{ color: 'rgba(255,246,239,0.8)', fontSize: 10, letterSpacing: '0.04em', textDecoration: 'none', transition: 'color 0.2s' }}
                                 onMouseEnter={(e) => (e.currentTarget.style.color = '#DE9E67')}
                                 onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,246,239,0.2)')}
                             >
-                                Confidentialité
+                                {confLabel}
                             </Link>
                         </div>
                     </div>
