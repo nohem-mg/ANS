@@ -2,8 +2,8 @@
 
 import { useRef, useEffect } from 'react';
 import { motion, useInView } from 'framer-motion';
+import { useForm, ValidationError } from '@formspree/react';
 import { ArrowRight, Phone, Mail, MapPin, Clock } from 'lucide-react';
-import Image from 'next/image';
 
 // ─── CONTACT INFO ────────────────────────────────────────────────────────────
 const CONTACT_INFO = [
@@ -37,6 +37,7 @@ const CONTACT_INFO = [
 export default function ContactPage() {
     const formRef = useRef<HTMLDivElement>(null);
     const isFormInView = useInView(formRef, { once: true, margin: '-40px' });
+    const [formState, handleSubmit] = useForm('xdabjozl');
 
     // Scroll to top on mount
     useEffect(() => {
@@ -157,30 +158,52 @@ export default function ContactPage() {
                             Remplissez le formulaire ci-dessous et nous vous recontacterons sous 24h.
                         </p>
 
+                        {formState.succeeded ? (
+                            <div
+                                role="status"
+                                className="rounded-lg border border-sienna-racing/20 bg-white/60 px-5 py-4 text-sm leading-relaxed text-deep-roast"
+                            >
+                                Merci, votre message a bien été envoyé. Nous vous recontacterons rapidement.
+                            </div>
+                        ) : (
                         <form
-                            onSubmit={(e) => e.preventDefault()}
+                            onSubmit={handleSubmit}
                             className="flex flex-col gap-6"
                         >
+                            <input type="hidden" name="_subject" value="Nouvelle demande depuis le site ANS" />
+
                             {/* Row: Nom + Email */}
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div>
-                                    <label className={labelClasses}>
+                                    <label htmlFor="name" className={labelClasses}>
                                         Nom complet
                                     </label>
                                     <input
+                                        id="name"
+                                        name="name"
                                         type="text"
                                         placeholder="Jean Dupont"
+                                        required
                                         className={inputClasses}
                                     />
                                 </div>
                                 <div>
-                                    <label className={labelClasses}>
+                                    <label htmlFor="email" className={labelClasses}>
                                         Email professionnel
                                     </label>
                                     <input
+                                        id="email"
+                                        name="email"
                                         type="email"
                                         placeholder="jean@entreprise.fr"
+                                        required
                                         className={inputClasses}
+                                    />
+                                    <ValidationError
+                                        prefix="Email"
+                                        field="email"
+                                        errors={formState.errors}
+                                        className="mt-2 block text-xs text-red-700"
                                     />
                                 </div>
                             </div>
@@ -188,20 +211,24 @@ export default function ContactPage() {
                             {/* Row: Téléphone + Entreprise */}
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div>
-                                    <label className={labelClasses}>
+                                    <label htmlFor="phone" className={labelClasses}>
                                         Téléphone
                                     </label>
                                     <input
+                                        id="phone"
+                                        name="phone"
                                         type="tel"
                                         placeholder="06 12 34 56 78"
                                         className={inputClasses}
                                     />
                                 </div>
                                 <div>
-                                    <label className={labelClasses}>
+                                    <label htmlFor="company" className={labelClasses}>
                                         Entreprise
                                     </label>
                                     <input
+                                        id="company"
+                                        name="company"
                                         type="text"
                                         placeholder="Nom de l&apos;entreprise"
                                         className={inputClasses}
@@ -211,11 +238,13 @@ export default function ContactPage() {
 
                             {/* Nombre de collaborateurs */}
                             <div>
-                                <label className={labelClasses}>
+                                <label htmlFor="collaborators" className={labelClasses}>
                                     Nombre de collaborateurs
                                 </label>
                                 <div className="relative">
                                     <select
+                                        id="collaborators"
+                                        name="collaborators"
                                         className={`${inputClasses} appearance-none cursor-pointer pr-10`}
                                         defaultValue=""
                                     >
@@ -234,26 +263,42 @@ export default function ContactPage() {
 
                             {/* Message */}
                             <div>
-                                <label className={labelClasses}>
+                                <label htmlFor="message" className={labelClasses}>
                                     Votre message
                                 </label>
                                 <textarea
+                                    id="message"
+                                    name="message"
                                     rows={5}
                                     placeholder="Décrivez votre projet, vos besoins, vos questions..."
+                                    required
                                     className={`${inputClasses} resize-y min-h-[120px]`}
                                 />
+                                <ValidationError
+                                    prefix="Message"
+                                    field="message"
+                                    errors={formState.errors}
+                                    className="mt-2 block text-xs text-red-700"
+                                />
                             </div>
+
+                            <ValidationError
+                                errors={formState.errors}
+                                className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800"
+                            />
 
                             {/* Submit */}
                             <motion.button
                                 type="submit"
-                                className="mt-4 w-full flex items-center justify-center gap-2 px-8 py-4 bg-golden-extraction text-deep-roast font-[family-name:var(--font-ibm-plex-mono)] text-sm font-bold tracking-widest uppercase rounded hover:bg-white transition-colors duration-300"
+                                disabled={formState.submitting}
+                                className="mt-4 w-full flex items-center justify-center gap-2 px-8 py-4 bg-golden-extraction text-deep-roast font-[family-name:var(--font-ibm-plex-mono)] text-sm font-bold tracking-widest uppercase rounded hover:bg-white transition-colors duration-300 disabled:cursor-not-allowed disabled:opacity-60"
                                 whileHover={{ scale: 1.01 }}
                                 whileTap={{ scale: 0.99 }}
                             >
-                                Envoyer le message <ArrowRight className="w-5 h-5" />
+                                {formState.submitting ? 'Envoi en cours...' : 'Envoyer le message'} <ArrowRight className="w-5 h-5" />
                             </motion.button>
                         </form>
+                        )}
                     </motion.div>
 
                     {/* Right: Contact info */}
