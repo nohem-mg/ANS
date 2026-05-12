@@ -22,11 +22,11 @@ export const SOLUTIONS: SolutionDetail[] = [
   {
     slug: 'machines-cafe',
     category: 'Cafe',
-    title: 'Machines à café pour entreprise',
+    title: 'Machines à café pour entreprise dans le Nord',
     summary:
-      'Des solutions boissons chaudes premium pour offrir une pause café qualitative, fluide et valorisante au quotidien.',
+      'Des machines à café premium pour entreprises dans le Nord et les Hauts-de-France. Pause café qualitative, fluide et valorisante au quotidien.',
     description:
-      'Nos machines à café combinent design, fiabilite et qualite d’extraction pour proposer un service premium dans tous les environnements de travail. Elles s’adaptent aussi bien aux bureaux qu’aux espaces de passage ou aux zones d’accueil.',
+      'Nos machines à café combinent design, fiabilité et qualité d\'extraction pour proposer un service premium dans tous les environnements de travail. ANS installe et entretient vos machines à café dans le Nord, à Cambrai et dans toute la région Hauts-de-France.',
     image: '/machcaf.png',
     icon: Coffee,
     highlights: [
@@ -49,11 +49,11 @@ export const SOLUTIONS: SolutionDetail[] = [
   {
     slug: 'fontaines-a-eau',
     category: 'Hydratation',
-    title: 'Fontaines a eau raccordees',
+    title: 'Fontaines à eau pour entreprise dans le Nord',
     summary:
-      'Des fontaines a eau elegantes et fiables pour offrir une hydratation simple, durable et qualitative sur site.',
+      'Des fontaines à eau élégantes et fiables pour les entreprises du Nord et des Hauts-de-France. Hydratation simple, durable et qualitative sur site.',
     description:
-      `Nos fontaines a eau s'integrent naturellement dans les espaces de travail et apportent une solution durable, esthetique et facile a vivre. Elles couvrent les besoins du quotidien avec une qualite de service constante.`,
+      'Nos fontaines à eau s\'intègrent naturellement dans les espaces de travail et apportent une solution durable, esthétique et facile à vivre. ANS assure l\'installation et la maintenance de vos fontaines à eau dans le Nord, à Cambrai et en Hauts-de-France.',
     image: '/fontaine-eau.jpeg',
     icon: Droplets,
     highlights: [
@@ -76,17 +76,17 @@ export const SOLUTIONS: SolutionDetail[] = [
   {
     slug: 'distributeurs-automatiques',
     category: 'Snacking',
-    title: 'Distributeurs automatiques',
+    title: 'Distributeurs automatiques dans le Nord & Hauts-de-France',
     summary:
-      'Une offre complete pour les pauses rapides avec snacks, boissons fraiches et produits du quotidien.',
+      'Une offre complète de distributeurs automatiques pour les entreprises du Nord et des Hauts-de-France : snacks, boissons fraîches et produits du quotidien, installés et maintenus par ANS.',
     description:
-      'Nos distributeurs automatiques permettent de proposer une gamme claire, attractive et bien geree, avec des references adaptees a votre site et a vos collaborateurs. Ils repondent aux usages intensifs comme aux besoins plus ponctuels.',
+      'Nos distributeurs automatiques permettent de proposer une gamme claire, attractive et bien gérée, avec des références adaptées à votre site et à vos collaborateurs. Implanté à Proville près de Cambrai, ANS intervient dans tout le Nord et les Hauts-de-France pour l\'installation, le réapprovisionnement et la maintenance de vos distributeurs.',
     image: '/snacks.png',
     icon: Package2,
     highlights: [
-      'Snacks, confiseries, boissons fraiches et canettes',
-      'Selection ajustee selon votre population',
-      'Presentation claire et exploitation fiable',
+      'Snacks, confiseries, boissons fraîches et canettes',
+      'Sélection ajustée selon votre population',
+      'Présentation claire et exploitation fiable',
     ],
     idealFor: [
       'Sites industriels',
@@ -95,9 +95,9 @@ export const SOLUTIONS: SolutionDetail[] = [
     ],
     features: [
       'Mix produits flexible selon vos contraintes',
-      'Suivi de rotation et optimisation des references',
-      'Paiement simple et experience utilisateur fluide',
-      'Gestion preventive pour limiter les ruptures',
+      'Suivi de rotation et optimisation des références',
+      'Paiement simple et expérience utilisateur fluide',
+      'Gestion préventive pour limiter les ruptures',
     ],
   },
 ];
