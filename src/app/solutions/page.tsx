@@ -745,6 +745,7 @@ function ShowcaseSection() {
               position: 'relative',
               width: '100%',
               maxWidth: 920,
+              margin: '0 auto',
               aspectRatio: '2048 / 1150',
               borderRadius: 20,
               overflow: 'hidden',
@@ -942,21 +943,20 @@ export default function SolutionsPage() {
 
       <style>{`
         @media (max-width: 767px) {
-          .solutions-hero-section { min-height: 70vh !important; height: auto !important; max-height: none !important; padding: 8px 12px !important; }
-          .solutions-hero-widget { border-radius: 14px !important; padding: 28px 22px !important; min-height: 100% !important; height: auto !important; }
+          .solutions-hero-section { min-height: 0 !important; height: auto !important; max-height: none !important; padding: 8px 12px 18px !important; }
+          .solutions-hero-widget { border-radius: 14px !important; padding: 48px 24px !important; min-height: 0 !important; height: auto !important; }
           .solutions-hero-content {
-            padding-top: 18% !important;
-            padding-bottom: 18% !important;
-            padding-left: 12px !important;
-            padding-right: 12px !important;
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
+            padding-left: 0 !important;
+            padding-right: 0 !important;
           }
-          .solutions-hero-label { margin-bottom: 12px !important; font-size: 10px !important; letter-spacing: 0.2em !important; }
+          .solutions-hero-label { margin-bottom: 12px !important; letter-spacing: 0.2em !important; }
           .solutions-hero-h1 {
-            font-size: clamp(1.6rem, 7.5vw, 2.2rem) !important;
             margin-bottom: 14px !important;
-            line-height: 1.18 !important;
+            line-height: 1.1 !important;
           }
-          .solutions-hero-desc { font-size: 0.9rem !important; line-height: 1.6 !important; margin-bottom: 0 !important; }
+          .solutions-hero-desc { line-height: 1.6 !important; margin-bottom: 0 !important; }
         }
         @media (min-width: 768px) and (max-height: 900px) {
           .solutions-hero-widget { padding-top: 24px !important; padding-bottom: 24px !important; }
