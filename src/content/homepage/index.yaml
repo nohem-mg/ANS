@@ -1,162 +1,186 @@
-{
-    "hero": {
-        "headline_part1": "Faites de la",
-        "headline_highlight": "pause",
-        "headline_part2": "un moment qui compte",
-        "subtitle": "Depuis plus de 40 ans, nous transformons la pause café en un véritable levier de Qualité de Vie au Travail. Service ultra-personnalisé, réactivité immédiate et engagement familial.",
-        "badge_rating": "4.9 / 5",
-        "badge_clients": "200+ partenaires",
-        "cta_primary": "Découvrir notre approche",
-        "cta_secondary": "Demander un devis"
-    },
-    "vision": {
-        "tag": "Notre Vision",
-        "title_line1": "Votre machine à café,",
-        "title_line2": "C'est le cœur battant de vos bureaux.",
-        "description": "Fini le café avalé dans un couloir. La pause est un moment stratégique celui où l'énergie se recharge et où la culture d'entreprise se construit. Chez ANS, on aménage cet espace pour qu'il soit à la hauteur.",
-        "cards": [
-            {
-                "title": "\"Reset\" Sensoriel",
-                "description": "Une pause réussie mobilise les sens pour couper court à la fatigue. Un rituel de déconnexion pour faire chuter la charge mentale et relancer la concentration."
-            },
-            {
-                "title": "Collisionneur d'Idées",
-                "description": "Les meilleures décisions ne naissent pas toujours en salle de réunion. Nos espaces créent des points de rencontres informels qui brisent les silos dans l'entreprise."
-            },
-            {
-                "title": "Marqueur d'Attention",
-                "description": "Ce que vous glissez dans la tasse de vos équipes en dit long. Une expérience digne d'un coffee shop est un levier concret et quotidien de Qualité de Vie au Travail."
-            },
-            {
-                "title": "Fluidité Invisible",
-                "description": "Pour qu'une pause soit reposante, la logistique doit s'effacer. Connexion, entretien préventif et réapprovisionnements : tout est anticipé sans que vous n'y pensiez."
-            }
-        ]
-    },
-    "services": {
-        "tag": "Notre Savoir-Faire",
-        "title": "L'Excellence de la Pause Café.",
-        "description": "Des équipements de pointe pilotés par une équipe humaine dédiée. La technologie au service de l'humain.",
-        "rows": [
-            {
-                "title": "Coffee Corners",
-                "description": "Home staging : une mise en valeur de l'espace de pause par un aménagement subtil et chaleureux de l'espace."
-            },
-            {
-                "title": "Disponibilité Totale",
-                "description": "Notre promesse : une réactivité sans faille. Une machine à l'arrêt, c'est une pause gâchée. Nous agissons au plus vite pour que l'arrêt ne dure jamais."
-            },
-            {
-                "title": "Partenariat Durable",
-                "description": "La fidélisation est notre KPI principal. Nous construisons des relations long terme basées sur la confiance et la transparence."
-            }
-        ]
-    },
-    "cta_band": {
-        "title": "Un projet d'espace-pause ?",
-        "description": "Audit gratuit, proposition sur-mesure et installation rapide.",
-        "cta_primary": "Demander un devis",
-        "phone": "03 27 37 16 84"
-    },
-    "testimonials": {
-        "tag": "La parole à nos clients",
-        "title": "Une expérience appréciée",
-        "subtitle": "Ce que nos clients disent de nous. Des entreprises de toutes tailles, unies par la même exigence de qualité et de service.",
-        "items": [
-            {
-                "name": "Thomas D.",
-                "review": "Un service irréprochable et régulier. Les machines sont modernes, le café d'excellente qualité, et les équipes très réactives au moindre souci. Un vrai plus pour la pause !"
-            },
-            {
-                "name": "Sandrine L.",
-                "review": "Nous avons fait installer un espace détente complet avec ANS. Rien à dire, c'est design, le passage du technicien est très discret et nos collaborateurs sont ravis de la qualité des produits."
-            },
-            {
-                "name": "Michel B.",
-                "review": "Entreprise à l'écoute et très pro. On sent l'esprit familial et l'envie de bien faire. Ça change vraiment des gros prestataires classiques impersonnels. Je recommande."
-            }
-        ]
-    },
-    "timeline": {
-        "tag": "Notre Histoire",
-        "title": "+ de 40 Ans d'Excellence",
-        "subtitle": "De l'entreprise familiale au partenaire QVT de référence.",
-        "milestones": [
-            {
-                "year": "1981",
-                "title": "Pionniers QVT",
-                "description": "Fondation d'une entreprise familiale avec une conviction forte : la pause café est le premier levier de la Qualité de Vie au Travail."
-            },
-            {
-                "year": "2000",
-                "title": "L'Expansion",
-                "description": "Intégration du réseau Prodia+ pour garantir une couverture nationale tout en préservant notre indépendance."
-            },
-            {
-                "year": "2024",
-                "title": "Engagements RSE",
-                "description": "Accélération de notre démarche durable : cafés responsables, revalorisation du marc et équipements éco-performants."
-            }
-        ]
-    },
-    "rse": {
-        "tag": "Notre Engagement",
-        "title": "Une démarche durable et responsable",
-        "description": "Nous n'avons pas attendu que ce soit dans l'air du temps. Dès le départ, nous nous sommes posé une question simple : serions-nous fiers de montrer comment nous travaillons à nos enfants ? C'est cette exigence qui oriente nos choix, des cafés que nous sélectionnons jusqu'aux tournées que nous planifions. Pas une posture, une conviction !",
-        "bullets": [
-            {
-                "text": "Cafés labellisés Bio et Équitable"
-            },
-            {
-                "text": "Revalorisation à 100% du marc de café"
-            },
-            {
-                "text": "Machines éco-performantes"
-            },
-            {
-                "text": "Tournées optimisées et éco-conduite"
-            }
-        ]
-    },
-    "faq": {
-        "tag": "FAQ",
-        "title": "Questions fréquentes",
-        "description": "Les principales réponses sur nos solutions, notre accompagnement et notre manière de travailler.",
-        "items": [
-            {
-                "question": "Quelles solutions ANS peut installer dans mon entreprise ?",
-                "answer": "Nous installons des distributeurs automatiques modernes et fiables, proposant une large gamme de boissons chaudes (café grains, lyophilisé ou capsules, chocolats), boissons fraîches, ainsi qu'une offre snacking variée (confiseries, viennoiseries, sandwichs). Nous proposons également de la petite machine de bureau (Coffee Corner) et des fontaines à eau (réseau ou bonbonne)."
-            },
-            {
-                "question": "Est-ce qu'ANS s'occupe aussi de l'installation et de la maintenance ?",
-                "answer": "Absolument. Nos équipes gèrent l'installation, l'approvisionnement et la maintenance préventive selon vos besoins. Notre équipe de plus de 30 personnes est dédiée à nos clients au quotidien pour garantir un fonctionnement fluide et sans faille de vos espaces pause."
-            },
-            {
-                "question": "Quels moyens de paiement peuvent être proposés ?",
-                "answer": "Nous facilitons les paiements grâce à des technologies modernes et adaptables : lecteur de badges, clés, billets, cartes bancaires sans contact, paiement par smartphone, ou encore monnayeur standard. Vous choisissez la solution la plus adaptée aux habitudes de vos collaborateurs."
-            },
-            {
-                "question": "Dans quels environnements intervenez-vous ?",
-                "answer": "Nous accompagnons les entreprises et administrations (industrie, services, transport, logistique) ainsi que le grand public. Partenaire de proximité en région Hauts-de-France (Nord-Pas-de-Calais, Picardie), nous garantissons des interventions rapides, avec tous nos sites clients situés à moins de 30 minutes de nos techniciens."
-            },
-            {
-                "question": "Qu'est-ce qui différencie ANS d'un prestataire classique ?",
-                "answer": "Notre force repose sur l'alliance de la proximité et de la réactivité. En tant que membre du réseau indépendant Prodia+, nous allions la puissance d'un réseau national à la souplesse d'un acteur historique du nord. Nous sommes au plus proche de nos clients (la quasi totalité des interventions sont effectuées en moins d'une heure) pour offrir un suivi humain et réactif."
-            },
-            {
-                "question": "Avez-vous une démarche plus responsable ?",
-                "answer": "Oui, notre engagement durable est profond : cafés labellisés 'Bio' et 'Max Havelaar', matériels économes en énergie, déplacements optimisés, recyclage des matériels en fin de vie, détecteurs de mugs, gobelets en carton, et collecte de notre marc de café revalorisé à 100% en biocombustible."
-            },
-            {
-                "question": "L'offre peut-elle être personnalisée selon notre site ?",
-                "answer": "Tout à fait. Nous proposons des solutions sur-mesure, notamment avec la charte 'FeelGood' pour varier les plaisirs. Du choix du café (grains, capsules, bio) aux snacks, en passant par le design de machines fiables et l'intégration des meubles, nous adaptons chaque détail à votre environnement."
-            }
-        ]
-    },
-    "final_cta": {
-        "title": "Prêt pour l'infusion ?",
-        "description": "Discutons de votre projet d'espace détente. Nos experts sont prêts à concevoir la solution idéale pour vos collaborateurs.",
-        "cta_primary": "Nous contacter",
-        "badge_text": "Audit gratuit · Réponse sous 24h · Hauts-de-France"
-    }
-}
+hero:
+  headline_part1: Faites de la
+  headline_highlight: pause
+  headline_part2: un moment qui compte
+  subtitle: >-
+    Depuis plus de 40 ans, nous transformons la pause café en un véritable
+    levier de Qualité de Vie au Travail. Service ultra-personnalisé, réactivité
+    immédiate et engagement familial.
+  badge_rating: 4.9 / 5
+  badge_clients: 200+ partenaires
+  cta_primary: Découvrir notre approche
+  cta_secondary: Demander un devis
+vision:
+  tag: Notre Vision
+  title_line1: Votre machine à café,
+  title_line2: C'est le cœur battant de vos bureaux.
+  description: >-
+    Fini le café avalé dans un couloir. La pause est un moment stratégique celui
+    où l'énergie se recharge et où la culture d'entreprise se construit. Chez
+    ANS, on aménage cet espace pour qu'il soit à la hauteur.
+  cards:
+    - title: '"Reset" Sensoriel.'
+      description: >-
+        Une pause réussie mobilise les sens pour couper court à la fatigue. Un
+        rituel de déconnexion pour faire chuter la charge mentale et relancer la
+        concentration.
+    - title: Collisionneur d'Idées
+      description: >-
+        Les meilleures décisions ne naissent pas toujours en salle de réunion.
+        Nos espaces créent des points de rencontres informels qui brisent les
+        silos dans l'entreprise.
+    - title: Marqueur d'Attention
+      description: >-
+        Ce que vous glissez dans la tasse de vos équipes en dit long. Une
+        expérience digne d'un coffee shop est un levier concret et quotidien de
+        Qualité de Vie au Travail.
+    - title: Fluidité Invisible
+      description: >-
+        Pour qu'une pause soit reposante, la logistique doit s'effacer.
+        Connexion, entretien préventif et réapprovisionnements : tout est
+        anticipé sans que vous n'y pensiez.
+services:
+  tag: Notre Savoir-Faire
+  title: L'Excellence de la Pause Café.
+  description: >-
+    Des équipements de pointe pilotés par une équipe humaine dédiée. La
+    technologie au service de l'humain.
+  rows:
+    - title: Coffee Corners
+      description: >-
+        Home staging : une mise en valeur de l'espace de pause par un
+        aménagement subtil et chaleureux de l'espace.
+    - title: Disponibilité Totale
+      description: >-
+        Notre promesse : une réactivité sans faille. Une machine à l'arrêt,
+        c'est une pause gâchée. Nous agissons au plus vite pour que l'arrêt ne
+        dure jamais.
+    - title: Partenariat Durable
+      description: >-
+        La fidélisation est notre KPI principal. Nous construisons des relations
+        long terme basées sur la confiance et la transparence.
+cta_band:
+  title: Un projet d'espace-pause ?
+  description: Audit gratuit, proposition sur-mesure et installation rapide.
+  cta_primary: Demander un devis
+  phone: 03 27 37 16 84
+testimonials:
+  tag: La parole à nos clients
+  title: Une expérience appréciée
+  subtitle: >-
+    Ce que nos clients disent de nous. Des entreprises de toutes tailles, unies
+    par la même exigence de qualité et de service.
+  items:
+    - name: Thomas D.
+      review: >-
+        Un service irréprochable et régulier. Les machines sont modernes, le
+        café d'excellente qualité, et les équipes très réactives au moindre
+        souci. Un vrai plus pour la pause !
+    - name: Sandrine L.
+      review: >-
+        Nous avons fait installer un espace détente complet avec ANS. Rien à
+        dire, c'est design, le passage du technicien est très discret et nos
+        collaborateurs sont ravis de la qualité des produits.
+    - name: Michel B.
+      review: >-
+        Entreprise à l'écoute et très pro. On sent l'esprit familial et l'envie
+        de bien faire. Ça change vraiment des gros prestataires classiques
+        impersonnels. Je recommande.
+timeline:
+  tag: Notre Histoire
+  title: + de 40 Ans d'Excellence
+  subtitle: De l'entreprise familiale au partenaire QVT de référence.
+  milestones:
+    - year: '1981'
+      title: Pionniers QVT
+      description: >-
+        Fondation d'une entreprise familiale avec une conviction forte : la
+        pause café est le premier levier de la Qualité de Vie au Travail.
+    - year: '2000'
+      title: L'Expansion
+      description: >-
+        Intégration du réseau Prodia+ pour garantir une couverture nationale
+        tout en préservant notre indépendance.
+    - year: '2024'
+      title: Engagements RSE
+      description: >-
+        Accélération de notre démarche durable : cafés responsables,
+        revalorisation du marc et équipements éco-performants.
+rse:
+  tag: Notre Engagement
+  title: Une démarche durable et responsable
+  description: >-
+    Nous n'avons pas attendu que ce soit dans l'air du temps. Dès le départ,
+    nous nous sommes posé une question simple : serions-nous fiers de montrer
+    comment nous travaillons à nos enfants ? C'est cette exigence qui oriente
+    nos choix, des cafés que nous sélectionnons jusqu'aux tournées que nous
+    planifions. Pas une posture, une conviction !
+  bullets:
+    - text: Cafés labellisés Bio et Équitable
+    - text: Revalorisation à 100% du marc de café
+    - text: Machines éco-performantes
+    - text: Tournées optimisées et éco-conduite
+faq:
+  tag: FAQ
+  title: Questions fréquentes
+  description: >-
+    Les principales réponses sur nos solutions, notre accompagnement et notre
+    manière de travailler.
+  items:
+    - question: Quelles solutions ANS peut installer dans mon entreprise ?
+      answer: >-
+        Nous installons des distributeurs automatiques modernes et fiables,
+        proposant une large gamme de boissons chaudes (café grains, lyophilisé
+        ou capsules, chocolats), boissons fraîches, ainsi qu'une offre snacking
+        variée (confiseries, viennoiseries, sandwichs). Nous proposons également
+        de la petite machine de bureau (Coffee Corner) et des fontaines à eau
+        (réseau ou bonbonne).
+    - question: Est-ce qu'ANS s'occupe aussi de l'installation et de la maintenance ?
+      answer: >-
+        Absolument. Nos équipes gèrent l'installation, l'approvisionnement et la
+        maintenance préventive selon vos besoins. Notre équipe de plus de 30
+        personnes est dédiée à nos clients au quotidien pour garantir un
+        fonctionnement fluide et sans faille de vos espaces pause.
+    - question: Quels moyens de paiement peuvent être proposés ?
+      answer: >-
+        Nous facilitons les paiements grâce à des technologies modernes et
+        adaptables : lecteur de badges, clés, billets, cartes bancaires sans
+        contact, paiement par smartphone, ou encore monnayeur standard. Vous
+        choisissez la solution la plus adaptée aux habitudes de vos
+        collaborateurs.
+    - question: Dans quels environnements intervenez-vous ?
+      answer: >-
+        Nous accompagnons les entreprises et administrations (industrie,
+        services, transport, logistique) ainsi que le grand public. Partenaire
+        de proximité en région Hauts-de-France (Nord-Pas-de-Calais, Picardie),
+        nous garantissons des interventions rapides, avec tous nos sites clients
+        situés à moins de 30 minutes de nos techniciens.
+    - question: Qu'est-ce qui différencie ANS d'un prestataire classique ?
+      answer: >-
+        Notre force repose sur l'alliance de la proximité et de la réactivité.
+        En tant que membre du réseau indépendant Prodia+, nous allions la
+        puissance d'un réseau national à la souplesse d'un acteur historique du
+        nord. Nous sommes au plus proche de nos clients (la quasi totalité des
+        interventions sont effectuées en moins d'une heure) pour offrir un suivi
+        humain et réactif.
+    - question: Avez-vous une démarche plus responsable ?
+      answer: >-
+        Oui, notre engagement durable est profond : cafés labellisés 'Bio' et
+        'Max Havelaar', matériels économes en énergie, déplacements optimisés,
+        recyclage des matériels en fin de vie, détecteurs de mugs, gobelets en
+        carton, et collecte de notre marc de café revalorisé à 100% en
+        biocombustible.
+    - question: L'offre peut-elle être personnalisée selon notre site ?
+      answer: >-
+        Tout à fait. Nous proposons des solutions sur-mesure, notamment avec la
+        charte 'FeelGood' pour varier les plaisirs. Du choix du café (grains,
+        capsules, bio) aux snacks, en passant par le design de machines fiables
+        et l'intégration des meubles, nous adaptons chaque détail à votre
+        environnement.
+final_cta:
+  title: Prêt pour l'infusion ?
+  description: >-
+    Discutons de votre projet d'espace détente. Nos experts sont prêts à
+    concevoir la solution idéale pour vos collaborateurs.
+  cta_primary: Nous contacter
+  badge_text: Audit gratuit · Réponse sous 24h · Hauts-de-France
