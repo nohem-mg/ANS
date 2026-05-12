@@ -414,8 +414,8 @@ export default function GroupePage() {
 
             <style>{`
                 @media (max-width: 767px) {
-                    .groupe-hero-section { min-height: 70vh !important; height: auto !important; max-height: none !important; }
-                    .groupe-hero-widget { min-height: 100% !important; height: auto !important; }
+                    .groupe-hero-section { min-height: 0 !important; height: auto !important; max-height: none !important; padding-bottom: 18px !important; }
+                    .groupe-hero-widget { min-height: 0 !important; height: auto !important; padding: 48px 24px !important; }
                 }
                 @media (min-width: 768px) and (max-height: 900px) {
                     .groupe-hero-widget { padding-top: 24px !important; padding-bottom: 24px !important; }

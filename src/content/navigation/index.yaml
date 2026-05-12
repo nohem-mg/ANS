@@ -1,0 +1,22 @@
+{
+    "nav_links": [
+        {
+            "label": "Accueil",
+            "href": "/"
+        },
+        {
+            "label": "Nos Solutions",
+            "href": "/solutions"
+        },
+        {
+            "label": "Groupe Prodia+",
+            "href": "/groupe"
+        },
+        {
+            "label": "À Propos",
+            "href": "/about"
+        }
+    ],
+    "cta_label": "Contact",
+    "cta_href": "/contact"
+}

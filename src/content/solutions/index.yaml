@@ -1,0 +1,164 @@
+hero:
+  label_tag: Solutions Techniques
+  title: La Technologie au Service de la Pause Parfaite.
+  description: >-
+    Des distributeurs de dernière génération aux coffee corners sur-mesure, nous
+    déployons un parc technique adapté à votre entreprise et à vos
+    collaborateurs.
+gallery:
+  title: Trois gammes, une même exigence de service
+  description: >-
+    Retrouvez nos principales familles de machines pour l'entreprise. Chaque
+    carte ouvre sur une page détaillée avec usages, points forts et type
+    d'implantation.
+solutions_cards:
+  - slug: machines-cafe
+    category: Cafe
+    title: Machines à café pour entreprise dans le Nord.
+    summary: >-
+      Des machines à café premium pour entreprises dans le Nord et les
+      Hauts-de-France. Pause café qualitative, fluide et valorisante au
+      quotidien.
+    description: >-
+      Nos machines à café combinent design, fiabilité et qualité d'extraction
+      pour proposer un service premium dans tous les environnements de travail.
+      ANS installe et entretient vos machines à café dans le Nord, à Cambrai et
+      dans toute la région Hauts-de-France.
+    highlights:
+      - text: Broyeur intégré et recettes variées
+      - text: Interface simple pour tous les usages
+      - text: Expérience premium pour vos collaborateurs
+    ideal_for:
+      - text: Sièges sociaux
+      - text: Open spaces
+      - text: Salles de réunion et espaces accueil
+    features:
+      - text: Espresso, cappuccino, latte, chocolat, thé
+      - text: Paramétrage selon vos volumes et habitudes
+      - text: Entretien et réapprovisionnement assurés par ANS
+      - text: Installation rapide et prise en main immédiate
+  - slug: fontaines-a-eau
+    category: Hydratation
+    title: Fontaines à eau pour entreprise dans le Nord.
+    summary: >-
+      Des fontaines à eau élégantes et fiables pour les entreprises du Nord et
+      des Hauts-de-France. Hydratation simple, durable et qualitative sur site.
+    description: >-
+      Nos fontaines à eau s'intègrent naturellement dans les espaces de travail
+      et apportent une solution durable, esthétique et facile à vivre. ANS
+      assure l'installation et la maintenance de vos fontaines à eau dans le
+      Nord, à Cambrai et en Hauts-de-France.
+    highlights:
+      - text: Eau fraîche, tempérée ou pétillante selon les modèles
+      - text: Design compact pour les espaces communs
+      - text: Alternative durable aux bouteilles individuelles
+    ideal_for:
+      - text: Bureaux
+      - text: Espaces accueil
+      - text: Zones communes et ateliers
+    features:
+      - text: Filtration adaptée et maintenance planifiée
+      - text: Installation propre et intégration discrète
+      - text: Usage intensif compatible avec les environnements pros
+      - text: Pilotage simple et accompagnement ANS
+  - slug: distributeurs-automatiques
+    category: Snacking
+    title: Distributeurs automatiques dans le Nord & Hauts-de-France.
+    summary: >-
+      Une offre complète de distributeurs automatiques pour les entreprises du
+      Nord et des Hauts-de-France : snacks, boissons fraîches et produits du
+      quotidien, installés et maintenus par ANS.
+    description: >-
+      Nos distributeurs automatiques permettent de proposer une gamme claire,
+      attractive et bien gérée, avec des références adaptées à votre site et à
+      vos collaborateurs. Implanté à Proville près de Cambrai, ANS intervient
+      dans tout le Nord et les Hauts-de-France pour l'installation, le
+      réapprovisionnement et la maintenance de vos distributeurs.
+    highlights:
+      - text: Snacks, confiseries, boissons fraîches et canettes
+      - text: Sélection ajustée selon votre population
+      - text: Présentation claire et exploitation fiable
+    ideal_for:
+      - text: Sites industriels
+      - text: Plateformes logistiques
+      - text: Bureaux avec fort trafic
+    features:
+      - text: Mix produits flexible selon vos contraintes
+      - text: Suivi de rotation et optimisation des références
+      - text: Paiement simple et expérience utilisateur fluide
+      - text: Gestion préventive pour limiter les ruptures
+process:
+  tag: NOTRE PROCESSS
+  title: Du cadrage au suivi.
+  description: >-
+    Cinq étapes courtes, lisibles et documentées pour garder votre projet simple
+    à suivre et facile à piloter.
+  steps:
+    - id: '01'
+      tag: IMMERSION TERRAIN
+      title: Audit & Diagnostic
+      subtitle: On vient voir, avant de proposer.
+      description: >-
+        Nous analysons vos espaces, vos flux et vos usages réels. Nombre de
+        collaborateurs, habitudes de consommation, contraintes techniques, rien
+        n'est laissé au hasard.
+      key_points:
+        - text: Visite sur site
+        - text: Analyse des flux
+        - text: Relevé technique
+    - id: '02'
+      tag: PROJECTION CLAIRE
+      title: Proposition Sur-Mesure
+      subtitle: Une offre lisible, sans angle mort.
+      description: >-
+        Nous concevons une offre personnalisée : choix des machines, sélection
+        des produits, plan d'implantation et budget transparent. Pas de
+        surprise.
+      key_points:
+        - text: Choix machines
+        - text: Budget transparent
+        - text: Plan d'implantation
+    - id: '03'
+      tag: MISE EN PLACE
+      title: Installation & Mise en Service
+      subtitle: Opérationnel dès le premier jour.
+      description: >-
+        Notre équipe technique installe, configure et teste l'ensemble.
+        Formation de vos référents incluse. Vous êtes opérationnels dès le
+        premier jour.
+      key_points:
+        - text: Installation complète
+        - text: Configuration
+        - text: Formation incluse
+    - id: '04'
+      tag: CONTINUITÉ DE SERVICE
+      title: Maintenance & SAV Réactif
+      subtitle: Moins d'interruptions, plus de sérénité.
+      description: >-
+        Intervention en moins de 4 heures. Approvisionnement régulier, entretien
+        préventif et curatif. Votre parc fonctionne, toujours.
+      key_points:
+        - text: Réponse < 4h
+        - text: Entretien préventif
+        - text: Approvisionnement
+    - id: '05'
+      tag: PILOTAGE DANS LA DURÉE
+      title: Suivi & Optimisation
+      subtitle: Le dispositif évolue avec vous.
+      description: >-
+        Reporting de consommation, évolution du parc, ajustement des gammes
+        produits. Nous pilotons votre installation dans la durée.
+      key_points:
+        - text: Reporting détaillé
+        - text: Évolution du parc
+        - text: Ajustement gammes
+showcase:
+  title: Avant & Après
+  description: >-
+    Un espace pause ordinaire peut devenir un vrai lieu de vie. Faites glisser
+    pour comparer l'avant et l'après d'une installation type.
+cta:
+  title: Prêt à équiper vos espaces ?
+  description: >-
+    Parlons de votre projet. Audit gratuit, proposition sur-mesure et
+    installation rapide.

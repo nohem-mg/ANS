@@ -69,30 +69,31 @@ export default function ContactPage() {
                     transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
                     className="flex-1 bg-deep-roast rounded-[20px] overflow-hidden relative flex flex-col items-center justify-center p-10 md:p-20"
                 >
-                    {/* Background Noise & Grain */}
-                    <div
-                        aria-hidden="true"
-                        className="absolute inset-0 z-0 opacity-[0.04] pointer-events-none mix-blend-overlay"
-                        style={{
-                            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
-                            backgroundRepeat: 'repeat',
-                        }}
-                    />
-
                     {/* Dot grid */}
-                    <div aria-hidden="true" className="absolute inset-0 pointer-events-none opacity-5"
-                        style={{
-                            backgroundImage: 'radial-gradient(circle, rgba(245,230,211,0.25) 1px, transparent 1px)',
-                            backgroundSize: '32px 32px'
-                        }}
-                    />
-
-                    {/* Amber glow */}
-                    <div aria-hidden="true" className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full pointer-events-none"
-                        style={{
-                            background: 'radial-gradient(circle, rgba(200,118,58,0.12) 0%, transparent 65%)',
-                        }}
-                    />
+                    <div aria-hidden="true" style={{
+                        position: 'absolute', inset: 0,
+                        backgroundImage: 'radial-gradient(circle, rgba(245,230,211,0.25) 1px, transparent 1px)',
+                        backgroundSize: '32px 32px', opacity: 0.06, pointerEvents: 'none',
+                    }} />
+                    {/* Glow */}
+                    <div aria-hidden="true" style={{
+                        position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)',
+                        width: 800, height: 800, borderRadius: '50%',
+                        background: 'radial-gradient(circle, rgba(200,118,58,0.1) 0%, transparent 65%)',
+                        pointerEvents: 'none',
+                    }} />
+                    {/* Background Image & Gradients */}
+                    <div aria-hidden="true" className="absolute inset-0 z-0 pointer-events-none overflow-hidden rounded-[20px]">
+                        {/* Image */}
+                        <div className="absolute inset-0" style={{
+                            backgroundImage: 'url(https://images.unsplash.com/photo-1447933601403-0c6688de566e?q=80&w=2560&auto=format&fit=crop)',
+                            backgroundSize: 'cover', backgroundPosition: 'center',
+                        }} />
+                        {/* Rich gradient overlays for Deep Roast mood & readable text */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#2B1200] via-[#2B1200]/70 to-transparent" />
+                        <div className="absolute inset-0 bg-gradient-to-b from-[#2B1200]/90 via-transparent to-[#2B1200]/40" />
+                        <div className="absolute inset-0 bg-gradient-to-r from-[#2B1200]/60 via-transparent to-[#2B1200]/60" />
+                    </div>
 
                     <div className="relative z-10 text-center max-w-[700px]">
                         <motion.div

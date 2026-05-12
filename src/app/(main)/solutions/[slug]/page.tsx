@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import { ArrowLeft, ArrowRight, CheckCircle2 } from 'lucide-react';
 
-import { getSolutionBySlug, SOLUTIONS } from '@/app/solutions/data';
+import { getSolutionBySlug, SOLUTIONS } from '@/app/(main)/solutions/data';
 
 type SolutionDetailPageProps = {
   params: Promise<{
@@ -41,8 +41,16 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${solution.title} · ANS`,
+    title: solution.title,
     description: solution.summary,
+    alternates: {
+      canonical: `/solutions/${slug}`,
+    },
+    openGraph: {
+      title: `${solution.title} · ANS – Pause Évasion`,
+      description: solution.summary,
+      url: `/solutions/${slug}`,
+    },
   };
 }
 
@@ -58,6 +66,35 @@ export default async function SolutionDetailPage({
 
   const Icon = solution.icon;
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: solution.title,
+    description: solution.summary,
+    provider: {
+      '@type': 'LocalBusiness',
+      name: 'ANS - Automatique Nord Service',
+      image: 'https://www.anspauseevasion.fr/logo-ans-entier.png',
+      telephone: '+33327371684',
+    },
+    areaServed: {
+      '@type': 'State',
+      name: 'Hauts-de-France',
+    },
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: solution.category,
+      itemListElement: solution.features.map((feature, index) => ({
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: feature,
+        },
+        position: index + 1,
+      })),
+    },
+  };
+
   return (
     <div
       style={{
@@ -66,6 +103,10 @@ export default async function SolutionDetailPage({
         minHeight: '100vh',
       }}
     >
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <section
         style={{
           padding:

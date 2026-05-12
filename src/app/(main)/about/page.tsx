@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import { motion, useInView, useReducedMotion, useScroll, useTransform, useSpring } from 'framer-motion';
 import Image from 'next/image';
 import { ArrowRight, ArrowLeft, Github, Globe } from 'lucide-react';
-import { ZoomParallax } from '../components/ZoomParallax';
+import { ZoomParallax } from '../../components/ZoomParallax';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // TYPESCRIPT INTERFACES
