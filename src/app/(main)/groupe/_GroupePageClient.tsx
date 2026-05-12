@@ -637,7 +637,7 @@ export default function GroupePageClient({ data }: { data: any }) {
             <BentoFeaturedSection featuredChiffre={featuredChiffre} smallFigures={smallFigures} />
 
             {/* ── AVANTAGES DU RÉSEAU (titres + schéma) ── */}
-            <section style={{
+            <section hidden aria-hidden="true" style={{
                 padding: 'clamp(20px, 3vw, 32px) clamp(20px, 4vw, 32px) clamp(32px, 5vw, 48px)',
                 backgroundColor: C.bg,
             }}>
@@ -812,6 +812,74 @@ export default function GroupePageClient({ data }: { data: any }) {
                 </div>
             </section>
 
+
+            {/* ── VIDÉO DE PRÉSENTATION PRODIA+ ── */}
+            <section style={{
+                backgroundColor: C.bg,
+                padding: 'clamp(24px, 4vw, 40px) 24px clamp(36px, 6vw, 56px)',
+            }}>
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.7, ease: EASE_OUT }}
+                    style={{ maxWidth: 980, margin: '0 auto' }}
+                >
+                    <div style={{ marginBottom: 'clamp(18px, 3vw, 24px)' }}>
+                        <div>
+                            <span style={{
+                                fontFamily: FONT.mono,
+                                fontSize: 10,
+                                letterSpacing: '0.22em',
+                                color: C.accent,
+                                textTransform: 'uppercase',
+                                display: 'block',
+                                marginBottom: 12,
+                            }}>
+                                Présentation
+                            </span>
+                            <h2 style={{
+                                fontFamily: FONT.display,
+                                fontSize: 'clamp(24px, 3.2vw, 38px)',
+                                fontWeight: 600,
+                                color: C.textPrimary,
+                                letterSpacing: '-0.02em',
+                                lineHeight: 1.16,
+                                margin: 0,
+                            }}>
+                                Découvrir Prodia+ en vidéo
+                            </h2>
+                        </div>
+                    </div>
+
+                    <div style={{
+                        position: 'relative',
+                        width: '100%',
+                        aspectRatio: '16 / 9',
+                        overflow: 'hidden',
+                        borderRadius: 8,
+                        border: `1px solid ${C.divider}`,
+                        backgroundColor: '#120804',
+                        boxShadow: '0 24px 60px rgba(43,18,0,0.14)',
+                    }}>
+                        <iframe
+                            src="https://player.vimeo.com/video/1191686194?title=0&byline=0&portrait=0&badge=0&autopause=0&player_id=0&app_id=58479"
+                            title="Présentation Prodia+"
+                            loading="lazy"
+                            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+                            referrerPolicy="strict-origin-when-cross-origin"
+                            allowFullScreen
+                            style={{
+                                position: 'absolute',
+                                inset: 0,
+                                width: '100%',
+                                height: '100%',
+                                border: 0,
+                            }}
+                        />
+                    </div>
+                </motion.div>
+            </section>
 
             {/* ── ANS DANS LE RÉSEAU ── */}
             <section style={{
