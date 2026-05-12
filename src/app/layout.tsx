@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://www.anspauseevasion.fr'),
 
   title: {
-    default: 'Automatique Nord Service (ANS)',
+    default: 'Automatique Nord Service (ANS) | Pause bien-être en entreprise',
     template: '%s | Automatique Nord Service',
   },
   description:
@@ -88,7 +88,7 @@ export const metadata: Metadata = {
     locale: 'fr_FR',
     url: 'https://www.anspauseevasion.fr',
     siteName: 'Automatique Nord Service',
-    title: 'Automatique Nord Service (ANS) | Distributeurs automatiques',
+    title: 'Automatique Nord Service (ANS) | Pause bien-être en entreprise',
     description:
       'Expert en solutions de pause café et distribution automatique pour entreprises en Hauts-de-France. Service sur-mesure depuis 1981.',
     images: [
@@ -103,7 +103,7 @@ export const metadata: Metadata = {
 
   twitter: {
     card: 'summary_large_image',
-    title: 'Automatique Nord Service (ANS) | Distributeurs automatiques',
+    title: 'Automatique Nord Service (ANS) | Pause bien-être en entreprise',
     description:
       'Expert en solutions de pause café et distribution automatique pour entreprises en Hauts-de-France. Service sur-mesure depuis 1981.',
     images: ['https://www.anspauseevasion.fr/og-image.jpg'],
