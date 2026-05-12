@@ -843,7 +843,7 @@ export default function GroupePage() {
                         boxShadow: '0 24px 60px rgba(43,18,0,0.14)',
                     }}>
                         <iframe
-                            src="https://player.vimeo.com/video/1191686194?title=0&byline=0&portrait=0&badge=0&autopause=0&player_id=0&app_id=58479"
+                            src="https://www.youtube-nocookie.com/embed/RsEEctSCzGw"
                             title="Présentation Prodia+"
                             loading="lazy"
                             allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
