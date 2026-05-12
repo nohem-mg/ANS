@@ -812,7 +812,6 @@ export default function GroupePageClient({ data }: { data: any }) {
                 </div>
             </section>
 
-
             {/* ── VIDÉO DE PRÉSENTATION PRODIA+ ── */}
             <section style={{
                 backgroundColor: C.bg,
