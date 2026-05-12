@@ -16,7 +16,10 @@ const NAV_LINKS = [
 
 const MotionLink = motion.create(Link);
 
-export default function Header() {
+export default function Header({ navData }: { navData?: any }) {
+    const navLinks = navData?.nav_links ?? NAV_LINKS;
+    const ctaLabel = navData?.cta_label ?? 'Contact';
+    const ctaHref = navData?.cta_href ?? '/contact';
     const pathname = usePathname();
     const [mobileOpen, setMobileOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
@@ -112,7 +115,7 @@ export default function Header() {
                             gap: 4,
                         }}
                     >
-                        {NAV_LINKS.map(({ label, href }) => (
+                        {navLinks.map(({ label, href }: { label: string, href: string }) => (
                             <Link
                                 key={href}
                                 href={href}
@@ -149,7 +152,7 @@ export default function Header() {
                     {/* Right: Contact CTA (desktop) */}
                     <Link
                         className="header-desktop-nav"
-                        href="/contact"
+                        href={ctaHref}
                         style={{
                             marginLeft: 'auto',
                             fontFamily: 'var(--font-ibm-plex-mono)',
@@ -157,9 +160,9 @@ export default function Header() {
                             fontSize: 12,
                             letterSpacing: '0.06em',
                             textTransform: 'uppercase' as const,
-                            color: pathname === '/contact' ? '#FFF6EF' : '#2B1200',
-                            background: pathname === '/contact' ? '#2B1200' : 'transparent',
-                            border: pathname === '/contact' ? '1px solid #2B1200' : '1px solid rgba(43,18,0,0.2)',
+                            color: pathname === ctaHref ? '#FFF6EF' : '#2B1200',
+                            background: pathname === ctaHref ? '#2B1200' : 'transparent',
+                            border: pathname === ctaHref ? '1px solid #2B1200' : '1px solid rgba(43,18,0,0.2)',
                             borderRadius: 6,
                             padding: '8px 20px',
                             textDecoration: 'none',
@@ -167,19 +170,19 @@ export default function Header() {
                             whiteSpace: 'nowrap' as const,
                         }}
                         onMouseEnter={(e) => {
-                            if (pathname !== '/contact') {
+                            if (pathname !== ctaHref) {
                                 e.currentTarget.style.background = 'rgba(43,18,0,0.05)';
                                 e.currentTarget.style.borderColor = 'rgba(43,18,0,0.4)';
                             }
                         }}
                         onMouseLeave={(e) => {
-                            if (pathname !== '/contact') {
+                            if (pathname !== ctaHref) {
                                 e.currentTarget.style.background = 'transparent';
                                 e.currentTarget.style.borderColor = 'rgba(43,18,0,0.2)';
                             }
                         }}
                     >
-                        Contact
+                        {ctaLabel}
                     </Link>
 
                     {/* Mobile hamburger */}
@@ -236,7 +239,7 @@ export default function Header() {
                             gap: 8,
                         }}
                     >
-                        {NAV_LINKS.map(({ label, href }, i) => (
+                        {navLinks.map(({ label, href }: { label: string, href: string }, i: number) => (
                             <MotionLink
                                 key={href}
                                 href={href}
@@ -269,10 +272,10 @@ export default function Header() {
                             </MotionLink>
                         ))}
                         <MotionLink
-                            href="/contact"
+                            href={ctaHref}
                             initial={{ opacity: 0, y: 16 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.05 + NAV_LINKS.length * 0.06 }}
+                            transition={{ delay: 0.05 + navLinks.length * 0.06 }}
                             onClick={() => setMobileOpen(false)}
                             style={{
                                 fontFamily: 'var(--font-ibm-plex-mono)',
@@ -288,7 +291,7 @@ export default function Header() {
                                 marginTop: 16,
                             }}
                         >
-                            Contact
+                            {ctaLabel}
                         </MotionLink>
                     </motion.div>
                 )}
