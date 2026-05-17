@@ -76,6 +76,25 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
                             </motion.div>
                         );
                     })}
+                    <motion.div
+                        aria-hidden="true"
+                        className="pointer-events-none absolute bottom-8 left-1/2 z-20 flex -translate-x-1/2 flex-col items-center gap-2"
+                        initial={{ opacity: 0, y: 8 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, amount: 0.4 }}
+                        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                    >
+                        <span className="rounded-full border border-[#F5E6D3]/20 bg-[#2B1200]/55 px-4 py-2 text-[10px] font-mono uppercase tracking-[0.18em] text-[#F5E6D3]/75 backdrop-blur-md">
+                            Faites défiler
+                        </span>
+                        <motion.span
+                            className="text-lg leading-none text-[#DE9E67]/75"
+                            animate={{ y: [0, 6, 0] }}
+                            transition={{ duration: 1.4, repeat: Infinity, ease: 'easeInOut' }}
+                        >
+                            ↓
+                        </motion.span>
+                    </motion.div>
                 </div>
             </div>
 

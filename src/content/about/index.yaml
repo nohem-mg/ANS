@@ -30,27 +30,10 @@
     "careers": {
         "tag": "Carrières",
         "title": "Nous Rejoindre",
-        "description_line1": "Le café, c'est sérieux.",
-        "description_line2": "Rejoignez une équipe passionnée qui le prouve chaque jour sur le terrain.",
-        "cta_label": "Voir toutes nos offres",
-        "jobs": [
-            {
-                "title": "Technicien de Maintenance",
-                "location": "Île-de-France"
-            },
-            {
-                "title": "Responsable de Compte",
-                "location": "Paris"
-            },
-            {
-                "title": "Chargé(e) de Logistique",
-                "location": "National"
-            },
-            {
-                "title": "Commercial(e) B2B",
-                "location": "Région Parisienne"
-            }
-        ]
+        "description_line1": "Aucune offre n'est ouverte actuellement.",
+        "description_line2": "Pour toute demande de travail ou de stage, vous pouvez nous écrire directement par mail.",
+        "cta_label": "Nous contacter par mail",
+        "jobs": []
     },
     "location": {
         "tag": "Localisation",

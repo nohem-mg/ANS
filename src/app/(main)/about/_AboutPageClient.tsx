@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import { motion, useInView, useReducedMotion, useScroll, useTransform, useSpring } from 'framer-motion';
 import Image from 'next/image';
 import { ArrowRight, ArrowLeft, Github, Globe } from 'lucide-react';
@@ -14,11 +14,6 @@ interface Value {
   letter: string;
   title: string;
   description: string;
-}
-
-interface Job {
-  title: string;
-  location: string;
 }
 
 interface TeamMember {
@@ -84,13 +79,6 @@ const STORY_DATA = [
     description: "Nous ne livrons plus seulement du café, nous aménageons de véritables refuges pour redynamiser vos équipes. Nos espaces de pause sont devenus les places centrales de vos bureaux, là où les silos se brisent, où soufflent les collaborateurs et où l'intelligence collective prend forme.",
     image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=600&fit=crop&auto=format&q=80',
   }
-];
-
-const JOBS: Job[] = [
-  { title: 'Technicien de Maintenance', location: 'Île-de-France' },
-  { title: 'Responsable de Compte', location: 'Paris' },
-  { title: 'Chargé(e) de Logistique', location: 'National' },
-  { title: 'Commercial(e) B2B', location: 'Région Parisienne' },
 ];
 
 const CONTACT_DETAILS: ContactDetail[] = [
@@ -784,64 +772,7 @@ function StorySection({ data, storyData }: { data: any, storyData: typeof STORY_
 // SECTION 4: CARRIÈRES / NOUS REJOINDRE
 // ─────────────────────────────────────────────────────────────────────────────
 
-function JobRow({ job, index }: { job: Job; index: number }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true });
-  const [hovered, setHovered] = useState(false);
-  const shouldReduce = useReducedMotion();
-
-  return (
-    <motion.div
-      ref={ref}
-      initial={shouldReduce ? false : { opacity: 0, y: 10 }}
-      animate={isInView ? { opacity: 1, y: 0 } : undefined}
-      transition={{ duration: 0.6, delay: index * 0.07, ease: EASE_OUT }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: '18px 0',
-        borderBottom: `1px solid ${C.divider}`,
-        cursor: 'pointer',
-        gap: '24px',
-      }}
-    >
-      <span
-        style={{
-          fontFamily: FONT.body,
-          fontSize: '15px',
-          fontWeight: 500,
-          color: hovered ? C.textPrimary : `rgba(43,18,0,0.85)`,
-          transition: 'color 0.2s',
-        }}
-      >
-        {job.title}
-      </span>
-
-      {/* Location pill badge */}
-      <span
-        style={{
-          fontFamily: FONT.mono,
-          fontSize: '11px',
-          color: hovered ? C.textPrimary : C.textMuted,
-          letterSpacing: '0.06em',
-          border: `1px solid ${hovered ? C.textMuted : C.divider}`,
-          borderRadius: '999px',
-          padding: '4px 12px',
-          flexShrink: 0,
-          transition: 'color 0.2s, border-color 0.2s',
-          whiteSpace: 'nowrap',
-        }}
-      >
-        {job.location}
-      </span>
-    </motion.div>
-  );
-}
-
-function CareersSection({ data, jobsData }: { data: any, jobsData: typeof JOBS }) {
+function CareersSection({ data }: { data: any }) {
   return (
     <section
       id="rejoindre"
@@ -888,7 +819,7 @@ function CareersSection({ data, jobsData }: { data: any, jobsData: typeof JOBS }
                 margin: '0 0 8px',
               }}
             >
-              {data?.careers?.description_line1 ?? "Le café, c'est sérieux."}
+              {data?.careers?.description_line1 ?? "Aucune offre n'est ouverte actuellement."}
             </p>
             <p
               style={{
@@ -900,10 +831,10 @@ function CareersSection({ data, jobsData }: { data: any, jobsData: typeof JOBS }
                 maxWidth: 300,
               }}
             >
-              {data?.careers?.description_line2 ?? "Rejoignez une équipe passionnée qui le prouve chaque jour sur le terrain."}
+              {data?.careers?.description_line2 ?? "Pour toute demande de travail ou de stage, vous pouvez nous écrire directement par mail."}
             </p>
             <a
-              href="#"
+              href="mailto:ans@prodiaplus.fr"
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -927,19 +858,67 @@ function CareersSection({ data, jobsData }: { data: any, jobsData: typeof JOBS }
                 e.currentTarget.style.color = C.textPrimary;
               }}
             >
-              Voir toutes nos offres
+              {data?.careers?.cta_label ?? 'Nous contacter par mail'}
               <ArrowRight size={12} />
             </a>
           </div>
         </FadeIn>
 
-        {/* ── Right column: job rows ── */}
+        {/* ── Right column: current hiring status ── */}
         <div style={{ paddingTop: '4px' }}>
-          {/* Top border above first row */}
-          <div style={{ borderTop: `1px solid ${C.divider}` }} />
-          {jobsData.map((job: any, i: number) => (
-            <JobRow key={i} job={job} index={i} />
-          ))}
+          <FadeIn delay={0.08}>
+            <div
+              style={{
+                border: `1px solid ${C.divider}`,
+                borderRadius: 28,
+                padding: 'clamp(28px, 4vw, 44px)',
+                background: 'rgba(255,255,255,0.03)',
+              }}
+            >
+              <p
+                style={{
+                  margin: '0 0 12px',
+                  fontFamily: FONT.mono,
+                  fontSize: 11,
+                  letterSpacing: '0.16em',
+                  textTransform: 'uppercase',
+                  color: C.accent,
+                }}
+              >
+                Aucun poste à pourvoir
+              </p>
+              <p
+                style={{
+                  margin: 0,
+                  maxWidth: 620,
+                  fontFamily: FONT.body,
+                  fontSize: 'clamp(18px, 2vw, 28px)',
+                  lineHeight: 1.45,
+                  color: C.textPrimary,
+                }}
+              >
+                Aucun poste n&apos;est à pourvoir pour le moment. Pour toute demande de travail ou de stage, n&apos;hésitez pas à nous contacter directement par mail.
+              </p>
+              <a
+                href="mailto:ans@prodiaplus.fr"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 8,
+                  marginTop: 28,
+                  fontFamily: FONT.mono,
+                  fontSize: 12,
+                  color: C.accent,
+                  textDecoration: 'none',
+                  letterSpacing: '0.08em',
+                  textTransform: 'uppercase',
+                }}
+              >
+                ans@prodiaplus.fr
+                <ArrowRight size={12} />
+              </a>
+            </div>
+          </FadeIn>
         </div>
       </div>
 
@@ -1331,8 +1310,6 @@ export default function AboutPageClient({ data }: { data: any }) {
     description: data?.story?.chapters?.[i]?.description ?? fallback.description,
   }))
 
-  const jobsData = data?.careers?.jobs?.length ? data.careers.jobs : JOBS
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -1350,7 +1327,7 @@ export default function AboutPageClient({ data }: { data: any }) {
       {/* 3. NOTRE HISTOIRE */}
       <StorySection data={data} storyData={storyData} />
       <TeamSection />
-      <CareersSection data={data} jobsData={jobsData} />
+      <CareersSection data={data} />
       <LocationSection />
     </div>
   );
