@@ -16,8 +16,8 @@ const CONTACT_INFO = [
     {
         icon: <Mail size={18} strokeWidth={1.5} />,
         label: 'Email',
-        value: 'contact@ans-da.fr',
-        href: 'mailto:contact@ans-da.fr',
+        value: 'ans@prodiaplus.fr',
+        href: 'mailto:ans@prodiaplus.fr',
     },
     {
         icon: <MapPin size={18} strokeWidth={1.5} />,
@@ -28,7 +28,7 @@ const CONTACT_INFO = [
     {
         icon: <Clock size={18} strokeWidth={1.5} />,
         label: 'Horaires',
-        value: 'Lun–Ven : 8h00 – 18h00',
+        value: 'Lundi au jeudi : 8h-18h\nVendredi : 8h-17h\nPause repas : 12h30-13h30',
         href: undefined,
     },
 ];
@@ -37,7 +37,7 @@ const CONTACT_INFO = [
 export default function ContactPage() {
     const formRef = useRef<HTMLDivElement>(null);
     const isFormInView = useInView(formRef, { once: true, margin: '-40px' });
-    const [formState, handleSubmit] = useForm('xdabjozl');
+    const [formState, handleSubmit] = useForm('xpqnakqy');
 
     // Scroll to top on mount
     useEffect(() => {
@@ -321,7 +321,7 @@ export default function ContactPage() {
                                 const isLast = i === CONTACT_INFO.length - 1;
                                 const content = (
                                     <div
-                                        className={`flex gap-5 items-start py-6 ${!isLast ? 'border-b border-deep-roast/10' : ''}`}
+                                        className={`flex gap-5 items-center py-6 ${!isLast ? 'border-b border-deep-roast/10' : ''}`}
                                     >
                                         <div className="w-12 h-12 rounded bg-[#FAF2E9] border border-deep-roast/10 shadow-sm flex items-center justify-center text-deep-roast/60 hover:text-golden-extraction transition-colors duration-300 shrink-0">
                                             {info.icon}
@@ -330,7 +330,7 @@ export default function ContactPage() {
                                             <p className="text-[0.7rem] font-[family-name:var(--font-ibm-plex-mono)] tracking-[0.1em] text-deep-roast/50 uppercase mb-1">
                                                 {info.label}
                                             </p>
-                                            <p className="text-[0.95rem] font-[family-name:var(--font-ibm-plex-sans)] text-deep-roast font-medium">
+                                            <p className="whitespace-pre-line text-[0.95rem] font-[family-name:var(--font-ibm-plex-sans)] text-deep-roast font-medium">
                                                 {info.value}
                                             </p>
                                         </div>

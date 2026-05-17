@@ -101,8 +101,8 @@ const CONTACT_DETAILS: ContactDetail[] = [
   },
   {
     label: 'Email',
-    value: 'contact@ans-da.fr',
-    href: 'mailto:contact@ans-da.fr',
+    value: 'ans@prodiaplus.fr',
+    href: 'mailto:ans@prodiaplus.fr',
   },
   {
     label: 'Adresse',
@@ -111,7 +111,7 @@ const CONTACT_DETAILS: ContactDetail[] = [
   },
   {
     label: 'Horaires',
-    value: 'Lun–Ven : 8h00 – 18h00',
+    value: 'Lundi au jeudi : 8h-18h\nVendredi : 8h-17h\nPause repas : 12h30-13h30',
   },
 ];
 
@@ -1054,6 +1054,7 @@ function LocationSection() {
                           fontSize: '16px',
                           lineHeight: 1.7,
                           color: C.textPrimary,
+                          whiteSpace: 'pre-line',
                         }}
                       >
                         {detail.value}
@@ -1173,12 +1174,12 @@ const TEAM_IMAGES = [
     alt: 'Locaux ANS',
   },
   {
-    src: '/camions-ans.jpeg',
-    alt: 'Camions ANS - logistique terrain',
+    src: '/entrepot1.JPG',
+    alt: 'Entrepôt ANS',
   },
   {
-    src: '/instant-cafe-ans.jpeg',
-    alt: 'Machine à café ANS',
+    src: '/camions-ans.jpeg',
+    alt: 'Camions ANS - logistique terrain',
   },
   {
     src: '/café+verdure.jpeg',

@@ -473,7 +473,7 @@ const VisionSection = ({ points }: { points: typeof VISION_POINTS }) => {
               className="text-deep-roast/70 leading-relaxed max-w-sm text-justify"
               style={{ fontSize: 'clamp(0.95rem, 1vw, 1.05rem)', fontFamily: 'var(--font-ibm-plex-sans)' }}
             >
-              Fini le café avalé dans un couloir. La pause est un moment stratégique celui où l'énergie se recharge et où la culture d'entreprise se construit. Chez ANS, on aménage cet espace pour qu'il soit à la hauteur.            </p>
+              Fini le café avalé dans un couloir. La pause est un moment stratégique, celui où l'énergie se recharge et où la culture d'entreprise se construit. Chez ANS, on aménage cet espace pour qu'il soit à la hauteur.            </p>
           </motion.div>
         </div>
       </div>

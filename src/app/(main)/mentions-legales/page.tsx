@@ -101,7 +101,7 @@ export default function MentionsLegalesPage() {
           <Row label="Capital social" value="7 622,45 €" />
           <Row label="Siège social" value="ZAC du Faubourg de Paris, 780 rue Blaise Pascal, 59267 Proville, France" />
           <Row label="Téléphone" value={<a href="tel:+33327371684" style={{ color: C.dark, textDecoration: 'none' }}>03 27 37 16 84</a>} />
-          <Row label="Email" value={<a href="mailto:contact@ans-da.fr" style={{ color: C.dark, textDecoration: 'none' }}>contact@ans-da.fr</a>} />
+          <Row label="Email" value={<a href="mailto:ans@prodiaplus.fr" style={{ color: C.dark, textDecoration: 'none' }}>ans@prodiaplus.fr</a>} />
           <Row label="SIREN" value="321 797 292" />
           <Row label="SIRET (siège)" value="321 797 292 00034" />
           <Row label="RCS" value="321 797 292 R.C.S. Douai" />
@@ -116,7 +116,7 @@ export default function MentionsLegalesPage() {
           </p>
           <p>
             Pour toute demande relative au contenu du site, vous pouvez le contacter à l'adresse suivante :{' '}
-            <a href="mailto:contact@ans-da.fr" style={{ color: C.dark }}>contact@ans-da.fr</a>.
+            <a href="mailto:ans@prodiaplus.fr" style={{ color: C.dark }}>ans@prodiaplus.fr</a>.
           </p>
         </Section>
 

@@ -17,7 +17,7 @@ Nous intervenons dans toute la région Hauts-de-France (Nord, Pas-de-Calais, Ais
 - **Nom de l'entreprise** : ANS - Automatique Nord Service
 - **Adresse** : 780 rue Blaise Pascal, 59267 Proville, France
 - **Téléphone** : +33 3 27 37 16 84
-- **Email** : contact@ans-da.fr
+- **Email** : ans@prodiaplus.fr
 
 ## Liens
 - [Site Web Officiel](https://www.anspauseevasion.fr/)

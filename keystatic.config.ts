@@ -114,7 +114,7 @@ export default config({
                         }),
                         email_href: fields.text({
                             label: 'Lien email (format: mailto:...)',
-                            defaultValue: 'mailto:contact@ans-da.fr',
+                            defaultValue: 'mailto:ans@prodiaplus.fr',
                         }),
                     },
                     { label: 'Réseaux sociaux' }

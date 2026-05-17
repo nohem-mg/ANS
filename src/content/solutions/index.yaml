@@ -13,7 +13,7 @@ gallery:
     d'implantation.
 solutions_cards:
   - slug: machines-cafe
-    category: Cafe
+    category: Café
     title: Machines à café pour entreprise dans le Nord.
     summary: >-
       Des machines à café premium pour entreprises dans le Nord et les
@@ -88,7 +88,7 @@ solutions_cards:
       - text: Paiement simple et expérience utilisateur fluide
       - text: Gestion préventive pour limiter les ruptures
 process:
-  tag: NOTRE PROCESSS
+  tag: NOTRE PROCESS
   title: Du cadrage au suivi.
   description: >-
     Cinq étapes courtes, lisibles et documentées pour garder votre projet simple

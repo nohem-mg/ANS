@@ -105,7 +105,7 @@ export default function ConfidentialitePage() {
           <p style={{ marginBottom: 4 }}>
             <a href="tel:+33327371684" style={{ color: C.dark, textDecoration: 'none' }}>03 27 37 16 84</a>
             {' · '}
-            <a href="mailto:contact@ans-da.fr" style={{ color: C.dark, textDecoration: 'none' }}>contact@ans-da.fr</a>
+            <a href="mailto:ans@prodiaplus.fr" style={{ color: C.dark, textDecoration: 'none' }}>ans@prodiaplus.fr</a>
           </p>
         </Section>
 
@@ -225,7 +225,7 @@ export default function ConfidentialitePage() {
           ]} />
           <p style={{ marginTop: 16, marginBottom: 12 }}>
             Pour exercer l'un de ces droits, adressez votre demande par email à{' '}
-            <a href="mailto:contact@ans-da.fr" style={{ color: C.dark }}>contact@ans-da.fr</a>{' '}
+            <a href="mailto:ans@prodiaplus.fr" style={{ color: C.dark }}>ans@prodiaplus.fr</a>{' '}
             ou par courrier à l'adresse du siège social.
           </p>
           <p style={{ marginBottom: 12 }}>
@@ -259,7 +259,7 @@ export default function ConfidentialitePage() {
             Ce site ne collecte pas sciemment de données personnelles concernant des mineurs de moins de 16 ans.
             Si vous êtes parent ou tuteur légal et avez des raisons de croire qu'un mineur nous a fourni des données
             personnelles, contactez-nous à{' '}
-            <a href="mailto:contact@ans-da.fr" style={{ color: C.dark }}>contact@ans-da.fr</a>.
+            <a href="mailto:ans@prodiaplus.fr" style={{ color: C.dark }}>ans@prodiaplus.fr</a>.
           </p>
         </Section>
 

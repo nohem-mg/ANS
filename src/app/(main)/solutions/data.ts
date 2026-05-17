@@ -21,7 +21,7 @@ export interface SolutionDetail {
 export const SOLUTIONS: SolutionDetail[] = [
   {
     slug: 'machines-cafe',
-    category: 'Cafe',
+    category: 'Café',
     title: 'Machines à café pour entreprise dans le Nord',
     summary:
       'Des machines à café premium pour entreprises dans le Nord et les Hauts-de-France. Pause café qualitative, fluide et valorisante au quotidien.',
@@ -30,20 +30,20 @@ export const SOLUTIONS: SolutionDetail[] = [
     image: '/machcaf.png',
     icon: Coffee,
     highlights: [
-      'Broyeur integre et recettes variees',
+      'Broyeur intégré et recettes variées',
       'Interface simple pour tous les usages',
-      'Experience premium pour vos collaborateurs',
+      'Expérience premium pour vos collaborateurs',
     ],
     idealFor: [
-      'Sieges sociaux',
+      'Sièges sociaux',
       'Open spaces',
-      'Salles de reunion et espaces accueil',
+      'Salles de réunion et espaces accueil',
     ],
     features: [
-      'Espresso, cappuccino, latte, chocolat, the',
-      'Parametrage selon vos volumes et habitudes',
-      'Entretien et reapprovisionnement assures par ANS',
-      'Installation rapide et prise en main immediate',
+      'Espresso, cappuccino, latte, chocolat, thé',
+      'Paramétrage selon vos volumes et habitudes',
+      'Entretien et réapprovisionnement assurés par ANS',
+      'Installation rapide et prise en main immédiate',
     ],
   },
   {
@@ -57,7 +57,7 @@ export const SOLUTIONS: SolutionDetail[] = [
     image: '/fontaine-eau.jpeg',
     icon: Droplets,
     highlights: [
-      'Eau fraiche, temperee ou petillante selon les modeles',
+      'Eau fraîche, tempérée ou pétillante selon les modèles',
       'Design compact pour les espaces communs',
       'Alternative durable aux bouteilles individuelles',
     ],
@@ -67,8 +67,8 @@ export const SOLUTIONS: SolutionDetail[] = [
       'Zones communes et ateliers',
     ],
     features: [
-      'Filtration adaptee et maintenance planifiee',
-      'Installation propre et integration discrete',
+      'Filtration adaptée et maintenance planifiée',
+      'Installation propre et intégration discrète',
       'Usage intensif compatible avec les environnements pros',
       'Pilotage simple et accompagnement ANS',
     ],
