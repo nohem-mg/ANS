@@ -157,7 +157,6 @@ showcase:
   description: >-
     Un espace pause ordinaire peut devenir un vrai lieu de vie. Faites glisser
     pour comparer l'avant et l'après d'une installation type.
-  before_image: /images/solutions/showcase/before_image.png
   slider_images:
     - {}
     - {}
