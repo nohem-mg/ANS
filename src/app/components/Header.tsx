@@ -20,7 +20,6 @@ export default function Header({ navData }: { navData?: any }) {
     const navLinks = navData?.nav_links ?? NAV_LINKS;
     const ctaLabel = navData?.cta_label ?? 'Contact';
     const ctaHref = navData?.cta_href ?? '/contact';
-    const logoImage = navData?.logo_image ?? '/logo-ans-entier.png';
     const pathname = usePathname();
     const [mobileOpen, setMobileOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
@@ -93,7 +92,7 @@ export default function Header({ navData }: { navData?: any }) {
                         }}
                     >
                         <Image 
-                            src={logoImage}
+                            src="/logo-ans-entier.png" 
                             alt="ANS Pause Évasion" 
                             width={136} 
                             height={58} 

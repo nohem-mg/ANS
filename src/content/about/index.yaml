@@ -1,8 +1,7 @@
 {
     "hero": {
         "manifesto_line1": "Les distributeurs de boissons sont le premier point de contact entre une entreprise et ses collaborateurs.",
-        "manifesto_line2": "Chez ANS, nous faisons en sorte que ce moment soit toujours parfait.",
-        "image": ""
+        "manifesto_line2": "Chez ANS, nous faisons en sorte que ce moment soit toujours parfait."
     },
     "story": {
         "tag": "Histoire",
@@ -11,55 +10,22 @@
         "chapters": [
             {
                 "title": "Les Origines",
-                "description": "Ce qui a commencé comme une modeste aventure s'est transformé en une véritable mission : redonner ses lettres de noblesse à la pause en entreprise. Dès nos premiers pas, nous avons eu la conviction que la qualité de l'expérience et le sens du service devaient primer avant tout.",
-                "image": ""
+                "description": "Ce qui a commencé comme une modeste aventure s'est transformé en une véritable mission : redonner ses lettres de noblesse à la pause en entreprise. Dès nos premiers pas, nous avons eu la conviction que la qualité de l'expérience et le sens du service devaient primer avant tout."
             },
             {
                 "title": "Le Développement",
-                "description": "En rejoignant le groupement Prodia+, nous avons franchi un cap. Cette étape décisive nous a permis d'acquérir l'envergure d'un réseau national, tout en conservant jalouseusement notre esprit d'artisan et notre ancrage local. Un pont parfait entre puissance logistique et relation de proximité.",
-                "image": ""
+                "description": "En rejoignant le groupement Prodia+, nous avons franchi un cap. Cette étape décisive nous a permis d'acquérir l'envergure d'un réseau national, tout en conservant jalouseusement notre esprit d'artisan et notre ancrage local. Un pont parfait entre puissance logistique et relation de proximité."
             },
             {
                 "title": "Aujourd'hui",
-                "description": "Nous ne livrons plus seulement du café, nous aménageons de véritables refuges pour redynamiser vos équipes. Nos espaces de pause sont devenus les places centrales de vos bureaux, là où les silos se brisent, où soufflent les collaborateurs et où l'intelligence collective prend forme.",
-                "image": ""
+                "description": "Nous ne livrons plus seulement du café, nous aménageons de véritables refuges pour redynamiser vos équipes. Nos espaces de pause sont devenus les places centrales de vos bureaux, là où les silos se brisent, où soufflent les collaborateurs et où l'intelligence collective prend forme."
             }
         ]
     },
     "team": {
         "tag": "Équipe",
         "title": "L'Équipe",
-        "description": "Techniciens, commerciaux, logisticiens, designers d'expérience. Tous passionnés.",
-        "images": [
-            {
-                "image": "",
-                "alt": "Bureaux ANS"
-            },
-            {
-                "image": "",
-                "alt": "Locaux ANS"
-            },
-            {
-                "image": "",
-                "alt": "Entrepôt ANS"
-            },
-            {
-                "image": "",
-                "alt": "Camions ANS - logistique terrain"
-            },
-            {
-                "image": "",
-                "alt": "Espace café et verdure"
-            },
-            {
-                "image": "",
-                "alt": "Stockage distributeurs ANS"
-            },
-            {
-                "image": "",
-                "alt": "Distributeurs automatiques ANS"
-            }
-        ]
+        "description": "Techniciens, commerciaux, logisticiens, designers d'expérience. Tous passionnés."
     },
     "careers": {
         "tag": "Carrières",
