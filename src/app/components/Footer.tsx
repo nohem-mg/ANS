@@ -53,7 +53,7 @@ export default function Footer({ footerData }: { footerData?: FooterData }) {
     const navLinks = footerData?.nav_links?.length ? footerData.nav_links : NAV_LINKS;
 
     const linkedinHref = footerData?.social?.linkedin_href ?? '#';
-    const instagramHref = footerData?.social?.instagram_href ?? '#';
+    const instagramHref = footerData?.social?.instagram_href ?? 'https://www.instagram.com/anspauseevasion/';
     const emailHref = footerData?.social?.email_href ?? 'mailto:ans@prodiaplus.fr';
 
     const copyrightName = footerData?.legal?.copyright_name ?? 'A.N.S.';

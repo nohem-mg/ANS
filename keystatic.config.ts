@@ -110,7 +110,7 @@ export default config({
                         }),
                         instagram_href: fields.text({
                             label: 'URL Instagram',
-                            defaultValue: '#',
+                            defaultValue: 'https://www.instagram.com/anspauseevasion/',
                         }),
                         email_href: fields.text({
                             label: 'Lien email (format: mailto:...)',
