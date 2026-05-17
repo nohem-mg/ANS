@@ -5,8 +5,7 @@ hero:
     Des distributeurs de dernière génération aux coffee corners sur-mesure, nous
     déployons un parc technique adapté à votre entreprise et à vos
     collaborateurs.
-  image: >-
-    https://images.unsplash.com/photo-1447933601403-0c6688de566e?q=80&w=2560&auto=format&fit=crop
+  image: ''
 gallery:
   title: Trois gammes, une même exigence de service
   description: >-
@@ -26,7 +25,7 @@ solutions_cards:
       pour proposer un service premium dans tous les environnements de travail.
       ANS installe et entretient vos machines à café dans le Nord, à Cambrai et
       dans toute la région Hauts-de-France.
-    image: /images/solutions/machcaf.png
+    image: ''
     highlights:
       - text: Broyeur intégré et recettes variées
       - text: Interface simple pour tous les usages
@@ -51,7 +50,7 @@ solutions_cards:
       et apportent une solution durable, esthétique et facile à vivre. ANS
       assure l'installation et la maintenance de vos fontaines à eau dans le
       Nord, à Cambrai et en Hauts-de-France.
-    image: /images/solutions/fontaine-eau.jpeg
+    image: ''
     highlights:
       - text: Eau fraîche, tempérée ou pétillante selon les modèles
       - text: Design compact pour les espaces communs
@@ -78,7 +77,7 @@ solutions_cards:
       vos collaborateurs. Implanté à Proville près de Cambrai, ANS intervient
       dans tout le Nord et les Hauts-de-France pour l'installation, le
       réapprovisionnement et la maintenance de vos distributeurs.
-    image: /images/solutions/snacks.png
+    image: ''
     highlights:
       - text: Snacks, confiseries, boissons fraîches et canettes
       - text: Sélection ajustée selon votre population
@@ -107,7 +106,7 @@ process:
         Nous analysons vos espaces, vos flux et vos usages réels. Nombre de
         collaborateurs, habitudes de consommation, contraintes techniques, rien
         n'est laissé au hasard.
-      image: /images/solutions/bureau-ans.jpeg
+      image: ''
       key_points:
         - text: Visite sur site
         - text: Analyse des flux
@@ -120,7 +119,7 @@ process:
         Nous concevons une offre personnalisée : choix des machines, sélection
         des produits, plan d'implantation et budget transparent. Pas de
         surprise.
-      image: /images/solutions/projec.jpg
+      image: ''
       key_points:
         - text: Choix machines
         - text: Budget transparent
@@ -133,7 +132,7 @@ process:
         Notre équipe technique installe, configure et teste l'ensemble.
         Formation de vos référents incluse. Vous êtes opérationnels dès le
         premier jour.
-      image: /images/solutions/ddg.png
+      image: ''
       key_points:
         - text: Installation complète
         - text: Configuration
@@ -145,7 +144,7 @@ process:
       description: >-
         Intervention en moins de 4 heures. Approvisionnement régulier, entretien
         préventif et curatif. Votre parc fonctionne, toujours.
-      image: /images/solutions/camp.jpg
+      image: ''
       key_points:
         - text: Réponse < 4h
         - text: Entretien préventif
@@ -157,7 +156,7 @@ process:
       description: >-
         Reporting de consommation, évolution du parc, ajustement des gammes
         produits. Nous pilotons votre installation dans la durée.
-      image: /images/solutions/bureau-ans.jpeg
+      image: ''
       key_points:
         - text: Reporting détaillé
         - text: Évolution du parc
@@ -167,17 +166,17 @@ showcase:
   description: >-
     Un espace pause ordinaire peut devenir un vrai lieu de vie. Faites glisser
     pour comparer l'avant et l'après d'une installation type.
-  before_image: /images/solutions/photoav-flou.png
-  after_image: /images/solutions/photoap-flou.jpg
+  before_image: ''
+  after_image: ''
   slider_images:
-    - image: /images/solutions/p1.jpg
-    - image: /images/solutions/p2.jpg
-    - image: /images/solutions/p3.jpg
-    - image: /images/solutions/instant-cafe-ans.jpeg
-    - image: /images/solutions/distrib-auto-ans.jpeg
-    - image: /images/solutions/distributeur-coffe.JPG
-    - image: /images/solutions/locaux-ans.jpeg
-    - image: /images/solutions/bureau-ans.jpeg
+    - image: ''
+    - image: ''
+    - image: ''
+    - image: ''
+    - image: ''
+    - image: ''
+    - image: ''
+    - image: ''
 cta:
   title: Prêt à équiper vos espaces ?
   description: >-
