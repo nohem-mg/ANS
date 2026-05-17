@@ -23,10 +23,10 @@ type FooterData = {
         phone?: string;
         phone_href?: string;
     };
-    nav_links?: Array<{
+    nav_links?: readonly {
         label: string;
         href: string;
-    }>;
+    }[];
     social?: {
         linkedin_href?: string;
         instagram_href?: string;
@@ -41,7 +41,7 @@ type FooterData = {
     };
 };
 
-export default function Footer({ footerData }: { footerData?: FooterData }) {
+export default function Footer({ footerData }: { footerData?: FooterData | null }) {
     const brandName = footerData?.brand?.name ?? 'A.N.S.';
     const brandTagline = footerData?.brand?.tagline ?? 'Depuis 1981, nous réinventons\nla pause café en entreprise.';
     
