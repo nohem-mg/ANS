@@ -13,6 +13,7 @@ const NAV_LINKS = [
 ];
 
 type FooterData = {
+    logo_image?: string | null;
     brand?: {
         name?: string;
         tagline?: string;
@@ -42,6 +43,7 @@ type FooterData = {
 };
 
 export default function Footer({ footerData }: { footerData?: FooterData | null }) {
+    const logoImage = footerData?.logo_image ?? '/logo-ANS.png';
     const brandName = footerData?.brand?.name ?? 'A.N.S.';
     const brandTagline = footerData?.brand?.tagline ?? 'Depuis 1981, nous réinventons\nla pause café en entreprise.';
     
@@ -107,7 +109,7 @@ export default function Footer({ footerData }: { footerData?: FooterData | null 
                     <div className="footer-logo-divider" style={{ display: 'flex', alignItems: 'center', gap: 24, marginBottom: 48 }}>
                         <div style={{ flex: 1, height: 1, background: 'rgba(255,246,239,0.08)' }} />
                         <Image
-                            src="/logo-ANS.png"
+                            src={logoImage}
                             alt="ANS"
                             width={38}
                             height={38}

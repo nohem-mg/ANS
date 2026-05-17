@@ -69,7 +69,13 @@ const FAQ_ITEMS = [
 // --- Components ---
 
 // 1. "Infusion" Loader
-const Loader = ({ onComplete }: { onComplete: () => void }) => {
+const Loader = ({
+  onComplete,
+  logoImage,
+}: {
+  onComplete: () => void;
+  logoImage: string;
+}) => {
   return (
     <motion.div
       className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#FAF2E9] text-deep-roast"
@@ -84,7 +90,7 @@ const Loader = ({ onComplete }: { onComplete: () => void }) => {
           transition={{ delay: 0.4, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
           <Image
-            src="/logo-ans-entier.png"
+            src={logoImage}
             alt="A.N.S Pause Évasion"
             width={280}
             height={120}
@@ -381,25 +387,25 @@ const ServiceRow = ({ title, desc, icon }: { title: string, desc: string, icon: 
 const VISION_POINTS = [
   {
     id: 'deconnexion',
-    img: '/pause-evasion.png',
+    img: '/carte1.png',
     title: '"Reset" Sensoriel',
     desc: "Une pause réussie mobilise les sens pour couper court à la fatigue. Un rituel de déconnexion pour faire chuter la charge mentale et relancer la concentration.",
   },
   {
     id: 'liens',
-    img: '/convivialite-equipe.png',
+    img: '/carte2.png',
     title: 'Collisionneur d\'Idées',
     desc: "Les meilleures décisions ne naissent pas toujours en salle de réunion. Nos espaces créent des points de rencontres informels qui brisent les silos dans l'entreprise.",
   },
   {
     id: 'bienetre',
-    img: '/qualite-vie-travail.png',
+    img: '/carte3.png',
     title: 'Marqueur d\'Attention',
     desc: "Ce que vous glissez dans la tasse de vos équipes en dit long. Une expérience digne d'un coffee shop est un levier concret et quotidien de Qualité de Vie au Travail.",
   },
   {
     id: 'serenite',
-    img: '/solution-simplicite.png',
+    img: '/carte4.png',
     title: 'Fluidité Invisible',
     desc: "Pour qu'une pause soit reposante, la logistique doit s'effacer. Connexion, entretien préventif et réapprovisionnements : tout est anticipé sans que vous n'y pensiez.",
   },
@@ -596,7 +602,7 @@ const VisionSection = ({ points }: { points: typeof VISION_POINTS }) => {
                   {/* ── BACK FACE — image ── */}
                   <div className="flip-card-back overflow-hidden shadow-lg bg-[#688125]">
                     <img
-                      src={`/carte${index + 1}.png`}
+                      src={point.img}
                       alt={point.title}
                       className="w-full h-full object-cover"
                     />
@@ -754,10 +760,16 @@ const FAQSection = ({
 };
 
 export default function HomePageClient({ data }: { data: any }) {
+  const heroImage =
+    data?.hero?.image ??
+    'https://images.unsplash.com/photo-1447933601403-0c6688de566e?q=80&w=2560&auto=format&fit=crop';
+  const heroLogoImage = data?.hero?.logo_image ?? '/logo-ans-entier.png';
+  const rseImage = data?.rse?.image ?? '/VISUEL1jpg.png';
   const visionPoints = VISION_POINTS.map((p, i) => ({
     ...p,
     title: data?.vision?.cards?.[i]?.title ?? p.title,
     desc: data?.vision?.cards?.[i]?.description ?? p.desc,
+    img: data?.vision?.cards?.[i]?.image ?? p.img,
   }))
   const faqItems = data?.faq?.items?.length ? data.faq.items : FAQ_ITEMS
   const testimonialItems = data?.testimonials?.items?.length ? data.testimonials.items : TESTIMONIALS
@@ -809,7 +821,12 @@ export default function HomePageClient({ data }: { data: any }) {
   return (
     <>
       {/* Loader overlay — always on top, fades out then unmounts */}
-      {loading && <Loader onComplete={() => setLoading(false)} />}
+      {loading && (
+        <Loader
+          logoImage={heroLogoImage}
+          onComplete={() => setLoading(false)}
+        />
+      )}
 
       <div
         ref={containerRef}
@@ -902,7 +919,7 @@ export default function HomePageClient({ data }: { data: any }) {
                   repeatType: "reverse"
                 }}
                 style={{
-                  backgroundImage: 'url(https://images.unsplash.com/photo-1447933601403-0c6688de566e?q=80&w=2560&auto=format&fit=crop)',
+                  backgroundImage: `url("${heroImage}")`,
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',
                 }}
@@ -1422,7 +1439,7 @@ export default function HomePageClient({ data }: { data: any }) {
               <div className="rse-image-ratio w-full relative">
                 <div className="absolute inset-0 bg-deep-roast/5 group-hover:bg-transparent transition-colors duration-500 z-10 mix-blend-multiply pointer-events-none" />
                 <Image
-                  src="/VISUEL1jpg.png"
+                  src={rseImage}
                   alt="Engagement RSE ANS - Panorama"
                   fill
                   sizes="(max-width: 768px) 100vw, (max-width: 1280px) 100vw, 1280px"
