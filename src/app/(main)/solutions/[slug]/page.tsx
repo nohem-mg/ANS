@@ -3,8 +3,14 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import { ArrowLeft, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { createReader } from '@keystatic/core/reader';
+import keystaticConfig from '../../../../../keystatic.config';
 
-import { getSolutionBySlug, SOLUTIONS } from '@/app/(main)/solutions/data';
+import {
+  getSolutionBySlug,
+  SOLUTIONS,
+  type SolutionDetail,
+} from '@/app/(main)/solutions/data';
 
 type SolutionDetailPageProps = {
   params: Promise<{
@@ -22,6 +28,40 @@ const C = {
   divider: 'rgba(245,230,211,0.12)',
 } as const;
 
+const reader = createReader(process.cwd(), keystaticConfig);
+
+type CmsSolutionsData = Awaited<
+  ReturnType<typeof reader.singletons.solutions.read>
+>;
+type CmsSolutionItem = NonNullable<CmsSolutionsData>['solutions_cards'][number];
+
+async function getCmsSolutionBySlug(slug: string) {
+  const cmsData = await reader.singletons.solutions.read();
+  return cmsData?.solutions_cards.find((solution) => solution.slug === slug);
+}
+
+function mergeSolution(
+  fallback: SolutionDetail,
+  cmsItem: CmsSolutionItem | undefined
+): SolutionDetail {
+  return {
+    ...fallback,
+    category: cmsItem?.category ?? fallback.category,
+    title: cmsItem?.title ?? fallback.title,
+    summary: cmsItem?.summary ?? fallback.summary,
+    description: cmsItem?.description ?? fallback.description,
+    highlights:
+      cmsItem?.highlights?.map((h: { text: string }) => h.text) ??
+      fallback.highlights,
+    idealFor:
+      cmsItem?.ideal_for?.map((h: { text: string }) => h.text) ??
+      fallback.idealFor,
+    features:
+      cmsItem?.features?.map((h: { text: string }) => h.text) ??
+      fallback.features,
+  };
+}
+
 export async function generateStaticParams() {
   return SOLUTIONS.map((solution) => ({
     slug: solution.slug,
@@ -32,23 +72,26 @@ export async function generateMetadata({
   params,
 }: SolutionDetailPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const solution = getSolutionBySlug(slug);
+  const fallback = getSolutionBySlug(slug);
 
-  if (!solution) {
+  if (!fallback) {
     return {
       title: 'Solution introuvable · ANS',
     };
   }
 
+  const cmsItem = await getCmsSolutionBySlug(slug);
+  const item = mergeSolution(fallback, cmsItem);
+
   return {
-    title: solution.title,
-    description: solution.summary,
+    title: item.title,
+    description: item.summary,
     alternates: {
       canonical: `/solutions/${slug}`,
     },
     openGraph: {
-      title: `${solution.title} · ANS – Pause Évasion`,
-      description: solution.summary,
+      title: `${item.title} · ANS – Pause Évasion`,
+      description: item.summary,
       url: `/solutions/${slug}`,
     },
   };
@@ -58,19 +101,21 @@ export default async function SolutionDetailPage({
   params,
 }: SolutionDetailPageProps) {
   const { slug } = await params;
-  const solution = getSolutionBySlug(slug);
+  const fallback = getSolutionBySlug(slug);
 
-  if (!solution) {
+  if (!fallback) {
     notFound();
   }
 
-  const Icon = solution.icon;
+  const cmsItem = await getCmsSolutionBySlug(slug);
+  const item = mergeSolution(fallback, cmsItem);
+  const Icon = item.icon;
 
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Service',
-    name: solution.title,
-    description: solution.summary,
+    name: item.title,
+    description: item.summary,
     provider: {
       '@type': 'LocalBusiness',
       name: 'ANS - Automatique Nord Service',
@@ -83,8 +128,8 @@ export default async function SolutionDetailPage({
     },
     hasOfferCatalog: {
       '@type': 'OfferCatalog',
-      name: solution.category,
-      itemListElement: solution.features.map((feature, index) => ({
+      name: item.category,
+      itemListElement: item.features.map((feature, index) => ({
         '@type': 'Offer',
         itemOffered: {
           '@type': 'Service',
@@ -165,7 +210,7 @@ export default async function SolutionDetailPage({
                     fontFamily: 'var(--font-ibm-plex-mono)',
                   }}
                 >
-                  {solution.category}
+                  {item.category}
                 </span>
               </div>
 
@@ -178,7 +223,7 @@ export default async function SolutionDetailPage({
                   margin: '0 0 20px',
                 }}
               >
-                {solution.title}
+                {item.title}
               </h1>
 
               <p
@@ -190,7 +235,7 @@ export default async function SolutionDetailPage({
                   margin: '0 0 18px',
                 }}
               >
-                {solution.description}
+                {item.description}
               </p>
 
               <p
@@ -202,7 +247,7 @@ export default async function SolutionDetailPage({
                   margin: 0,
                 }}
               >
-                {solution.summary}
+                {item.summary}
               </p>
             </div>
 
@@ -217,8 +262,8 @@ export default async function SolutionDetailPage({
               }}
             >
               <Image
-                src={solution.image}
-                alt={solution.title}
+                src={item.image}
+                alt={item.title}
                 fill
                 sizes="(max-width: 1024px) 100vw, 48vw"
                 style={{ objectFit: 'cover' }}
@@ -253,15 +298,15 @@ export default async function SolutionDetailPage({
         >
           <InfoCard
             title="Points forts"
-            items={solution.highlights}
+            items={item.highlights}
           />
           <InfoCard
             title="Idéal pour"
-            items={solution.idealFor}
+            items={item.idealFor}
           />
           <InfoCard
             title="Ce que nous mettons en place"
-            items={solution.features}
+            items={item.features}
           />
         </div>
       </section>
