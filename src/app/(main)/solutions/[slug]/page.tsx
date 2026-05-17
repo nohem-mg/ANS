@@ -50,6 +50,7 @@ function mergeSolution(
     title: cmsItem?.title ?? fallback.title,
     summary: cmsItem?.summary ?? fallback.summary,
     description: cmsItem?.description ?? fallback.description,
+    image: cmsItem?.image ?? fallback.image,
     highlights:
       cmsItem?.highlights?.map((h: { text: string }) => h.text) ??
       fallback.highlights,

@@ -391,7 +391,7 @@ function SectionTag({ index, label }: { index: string; label: string }) {
 // SECTION 1: HERO / MANIFESTO
 // ─────────────────────────────────────────────────────────────────────────────
 
-function HeroSection() {
+function HeroSection({ image }: { image: string }) {
   return (
     /* Hero fills its absolutely-positioned container */
     <div
@@ -441,7 +441,7 @@ function HeroSection() {
       <div aria-hidden className="absolute inset-0 z-0 pointer-events-none overflow-hidden rounded-[20px]">
           {/* Image */}
           <div className="absolute inset-0" style={{
-              backgroundImage: 'url(https://images.unsplash.com/photo-1447933601403-0c6688de566e?q=80&w=2560&auto=format&fit=crop)',
+              backgroundImage: `url("${image}")`,
               backgroundSize: 'cover', backgroundPosition: 'center',
           }} />
           {/* Rich gradient overlays for Deep Roast mood & readable text */}
@@ -1174,7 +1174,7 @@ const TEAM_IMAGES = [
   },
 ];
 
-function TeamSection() {
+function TeamSection({ images }: { images: typeof TEAM_IMAGES }) {
   return (
     <section
       id="equipe"
@@ -1230,7 +1230,7 @@ function TeamSection() {
       </div>
 
       {/* Zoom Parallax Gallery */}
-      <ZoomParallax images={TEAM_IMAGES} />
+      <ZoomParallax images={images} />
     </section>
   );
 }
@@ -1246,7 +1246,7 @@ function TeamSection() {
 // HERO + MOODBOARD — scroll-driven cross-fade inside a single sticky widget
 // ─────────────────────────────────────────────────────────────────────────────
 
-function AboutHeroSection() {
+function AboutHeroSection({ image }: { image: string }) {
   return (
     <>
       <style>{`
@@ -1296,7 +1296,7 @@ function AboutHeroSection() {
             position: 'relative',
           }}
         >
-          <HeroSection />
+          <HeroSection image={image} />
         </motion.div>
       </section>
     </>
@@ -1304,10 +1304,19 @@ function AboutHeroSection() {
 }
 
 export default function AboutPageClient({ data }: { data: any }) {
+  const heroImage =
+    data?.hero?.image ??
+    'https://images.unsplash.com/photo-1447933601403-0c6688de566e?q=80&w=2560&auto=format&fit=crop';
   const storyData = STORY_DATA.map((fallback, i) => ({
     ...fallback,
     title: data?.story?.chapters?.[i]?.title ?? fallback.title,
     description: data?.story?.chapters?.[i]?.description ?? fallback.description,
+    image: data?.story?.chapters?.[i]?.image ?? fallback.image,
+  }))
+  const teamImages = TEAM_IMAGES.map((fallback, i) => ({
+    ...fallback,
+    src: data?.team?.images?.[i]?.image ?? fallback.src,
+    alt: data?.team?.images?.[i]?.alt ?? fallback.alt,
   }))
 
   useEffect(() => {
@@ -1323,10 +1332,10 @@ export default function AboutPageClient({ data }: { data: any }) {
         minHeight: '100vh',
       }}
     >
-      <AboutHeroSection />
+      <AboutHeroSection image={heroImage} />
       {/* 3. NOTRE HISTOIRE */}
       <StorySection data={data} storyData={storyData} />
-      <TeamSection />
+      <TeamSection images={teamImages} />
       <CareersSection data={data} />
       <LocationSection />
     </div>

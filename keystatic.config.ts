@@ -25,6 +25,11 @@ export default config({
             label: 'Navigation',
             path: 'src/content/navigation/',
             schema: {
+                logo_image: fields.image({
+                    label: 'Logo header',
+                    directory: 'public/images/navigation',
+                    publicPath: '/images/navigation/',
+                }),
                 nav_links: fields.array(
                     fields.object({
                         label: fields.text({ label: 'Libellé affiché' }),
@@ -53,6 +58,11 @@ export default config({
             label: 'Footer',
             path: 'src/content/footer/',
             schema: {
+                logo_image: fields.image({
+                    label: 'Logo footer',
+                    directory: 'public/images/footer',
+                    publicPath: '/images/footer/',
+                }),
                 brand: fields.object(
                     {
                         name: fields.text({
@@ -175,6 +185,16 @@ export default config({
                             defaultValue:
                                 "Depuis plus de 40 ans, nous transformons la pause café en un véritable levier de Qualité de Vie au Travail. Service ultra-personnalisé, réactivité immédiate et engagement familial.",
                         }),
+                        image: fields.image({
+                            label: 'Image de fond hero',
+                            directory: 'public/images/homepage',
+                            publicPath: '/images/homepage/',
+                        }),
+                        logo_image: fields.image({
+                            label: 'Logo du loader',
+                            directory: 'public/images/homepage',
+                            publicPath: '/images/homepage/',
+                        }),
                         badge_rating: fields.text({
                             label: 'Badge — note',
                             defaultValue: '4.9 / 5',
@@ -218,6 +238,11 @@ export default config({
                                 description: fields.text({
                                     label: 'Description',
                                     multiline: true,
+                                }),
+                                image: fields.image({
+                                    label: 'Image de la carte',
+                                    directory: 'public/images/homepage',
+                                    publicPath: '/images/homepage/',
                                 }),
                             }),
                             {
@@ -355,6 +380,11 @@ export default config({
                             defaultValue:
                                 "Nous n'avons pas attendu que ce soit dans l'air du temps. Dès le départ, nous nous sommes posé une question simple : serions-nous fiers de montrer comment nous travaillons à nos enfants ?",
                         }),
+                        image: fields.image({
+                            label: 'Image panoramique RSE',
+                            directory: 'public/images/homepage',
+                            publicPath: '/images/homepage/',
+                        }),
                         bullets: fields.array(
                             fields.object({
                                 text: fields.text({ label: 'Point RSE' }),
@@ -445,6 +475,11 @@ export default config({
                             defaultValue:
                                 "Des distributeurs de dernière génération aux coffee corners sur-mesure, nous déployons un parc technique adapté à votre entreprise et à vos collaborateurs.",
                         }),
+                        image: fields.image({
+                            label: 'Image de fond hero',
+                            directory: 'public/images/solutions',
+                            publicPath: '/images/solutions/',
+                        }),
                     },
                     { label: 'Section Hero' }
                 ),
@@ -480,6 +515,11 @@ export default config({
                         description: fields.text({
                             label: 'Description longue',
                             multiline: true,
+                        }),
+                        image: fields.image({
+                            label: 'Image de la fiche',
+                            directory: 'public/images/solutions',
+                            publicPath: '/images/solutions/',
                         }),
                         highlights: fields.array(
                             fields.object({ text: fields.text({ label: 'Point fort' }) }),
@@ -532,6 +572,11 @@ export default config({
                                     label: 'Description',
                                     multiline: true,
                                 }),
+                                image: fields.image({
+                                    label: 'Image étape',
+                                    directory: 'public/images/solutions',
+                                    publicPath: '/images/solutions/',
+                                }),
                                 key_points: fields.array(
                                     fields.object({ text: fields.text({ label: 'Point clé' }) }),
                                     {
@@ -563,6 +608,29 @@ export default config({
                             defaultValue:
                                 "Un espace pause ordinaire peut devenir un vrai lieu de vie. Faites glisser pour comparer l'avant et l'après d'une installation type.",
                         }),
+                        before_image: fields.image({
+                            label: 'Image avant',
+                            directory: 'public/images/solutions',
+                            publicPath: '/images/solutions/',
+                        }),
+                        after_image: fields.image({
+                            label: 'Image après',
+                            directory: 'public/images/solutions',
+                            publicPath: '/images/solutions/',
+                        }),
+                        slider_images: fields.array(
+                            fields.object({
+                                image: fields.image({
+                                    label: 'Image',
+                                    directory: 'public/images/solutions',
+                                    publicPath: '/images/solutions/',
+                                }),
+                            }),
+                            {
+                                label: 'Images du carousel réalisations',
+                                itemLabel: () => 'Image',
+                            }
+                        ),
                     },
                     { label: 'Section Showcase Avant/Après' }
                 ),
@@ -605,6 +673,11 @@ export default config({
                             defaultValue:
                                 "Le premier réseau français d'indépendants en distribution automatique, au service de vos espaces de pause.",
                         }),
+                        image: fields.image({
+                            label: 'Image de fond hero',
+                            directory: 'public/images/groupe',
+                            publicPath: '/images/groupe/',
+                        }),
                     },
                     { label: 'Section Hero' }
                 ),
@@ -636,6 +709,11 @@ export default config({
                             multiline: true,
                             defaultValue:
                                 "Résultat : nos clients bénéficient de la force d'un réseau national avec le service personnalisé d'une entreprise locale qui connaît le terrain.",
+                        }),
+                        image: fields.image({
+                            label: 'Image de présentation',
+                            directory: 'public/images/groupe',
+                            publicPath: '/images/groupe/',
                         }),
                     },
                     { label: 'Section Présentation' }
@@ -746,6 +824,11 @@ export default config({
                             defaultValue:
                                 "Chez ANS, nous faisons en sorte que ce moment soit toujours parfait.",
                         }),
+                        image: fields.image({
+                            label: 'Image de fond hero',
+                            directory: 'public/images/about',
+                            publicPath: '/images/about/',
+                        }),
                     },
                     { label: 'Section Hero / Manifesto' }
                 ),
@@ -770,6 +853,11 @@ export default config({
                                     label: 'Description',
                                     multiline: true,
                                 }),
+                                image: fields.image({
+                                    label: 'Image du chapitre',
+                                    directory: 'public/images/about',
+                                    publicPath: '/images/about/',
+                                }),
                             }),
                             {
                                 label: 'Chapitres (3)',
@@ -790,6 +878,20 @@ export default config({
                             defaultValue:
                                 "Techniciens, commerciaux, logisticiens, designers d'expérience. Tous passionnés.",
                         }),
+                        images: fields.array(
+                            fields.object({
+                                image: fields.image({
+                                    label: 'Image',
+                                    directory: 'public/images/about',
+                                    publicPath: '/images/about/',
+                                }),
+                                alt: fields.text({ label: 'Texte alternatif' }),
+                            }),
+                            {
+                                label: 'Images équipe',
+                                itemLabel: (props) => props.fields.alt.value || 'Image',
+                            }
+                        ),
                     },
                     { label: "Section L'Équipe" }
                 ),

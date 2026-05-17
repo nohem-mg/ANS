@@ -403,6 +403,10 @@ function BentoFeaturedSection({ featuredChiffre, smallFigures }: { featuredChiff
 
 // ─── PAGE ────────────────────────────────────────────────────────────────────
 export default function GroupePageClient({ data }: { data: any }) {
+    const heroImage =
+        data?.hero?.image ??
+        'https://images.unsplash.com/photo-1447933601403-0c6688de566e?q=80&w=2560&auto=format&fit=crop';
+    const presentationImage = data?.presentation?.image ?? '/Prodiaplusweb.png';
     const advantageTitles = data?.advantages?.items?.length
         ? data.advantages.items.map((i: any) => i.title)
         : AVANTAGE_TITLES
@@ -490,7 +494,7 @@ export default function GroupePageClient({ data }: { data: any }) {
                     <div aria-hidden className="absolute inset-0 z-0 pointer-events-none overflow-hidden rounded-[20px]">
                         {/* Image */}
                         <div className="absolute inset-0" style={{
-                            backgroundImage: 'url(https://images.unsplash.com/photo-1447933601403-0c6688de566e?q=80&w=2560&auto=format&fit=crop)',
+                            backgroundImage: `url("${heroImage}")`,
                             backgroundSize: 'cover', backgroundPosition: 'center',
                         }} />
                         {/* Rich gradient overlays for Deep Roast mood & readable text */}
@@ -598,7 +602,7 @@ export default function GroupePageClient({ data }: { data: any }) {
                             style={{ position: 'relative', width: '100%', aspectRatio: '3/2', maxWidth: 650, margin: '0 auto' }}
                         >
                             <Image 
-                                src="/Prodiaplusweb.png" 
+                                src={presentationImage}
                                 alt="Réseau Prodia+" 
                                 fill 
                                 style={{ objectFit: 'contain' }} 
