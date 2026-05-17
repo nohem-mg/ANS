@@ -52,7 +52,7 @@ export default function Footer({ footerData }: { footerData?: FooterData }) {
 
     const navLinks = footerData?.nav_links?.length ? footerData.nav_links : NAV_LINKS;
 
-    const linkedinHref = footerData?.social?.linkedin_href ?? '#';
+    const linkedinHref = footerData?.social?.linkedin_href ?? 'https://www.linkedin.com/company/automatique-nord-service-a.n.s./';
     const instagramHref = footerData?.social?.instagram_href ?? 'https://www.instagram.com/anspauseevasion/';
     const emailHref = footerData?.social?.email_href ?? 'mailto:ans@prodiaplus.fr';
 
