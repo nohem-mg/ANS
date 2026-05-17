@@ -6,8 +6,6 @@ hero:
     Depuis plus de 40 ans, nous transformons la pause café en un véritable
     levier de Qualité de Vie au Travail. Service ultra-personnalisé, réactivité
     immédiate et engagement familial.
-  image: ''
-  logo_image: ''
   badge_rating: 4.9 / 5
   badge_clients: 200+ partenaires
   cta_primary: Découvrir notre approche
@@ -26,25 +24,21 @@ vision:
         Une pause réussie mobilise les sens pour couper court à la fatigue. Un
         rituel de déconnexion pour faire chuter la charge mentale et relancer la
         concentration.
-      image: ''
     - title: Collisionneur d'Idées
       description: >-
         Les meilleures décisions ne naissent pas toujours en salle de réunion.
         Nos espaces créent des points de rencontres informels qui brisent les
         silos dans l'entreprise.
-      image: ''
     - title: Marqueur d'Attention
       description: >-
         Ce que vous glissez dans la tasse de vos équipes en dit long. Une
         expérience digne d'un coffee shop est un levier concret et quotidien de
         Qualité de Vie au Travail.
-      image: ''
     - title: Fluidité Invisible
       description: >-
         Pour qu'une pause soit reposante, la logistique doit s'effacer.
         Connexion, entretien préventif et réapprovisionnements : tout est
         anticipé sans que vous n'y pensiez.
-      image: ''
 services:
   tag: Notre Savoir-Faire
   title: L'Excellence de la Pause Café.
@@ -121,7 +115,6 @@ rse:
     comment nous travaillons à nos enfants ? C'est cette exigence qui oriente
     nos choix, des cafés que nous sélectionnons jusqu'aux tournées que nous
     planifions. Pas une posture, une conviction !
-  image: ''
   bullets:
     - text: Cafés labellisés Bio et Équitable
     - text: Revalorisation à 100% du marc de café

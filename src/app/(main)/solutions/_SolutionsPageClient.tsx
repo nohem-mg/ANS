@@ -617,13 +617,7 @@ function ProcessSection({ stepsData }: { stepsData: typeof steps }) {
 
 // ─── SHOWCASE ────────────────────────────────────────────────────────────────
 
-function ShowcaseSection({
-  beforeImage,
-  afterImage,
-}: {
-  beforeImage: string;
-  afterImage: string;
-}) {
+function ShowcaseSection() {
   const [sliderPos, setSliderPos] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -764,7 +758,7 @@ function ShowcaseSection({
             {/* AFTER */}
             <div style={{ position: 'absolute', inset: 0 }}>
               <Image
-                src={afterImage}
+                src="/photoap-flou.jpg"
                 alt="Après : espace pause aménagé"
                 fill
                 unoptimized
@@ -792,7 +786,7 @@ function ShowcaseSection({
               transition: isDragging ? 'none' : 'clip-path 0.05s',
             }}>
               <Image
-                src={beforeImage}
+                src="/photoav-flou.png"
                 alt="Avant : coin café basique"
                 fill
                 unoptimized
@@ -860,7 +854,7 @@ function ShowcaseSection({
   );
 }
 
-function AutresRealisationsSection({ images }: { images?: string[] }) {
+function AutresRealisationsSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -931,7 +925,7 @@ function AutresRealisationsSection({ images }: { images?: string[] }) {
             transition: 'all 0.85s ease 0.12s',
           }}
         >
-          <ImageAutoSlider images={images?.length ? images : undefined} />
+          <ImageAutoSlider />
         </div>
       </div>
     </section>
@@ -940,25 +934,12 @@ function AutresRealisationsSection({ images }: { images?: string[] }) {
 
 // ─── PAGE ────────────────────────────────────────────────────────────────────
 export default function SolutionsPageClient({ data }: { data: any }) {
-  const heroImage =
-    data?.hero?.image ??
-    'https://images.unsplash.com/photo-1447933601403-0c6688de566e?q=80&w=2560&auto=format&fit=crop';
-  const beforeImage = data?.showcase?.before_image ?? '/photoav-flou.png';
-  const afterImage = data?.showcase?.after_image ?? '/photoap-flou.jpg';
-  const sliderImages = data?.showcase?.slider_images
-    ?.map((item: { image?: string }) => item.image)
-    .filter(Boolean) as string[] | undefined;
-
   const stepsData = steps.map((fallback, i) => ({
     ...fallback,
     tag: data?.process?.steps?.[i]?.tag ?? fallback.tag,
     title: data?.process?.steps?.[i]?.title ?? fallback.title,
     subtitle: data?.process?.steps?.[i]?.subtitle ?? fallback.subtitle,
     description: data?.process?.steps?.[i]?.description ?? fallback.description,
-    photo: {
-      ...fallback.photo,
-      src: data?.process?.steps?.[i]?.image ?? fallback.photo.src,
-    },
     keyPoints: data?.process?.steps?.[i]?.key_points?.map((k: any) => k.text) ?? fallback.keyPoints,
   }))
 
@@ -967,7 +948,6 @@ export default function SolutionsPageClient({ data }: { data: any }) {
     title: data?.solutions_cards?.[i]?.title ?? fallback.title,
     summary: data?.solutions_cards?.[i]?.summary ?? fallback.summary,
     description: data?.solutions_cards?.[i]?.description ?? fallback.description,
-    image: data?.solutions_cards?.[i]?.image ?? fallback.image,
     highlights: data?.solutions_cards?.[i]?.highlights?.map((h: any) => h.text) ?? fallback.highlights,
     idealFor: data?.solutions_cards?.[i]?.ideal_for?.map((h: any) => h.text) ?? fallback.idealFor,
     features: data?.solutions_cards?.[i]?.features?.map((h: any) => h.text) ?? fallback.features,
@@ -1046,7 +1026,7 @@ export default function SolutionsPageClient({ data }: { data: any }) {
           <div aria-hidden className="absolute inset-0 z-0 pointer-events-none overflow-hidden rounded-[20px]">
               {/* Image */}
               <div className="absolute inset-0" style={{
-                  backgroundImage: `url("${heroImage}")`,
+                  backgroundImage: 'url(https://images.unsplash.com/photo-1447933601403-0c6688de566e?q=80&w=2560&auto=format&fit=crop)',
                   backgroundSize: 'cover', backgroundPosition: 'center',
               }} />
               {/* Rich gradient overlays for Deep Roast mood & readable text */}
@@ -1108,9 +1088,9 @@ export default function SolutionsPageClient({ data }: { data: any }) {
 
       <ProcessSection stepsData={stepsData} />
 
-      <ShowcaseSection beforeImage={beforeImage} afterImage={afterImage} />
+      <ShowcaseSection />
 
-      <AutresRealisationsSection images={sliderImages} />
+      <AutresRealisationsSection />
 
       {/* ── CTA ── */}
       <section
