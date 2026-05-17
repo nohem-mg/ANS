@@ -1081,8 +1081,8 @@ export default function SolutionsPageClient({ data }: { data: any }) {
       </section>
 
       <Gallery4
-        title="Trois gammes, une meme exigence de service"
-        description="Retrouvez nos principales familles de machines pour l’entreprise. Chaque carte ouvre sur une page detaillee avec usages, points forts et type d’implantation."
+        title="Trois gammes, une même exigence de service"
+        description="Retrouvez nos principales familles de machines pour l’entreprise. Chaque carte ouvre sur une page détaillée avec usages, points forts et type d’implantation."
         items={galleryItems}
       />
 

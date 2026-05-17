@@ -256,7 +256,7 @@ export default async function SolutionDetailPage({
             items={solution.highlights}
           />
           <InfoCard
-            title="Ideal pour"
+            title="Idéal pour"
             items={solution.idealFor}
           />
           <InfoCard
@@ -315,7 +315,7 @@ export default async function SolutionDetailPage({
                   letterSpacing: '-0.02em',
                 }}
               >
-                Besoin d&apos;une implantation adaptee a votre site ?
+                Besoin d&apos;une implantation adaptée à votre site ?
               </h2>
               <p
                 style={{
@@ -325,7 +325,7 @@ export default async function SolutionDetailPage({
                   fontSize: 16,
                 }}
               >
-                Nous vous aidons a choisir la bonne configuration selon vos
+                Nous vous aidons à choisir la bonne configuration selon vos
                 usages, vos volumes et vos contraintes techniques.
               </p>
             </div>

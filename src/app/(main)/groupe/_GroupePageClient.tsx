@@ -862,7 +862,7 @@ export default function GroupePageClient({ data }: { data: any }) {
                         boxShadow: '0 24px 60px rgba(43,18,0,0.14)',
                     }}>
                         <iframe
-                            src="https://www.youtube-nocookie.com/embed/RsEEctSCzGw"
+                            src="https://www.youtube-nocookie.com/embed/Sj-5jdNgSSE"
                             title="Présentation Prodia+"
                             loading="lazy"
                             allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"

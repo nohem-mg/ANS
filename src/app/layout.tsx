@@ -154,7 +154,7 @@ const jsonLd = {
   logo: 'https://www.anspauseevasion.fr/logo-ans-entier.png',
   image: 'https://www.anspauseevasion.fr/logo-ans-entier.png',
   telephone: '+33327371684',
-  email: 'contact@ans-da.fr',
+  email: 'ans@prodiaplus.fr',
   foundingDate: '1981',
   address: {
     '@type': 'PostalAddress',

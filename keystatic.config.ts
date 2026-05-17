@@ -114,7 +114,7 @@ export default config({
                         }),
                         email_href: fields.text({
                             label: 'Lien email (format: mailto:...)',
-                            defaultValue: 'mailto:contact@ans-da.fr',
+                            defaultValue: 'mailto:ans@prodiaplus.fr',
                         }),
                     },
                     { label: 'Réseaux sociaux' }
@@ -803,17 +803,17 @@ export default config({
                         }),
                         description_line1: fields.text({
                             label: 'Accroche courte',
-                            defaultValue: "Le café, c'est sérieux.",
+                            defaultValue: "Aucune offre n'est ouverte actuellement.",
                         }),
                         description_line2: fields.text({
                             label: 'Description',
                             multiline: true,
                             defaultValue:
-                                "Rejoignez une équipe passionnée qui le prouve chaque jour sur le terrain.",
+                                "Pour toute demande de travail ou de stage, vous pouvez nous écrire directement par mail.",
                         }),
                         cta_label: fields.text({
                             label: 'Libellé bouton',
-                            defaultValue: 'Voir toutes nos offres',
+                            defaultValue: 'Nous contacter par mail',
                         }),
                         jobs: fields.array(
                             fields.object({

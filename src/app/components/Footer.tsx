@@ -12,7 +12,36 @@ const NAV_LINKS = [
     { label: 'Contact', href: '/contact' },
 ];
 
-export default function Footer({ footerData }: { footerData?: any }) {
+type FooterData = {
+    brand?: {
+        name?: string;
+        tagline?: string;
+    };
+    contact?: {
+        address_line1?: string;
+        address_line2?: string;
+        phone?: string;
+        phone_href?: string;
+    };
+    nav_links?: Array<{
+        label: string;
+        href: string;
+    }>;
+    social?: {
+        linkedin_href?: string;
+        instagram_href?: string;
+        email_href?: string;
+    };
+    legal?: {
+        copyright_name?: string;
+        mentions_label?: string;
+        mentions_href?: string;
+        confidentialite_label?: string;
+        confidentialite_href?: string;
+    };
+};
+
+export default function Footer({ footerData }: { footerData?: FooterData }) {
     const brandName = footerData?.brand?.name ?? 'A.N.S.';
     const brandTagline = footerData?.brand?.tagline ?? 'Depuis 1981, nous réinventons\nla pause café en entreprise.';
     
@@ -25,7 +54,7 @@ export default function Footer({ footerData }: { footerData?: any }) {
 
     const linkedinHref = footerData?.social?.linkedin_href ?? '#';
     const instagramHref = footerData?.social?.instagram_href ?? '#';
-    const emailHref = footerData?.social?.email_href ?? 'mailto:contact@ans-da.fr';
+    const emailHref = footerData?.social?.email_href ?? 'mailto:ans@prodiaplus.fr';
 
     const copyrightName = footerData?.legal?.copyright_name ?? 'A.N.S.';
     const mentionsLabel = footerData?.legal?.mentions_label ?? 'Mentions Légales';
@@ -38,7 +67,7 @@ export default function Footer({ footerData }: { footerData?: any }) {
             style={{
                 backgroundColor: '#FAF2E9',
                 padding: 'clamp(16px, 2vw, 24px) clamp(16px, 4vw, 48px)',
-                fontFamily: 'var(--font-ibm-plex-mono)',
+                fontFamily: 'var(--font-ibm-plex-sans), Arial, Helvetica, sans-serif',
             }}
         >
         <style>{`
@@ -77,7 +106,17 @@ export default function Footer({ footerData }: { footerData?: any }) {
                     {/* Top divider with logo */}
                     <div className="footer-logo-divider" style={{ display: 'flex', alignItems: 'center', gap: 24, marginBottom: 48 }}>
                         <div style={{ flex: 1, height: 1, background: 'rgba(255,246,239,0.08)' }} />
-                        <Image src="/logo-ANS.png" alt="ANS" width={36} height={36} style={{ objectFit: 'contain' }} />
+                        <Image
+                            src="/logo-ANS.png"
+                            alt="ANS"
+                            width={38}
+                            height={38}
+                            style={{
+                                objectFit: 'contain',
+                                filter: 'brightness(0) invert(1)',
+                                opacity: 0.96,
+                            }}
+                        />
                         <div style={{ flex: 1, height: 1, background: 'rgba(255,246,239,0.08)' }} />
                     </div>
 
@@ -94,7 +133,7 @@ export default function Footer({ footerData }: { footerData?: any }) {
                     >
                         {/* Col 1 — Brand */}
                         <div>
-                            <p style={{ color: 'rgba(255,246,239,0.9)', fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase' as const, marginBottom: 16 }}>
+                            <p style={{ color: 'rgba(255,246,239,0.9)', fontSize: 12, fontWeight: 600, letterSpacing: '0.22em', textTransform: 'uppercase' as const, marginBottom: 16 }}>
                                 {brandName}
                             </p>
                             <p style={{ color: 'rgba(255,246,239,0.85)', fontSize: 12, lineHeight: 1.7, whiteSpace: 'pre-line' }}>
@@ -103,17 +142,17 @@ export default function Footer({ footerData }: { footerData?: any }) {
                             {/* Social icons */}
                             <div style={{ display: 'flex', justifyContent: 'center', gap: 16, marginTop: 16 }}>
                                 {[
-                                    { icon: <Linkedin size={13} />, href: linkedinHref, label: 'LinkedIn' },
-                                    { icon: <Instagram size={13} />, href: instagramHref, label: 'Instagram' },
-                                    { icon: <Mail size={13} />, href: emailHref, label: 'Email' },
+                                    { icon: <Linkedin size={16} />, href: linkedinHref, label: 'LinkedIn' },
+                                    { icon: <Instagram size={16} />, href: instagramHref, label: 'Instagram' },
+                                    { icon: <Mail size={16} />, href: emailHref, label: 'Email' },
                                 ].map(({ icon, href, label }, i) => (
                                     <a
                                         key={i}
                                         href={href}
                                         aria-label={label}
-                                        style={{ color: 'rgba(255,246,239,0.8)', transition: 'color 0.2s', display: 'flex' }}
+                                        style={{ color: 'rgba(255,246,239,0.8)', transition: 'color 0.2s', display: 'flex', padding: 4 }}
                                         onMouseEnter={(e) => (e.currentTarget.style.color = '#DE9E67')}
-                                        onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,246,239,0.25)')}
+                                        onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,246,239,0.8)')}
                                     >
                                         {icon}
                                     </a>
@@ -123,7 +162,7 @@ export default function Footer({ footerData }: { footerData?: any }) {
 
                         {/* Col 2 — Address */}
                         <div className="footer-col-address">
-                            <p style={{ color: 'rgba(255,246,239,0.9)', fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase' as const, marginBottom: 16 }}>
+                            <p style={{ color: 'rgba(255,246,239,0.9)', fontSize: 12, fontWeight: 600, letterSpacing: '0.22em', textTransform: 'uppercase' as const, marginBottom: 16 }}>
                                 Adresse
                             </p>
                             <p style={{ color: 'rgba(255,246,239,0.85)', fontSize: 12, lineHeight: 1.7 }}>
@@ -134,7 +173,7 @@ export default function Footer({ footerData }: { footerData?: any }) {
                                 href={contactPhoneHref}
                                 style={{ color: 'rgba(255,246,239,0.85)', fontSize: 12, letterSpacing: '0.04em', textDecoration: 'none', transition: 'color 0.2s', display: 'inline-block', marginTop: 4 }}
                                 onMouseEnter={(e) => (e.currentTarget.style.color = '#DE9E67')}
-                                onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,246,239,0.3)')}
+                                onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,246,239,0.85)')}
                             >
                                 {contactPhone}
                             </a>
@@ -142,7 +181,7 @@ export default function Footer({ footerData }: { footerData?: any }) {
 
                         {/* Col 3 — Navigation */}
                         <div className="footer-col-nav">
-                            <p style={{ color: 'rgba(255,246,239,0.9)', fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase' as const, marginBottom: 16 }}>
+                            <p style={{ color: 'rgba(255,246,239,0.9)', fontSize: 12, fontWeight: 600, letterSpacing: '0.22em', textTransform: 'uppercase' as const, marginBottom: 16 }}>
                                 Navigation
                             </p>
                             {navLinks.map(({ label, href }: { label: string, href: string }) => (
@@ -159,7 +198,7 @@ export default function Footer({ footerData }: { footerData?: any }) {
                                         padding: '3px 0',
                                     }}
                                     onMouseEnter={(e) => (e.currentTarget.style.color = '#DE9E67')}
-                                    onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,246,239,0.3)')}
+                                    onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,246,239,0.85)')}
                                 >
                                     {label}
                                 </a>
@@ -186,13 +225,13 @@ export default function Footer({ footerData }: { footerData?: any }) {
                         <div style={{ display: 'flex', gap: 24 }}>
                             <Link href={mentionsHref} style={{ color: 'rgba(255,246,239,0.8)', fontSize: 10, letterSpacing: '0.04em', textDecoration: 'none', transition: 'color 0.2s' }}
                                 onMouseEnter={(e) => (e.currentTarget.style.color = '#DE9E67')}
-                                onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,246,239,0.2)')}
+                                onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,246,239,0.8)')}
                             >
                                 {mentionsLabel}
                             </Link>
                             <Link href={confHref} style={{ color: 'rgba(255,246,239,0.8)', fontSize: 10, letterSpacing: '0.04em', textDecoration: 'none', transition: 'color 0.2s' }}
                                 onMouseEnter={(e) => (e.currentTarget.style.color = '#DE9E67')}
-                                onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,246,239,0.2)')}
+                                onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,246,239,0.8)')}
                             >
                                 {confLabel}
                             </Link>
