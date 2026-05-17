@@ -23,10 +23,10 @@ type FooterData = {
         phone?: string;
         phone_href?: string;
     };
-    nav_links?: Array<{
+    nav_links?: readonly {
         label: string;
         href: string;
-    }>;
+    }[];
     social?: {
         linkedin_href?: string;
         instagram_href?: string;
@@ -41,7 +41,7 @@ type FooterData = {
     };
 };
 
-export default function Footer({ footerData }: { footerData?: FooterData }) {
+export default function Footer({ footerData }: { footerData?: FooterData | null }) {
     const brandName = footerData?.brand?.name ?? 'A.N.S.';
     const brandTagline = footerData?.brand?.tagline ?? 'Depuis 1981, nous réinventons\nla pause café en entreprise.';
     
@@ -52,8 +52,8 @@ export default function Footer({ footerData }: { footerData?: FooterData }) {
 
     const navLinks = footerData?.nav_links?.length ? footerData.nav_links : NAV_LINKS;
 
-    const linkedinHref = footerData?.social?.linkedin_href ?? '#';
-    const instagramHref = footerData?.social?.instagram_href ?? '#';
+    const linkedinHref = footerData?.social?.linkedin_href ?? 'https://www.linkedin.com/company/automatique-nord-service-a.n.s./';
+    const instagramHref = footerData?.social?.instagram_href ?? 'https://www.instagram.com/anspauseevasion/';
     const emailHref = footerData?.social?.email_href ?? 'mailto:ans@prodiaplus.fr';
 
     const copyrightName = footerData?.legal?.copyright_name ?? 'A.N.S.';

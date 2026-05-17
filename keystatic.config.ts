@@ -106,11 +106,11 @@ export default config({
                     {
                         linkedin_href: fields.text({
                             label: 'URL LinkedIn',
-                            defaultValue: '#',
+                            defaultValue: 'https://www.linkedin.com/company/automatique-nord-service-a.n.s./',
                         }),
                         instagram_href: fields.text({
                             label: 'URL Instagram',
-                            defaultValue: '#',
+                            defaultValue: 'https://www.instagram.com/anspauseevasion/',
                         }),
                         email_href: fields.text({
                             label: 'Lien email (format: mailto:...)',
