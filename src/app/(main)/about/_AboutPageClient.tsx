@@ -771,6 +771,9 @@ function StorySection({ data, storyData }: { data: any, storyData: typeof STORY_
 // ─────────────────────────────────────────────────────────────────────────────
 
 function CareersSection({ data }: { data: any }) {
+  const jobs = data?.careers?.jobs || [];
+  const hasJobs = jobs.length > 0;
+
   return (
     <section
       id="rejoindre"
@@ -865,57 +868,129 @@ function CareersSection({ data }: { data: any }) {
         {/* ── Right column: current hiring status ── */}
         <div style={{ paddingTop: '4px' }}>
           <FadeIn delay={0.08}>
-            <div
-              style={{
-                border: `1px solid ${C.divider}`,
-                borderRadius: 28,
-                padding: 'clamp(28px, 4vw, 44px)',
-                background: 'rgba(255,255,255,0.03)',
-              }}
-            >
-              <p
+            {hasJobs ? (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+                {jobs.map((job: any, index: number) => (
+                  <div
+                    key={index}
+                    style={{
+                      border: `1px solid ${C.divider}`,
+                      borderRadius: 16,
+                      padding: '20px 24px',
+                      background: 'rgba(255,255,255,0.03)',
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                      gap: 16,
+                    }}
+                  >
+                    <div>
+                      <h4
+                        style={{
+                          margin: '0 0 4px',
+                          fontFamily: FONT.display,
+                          fontSize: 18,
+                          fontWeight: 600,
+                          color: C.textPrimary,
+                        }}
+                      >
+                        {job.title}
+                      </h4>
+                      <span
+                        style={{
+                          fontFamily: FONT.mono,
+                          fontSize: 11,
+                          color: C.accent,
+                          letterSpacing: '0.05em',
+                        }}
+                      >
+                        {job.location}
+                      </span>
+                    </div>
+                    <a
+                      href="mailto:ans@prodiaplus.fr"
+                      style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: 6,
+                        fontFamily: FONT.mono,
+                        fontSize: 11,
+                        color: C.textPrimary,
+                        textDecoration: 'none',
+                        border: `1px solid ${C.divider}`,
+                        borderRadius: 20,
+                        padding: '6px 14px',
+                        letterSpacing: '0.04em',
+                        transition: 'all 0.2s',
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.borderColor = C.accent;
+                        e.currentTarget.style.color = C.accent;
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.borderColor = C.divider;
+                        e.currentTarget.style.color = C.textPrimary;
+                      }}
+                    >
+                      Postuler
+                      <ArrowRight size={10} />
+                    </a>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div
                 style={{
-                  margin: '0 0 12px',
-                  fontFamily: FONT.mono,
-                  fontSize: 11,
-                  letterSpacing: '0.16em',
-                  textTransform: 'uppercase',
-                  color: C.accent,
+                  border: `1px solid ${C.divider}`,
+                  borderRadius: 28,
+                  padding: 'clamp(28px, 4vw, 44px)',
+                  background: 'rgba(255,255,255,0.03)',
                 }}
               >
-                Aucun poste à pourvoir
-              </p>
-              <p
-                style={{
-                  margin: 0,
-                  maxWidth: 620,
-                  fontFamily: FONT.body,
-                  fontSize: 'clamp(18px, 2vw, 28px)',
-                  lineHeight: 1.45,
-                  color: C.textPrimary,
-                }}
-              >
-                Aucun poste n&apos;est à pourvoir pour le moment. Pour toute demande de travail ou de stage, n&apos;hésitez pas à nous contacter directement par mail.
-              </p>
-              <a
-                href="mailto:ans@prodiaplus.fr"
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: 8,
-                  marginTop: 28,
-                  fontFamily: FONT.mono,
-                  fontSize: 12,
-                  color: C.accent,
-                  textDecoration: 'none',
-                  letterSpacing: '0.08em',
-                  textTransform: 'uppercase',
-                }}
-              >
-                ans@prodiaplus.fr
-                <ArrowRight size={12} />
-              </a>
-            </div>
+                <p
+                  style={{
+                    margin: '0 0 12px',
+                    fontFamily: FONT.mono,
+                    fontSize: 11,
+                    letterSpacing: '0.16em',
+                    textTransform: 'uppercase',
+                    color: C.accent,
+                  }}
+                >
+                  {data?.careers?.description_line1 || "Aucune offre n'est ouverte actuellement."}
+                </p>
+                <p
+                  style={{
+                    margin: 0,
+                    maxWidth: 620,
+                    fontFamily: FONT.body,
+                    fontSize: 'clamp(18px, 2vw, 28px)',
+                    lineHeight: 1.45,
+                    color: C.textPrimary,
+                  }}
+                >
+                  {data?.careers?.description_line2 || "Pour toute demande de travail ou de stage, vous pouvez nous écrire directement par mail."}
+                </p>
+                <a
+                  href="mailto:ans@prodiaplus.fr"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: 8,
+                    marginTop: 28,
+                    fontFamily: FONT.mono,
+                    fontSize: 12,
+                    color: C.accent,
+                    textDecoration: 'none',
+                    letterSpacing: '0.08em',
+                    textTransform: 'uppercase',
+                  }}
+                >
+                  ans@prodiaplus.fr
+                  <ArrowRight size={12} />
+                </a>
+              </div>
+            )}
           </FadeIn>
         </div>
       </div>
@@ -931,7 +1006,7 @@ function CareersSection({ data }: { data: any }) {
   );
 }
 
-function LocationSection() {
+function LocationSection({ data }: { data: any }) {
   return (
     <section
       className="ans-location-section"
@@ -944,7 +1019,7 @@ function LocationSection() {
         <FadeIn style={{ marginBottom: '56px', position: 'relative' }}>
           <GhostNumber n="04" />
           <div style={{ position: 'relative', zIndex: 1, maxWidth: 640 }}>
-            <SectionTag index="04" label="Localisation" />
+            <SectionTag index="04" label={data?.location?.tag ?? 'Localisation'} />
             <h2
               style={{
                 fontFamily: FONT.display,
@@ -956,7 +1031,7 @@ function LocationSection() {
                 margin: '0 0 18px',
               }}
             >
-              Retrouvez-nous à Proville
+              {data?.location?.title ?? 'Retrouvez-nous à Proville'}
             </h2>
             <p
               style={{
@@ -968,8 +1043,7 @@ function LocationSection() {
                 maxWidth: 520,
               }}
             >
-              Notre ancrage local fait partie de notre manière de travailler :
-              proche du terrain, réactif et toujours accessible.
+              {data?.location?.description ?? "Notre ancrage local fait partie de notre manière de travailler : proche du terrain, réactif et toujours accessible."}
             </p>
           </div>
         </FadeIn>
@@ -1172,7 +1246,7 @@ const TEAM_IMAGES = [
   },
 ];
 
-function TeamSection() {
+function TeamSection({ data }: { data: any }) {
   return (
     <section
       id="equipe"
@@ -1196,7 +1270,7 @@ function TeamSection() {
               maxWidth: 640,
             }}
           >
-            <SectionTag index="02" label="Équipe" />
+            <SectionTag index="02" label={data?.team?.tag ?? 'Équipe'} />
             <h2
               style={{
                 fontFamily: FONT.display,
@@ -1208,7 +1282,7 @@ function TeamSection() {
                 margin: '0 0 20px',
               }}
             >
-              L&apos;Équipe
+              {data?.team?.title ?? "L'Équipe"}
             </h2>
             <p
               style={{
@@ -1220,8 +1294,7 @@ function TeamSection() {
                 margin: 0,
               }}
             >
-              Techniciens, commerciaux, logisticiens, designers
-              d&apos;expérience. Tous passionnés.
+              {data?.team?.description ?? "Techniciens, commerciaux, logisticiens, designers d'expérience. Tous passionnés."}
             </p>
           </div>
         </FadeIn>
@@ -1324,9 +1397,9 @@ export default function AboutPageClient({ data }: { data: any }) {
       <AboutHeroSection data={data} />
       {/* 3. NOTRE HISTOIRE */}
       <StorySection data={data} storyData={storyData} />
-      <TeamSection />
+      <TeamSection data={data} />
       <CareersSection data={data} />
-      <LocationSection />
+      <LocationSection data={data} />
     </div>
   );
 }

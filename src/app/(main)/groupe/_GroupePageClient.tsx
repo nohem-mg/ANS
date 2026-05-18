@@ -87,7 +87,7 @@ function StatNumber({
     );
 }
 
-function BentoFeaturedSection({ featuredChiffre, smallFigures }: { featuredChiffre: { value: number; suffix: string; label: string; headline: string; description: string }, smallFigures: { value: number; suffix: string; label: string; description: string; icon: ReactNode }[] }) {
+function BentoFeaturedSection({ featuredChiffre, smallFigures, data }: { featuredChiffre: { value: number; suffix: string; label: string; headline: string; description: string }, smallFigures: { value: number; suffix: string; label: string; description: string; icon: ReactNode }[], data?: any }) {
     const rootRef = useRef<HTMLElement>(null);
 
     useEffect(() => {
@@ -318,7 +318,7 @@ function BentoFeaturedSection({ featuredChiffre, smallFigures }: { featuredChiff
                             fontFamily: FONT.mono, fontSize: 10, letterSpacing: '0.22em',
                             color: C.accent, textTransform: 'uppercase', display: 'block', marginBottom: 16,
                         }}>
-                            En chiffres
+                            {data?.key_figures?.tag || "En chiffres"}
                         </span>
                         <h2 style={{
                             fontFamily: FONT.display,
@@ -326,7 +326,7 @@ function BentoFeaturedSection({ featuredChiffre, smallFigures }: { featuredChiff
                             fontWeight: 600, color: C.textPrimary,
                             letterSpacing: '-0.02em', margin: 0,
                         }}>
-                            La Force du Réseau
+                            {data?.key_figures?.title || "La Force du Réseau"}
                         </h2>
                     </motion.div>
 
@@ -509,7 +509,7 @@ export default function GroupePageClient({ data }: { data: any }) {
                                 color: C.accent, textTransform: 'uppercase', marginBottom: 36,
                             }}
                         >
-                            Le Réseau
+                            {data?.hero?.tag || "Le Réseau"}
                         </motion.div>
 
                         <motion.h1
@@ -525,7 +525,11 @@ export default function GroupePageClient({ data }: { data: any }) {
                                 marginBottom: 24,
                             }}
                         >
-                            Le Groupe <span style={{ color: C.accent, fontStyle: 'italic' }}>Prodia+</span>
+                            {data?.hero?.title ? (
+                                <span dangerouslySetInnerHTML={{ __html: data.hero.title.replace('Prodia+', '<span style="color: #C8763A; font-style: italic;">Prodia+</span>') }} />
+                            ) : (
+                                <>Le Groupe <span style={{ color: C.accent, fontStyle: 'italic' }}>Prodia+</span></>
+                            )}
                         </motion.h1>
 
                         <motion.p
@@ -535,7 +539,7 @@ export default function GroupePageClient({ data }: { data: any }) {
                             className="text-[1.05rem] md:text-lg text-coffee-cream/90 leading-relaxed mx-auto max-w-xl mb-8 drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)] font-light"
                             style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}
                         >
-                            Le premier réseau français d’indépendants en distribution automatique, au service de vos espaces de pause.
+                            {data?.hero?.description || "Le premier réseau français d’indépendants en distribution automatique, au service de vos espaces de pause."}
                         </motion.p>
                     </div>
                 </motion.div>
@@ -555,7 +559,7 @@ export default function GroupePageClient({ data }: { data: any }) {
                             fontFamily: FONT.mono, fontSize: 10, letterSpacing: '0.22em',
                             color: C.accent, textTransform: 'uppercase', display: 'block', marginBottom: 16,
                         }}>
-                            Qui sommes-nous
+                            {data?.presentation?.tag || "Qui sommes-nous"}
                         </span>
                         <h2 style={{
                             fontFamily: FONT.display,
@@ -564,7 +568,11 @@ export default function GroupePageClient({ data }: { data: any }) {
                             letterSpacing: '-0.02em', lineHeight: 1.15,
                             margin: '0 0 24px',
                         }}>
-                            Un Collectif d&apos;Experts<br />Indépendants
+                            {data?.presentation?.title ? (
+                                <span dangerouslySetInnerHTML={{ __html: data.presentation.title.replace('Experts Indépendants', '<span style="color: #C8763A; font-style: italic;">Experts Indépendants</span>') }} />
+                            ) : (
+                                <>Un Collectif d&apos;Experts<br />Indépendants</>
+                            )}
                         </h2>
                         <div style={{ width: 48, height: 2, background: C.accent }} />
                     </motion.div>
@@ -614,27 +622,20 @@ export default function GroupePageClient({ data }: { data: any }) {
                             style={{ display: 'flex', flexDirection: 'column', gap: 20, paddingTop: '20px' }}
                         >
                             <p style={{ fontFamily: FONT.body, fontSize: 15, color: C.textMuted, lineHeight: 1.8, margin: 0 }}>
-                                <strong style={{ color: C.textPrimary }}>Prodia+</strong> est un groupement de PME indépendantes
-                                spécialisées dans la distribution automatique et les solutions de pause en entreprise.
-                                Chaque membre est un entrepreneur local, ancré dans son territoire,
-                                qui partage les mêmes valeurs d&apos;excellence et de proximité.
+                                <strong style={{ color: C.textPrimary }}>Prodia+</strong> {data?.presentation?.paragraph_1 || "est un groupement de PME indépendantes spécialisées dans la distribution automatique et les solutions de pause en entreprise. Chaque membre est un entrepreneur local, ancré dans son territoire, qui partage les mêmes valeurs d'excellence et de proximité."}
                             </p>
                             <p style={{ fontFamily: FONT.body, fontSize: 15, color: C.textMuted, lineHeight: 1.8, margin: 0 }}>
-                                En rejoignant Prodia+ il y a plus de 20 ans, ANS a renforcé sa capacité
-                                à proposer les meilleurs équipements aux meilleures conditions, tout en conservant
-                                son indépendance et sa culture familiale. Le réseau mutualise les achats,
-                                la logistique et les innovations technologiques.
+                                {data?.presentation?.paragraph_2 || "En rejoignant Prodia+ il y a plus de 20 ans, ANS a renforcé sa capacité à proposer les meilleurs équipements aux meilleures conditions, tout en conservant son indépendance et sa culture familiale. Le réseau mutualise les achats, la logistique et les innovations technologiques."}
                             </p>
                             <p style={{ fontFamily: FONT.body, fontSize: 15, color: C.textMuted, lineHeight: 1.8, margin: 0 }}>
-                                Résultat : nos clients bénéficient de la force d&apos;un réseau national
-                                avec le service personnalisé d&apos;une entreprise locale qui connaît le terrain.
+                                {data?.presentation?.paragraph_3 || "Résultat : nos clients bénéficient de la force d'un réseau national avec le service personnalisé d'une entreprise locale qui connaît le terrain."}
                             </p>
                         </motion.div>
                     </div>
                 </div>
             </section>
 
-            <BentoFeaturedSection featuredChiffre={featuredChiffre} smallFigures={smallFigures} />
+            <BentoFeaturedSection featuredChiffre={featuredChiffre} smallFigures={smallFigures} data={data} />
 
             {/* ── AVANTAGES DU RÉSEAU (titres + schéma) ── */}
             <section hidden aria-hidden="true" style={{
@@ -712,7 +713,7 @@ export default function GroupePageClient({ data }: { data: any }) {
                             fontFamily: FONT.mono, fontSize: 10, letterSpacing: '0.22em',
                             color: C.accent, textTransform: 'uppercase', display: 'block', marginBottom: 16,
                         }}>
-                            Avantages
+                            {data?.advantages?.tag || "Avantages"}
                         </span>
                         <h2 style={{
                             fontFamily: FONT.display,
@@ -721,7 +722,7 @@ export default function GroupePageClient({ data }: { data: any }) {
                             letterSpacing: '-0.02em', lineHeight: 1.15,
                             margin: 0,
                         }}>
-                            Pourquoi Prodia+ fait la différence
+                            {data?.advantages?.title || "Pourquoi Prodia+ fait la différence"}
                         </h2>
                     </motion.div>
 
@@ -896,7 +897,7 @@ export default function GroupePageClient({ data }: { data: any }) {
                             fontFamily: FONT.mono, fontSize: 10, letterSpacing: '0.22em',
                             color: C.accent, textTransform: 'uppercase', display: 'block', marginBottom: 20,
                         }}>
-                            ANS × Prodia+
+                            {data?.ans_network?.tag || "ANS × Prodia+"}
                         </span>
                         <h2 style={{
                             fontFamily: FONT.display,
@@ -905,16 +906,17 @@ export default function GroupePageClient({ data }: { data: any }) {
                             letterSpacing: '-0.02em', lineHeight: 1.2,
                             margin: '0 0 24px',
                         }}>
-                            Membre du réseau depuis 2000,<br />
-                            ANS incarne la promesse Prodia+.
+                            {data?.ans_network?.title ? (
+                                <span dangerouslySetInnerHTML={{ __html: data.ans_network.title.replace('ANS incarne', '<span style="color: #C8763A; font-style: italic;">ANS incarne</span>') }} />
+                            ) : (
+                                <>Membre du réseau depuis 2000,<br />ANS incarne la promesse Prodia+.</>
+                            )}
                         </h2>
                         <p style={{
                             fontFamily: FONT.body, fontSize: 15, color: C.textMuted,
                             lineHeight: 1.8, maxWidth: 640, margin: '0 auto 32px',
                         }}>
-                            Notre appartenance au groupement nous permet de proposer les meilleurs équipements
-                            du marché tout en conservant notre ADN familial. Vous travaillez avec ANS,
-                            vous bénéficiez de la puissance Prodia+.
+                            {data?.ans_network?.description || "Notre appartenance au groupement nous permet de proposer les meilleurs équipements du marché tout en conservant notre ADN familial. Vous travaillez avec ANS, vous bénéficiez de la puissance Prodia+."}
                         </p>
 
                         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 12 }}>
