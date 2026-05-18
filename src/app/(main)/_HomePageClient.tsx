@@ -625,12 +625,10 @@ const FAQSection = ({
   activeIndex,
   onToggle,
   items,
-  data,
 }: {
   activeIndex: number;
   onToggle: (index: number) => void;
   items: typeof FAQ_ITEMS;
-  data?: any;
 }) => {
   return (
     <section className="pt-8 pb-8 md:py-20 bg-[#FAF2E9]">
@@ -646,7 +644,7 @@ const FAQSection = ({
             className="block text-[10px] font-mono uppercase tracking-[0.22em] text-golden-extraction mb-4"
             style={{ fontFamily: 'var(--font-ibm-plex-mono)' }}
           >
-            {data?.faq?.tag ?? "FAQ"}
+            FAQ
           </span>
           <h2
             className="text-deep-roast leading-tight mb-4"
@@ -657,7 +655,7 @@ const FAQSection = ({
               letterSpacing: '-0.02em',
             }}
           >
-            {data?.faq?.title ?? "Questions fréquentes"}
+            Questions fréquentes
           </h2>
           <p
             className="text-deep-roast/65 leading-relaxed max-w-2xl"
@@ -666,7 +664,7 @@ const FAQSection = ({
               fontSize: '1rem',
             }}
           >
-            {data?.faq?.description ?? "Les principales réponses sur nos solutions, notre accompagnement et notre manière de travailler."}
+            {data?.hero?.subtitle ?? "Ne laissez plus vos espaces de pause au hasard. Nous concevons et gérons des espaces café sur-mesure pour redynamiser vos équipes en Hauts-de-France."}
           </p>
         </motion.div>
 
@@ -942,7 +940,7 @@ export default function HomePageClient({ data }: { data: any }) {
                 </div>
                 <div className="w-px h-3 bg-coffee-cream/20 shrink-0" />
                 <span className="text-coffee-cream/80 text-[10px] font-mono tracking-[0.06em] uppercase whitespace-nowrap">
-                <span className="mr-2">{data?.hero?.badge_clients ?? "200+ partenaires"}</span>
+                  {data?.hero?.badge_top ?? 'Partenaire Prodia+'} 4.9 / 5 <span className="opacity-50">·</span> 200+ partenaires
                 </span>
               </motion.div>
 
@@ -1157,7 +1155,7 @@ export default function HomePageClient({ data }: { data: any }) {
                   className="text-deep-roast/70 leading-relaxed"
                   style={{ fontSize: 'clamp(0.95rem, 1vw, 1.05rem)', fontFamily: 'var(--font-ibm-plex-sans)' }}
                 >
-                  {data?.testimonials?.description ?? "Ce que nos clients disent de nous. Des entreprises de toutes tailles, unies par la même exigence de qualité et de service."}
+                  Ce que nos clients disent de nous. Des entreprises de toutes tailles, unies par la même exigence de qualité et de service.
                 </p>
               </div>
             </div>
@@ -1437,7 +1435,6 @@ export default function HomePageClient({ data }: { data: any }) {
         </section>
 
         <FAQSection
-          data={data}
           items={faqItems}
           activeIndex={activeFaqIndex}
           onToggle={(index) =>
