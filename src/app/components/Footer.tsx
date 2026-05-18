@@ -42,25 +42,25 @@ type FooterData = {
 };
 
 export default function Footer({ footerData }: { footerData?: FooterData | null }) {
-    const brandName = footerData?.brand?.name ?? 'A.N.S.';
-    const brandTagline = footerData?.brand?.tagline ?? 'Depuis 1981, nous réinventons\nla pause café en entreprise.';
+    const brandName = footerData?.brand?.name || 'A.N.S.';
+    const brandTagline = footerData?.brand?.tagline || 'Depuis 1981, nous réinventons\nla pause café en entreprise.';
     
-    const contactAddress1 = footerData?.contact?.address_line1 ?? '780 rue Blaise Pascal';
-    const contactAddress2 = footerData?.contact?.address_line2 ?? '59267 Proville France';
-    const contactPhone = footerData?.contact?.phone ?? '03 27 37 16 84';
-    const contactPhoneHref = footerData?.contact?.phone_href ?? 'tel:+33327371684';
+    const contactAddress1 = footerData?.contact?.address_line1 || '780 rue Blaise Pascal';
+    const contactAddress2 = footerData?.contact?.address_line2 || '59267 Proville France';
+    const contactPhone = footerData?.contact?.phone || '03 27 37 16 84';
+    const contactPhoneHref = footerData?.contact?.phone_href || 'tel:+33327371684';
 
     const navLinks = footerData?.nav_links?.length ? footerData.nav_links : NAV_LINKS;
 
-    const linkedinHref = footerData?.social?.linkedin_href ?? 'https://www.linkedin.com/company/automatique-nord-service-a.n.s./';
-    const instagramHref = footerData?.social?.instagram_href ?? 'https://www.instagram.com/anspauseevasion/';
-    const emailHref = footerData?.social?.email_href ?? 'mailto:ans@prodiaplus.fr';
+    const linkedinHref = footerData?.social?.linkedin_href || 'https://www.linkedin.com/company/automatique-nord-service-a.n.s./';
+    const instagramHref = footerData?.social?.instagram_href || 'https://www.instagram.com/anspauseevasion/';
+    const emailHref = footerData?.social?.email_href || 'mailto:ans@prodiaplus.fr';
 
-    const copyrightName = footerData?.legal?.copyright_name ?? 'A.N.S.';
-    const mentionsLabel = footerData?.legal?.mentions_label ?? 'Mentions Légales';
-    const mentionsHref = footerData?.legal?.mentions_href ?? '/mentions-legales';
-    const confLabel = footerData?.legal?.confidentialite_label ?? 'Confidentialité';
-    const confHref = footerData?.legal?.confidentialite_href ?? '/confidentialite';
+    const copyrightName = footerData?.legal?.copyright_name || 'A.N.S.';
+    const mentionsLabel = footerData?.legal?.mentions_label || 'Mentions Légales';
+    const mentionsHref = footerData?.legal?.mentions_href || '/mentions-legales';
+    const confLabel = footerData?.legal?.confidentialite_label || 'Confidentialité';
+    const confHref = footerData?.legal?.confidentialite_href || '/confidentialite';
 
     return (
         <footer
