@@ -19,11 +19,6 @@ vision:
     où l'énergie se recharge et où la culture d'entreprise se construit. Chez
     ANS, on aménage cet espace pour qu'il soit à la hauteur.
   cards:
-    - title: '"Reset" Sensoriel'
-      description: >-
-        Une pause réussie mobilise les sens pour couper court à la fatigue. Un
-        rituel de déconnexion pour faire chuter la charge mentale et relancer la
-        concentration.
     - title: Collisionneur d'Idées
       description: >-
         Les meilleures décisions ne naissent pas toujours en salle de réunion.
@@ -39,6 +34,11 @@ vision:
         Pour qu'une pause soit reposante, la logistique doit s'effacer.
         Connexion, entretien préventif et réapprovisionnements : tout est
         anticipé sans que vous n'y pensiez.
+    - title: '"Reset" Sensoriel'
+      description: >-
+        Une pause réussie mobilise les sens pour couper court à la fatigue. Un
+        rituel de déconnexion pour faire chuter la charge mentale et relancer la
+        concentration.
 services:
   tag: Notre Savoir-Faire
   title: L'Excellence de la Pause Café.
