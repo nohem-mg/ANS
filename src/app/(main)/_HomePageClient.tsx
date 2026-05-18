@@ -625,10 +625,12 @@ const FAQSection = ({
   activeIndex,
   onToggle,
   items,
+  data,
 }: {
   activeIndex: number;
   onToggle: (index: number) => void;
   items: typeof FAQ_ITEMS;
+  data?: any;
 }) => {
   return (
     <section className="pt-8 pb-8 md:py-20 bg-[#FAF2E9]">
@@ -644,7 +646,7 @@ const FAQSection = ({
             className="block text-[10px] font-mono uppercase tracking-[0.22em] text-golden-extraction mb-4"
             style={{ fontFamily: 'var(--font-ibm-plex-mono)' }}
           >
-            FAQ
+            {data?.faq?.tag ?? "FAQ"}
           </span>
           <h2
             className="text-deep-roast leading-tight mb-4"
@@ -655,7 +657,7 @@ const FAQSection = ({
               letterSpacing: '-0.02em',
             }}
           >
-            Questions fréquentes
+            {data?.faq?.title ?? "Questions fréquentes"}
           </h2>
           <p
             className="text-deep-roast/65 leading-relaxed max-w-2xl"
@@ -664,8 +666,7 @@ const FAQSection = ({
               fontSize: '1rem',
             }}
           >
-            Les principales reponses sur nos solutions, notre accompagnement et
-            notre maniere de travailler.
+            {data?.faq?.description ?? "Les principales réponses sur nos solutions, notre accompagnement et notre manière de travailler."}
           </p>
         </motion.div>
 
@@ -941,7 +942,7 @@ export default function HomePageClient({ data }: { data: any }) {
                 </div>
                 <div className="w-px h-3 bg-coffee-cream/20 shrink-0" />
                 <span className="text-coffee-cream/80 text-[10px] font-mono tracking-[0.06em] uppercase whitespace-nowrap">
-                  4.9 / 5 <span className="opacity-50">·</span> 200+ partenaires
+                <span className="mr-2">{data?.hero?.badge_clients ?? "200+ partenaires"}</span>
                 </span>
               </motion.div>
 
@@ -961,8 +962,8 @@ export default function HomePageClient({ data }: { data: any }) {
                   textAlign: 'center',
                 }}
               >
-                Faites de la <span className="text-transparent bg-clip-text bg-gradient-to-br from-golden-extraction to-sienna-racing italic pr-2">pause</span>
-                <br className="hidden md:block" /> un moment qui compte
+                <span className="block text-[#F5E6D3]">{data?.hero?.title_line1 ?? "La Pause,"}</span>
+                <span className="block text-brand-orange mt-2 md:mt-4 italic">{data?.hero?.title_line2 ?? "Moteur de Votre Entreprise."}</span>
               </motion.h1>
 
               {/* Subtitle with improved legibility */}
@@ -1003,7 +1004,7 @@ export default function HomePageClient({ data }: { data: any }) {
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
                 >
-                  Découvrir notre approche
+                  <span className="mr-2">{data?.hero?.cta_primary ?? "Découvrir notre approche"}</span>
                 </motion.a>
                 <motion.a
                   href="/contact"
@@ -1012,7 +1013,7 @@ export default function HomePageClient({ data }: { data: any }) {
                   whileHover={{ scale: 1.03, borderColor: 'rgba(245,230,211,0.5)' }}
                   whileTap={{ scale: 0.97 }}
                 >
-                  Demander un devis
+                  {data?.hero?.cta_secondary ?? "Demander un devis"}
                 </motion.a>
               </motion.div>
 
@@ -1156,7 +1157,7 @@ export default function HomePageClient({ data }: { data: any }) {
                   className="text-deep-roast/70 leading-relaxed"
                   style={{ fontSize: 'clamp(0.95rem, 1vw, 1.05rem)', fontFamily: 'var(--font-ibm-plex-sans)' }}
                 >
-                  Ce que nos clients disent de nous. Des entreprises de toutes tailles, unies par la même exigence de qualité et de service.
+                  {data?.testimonials?.description ?? "Ce que nos clients disent de nous. Des entreprises de toutes tailles, unies par la même exigence de qualité et de service."}
                 </p>
               </div>
             </div>
@@ -1436,6 +1437,7 @@ export default function HomePageClient({ data }: { data: any }) {
         </section>
 
         <FAQSection
+          data={data}
           items={faqItems}
           activeIndex={activeFaqIndex}
           onToggle={(index) =>
