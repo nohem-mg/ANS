@@ -405,7 +405,7 @@ const VISION_POINTS = [
   },
 ];
 
-const VisionSection = ({ points }: { points: typeof VISION_POINTS }) => {
+const VisionSection = ({ points, data }: { points: typeof VISION_POINTS; data?: any }) => {
   const [isMobile, setIsMobile] = useState(false);
   const [activeVisionDot, setActiveVisionDot] = useState(0);
   const visionScrollRef = useRef<HTMLDivElement>(null);
@@ -444,7 +444,7 @@ const VisionSection = ({ points }: { points: typeof VISION_POINTS }) => {
               className="block text-[10px] font-mono uppercase tracking-[0.22em] text-golden-extraction mb-4"
               style={{ fontFamily: 'var(--font-ibm-plex-mono)' }}
             >
-              Notre Vision
+              {data?.vision?.tag ?? "Notre Vision"}
             </span>
             <h2
               className="text-deep-roast leading-tight"
@@ -455,9 +455,9 @@ const VisionSection = ({ points }: { points: typeof VISION_POINTS }) => {
                 letterSpacing: '-0.02em'
               }}
             >
-              Votre machine à café,
+              {data?.vision?.title_line1 ?? "Votre machine à café,"}
               <br />
-              <span className="text-sienna-racing">C'est le cœur battant de vos bureaux.</span>
+              <span className="text-sienna-racing">{data?.vision?.title_line2 ?? "C'est le cœur battant de vos bureaux."}</span>
             </h2>
           </motion.div>
 
@@ -473,7 +473,8 @@ const VisionSection = ({ points }: { points: typeof VISION_POINTS }) => {
               className="text-deep-roast/70 leading-relaxed max-w-sm text-justify"
               style={{ fontSize: 'clamp(0.95rem, 1vw, 1.05rem)', fontFamily: 'var(--font-ibm-plex-sans)' }}
             >
-              Fini le café avalé dans un couloir. La pause est un moment stratégique, celui où l'énergie se recharge et où la culture d'entreprise se construit. Chez ANS, on aménage cet espace pour qu'il soit à la hauteur.            </p>
+              {data?.vision?.description ?? "Fini le café avalé dans un couloir. La pause est un moment stratégique, celui où l'énergie se recharge et où la culture d'entreprise se construit. Chez ANS, on aménage cet espace pour qu'il soit à la hauteur."}
+            </p>
           </motion.div>
         </div>
       </div>
@@ -625,10 +626,12 @@ const FAQSection = ({
   activeIndex,
   onToggle,
   items,
+  data,
 }: {
   activeIndex: number;
   onToggle: (index: number) => void;
   items: typeof FAQ_ITEMS;
+  data?: any;
 }) => {
   return (
     <section className="pt-8 pb-8 md:py-20 bg-[#FAF2E9]">
@@ -644,7 +647,7 @@ const FAQSection = ({
             className="block text-[10px] font-mono uppercase tracking-[0.22em] text-golden-extraction mb-4"
             style={{ fontFamily: 'var(--font-ibm-plex-mono)' }}
           >
-            FAQ
+            {data?.faq?.tag ?? "FAQ"}
           </span>
           <h2
             className="text-deep-roast leading-tight mb-4"
@@ -655,7 +658,7 @@ const FAQSection = ({
               letterSpacing: '-0.02em',
             }}
           >
-            Questions fréquentes
+            {data?.faq?.title ?? "Questions fréquentes"}
           </h2>
           <p
             className="text-deep-roast/65 leading-relaxed max-w-2xl"
@@ -664,8 +667,7 @@ const FAQSection = ({
               fontSize: '1rem',
             }}
           >
-            Les principales reponses sur nos solutions, notre accompagnement et
-            notre maniere de travailler.
+            {data?.faq?.description ?? "Les principales réponses sur nos solutions, notre accompagnement et notre manière de travailler."}
           </p>
         </motion.div>
 
@@ -941,7 +943,7 @@ export default function HomePageClient({ data }: { data: any }) {
                 </div>
                 <div className="w-px h-3 bg-coffee-cream/20 shrink-0" />
                 <span className="text-coffee-cream/80 text-[10px] font-mono tracking-[0.06em] uppercase whitespace-nowrap">
-                  4.9 / 5 <span className="opacity-50">·</span> 200+ partenaires
+                  {data?.hero?.badge_rating ?? "4.9 / 5"} <span className="opacity-50">·</span> {data?.hero?.badge_clients ?? "200+ partenaires"}
                 </span>
               </motion.div>
 
@@ -961,8 +963,8 @@ export default function HomePageClient({ data }: { data: any }) {
                   textAlign: 'center',
                 }}
               >
-                Faites de la <span className="text-transparent bg-clip-text bg-gradient-to-br from-golden-extraction to-sienna-racing italic pr-2">pause</span>
-                <br className="hidden md:block" /> un moment qui compte
+                {data?.hero?.title_line1 ?? "Faites de la"} <span className="text-transparent bg-clip-text bg-gradient-to-br from-golden-extraction to-sienna-racing italic pr-2">{data?.hero?.title_highlight ?? "pause"}</span>
+                <br className="hidden md:block" /> {data?.hero?.title_line2 ?? "un moment qui compte"}
               </motion.h1>
 
               {/* Subtitle with improved legibility */}
@@ -972,10 +974,8 @@ export default function HomePageClient({ data }: { data: any }) {
                 transition={{ delay: 1.05, duration: 0.8 }}
                 className="text-[1.05rem] md:text-lg text-coffee-cream/90 leading-relaxed mx-auto max-w-xl mb-8 drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)] font-light"
                 style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}
-              >
-                Depuis plus de <span className="text-coffee-cream font-medium">40 ans</span>, nous transformons la pause café en un véritable levier de <span className="text-coffee-cream font-medium">Qualité de Vie au Travail.</span>
-                <br className="hidden md:block" /> Service ultra-personnalisé, réactivité immédiate et engagement familial.
-              </motion.p>
+                dangerouslySetInnerHTML={{ __html: data?.hero?.subtitle ?? "Depuis plus de <span class=\"text-coffee-cream font-medium\">40 ans</span>, nous transformons la pause café en un véritable levier de <span class=\"text-coffee-cream font-medium\">Qualité de Vie au Travail.</span><br class=\"hidden md:block\" /> Service ultra-personnalisé, réactivité immédiate et engagement familial." }}
+              />
 
               {/* Pill CTAs — matching reference button shapes */}
               <motion.div
@@ -1003,7 +1003,7 @@ export default function HomePageClient({ data }: { data: any }) {
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
                 >
-                  Découvrir notre approche
+                  {data?.hero?.cta_primary ?? "Découvrir notre approche"}
                 </motion.a>
                 <motion.a
                   href="/contact"
@@ -1012,7 +1012,7 @@ export default function HomePageClient({ data }: { data: any }) {
                   whileHover={{ scale: 1.03, borderColor: 'rgba(245,230,211,0.5)' }}
                   whileTap={{ scale: 0.97 }}
                 >
-                  Demander un devis
+                  {data?.hero?.cta_secondary ?? "Demander un devis"}
                 </motion.a>
               </motion.div>
 
@@ -1031,7 +1031,7 @@ export default function HomePageClient({ data }: { data: any }) {
         </section>
 
         {/* ── "Notre Vision" Section (Interactive Gallery) ── */}
-        <VisionSection points={visionPoints} />
+        <VisionSection points={visionPoints} data={data} />
 
 
         {/* Services Section — Spec-Sheet Layout */}
@@ -1041,14 +1041,15 @@ export default function HomePageClient({ data }: { data: any }) {
             {/* Section header */}
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-6 md:mb-12">
               <div>
-                <span className="text-golden-extraction text-[10px] tracking-[0.22em] uppercase mb-5 block" style={{ fontFamily: 'var(--font-ibm-plex-mono)' }}>Notre Savoir-Faire</span>
+                <span className="text-golden-extraction text-[10px] tracking-[0.22em] uppercase mb-5 block" style={{ fontFamily: 'var(--font-ibm-plex-mono)' }}>
+                  {data?.services?.tag ?? "Notre Savoir-Faire"}
+                </span>
                 <h2 className="text-deep-roast leading-tight" style={{ fontFamily: 'var(--font-sora)', fontSize: 'clamp(1.75rem, 3.5vw, 3rem)', fontWeight: 600, letterSpacing: '-0.02em' }}>
-                  L'Excellence de la <span className="text-sienna-racing">Pause Café.</span>
+                  {data?.services?.title ?? "L'Excellence de la Pause Café."}
                 </h2>
               </div>
               <p className="max-w-sm text-deep-roast/60 leading-relaxed md:text-right" style={{ fontFamily: 'var(--font-ibm-plex-sans)', fontSize: 'clamp(0.95rem, 1vw, 1.05rem)' }}>
-                Des équipements de pointe pilotés par une équipe humaine dédiée.{' '}
-                La technologie au service de l'humain.
+                {data?.services?.description ?? "Des équipements de pointe pilotés par une équipe humaine dédiée. La technologie au service de l'humain."}
               </p>
             </div>
 
@@ -1137,7 +1138,7 @@ export default function HomePageClient({ data }: { data: any }) {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 mb-12 lg:mb-20 items-start max-w-7xl">
               <div>
                 <span className="block text-[10px] font-mono uppercase tracking-[0.22em] text-golden-extraction mb-4" style={{ fontFamily: 'var(--font-ibm-plex-mono)' }}>
-                  La parole à nos clients
+                  {data?.testimonials?.tag ?? "La parole à nos clients"}
                 </span>
                 <h2
                   className="text-deep-roast leading-tight"
@@ -1148,7 +1149,7 @@ export default function HomePageClient({ data }: { data: any }) {
                     letterSpacing: '-0.02em',
                   }}
                 >
-                  Une expérience <span className="text-sienna-racing">appréciée</span>
+                  {data?.testimonials?.title ?? "Une expérience appréciée"}
                 </h2>
               </div>
               <div className="lg:pt-8">
@@ -1156,7 +1157,7 @@ export default function HomePageClient({ data }: { data: any }) {
                   className="text-deep-roast/70 leading-relaxed"
                   style={{ fontSize: 'clamp(0.95rem, 1vw, 1.05rem)', fontFamily: 'var(--font-ibm-plex-sans)' }}
                 >
-                  Ce que nos clients disent de nous. Des entreprises de toutes tailles, unies par la même exigence de qualité et de service.
+                  {data?.testimonials?.subtitle ?? "Ce que nos clients disent de nous. Des entreprises de toutes tailles, unies par la même exigence de qualité et de service."}
                 </p>
               </div>
             </div>
@@ -1253,7 +1254,7 @@ export default function HomePageClient({ data }: { data: any }) {
             >
               <div>
                 <span className="block text-[10px] font-mono uppercase tracking-[0.22em] text-golden-extraction mb-4">
-                  Notre Histoire
+                  {data?.timeline?.tag ?? "Notre Histoire"}
                 </span>
                 <h2
                   className="text-deep-roast leading-tight"
@@ -1263,11 +1264,11 @@ export default function HomePageClient({ data }: { data: any }) {
                     fontWeight: 600,
                   }}
                 >
-                  + de 40 Ans <span className="text-sienna-racing">d&apos;Excellence</span>
+                  {data?.timeline?.title ?? "+ de 40 Ans d'Excellence"}
                 </h2>
               </div>
               <p className="text-deep-roast/50 text-sm max-w-xs leading-relaxed md:text-right" style={{ fontFamily: 'var(--font-ibm-plex-mono)' }}>
-                De l'entreprise familiale au partenaire QVT de référence.
+                {data?.timeline?.subtitle ?? "De l'entreprise familiale au partenaire QVT de référence."}
               </p>
             </motion.div>
 
@@ -1294,7 +1295,7 @@ export default function HomePageClient({ data }: { data: any }) {
                 {/* Left: Title */}
                 <div className="lg:w-[40%] shrink-0">
                   <span className="block text-[10px] font-mono uppercase tracking-[0.22em] text-golden-extraction mb-4" style={{ fontFamily: 'var(--font-ibm-plex-mono)' }}>
-                    Notre Engagement
+                    {data?.rse?.tag ?? "Notre Engagement"}
                   </span>
                   <h2
                     className="text-deep-roast leading-tight"
@@ -1305,24 +1306,24 @@ export default function HomePageClient({ data }: { data: any }) {
                       letterSpacing: '-0.02em',
                     }}
                   >
-                    Une démarche <span className="text-sienna-racing">durable</span> et responsable
+                    {data?.rse?.title ?? "Une démarche durable et responsable"}
                   </h2>
                 </div>
 
                 {/* Right: Intro + Bullets (desktop only — bullets hidden on mobile) */}
                 <div className="lg:w-[60%] flex flex-col justify-center">
                   <p className="text-deep-roast/70 leading-relaxed md:mb-8 text-justify" style={{ fontFamily: 'var(--font-ibm-plex-sans)', fontSize: 'clamp(0.95rem, 1vw, 1.05rem)' }}>
-                    Nous n'avons pas attendu que ce soit dans l'air du temps. Dès le départ, nous nous sommes posé une question simple : serions-nous fiers de montrer comment nous travaillons à nos enfants ? C'est cette exigence qui oriente nos choix, des cafés que nous sélectionnons jusqu'aux tournées que nous planifions. Pas une posture, une conviction !
+                    {data?.rse?.description ?? "Nous n'avons pas attendu que ce soit dans l'air du temps. Dès le départ, nous nous sommes posé une question simple : serions-nous fiers de montrer comment nous travaillons à nos enfants ? C'est cette exigence qui oriente nos choix, des cafés que nous sélectionnons jusqu'aux tournées que nous planifions. Pas une posture, une conviction !"}
                   </p>
 
                   {/* Bullets — visible on desktop only */}
                   <div className="hidden md:grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
-                    {[
+                    {(data?.rse?.bullets?.length ? data.rse.bullets.map((b: any) => b.text) : [
                       "Cafés labellisés Bio et Équitable",
                       "Revalorisation à 100% du marc de café",
                       "Machines éco-performantes",
                       "Tournées optimisées et éco-conduite"
-                    ].map((item, i) => (
+                    ]).map((item: string, i: number) => (
                       <div key={i} className="flex items-center gap-3">
                         <span className="text-golden-extraction shrink-0 bg-white p-1.5 rounded-full shadow-sm">
                           <Award className="w-4 h-4" />
@@ -1348,15 +1349,23 @@ export default function HomePageClient({ data }: { data: any }) {
                         transition={{ duration: 36, repeat: Infinity, ease: "linear" }}
                       >
                         {[
-                          "Cafés labellisés Bio et Équitable",
-                          "Revalorisation à 100% du marc de café",
-                          "Cafés labellisés Bio et Équitable",
-                          "Revalorisation à 100% du marc de café",
-                          "Cafés labellisés Bio et Équitable",
-                          "Revalorisation à 100% du marc de café",
-                          "Cafés labellisés Bio et Équitable",
-                          "Revalorisation à 100% du marc de café"
-                        ].map((item, i) => (
+                          ...(data?.rse?.bullets?.length ? data.rse.bullets.map((b: any) => b.text) : [
+                            "Cafés labellisés Bio et Équitable",
+                            "Revalorisation à 100% du marc de café"
+                          ]),
+                          ...(data?.rse?.bullets?.length ? data.rse.bullets.map((b: any) => b.text) : [
+                            "Cafés labellisés Bio et Équitable",
+                            "Revalorisation à 100% du marc de café"
+                          ]),
+                          ...(data?.rse?.bullets?.length ? data.rse.bullets.map((b: any) => b.text) : [
+                            "Cafés labellisés Bio et Équitable",
+                            "Revalorisation à 100% du marc de café"
+                          ]),
+                          ...(data?.rse?.bullets?.length ? data.rse.bullets.map((b: any) => b.text) : [
+                            "Cafés labellisés Bio et Équitable",
+                            "Revalorisation à 100% du marc de café"
+                          ])
+                        ].map((item: string, i: number) => (
                           <div key={i} className="flex items-center gap-2 bg-white/60 border border-border px-4 py-2 rounded-full whitespace-nowrap shadow-sm">
                             <span className="text-golden-extraction shrink-0 bg-white p-1 rounded-full shadow-sm">
                               <Award className="w-3.5 h-3.5" />
@@ -1377,15 +1386,23 @@ export default function HomePageClient({ data }: { data: any }) {
                         transition={{ duration: 36, repeat: Infinity, ease: "linear" }}
                       >
                         {[
-                          "Machines éco-performantes",
-                          "Tournées optimisées et éco-conduite",
-                          "Machines éco-performantes",
-                          "Tournées optimisées et éco-conduite",
-                          "Machines éco-performantes",
-                          "Tournées optimisées et éco-conduite",
-                          "Machines éco-performantes",
-                          "Tournées optimisées et éco-conduite"
-                        ].map((item, i) => (
+                          ...(data?.rse?.bullets?.length ? data.rse.bullets.map((b: any) => b.text) : [
+                            "Machines éco-performantes",
+                            "Tournées optimisées et éco-conduite"
+                          ]),
+                          ...(data?.rse?.bullets?.length ? data.rse.bullets.map((b: any) => b.text) : [
+                            "Machines éco-performantes",
+                            "Tournées optimisées et éco-conduite"
+                          ]),
+                          ...(data?.rse?.bullets?.length ? data.rse.bullets.map((b: any) => b.text) : [
+                            "Machines éco-performantes",
+                            "Tournées optimisées et éco-conduite"
+                          ]),
+                          ...(data?.rse?.bullets?.length ? data.rse.bullets.map((b: any) => b.text) : [
+                            "Machines éco-performantes",
+                            "Tournées optimisées et éco-conduite"
+                          ])
+                        ].map((item: string, i: number) => (
                           <div key={i} className="flex items-center gap-2 bg-white/60 border border-border px-4 py-2 rounded-full whitespace-nowrap shadow-sm">
                             <span className="text-golden-extraction shrink-0 bg-white p-1 rounded-full shadow-sm">
                               <Award className="w-3.5 h-3.5" />
@@ -1437,6 +1454,7 @@ export default function HomePageClient({ data }: { data: any }) {
 
         <FAQSection
           items={faqItems}
+          data={data}
           activeIndex={activeFaqIndex}
           onToggle={(index) =>
             setActiveFaqIndex((currentIndex) =>
