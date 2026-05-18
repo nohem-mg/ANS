@@ -1,8 +1,6 @@
 import { createReader } from '@keystatic/core/reader';
 
-export const dynamic = 'force-dynamic';
-export const fetchCache = 'force-no-store';
-export const revalidate = 0;
+export const dynamic = 'force-static';
 import keystaticConfig from '../../../../keystatic.config';
 import AboutPageClient from './_AboutPageClient';
 

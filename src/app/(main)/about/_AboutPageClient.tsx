@@ -391,7 +391,7 @@ function SectionTag({ index, label }: { index: string; label: string }) {
 // SECTION 1: HERO / MANIFESTO
 // ─────────────────────────────────────────────────────────────────────────────
 
-function HeroSection() {
+function HeroSection({ data }: { data: any }) {
   return (
     /* Hero fills its absolutely-positioned container */
     <div
@@ -488,8 +488,7 @@ function HeroSection() {
             margin: 0,
           }}
         >
-          Les distributeurs de boissons sont le premier point de contact
-          entre une entreprise et ses collaborateurs.
+          {data?.hero?.manifesto_line1 ?? "Les distributeurs de boissons sont le premier point de contact entre une entreprise et ses collaborateurs."}
         </motion.p>
 
         <motion.p
@@ -507,8 +506,7 @@ function HeroSection() {
             marginBottom: 0,
           }}
         >
-          Chez ANS, nous faisons en sorte que ce moment soit toujours
-          parfait.
+          {data?.hero?.manifesto_line2 ?? "Chez ANS, nous faisons en sorte que ce moment soit toujours parfait."}
         </motion.p>
 
       </div>
@@ -1246,7 +1244,7 @@ function TeamSection() {
 // HERO + MOODBOARD — scroll-driven cross-fade inside a single sticky widget
 // ─────────────────────────────────────────────────────────────────────────────
 
-function AboutHeroSection() {
+function AboutHeroSection({ data }: { data: any }) {
   return (
     <>
       <style>{`
@@ -1296,7 +1294,7 @@ function AboutHeroSection() {
             position: 'relative',
           }}
         >
-          <HeroSection />
+          <HeroSection data={data} />
         </motion.div>
       </section>
     </>
@@ -1323,7 +1321,7 @@ export default function AboutPageClient({ data }: { data: any }) {
         minHeight: '100vh',
       }}
     >
-      <AboutHeroSection />
+      <AboutHeroSection data={data} />
       {/* 3. NOTRE HISTOIRE */}
       <StorySection data={data} storyData={storyData} />
       <TeamSection />

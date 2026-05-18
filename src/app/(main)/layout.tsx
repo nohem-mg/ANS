@@ -1,7 +1,4 @@
 import { createReader } from '@keystatic/core/reader';
-export const dynamic = 'force-dynamic';
-export const fetchCache = 'force-no-store';
-export const revalidate = 0;
 import keystaticConfig from '../../../keystatic.config';
 import Header from "../components/Header";
 import Footer from "../components/Footer";
