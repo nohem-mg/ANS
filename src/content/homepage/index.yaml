@@ -42,9 +42,7 @@ vision:
 services:
   tag: Notre Savoir-Faire
   title: L'Excellence de la Pause Café.
-  description: >-
-    Des équipements de pointe pilotés par une équipe humaine dédiée. La
-    technologie au service de l'humain.
+  description: ''
   rows:
     - title: Coffee Corners
       description: >-

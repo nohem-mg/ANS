@@ -54,7 +54,7 @@ export const SOLUTIONS: SolutionDetail[] = [
       'Des fontaines à eau élégantes et fiables pour les entreprises du Nord et des Hauts-de-France. Hydratation simple, durable et qualitative sur site.',
     description:
       'Nos fontaines à eau s\'intègrent naturellement dans les espaces de travail et apportent une solution durable, esthétique et facile à vivre. ANS assure l\'installation et la maintenance de vos fontaines à eau dans le Nord, à Cambrai et en Hauts-de-France.',
-    image: '/fontaine-eau.jpeg',
+    image: '/faeg.png',
     icon: Droplets,
     highlights: [
       'Eau fraîche, tempérée ou pétillante selon les modèles',
