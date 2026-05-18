@@ -1096,13 +1096,13 @@ export default function HomePageClient({ data }: { data: any }) {
                       textAlign: 'center'
                     }}
                   >
-                    Un projet d'espace-pause ?
+                    {data?.cta_band?.title ?? "Un projet d'espace-pause ?"}
                   </h3>
                   <p
                     className="text-[#F5E6D3]/60 text-center"
                     style={{ fontFamily: 'var(--font-ibm-plex-sans)', fontSize: '15px', lineHeight: 1.6 }}
                   >
-                    Audit gratuit, proposition sur-mesure et installation rapide.
+                    {data?.cta_band?.description ?? "Audit gratuit, proposition sur-mesure et installation rapide."}
                   </p>
                 </div>
                 <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0 w-full sm:w-auto">
@@ -1113,17 +1113,17 @@ export default function HomePageClient({ data }: { data: any }) {
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.97 }}
                   >
-                    Demander un devis <ArrowRight size={14} />
+                    {data?.cta_band?.cta_primary ?? "Demander un devis"} <ArrowRight size={14} />
                   </motion.a>
                   <a
-                    href="tel:0327371684"
+                    href={`tel:${(data?.cta_band?.phone || "0327371684").replace(/\s/g, '')}`}
                     className="inline-flex items-center justify-center gap-2 px-6 py-3 text-sm text-[#F5E6D3] border border-[#F5E6D3]/20 rounded-lg hover:border-[#DE9E67]/50 transition-colors whitespace-nowrap w-full sm:w-auto"
                     style={{ fontFamily: 'var(--font-ibm-plex-mono)', letterSpacing: '0.06em', fontSize: '12px' }}
                   >
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" />
                     </svg>
-                    03 27 37 16 84
+                    {data?.cta_band?.phone ?? "03 27 37 16 84"}
                   </a>
                 </div>
               </div>
@@ -1450,9 +1450,9 @@ export default function HomePageClient({ data }: { data: any }) {
           <div className="absolute bottom-0 left-0 w-full h-full from-sienna-racing/10 to-transparent pointer-events-none" />
 
           <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center relative z-10">
-            <h2 className="text-3xl sm:text-5xl md:text-7xl mb-6 tracking-tight" style={{ fontFamily: 'var(--font-sora)', fontWeight: 600 }}>Prêt pour l&apos;infusion ?</h2>
+            <h2 className="text-3xl sm:text-5xl md:text-7xl mb-6 tracking-tight" style={{ fontFamily: 'var(--font-sora)', fontWeight: 600 }}>{data?.final_cta?.title ?? "Prêt pour l'infusion ?"}</h2>
             <p className="text-base md:text-xl text-deep-roast/70 mb-10 max-w-2xl mx-auto" style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}>
-              Discutons de votre projet d&apos;espace détente. Nos experts sont prêts à concevoir la solution idéale pour vos collaborateurs.
+              {data?.final_cta?.description ?? "Discutons de votre projet d'espace détente. Nos experts sont prêts à concevoir la solution idéale pour vos collaborateurs."}
             </p>
 
             <div className="flex items-center justify-center gap-3 sm:gap-4 mb-10">
@@ -1463,10 +1463,10 @@ export default function HomePageClient({ data }: { data: any }) {
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
               >
-                Nous contacter <ArrowRight className="w-4 h-4" />
+                {data?.final_cta?.cta_primary ?? "Nous contacter"} <ArrowRight className="w-4 h-4" />
               </motion.a>
               <motion.a
-                href="tel:0327371684"
+                href={`tel:${(data?.cta_band?.phone || "0327371684").replace(/\s/g, '')}`}
                 className="inline-flex items-center gap-2.5 px-4 sm:px-8 py-3 sm:py-4 text-xs sm:text-sm text-deep-roast border border-deep-roast/20 rounded-lg hover:border-golden-extraction/50 transition-colors whitespace-nowrap"
                 style={{ fontFamily: 'var(--font-ibm-plex-mono)', letterSpacing: '0.06em' }}
                 whileHover={{ scale: 1.03 }}
@@ -1475,7 +1475,7 @@ export default function HomePageClient({ data }: { data: any }) {
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" />
                 </svg>
-                03 27 37 16 84
+                {data?.cta_band?.phone ?? "03 27 37 16 84"}
               </motion.a>
             </div>
 
@@ -1483,7 +1483,7 @@ export default function HomePageClient({ data }: { data: any }) {
               className="text-deep-roast/40 text-[9px] sm:text-xs whitespace-nowrap"
               style={{ fontFamily: 'var(--font-ibm-plex-mono)', letterSpacing: '0.1em', textTransform: 'uppercase' }}
             >
-              Audit gratuit · Réponse sous 24h · Hauts-de-France
+              {data?.final_cta?.badge_text ?? "Audit gratuit · Réponse sous 24h · Hauts-de-France"}
             </p>
           </div>
         </section>
