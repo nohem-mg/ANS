@@ -664,7 +664,8 @@ const FAQSection = ({
               fontSize: '1rem',
             }}
           >
-            {data?.hero?.subtitle ?? "Ne laissez plus vos espaces de pause au hasard. Nous concevons et gérons des espaces café sur-mesure pour redynamiser vos équipes en Hauts-de-France."}
+            Les principales reponses sur nos solutions, notre accompagnement et
+            notre maniere de travailler.
           </p>
         </motion.div>
 
@@ -940,7 +941,7 @@ export default function HomePageClient({ data }: { data: any }) {
                 </div>
                 <div className="w-px h-3 bg-coffee-cream/20 shrink-0" />
                 <span className="text-coffee-cream/80 text-[10px] font-mono tracking-[0.06em] uppercase whitespace-nowrap">
-                  {data?.hero?.badge_top ?? 'Partenaire Prodia+'} 4.9 / 5 <span className="opacity-50">·</span> 200+ partenaires
+                  4.9 / 5 <span className="opacity-50">·</span> 200+ partenaires
                 </span>
               </motion.div>
 
@@ -960,8 +961,8 @@ export default function HomePageClient({ data }: { data: any }) {
                   textAlign: 'center',
                 }}
               >
-                <span className="block text-[#F5E6D3]">{data?.hero?.title_line1 ?? "La Pause,"}</span>
-                <span className="block text-brand-orange mt-2 md:mt-4 italic">{data?.hero?.title_line2 ?? "Moteur de Votre Entreprise."}</span>
+                Faites de la <span className="text-transparent bg-clip-text bg-gradient-to-br from-golden-extraction to-sienna-racing italic pr-2">pause</span>
+                <br className="hidden md:block" /> un moment qui compte
               </motion.h1>
 
               {/* Subtitle with improved legibility */}
@@ -1002,7 +1003,7 @@ export default function HomePageClient({ data }: { data: any }) {
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
                 >
-                  <span className="mr-2">{data?.hero?.cta_primary ?? "Découvrir notre approche"}</span>
+                  Découvrir notre approche
                 </motion.a>
                 <motion.a
                   href="/contact"
@@ -1011,7 +1012,7 @@ export default function HomePageClient({ data }: { data: any }) {
                   whileHover={{ scale: 1.03, borderColor: 'rgba(245,230,211,0.5)' }}
                   whileTap={{ scale: 0.97 }}
                 >
-                  {data?.hero?.cta_secondary ?? "Demander un devis"}
+                  Demander un devis
                 </motion.a>
               </motion.div>
 
