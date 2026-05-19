@@ -337,39 +337,53 @@ const PartnershipIcon = () => (
   </svg>
 );
 
-// 7. Service Row — Technical Datasheet / Spec-Sheet Style
-const ServiceRow = ({ title, desc, icon }: { title: string, desc: string, icon: React.ReactNode }) => {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "center 65%"]
-  });
-  const opacity = useTransform(scrollYProgress, [0, 0.6], [0, 1]);
-  const y = useTransform(scrollYProgress, [0, 1], [24, 0]);
+const SERVICE_VISUALS = [
+  {
+    src: '/sv2.jpeg',
+    alt: 'Pause café conviviale entre collaboratrices',
+    className: 'services-visual-main',
+  },
+  {
+    src: '/sv3.jpeg',
+    alt: 'Extraction de café sur une machine professionnelle',
+    className: 'services-visual-small services-visual-coffee',
+  },
+  {
+    src: '/sv1.jpeg',
+    alt: 'Boisson chaude servie par une machine automatique',
+    className: 'services-visual-small services-visual-service',
+  },
+  {
+    src: '/sv4.jpeg',
+    alt: 'Sélection sur un distributeur automatique',
+    className: 'services-visual-small services-visual-distribution',
+  },
+];
 
+// 7. Service Row — compact spec sheet
+const ServiceRow = ({ title, desc, icon, index }: { title: string, desc: string, icon: React.ReactNode, index: number }) => {
   return (
     <motion.div
-      ref={ref}
-      style={{ opacity, y, paddingTop: 'clamp(1.25rem, 5vw, 4rem)', paddingBottom: 'clamp(1.25rem, 5vw, 4rem)' }}
-      className="group relative flex flex-col md:flex-row md:items-center gap-5 md:gap-16 border-b border-deep-roast/10 overflow-hidden"
+      initial={{ opacity: 0, y: 14 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-8% 0px' }}
+      transition={{ delay: 0.08 * index, duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+      className="service-row group"
     >
-      {/* Left column: icon + title */}
-      <div className="md:w-[30%] flex items-center gap-4 flex-shrink-0 relative z-10">
-        <div className="text-deep-roast/40 group-hover:text-golden-extraction transition-colors duration-300 flex-shrink-0">
+      <div className="service-row-heading">
+        <div className="service-row-icon text-deep-roast/40 group-hover:text-golden-extraction transition-colors duration-300">
           {icon}
         </div>
         <h3
-          className="text-deep-roast font-semibold"
-          style={{ fontSize: 'clamp(1rem, 1.4vw, 1.15rem)', letterSpacing: '0.08em', textTransform: 'uppercase', fontFamily: 'var(--font-ibm-plex-mono)' }}
+          className="service-row-title text-deep-roast font-semibold"
+          style={{ textTransform: 'uppercase', fontFamily: 'var(--font-ibm-plex-mono)' }}
         >
           {title}
         </h3>
       </div>
-
-      {/* Right column: description */}
       <p
-        className="md:w-[70%] text-deep-roast/60 relative z-10 group-hover:text-deep-roast/80 transition-colors duration-300"
-        style={{ lineHeight: 1.75, fontSize: 'clamp(0.95rem, 1.15vw, 1.05rem)', fontFamily: 'var(--font-ibm-plex-sans)' }}
+        className="service-row-desc text-deep-roast/60 group-hover:text-deep-roast/80 transition-colors duration-300"
+        style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}
       >
         {desc}
       </p>
@@ -770,7 +784,11 @@ export default function HomePageClient({ data }: { data: any }) {
     { title: data?.services?.rows?.[0]?.title ?? 'Coffee Corners', desc: data?.services?.rows?.[0]?.description ?? 'Home staging : une mise en valeur de l\'espace de pause par un aménagement subtil et chaleureux de l\'espace.', icon: <CoffeeCornerIcon /> },
     { title: data?.services?.rows?.[1]?.title ?? 'Disponibilité Totale', desc: data?.services?.rows?.[1]?.description ?? 'Notre promesse : une réactivité sans faille. Une machine à l\'arrêt, c\'est une pause gâchée. Nous agissons au plus vite pour que l\'arrêt ne dure jamais.', icon: <MaintenanceIcon /> },
     { title: data?.services?.rows?.[2]?.title ?? 'Partenariat Durable', desc: data?.services?.rows?.[2]?.description ?? 'La fidélisation est notre KPI principal. Nous construisons des relations long terme basées sur la confiance et la transparence.', icon: <PartnershipIcon /> },
+    { title: data?.services?.rows?.[3]?.title ?? 'Conseil & Implantation', desc: data?.services?.rows?.[3]?.description ?? 'Nous analysons vos flux, vos volumes et vos espaces pour installer la bonne solution au bon endroit, sans perturber votre quotidien.', icon: <Lightbulb size={20} strokeWidth={1.6} /> },
   ]
+  const servicesTag = data?.services?.tag ?? 'Notre Savoir-Faire';
+  const servicesTitle = data?.services?.title ?? "L'Excellence de la Pause Café.";
+  const hasPauseCafeTitle = servicesTitle.includes('Pause Café');
   const [loading, setLoading] = useState(true);
   const [activeFaqIndex, setActiveFaqIndex] = useState(0);
   const [activeTestimonialDot, setActiveTestimonialDot] = useState(0);
@@ -1034,32 +1052,357 @@ export default function HomePageClient({ data }: { data: any }) {
         <VisionSection points={visionPoints} data={data} />
 
 
-        {/* Services Section — Spec-Sheet Layout */}
-        <section id="services" className="pt-8 pb-8 md:py-20 relative">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        {/* Services Section — compact editorial spec-sheet */}
+        <section id="services" className="services-section relative">
+          <style>{`
+            .services-section {
+              background: #FAF2E9;
+              min-height: calc(100svh - 84px);
+              height: calc(100svh - 84px);
+              overflow: hidden;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              padding: 24px 0;
+              box-sizing: border-box;
+            }
 
-            {/* Section header */}
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-6 md:mb-12">
+            .services-shell {
+              width: 100%;
+              height: auto;
+              max-width: 1360px;
+              margin: 0 auto;
+              padding: 0 24px;
+              display: grid;
+              grid-template-columns: minmax(0, 1fr) minmax(420px, 0.82fr);
+              grid-template-rows: auto auto;
+              grid-template-areas:
+                "header visuals"
+                "rows visuals";
+              gap: clamp(20px, 3vh, 34px) 38px;
+              align-content: center;
+              align-items: start;
+              box-sizing: border-box;
+            }
+
+            .services-header {
+              grid-area: header;
+              display: block;
+              max-width: 680px;
+              padding-top: 2px;
+            }
+
+            .services-eyebrow {
+              display: block;
+              margin-bottom: 14px;
+              color: #DE9E67;
+              font-family: var(--font-ibm-plex-mono);
+              font-size: 0.68rem;
+              font-weight: 600;
+              letter-spacing: 0.18em;
+              text-transform: uppercase;
+            }
+
+            .services-title {
+              color: #451F17;
+              font-family: var(--font-sora);
+              font-size: 2.5rem;
+              font-weight: 650;
+              line-height: 1.06;
+              letter-spacing: 0;
+            }
+
+            .services-rows {
+              grid-area: rows;
+              align-self: start;
+              display: grid;
+              grid-template-rows: repeat(4, minmax(0, 1fr));
+              height: clamp(430px, 46svh, 540px);
+              border-top: 1px solid rgba(69, 31, 23, 0.1);
+            }
+
+            .service-row {
+              display: grid;
+              grid-template-columns: minmax(180px, 0.38fr) minmax(0, 1fr);
+              align-items: center;
+              gap: 22px;
+              padding: 24px 0;
+              border-bottom: 1px solid rgba(69, 31, 23, 0.1);
+              overflow: hidden;
+            }
+
+            .service-row-heading {
+              display: flex;
+              align-items: center;
+              min-width: 0;
+              gap: 12px;
+            }
+
+            .service-row-icon {
+              display: inline-flex;
+              flex: 0 0 auto;
+            }
+
+            .service-row-title {
+              min-width: 0;
+              font-size: 0.9rem;
+              line-height: 1.25;
+              letter-spacing: 0.07em;
+            }
+
+            .service-row-desc {
+              display: -webkit-box;
+              overflow: hidden;
+              -webkit-box-orient: vertical;
+              -webkit-line-clamp: 2;
+              font-size: 0.98rem;
+              line-height: 1.55;
+            }
+
+            .services-visual-grid {
+              grid-area: visuals;
+              align-self: center;
+              min-height: 0;
+              height: clamp(620px, 74svh, 760px);
+              display: grid;
+              grid-template-columns: minmax(0, 1.18fr) minmax(118px, 0.72fr);
+              grid-template-rows: repeat(3, minmax(0, 1fr));
+              gap: 10px;
+            }
+
+            .services-visual-tile {
+              position: relative;
+              margin: 0;
+              overflow: hidden;
+              border-radius: 8px;
+              background: rgba(69, 31, 23, 0.08);
+              isolation: isolate;
+            }
+
+            .services-visual-main {
+              grid-row: 1 / span 3;
+            }
+
+            .services-visual-image {
+              object-fit: cover;
+              transition: transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+            }
+
+            .services-visual-tile:hover .services-visual-image {
+              transform: scale(1.035);
+            }
+
+            .services-visual-main .services-visual-image {
+              object-position: 52% 48%;
+            }
+
+            .services-visual-coffee .services-visual-image {
+              object-position: 30% 50%;
+            }
+
+            .services-visual-service .services-visual-image {
+              object-position: 55% 50%;
+            }
+
+            .services-visual-distribution .services-visual-image {
+              object-position: 72% 50%;
+            }
+
+            .services-visual-tile::after {
+              content: "";
+              position: absolute;
+              inset: 0;
+              background: linear-gradient(180deg, rgba(28, 10, 0, 0.02), rgba(28, 10, 0, 0.16));
+              pointer-events: none;
+              z-index: 1;
+            }
+
+            @media (min-width: 1280px) {
+              .services-title { font-size: 3rem; }
+              .services-shell { padding: 0 32px; }
+            }
+
+            @media (min-width: 1024px) and (max-height: 760px) {
+              .services-section { padding: 14px 0; }
+              .services-shell { gap: 14px 26px; }
+              .services-eyebrow { margin-bottom: 8px; }
+              .services-title { font-size: 2.15rem; }
+              .services-rows { height: min(360px, calc(100svh - 354px)); }
+              .service-row-title { font-size: 0.82rem; line-height: 1.18; }
+              .service-row { padding: 9px 0; }
+              .service-row-desc { font-size: 0.9rem; line-height: 1.4; }
+              .services-visual-grid { height: min(560px, calc(100svh - 126px)); gap: 8px; }
+            }
+
+            @media (max-width: 1023px) {
+              .services-section {
+                padding: 22px 0;
+                align-items: stretch;
+              }
+
+              .services-shell {
+                padding: 0 18px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                gap: 14px;
+              }
+
+              .services-header {
+                display: block;
+                padding-top: 0;
+              }
+
+              .services-eyebrow {
+                margin-bottom: 10px;
+              }
+
+              .services-title {
+                font-size: 2rem;
+                line-height: 1.08;
+              }
+
+              .services-visual-grid {
+                flex: 0 0 auto;
+                height: 174px;
+                max-height: none;
+                display: grid;
+                grid-template-columns: minmax(0, 1.25fr) repeat(3, minmax(0, 0.75fr));
+                grid-template-rows: 1fr;
+                gap: 8px;
+              }
+
+              .services-visual-main {
+                grid-row: auto;
+              }
+
+              .services-rows {
+                align-self: auto;
+                display: block;
+                height: auto;
+              }
+
+              .service-row {
+                grid-template-columns: 1fr;
+                gap: 6px;
+                padding: 12px 0;
+              }
+
+              .service-row-title {
+                font-size: 0.82rem;
+              }
+
+              .service-row-desc {
+                font-size: 0.88rem;
+                line-height: 1.4;
+              }
+            }
+
+            @media (max-width: 767px) {
+              .services-section {
+                padding: 16px 0;
+              }
+
+              .services-shell {
+                padding: 0 14px;
+                gap: 11px;
+              }
+
+              .services-eyebrow {
+                margin-bottom: 7px;
+                font-size: 0.62rem;
+              }
+
+              .services-title {
+                font-size: 1.52rem;
+                line-height: 1.1;
+              }
+
+              .services-visual-grid {
+                height: 124px;
+                grid-template-columns: minmax(0, 1.15fr) repeat(3, minmax(0, 0.76fr));
+                gap: 6px;
+              }
+
+              .service-row {
+                padding: 9px 0;
+                gap: 4px;
+              }
+
+              .service-row-heading {
+                gap: 9px;
+              }
+
+              .service-row-icon svg {
+                width: 17px;
+                height: 17px;
+              }
+
+              .service-row-title {
+                font-size: 0.72rem;
+                line-height: 1.22;
+                letter-spacing: 0.06em;
+              }
+
+              .service-row-desc {
+                font-size: 0.76rem;
+                line-height: 1.32;
+              }
+            }
+
+            @media (max-width: 390px), (max-width: 767px) and (max-height: 700px) {
+              .services-section { padding: 12px 0; }
+              .services-shell { gap: 9px; }
+              .services-title { font-size: 1.38rem; }
+              .services-visual-grid { height: 96px; }
+              .service-row { padding: 7px 0; }
+              .service-row-desc { -webkit-line-clamp: 1; }
+            }
+          `}</style>
+
+          <div className="services-shell">
+            <div className="services-header">
               <div>
-                <span className="text-golden-extraction text-[10px] tracking-[0.22em] uppercase mb-5 block" style={{ fontFamily: 'var(--font-ibm-plex-mono)' }}>
-                  {data?.services?.tag ?? "Notre Savoir-Faire"}
-                </span>
-                <h2 className="text-deep-roast leading-tight" style={{ fontFamily: 'var(--font-sora)', fontSize: 'clamp(1.75rem, 3.5vw, 3rem)', fontWeight: 600, letterSpacing: '-0.02em' }}>
-                  {data?.services?.title ?? "L'Excellence de la Pause Café."}
+                <span className="services-eyebrow">{servicesTag}</span>
+                <h2 className="services-title">
+                  {hasPauseCafeTitle ? (
+                    <>
+                      {servicesTitle.replace('Pause Café.', '').replace('Pause Café', '').trim()}{' '}
+                      <span className="text-sienna-racing">Pause Café.</span>
+                    </>
+                  ) : (
+                    servicesTitle
+                  )}
                 </h2>
               </div>
-              <p className="max-w-sm text-deep-roast/60 leading-relaxed md:text-right" style={{ fontFamily: 'var(--font-ibm-plex-sans)', fontSize: 'clamp(0.95rem, 1vw, 1.05rem)' }}>
-                {data?.services?.description ?? "Des équipements de pointe pilotés par une équipe humaine dédiée. La technologie au service de l'humain."}
-              </p>
             </div>
 
-            {/* Spec-sheet rows */}
-            <div className="border-t border-deep-roast/10">
-              {serviceRows.map((row, i) => (
-                <ServiceRow key={i} title={row.title} desc={row.desc} icon={row.icon} />
+            <div className="services-visual-grid" aria-label="Moments de pause et distributeurs ANS">
+              {SERVICE_VISUALS.map((visual, index) => (
+                <motion.figure
+                  key={visual.src}
+                  initial={{ opacity: 0, scale: 0.98 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true, margin: '-8% 0px' }}
+                  transition={{ delay: 0.08 * index, duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+                  className={`services-visual-tile ${visual.className}`}
+                >
+                  <Image
+                    src={visual.src}
+                    alt={visual.alt}
+                    fill
+                    sizes={index === 0 ? '(max-width: 1023px) 40vw, 30vw' : '(max-width: 1023px) 20vw, 15vw'}
+                    className="services-visual-image"
+                  />
+                </motion.figure>
               ))}
             </div>
 
+            <div className="services-rows">
+              {serviceRows.map((row, i) => (
+                <ServiceRow key={row.title} title={row.title} desc={row.desc} icon={row.icon} index={i} />
+              ))}
+            </div>
           </div>
         </section>
 

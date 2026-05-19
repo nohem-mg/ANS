@@ -12,7 +12,7 @@ interface ContactPageClientProps {
 export default function ContactPageClient({ data }: ContactPageClientProps) {
     const formRef = useRef<HTMLDivElement>(null);
     const isFormInView = useInView(formRef, { once: true, margin: '-40px' });
-    
+
     // Dynamically retrieve formspree_id from Keystatic with a fallback
     const formspreeId = data?.form?.formspree_id ?? 'xpqnakqy';
     const [formState, handleSubmit] = useForm(formspreeId);
