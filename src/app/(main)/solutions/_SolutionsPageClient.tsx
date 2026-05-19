@@ -103,7 +103,7 @@ const steps = [
   },
 ];
 
-function ProcessSection({ stepsData }: { stepsData: typeof steps }) {
+function ProcessSection({ stepsData, data }: { stepsData: typeof steps; data?: any }) {
   const [activeStep, setActiveStep] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const [photoLoaded, setPhotoLoaded] = useState(false);
@@ -215,7 +215,7 @@ function ProcessSection({ stepsData }: { stepsData: typeof steps }) {
               fontFamily: 'var(--font-ibm-plex-mono)',
             }}
           >
-            NOTRE PROCESS
+            {data?.process?.tag || "NOTRE PROCESS"}
           </p>
           <h2
             className="process-h2"
@@ -229,9 +229,11 @@ function ProcessSection({ stepsData }: { stepsData: typeof steps }) {
               letterSpacing: '-0.02em',
             }}
           >
-            Du cadrage
-
-            <span style={{ color: '#8c4f25' }}> au suivi.</span>
+            {data?.process?.title ? (
+                <span dangerouslySetInnerHTML={{ __html: data.process.title.replace('au suivi.', '<span style="color: #8c4f25"> au suivi.</span>') }} />
+            ) : (
+                <>Du cadrage <span style={{ color: '#8c4f25' }}> au suivi.</span></>
+            )}
           </h2>
           <p
             style={{
@@ -244,7 +246,7 @@ function ProcessSection({ stepsData }: { stepsData: typeof steps }) {
               fontFamily: 'var(--font-ibm-plex-sans)',
             }}
           >
-            Cinq étapes courtes, lisibles et documentées pour garder votre projet simple à suivre et facile à piloter.
+            {data?.process?.description || "Cinq étapes courtes, lisibles et documentées pour garder votre projet simple à suivre et facile à piloter."}
           </p>
         </div>
 
@@ -617,7 +619,7 @@ function ProcessSection({ stepsData }: { stepsData: typeof steps }) {
 
 // ─── SHOWCASE ────────────────────────────────────────────────────────────────
 
-function ShowcaseSection() {
+function ShowcaseSection({ data }: { data?: any }) {
   const [sliderPos, setSliderPos] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -689,7 +691,7 @@ function ShowcaseSection() {
             textTransform: 'uppercase',
             fontFamily: FONT.mono,
           }}>
-            RÉALISATIONS
+            {data?.showcase?.tag || "RÉALISATIONS"}
           </p>
           <h2
             className="showcase-h2"
@@ -703,7 +705,7 @@ function ShowcaseSection() {
               letterSpacing: '-0.025em',
             }}
           >
-            Avant & Après
+            {data?.showcase?.title || "Avant & Après"}
 
           </h2>
           <p
@@ -717,7 +719,7 @@ function ShowcaseSection() {
               fontFamily: FONT.body,
             }}
           >
-            Un espace pause ordinaire peut devenir un vrai lieu de vie. Faites glisser pour comparer l&apos;avant et l&apos;après d&apos;une installation type.
+            {data?.showcase?.description || "Un espace pause ordinaire peut devenir un vrai lieu de vie. Faites glisser pour comparer l'avant et l'après d'une installation type."}
           </p>
         </div>
 
@@ -1046,7 +1048,7 @@ export default function SolutionsPageClient({ data }: { data: any }) {
                 color: C.accent, textTransform: 'uppercase', marginBottom: 36,
               }}
             >
-              Solutions Techniques
+              {data?.hero?.label_tag || "Solutions Techniques"}
             </motion.div>
 
             <motion.h1
@@ -1063,7 +1065,11 @@ export default function SolutionsPageClient({ data }: { data: any }) {
                 marginBottom: 24,
               }}
             >
-              La Technologie au Service<br />de la <span style={{ color: C.accent, fontStyle: 'italic' }}>Pause Parfaite.</span>
+              {data?.hero?.title ? (
+                <span dangerouslySetInnerHTML={{ __html: data.hero.title.replace('Pause Parfaite.', '<span style="color: #C8763A; font-style: italic;">Pause Parfaite.</span>') }} />
+              ) : (
+                <>La Technologie au Service<br />de la <span style={{ color: C.accent, fontStyle: 'italic' }}>Pause Parfaite.</span></>
+              )}
             </motion.h1>
 
             <motion.p
@@ -1073,22 +1079,21 @@ export default function SolutionsPageClient({ data }: { data: any }) {
               className="solutions-hero-desc text-[1.05rem] md:text-lg text-coffee-cream/90 leading-relaxed mx-auto max-w-xl mb-8 drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)] font-light"
               style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}
             >
-              Des distributeurs de dernière génération aux coffee corners sur-mesure,
-              nous déployons un parc technique adapté à votre entreprise et à vos collaborateurs.
+              {data?.hero?.description || "Des distributeurs de dernière génération aux coffee corners sur-mesure, nous déployons un parc technique adapté à votre entreprise et à vos collaborateurs."}
             </motion.p>
           </div>
         </motion.div>
       </section>
 
       <Gallery4
-        title="Trois gammes, une même exigence de service"
-        description="Retrouvez nos principales familles de machines pour l’entreprise. Chaque carte ouvre sur une page détaillée avec usages, points forts et type d’implantation."
+        title={data?.gallery?.title || "Trois gammes, une même exigence de service"}
+        description={data?.gallery?.description || "Retrouvez nos principales familles de machines pour l’entreprise. Chaque carte ouvre sur une page détaillée avec usages, points forts et type d’implantation."}
         items={galleryItems}
       />
 
-      <ProcessSection stepsData={stepsData} />
+      <ProcessSection stepsData={stepsData} data={data} />
 
-      <ShowcaseSection />
+      <ShowcaseSection data={data} />
 
       <AutresRealisationsSection />
 
@@ -1116,13 +1121,13 @@ export default function SolutionsPageClient({ data }: { data: any }) {
             letterSpacing: '-0.02em', marginBottom: 16,
             lineHeight: 1.15,
           }}>
-            Prêt à équiper vos espaces ?
+            {data?.cta?.title || "Prêt à équiper vos espaces ?"}
           </h2>
           <p style={{
             fontFamily: FONT.body, fontSize: 'clamp(14px, 2.4vw, 16px)', color: C.textMuted,
             lineHeight: 1.7, maxWidth: 480, margin: '0 auto 32px',
           }}>
-            Parlons de votre projet. Audit gratuit, proposition sur-mesure et installation rapide.
+            {data?.cta?.description || "Parlons de votre projet. Audit gratuit, proposition sur-mesure et installation rapide."}
           </p>
           <div className="solutions-cta-actions" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 12 }}>
             <motion.a

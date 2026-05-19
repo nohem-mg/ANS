@@ -847,5 +847,91 @@ export default config({
                 ),
             },
         }),
+
+        // ─────────────────────────────────────────────────────────────────────
+        // PAGE CONTACT
+        // ─────────────────────────────────────────────────────────────────────
+        contact: singleton({
+            label: 'Page Contact',
+            path: 'src/content/contact/',
+            schema: {
+                hero: fields.object(
+                    {
+                        tag: fields.text({ label: 'Tag', defaultValue: 'Contact' }),
+                        title_part1: fields.text({
+                            label: 'Titre — partie 1',
+                            defaultValue: 'Parlons de votre',
+                        }),
+                        title_highlight: fields.text({
+                            label: 'Titre — mot mis en couleur',
+                            defaultValue: 'projet.',
+                        }),
+                        description: fields.text({
+                            label: 'Description',
+                            multiline: true,
+                            defaultValue:
+                                "Audit gratuit, proposition sur-mesure et accompagnement personnalisé.\nNotre équipe est à votre écoute pour redéfinir la pause dans votre entreprise.",
+                        }),
+                    },
+                    { label: 'Section Hero' }
+                ),
+                form: fields.object(
+                    {
+                        formspree_id: fields.text({
+                            label: 'ID Formspree (ex: xpqnakqy)',
+                            defaultValue: 'xpqnakqy',
+                        }),
+                        title: fields.text({
+                            label: 'Titre du formulaire',
+                            defaultValue: 'Envoyez-nous un message',
+                        }),
+                        description: fields.text({
+                            label: 'Description du formulaire',
+                            multiline: true,
+                            defaultValue: 'Remplissez le formulaire ci-dessous et nous vous recontacterons sous 24h.',
+                        }),
+                    },
+                    { label: 'Formulaire de Contact' }
+                ),
+                info: fields.object(
+                    {
+                        title: fields.text({
+                            label: 'Titre des infos',
+                            defaultValue: 'Informations de contact',
+                        }),
+                        phone: fields.text({
+                            label: 'Téléphone',
+                            defaultValue: '03 27 37 16 84',
+                        }),
+                        phone_href: fields.text({
+                            label: 'Lien téléphone (tel:+33...)',
+                            defaultValue: 'tel:+33327371684',
+                        }),
+                        email: fields.text({
+                            label: 'E-mail',
+                            defaultValue: 'ans@prodiaplus.fr',
+                        }),
+                        email_href: fields.text({
+                            label: 'Lien E-mail (mailto:...)',
+                            defaultValue: 'mailto:ans@prodiaplus.fr',
+                        }),
+                        address: fields.text({
+                            label: 'Adresse physique',
+                            defaultValue: '780 rue Blaise Pascal, 59267 Proville',
+                        }),
+                        address_href: fields.text({
+                            label: 'Lien Google Maps',
+                            defaultValue: 'https://maps.google.com/?q=780+rue+Blaise+Pascal+59267+Proville',
+                        }),
+                        hours: fields.text({
+                            label: 'Horaires',
+                            multiline: true,
+                            defaultValue: 'Lundi au jeudi : 8h-18h\nVendredi : 8h-17h\nPause repas : 12h30-13h30',
+                        }),
+                    },
+                    { label: 'Informations de contact' }
+                ),
+            },
+        }),
     },
 });

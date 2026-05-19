@@ -1,4 +1,6 @@
 import { createReader } from '@keystatic/core/reader';
+
+export const dynamic = 'force-static';
 import keystaticConfig from '../../../keystatic.config';
 import HomePageClient from './_HomePageClient';
 

@@ -17,9 +17,9 @@ const NAV_LINKS = [
 const MotionLink = motion.create(Link);
 
 export default function Header({ navData }: { navData?: any }) {
-    const navLinks = navData?.nav_links ?? NAV_LINKS;
-    const ctaLabel = navData?.cta_label ?? 'Contact';
-    const ctaHref = navData?.cta_href ?? '/contact';
+    const navLinks = navData?.nav_links?.length > 0 ? navData.nav_links : NAV_LINKS;
+    const ctaLabel = navData?.cta_label || 'Contact';
+    const ctaHref = navData?.cta_href || '/contact';
     const pathname = usePathname();
     const [mobileOpen, setMobileOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
