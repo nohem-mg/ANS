@@ -1264,6 +1264,8 @@ export default function HomePageClient({ data }: { data: any }) {
 
               .services-visual-grid {
                 flex: 0 0 auto;
+                width: 100%;
+                align-self: stretch;
                 height: 174px;
                 max-height: none;
                 display: grid;
