@@ -1236,7 +1236,10 @@ export default function HomePageClient({ data }: { data: any }) {
 
             @media (max-width: 1023px) {
               .services-section {
-                padding: 22px 0;
+                min-height: auto;
+                height: auto;
+                overflow: visible;
+                padding: 14px 0 18px;
                 align-items: stretch;
               }
 
@@ -1244,12 +1247,13 @@ export default function HomePageClient({ data }: { data: any }) {
                 padding: 0 18px;
                 display: flex;
                 flex-direction: column;
-                justify-content: center;
+                justify-content: flex-start;
                 gap: 14px;
               }
 
               .services-header {
                 display: block;
+                order: 1;
                 padding-top: 0;
               }
 
@@ -1263,20 +1267,24 @@ export default function HomePageClient({ data }: { data: any }) {
               }
 
               .services-visual-grid {
+                order: 3;
                 flex: 0 0 auto;
-                height: 174px;
+                width: 100%;
+                align-self: stretch;
+                height: clamp(360px, 70svh, 520px);
                 max-height: none;
                 display: grid;
-                grid-template-columns: minmax(0, 1.25fr) repeat(3, minmax(0, 0.75fr));
-                grid-template-rows: 1fr;
+                grid-template-columns: minmax(0, 1.18fr) minmax(112px, 0.72fr);
+                grid-template-rows: repeat(3, minmax(0, 1fr));
                 gap: 8px;
               }
 
               .services-visual-main {
-                grid-row: auto;
+                grid-row: 1 / span 3;
               }
 
               .services-rows {
+                order: 2;
                 align-self: auto;
                 display: block;
                 height: auto;
@@ -1300,12 +1308,12 @@ export default function HomePageClient({ data }: { data: any }) {
 
             @media (max-width: 767px) {
               .services-section {
-                padding: 16px 0;
+                padding: 10px 0 14px;
               }
 
               .services-shell {
                 padding: 0 14px;
-                gap: 11px;
+                gap: 10px;
               }
 
               .services-eyebrow {
@@ -1319,8 +1327,8 @@ export default function HomePageClient({ data }: { data: any }) {
               }
 
               .services-visual-grid {
-                height: 124px;
-                grid-template-columns: minmax(0, 1.15fr) repeat(3, minmax(0, 0.76fr));
+                height: clamp(330px, 58svh, 430px);
+                grid-template-columns: minmax(0, 1.14fr) minmax(104px, 0.76fr);
                 gap: 6px;
               }
 
@@ -1351,10 +1359,10 @@ export default function HomePageClient({ data }: { data: any }) {
             }
 
             @media (max-width: 390px), (max-width: 767px) and (max-height: 700px) {
-              .services-section { padding: 12px 0; }
-              .services-shell { gap: 9px; }
+              .services-section { padding: 8px 0 12px; }
+              .services-shell { gap: 8px; }
               .services-title { font-size: 1.38rem; }
-              .services-visual-grid { height: 96px; }
+              .services-visual-grid { height: 300px; }
               .service-row { padding: 7px 0; }
               .service-row-desc { -webkit-line-clamp: 1; }
             }
@@ -1379,12 +1387,8 @@ export default function HomePageClient({ data }: { data: any }) {
 
             <div className="services-visual-grid" aria-label="Moments de pause et distributeurs ANS">
               {SERVICE_VISUALS.map((visual, index) => (
-                <motion.figure
+                <figure
                   key={visual.src}
-                  initial={{ opacity: 0, scale: 0.98 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true, margin: '-8% 0px' }}
-                  transition={{ delay: 0.08 * index, duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
                   className={`services-visual-tile ${visual.className}`}
                 >
                   <Image
@@ -1394,7 +1398,7 @@ export default function HomePageClient({ data }: { data: any }) {
                     sizes={index === 0 ? '(max-width: 1023px) 40vw, 30vw' : '(max-width: 1023px) 20vw, 15vw'}
                     className="services-visual-image"
                   />
-                </motion.figure>
+                </figure>
               ))}
             </div>
 
