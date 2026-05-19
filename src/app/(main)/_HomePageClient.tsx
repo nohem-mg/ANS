@@ -1319,7 +1319,7 @@ export default function HomePageClient({ data }: { data: any }) {
               }
 
               .services-visual-grid {
-                height: 124px;
+                height: clamp(132px, 18svh, 156px);
                 grid-template-columns: minmax(0, 1.15fr) repeat(3, minmax(0, 0.76fr));
                 gap: 6px;
               }
@@ -1379,12 +1379,8 @@ export default function HomePageClient({ data }: { data: any }) {
 
             <div className="services-visual-grid" aria-label="Moments de pause et distributeurs ANS">
               {SERVICE_VISUALS.map((visual, index) => (
-                <motion.figure
+                <figure
                   key={visual.src}
-                  initial={{ opacity: 0, scale: 0.98 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true, margin: '-8% 0px' }}
-                  transition={{ delay: 0.08 * index, duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
                   className={`services-visual-tile ${visual.className}`}
                 >
                   <Image
@@ -1394,7 +1390,7 @@ export default function HomePageClient({ data }: { data: any }) {
                     sizes={index === 0 ? '(max-width: 1023px) 40vw, 30vw' : '(max-width: 1023px) 20vw, 15vw'}
                     className="services-visual-image"
                   />
-                </motion.figure>
+                </figure>
               ))}
             </div>
 
