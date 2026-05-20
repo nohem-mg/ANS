@@ -42,7 +42,6 @@ vision:
 services:
   tag: Notre Savoir-Faire
   title: L'Excellence de la Pause Café.
-  description: ''
   rows:
     - title: Coffee Corners
       description: >-
@@ -86,7 +85,7 @@ testimonials:
         impersonnels. Je recommande.
 timeline:
   tag: Notre Histoire
-  title: + de 40 Ans d'Excellence
+  title: + de 45 Ans d'Excellence
   subtitle: De l'entreprise familiale au partenaire QVT de référence.
   milestones:
     - year: '1981'
