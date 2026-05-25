@@ -163,7 +163,7 @@ function ProcessSection({ stepsData, data }: { stepsData: typeof steps; data?: a
           border-radius: 6px;
           font-size: 11px; letter-spacing: 0.06em;
           color: #8c4f25; background: rgba(140,79,37,0.08);
-          font-family: var(--font-ibm-plex-mono);
+          font-family: var(--font-ibm-plex-sans);
           white-space: nowrap;
         }
 
@@ -212,7 +212,7 @@ function ProcessSection({ stepsData, data }: { stepsData: typeof steps; data?: a
               fontWeight: 500,
               textTransform: 'uppercase',
               margin: '0 0 20px',
-              fontFamily: 'var(--font-ibm-plex-mono)',
+              fontFamily: 'var(--font-ibm-plex-sans)',
             }}
           >
             {data?.process?.tag || "NOTRE PROCESS"}
@@ -220,7 +220,7 @@ function ProcessSection({ stepsData, data }: { stepsData: typeof steps; data?: a
           <h2
             className="process-h2"
             style={{
-              fontFamily: 'var(--font-sora)',
+              fontFamily: 'var(--font-ibm-plex-sans)',
               fontSize: 'clamp(40px, 5vw, 68px)',
               color: '#451F17',
               lineHeight: 1.05,
@@ -291,7 +291,7 @@ function ProcessSection({ stepsData, data }: { stepsData: typeof steps; data?: a
                       flexShrink: 0,
                       fontSize: '13px',
                       fontWeight: 600,
-                      fontFamily: 'var(--font-ibm-plex-mono)',
+                      fontFamily: 'var(--font-ibm-plex-sans)',
                     }}
                   >
                     {s.id}
@@ -320,7 +320,7 @@ function ProcessSection({ stepsData, data }: { stepsData: typeof steps; data?: a
                         textTransform: 'uppercase',
                         fontWeight: 400,
                         transition: 'color 0.3s',
-                        fontFamily: 'var(--font-ibm-plex-mono)',
+                        fontFamily: 'var(--font-ibm-plex-sans)',
                       }}
                     >
                       {s.tag}
@@ -348,7 +348,7 @@ function ProcessSection({ stepsData, data }: { stepsData: typeof steps; data?: a
                   fontWeight: 600,
                   transition: 'all 0.25s',
                   background: 'rgba(140,79,37,0.06)',
-                  fontFamily: 'var(--font-ibm-plex-mono)',
+                  fontFamily: 'var(--font-ibm-plex-sans)',
                   textTransform: 'uppercase',
                 }}
                 onMouseEnter={(e) => {
@@ -428,7 +428,7 @@ function ProcessSection({ stepsData, data }: { stepsData: typeof steps; data?: a
               >
                 <span
                   style={{
-                    fontFamily: 'var(--font-ibm-plex-mono)',
+                    fontFamily: 'var(--font-ibm-plex-sans)',
                     fontSize: '10px',
                     letterSpacing: '0.14em',
                     color: '#FFF6EF',
@@ -515,13 +515,13 @@ function ProcessSection({ stepsData, data }: { stepsData: typeof steps; data?: a
                 <h3
                   className="process-photo-title"
                   style={{
-                    fontFamily: 'var(--font-sora)',
+                    fontFamily: 'var(--font-ibm-plex-sans)',
                     fontSize: 'clamp(22px, 2.5vw, 32px)',
                     color: '#F5E6D3',
                     margin: '0 0 4px',
                     fontWeight: 600,
                     lineHeight: 1.15,
-                    letterSpacing: '-0.02em',
+                    letterSpacing: '-0.01em',
                   }}
                 >
                   {step.title}
@@ -531,7 +531,7 @@ function ProcessSection({ stepsData, data }: { stepsData: typeof steps; data?: a
                     fontSize: '14px',
                     color: 'rgba(222,158,103,0.9)',
                     margin: 0,
-                    fontFamily: 'var(--font-sora)',
+                    fontFamily: 'var(--font-ibm-plex-sans)',
                     fontWeight: 500,
                     letterSpacing: '-0.01em',
                   }}
@@ -600,7 +600,7 @@ function ProcessSection({ stepsData, data }: { stepsData: typeof steps; data?: a
                 <span
                   style={{
                     marginLeft: 'auto',
-                    fontFamily: 'var(--font-ibm-plex-mono)',
+                    fontFamily: 'var(--font-ibm-plex-sans)',
                     fontSize: '11px',
                     color: 'rgba(36,19,12,0.35)',
                     letterSpacing: '0.06em',
@@ -1058,7 +1058,7 @@ export default function SolutionsPageClient({ data }: { data: any }) {
               className="solutions-hero-h1"
               style={{
                 fontSize: 'clamp(3.2rem, 7vw, 6rem)',
-                fontFamily: 'var(--font-sora)',
+                fontFamily: 'var(--font-ibm-plex-sans)',
                 lineHeight: 1.1,
                 letterSpacing: '-0.02em',
                 color: '#F5E6D3',

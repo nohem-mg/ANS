@@ -142,15 +142,15 @@ export default function Footer({ footerData }: { footerData?: FooterData | null 
                             {/* Social icons */}
                             <div style={{ display: 'flex', justifyContent: 'center', gap: 16, marginTop: 16 }}>
                                 {[
-                                    { icon: <Linkedin size={16} />, href: linkedinHref, label: 'LinkedIn' },
-                                    { icon: <Instagram size={16} />, href: instagramHref, label: 'Instagram' },
-                                    { icon: <Mail size={16} />, href: emailHref, label: 'Email' },
+                                    { icon: <Linkedin size={22} />, href: linkedinHref, label: 'LinkedIn' },
+                                    { icon: <Instagram size={22} />, href: instagramHref, label: 'Instagram' },
+                                    { icon: <Mail size={22} />, href: emailHref, label: 'Email' },
                                 ].map(({ icon, href, label }, i) => (
                                     <a
                                         key={i}
                                         href={href}
                                         aria-label={label}
-                                        style={{ color: 'rgba(255,246,239,0.8)', transition: 'color 0.2s', display: 'flex', padding: 4 }}
+                                        style={{ color: 'rgba(255,246,239,0.8)', transition: 'color 0.2s', display: 'flex', padding: 8 }}
                                         onMouseEnter={(e) => (e.currentTarget.style.color = '#DE9E67')}
                                         onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,246,239,0.8)')}
                                     >

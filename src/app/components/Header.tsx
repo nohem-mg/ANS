@@ -120,7 +120,7 @@ export default function Header({ navData }: { navData?: any }) {
                                 key={href}
                                 href={href}
                                 style={{
-                                    fontFamily: 'var(--font-ibm-plex-mono)',
+                                    fontFamily: 'var(--font-ibm-plex-sans)',
                                     fontWeight: 600,
                                     fontSize: 12,
                                     letterSpacing: '0.06em',
@@ -155,7 +155,7 @@ export default function Header({ navData }: { navData?: any }) {
                         href={ctaHref}
                         style={{
                             marginLeft: 'auto',
-                            fontFamily: 'var(--font-ibm-plex-mono)',
+                            fontFamily: 'var(--font-ibm-plex-sans)',
                             fontWeight: 600,
                             fontSize: 12,
                             letterSpacing: '0.06em',
@@ -247,7 +247,7 @@ export default function Header({ navData }: { navData?: any }) {
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.05 + i * 0.06 }}
                                 style={{
-                                    fontFamily: 'var(--font-sora)',
+                                    fontFamily: 'var(--font-ibm-plex-sans)',
                                     fontSize: 24,
                                     fontWeight: 500,
                                     color: isActive(href) ? '#DE9E67' : '#FFF6EF',
@@ -278,7 +278,7 @@ export default function Header({ navData }: { navData?: any }) {
                             transition={{ delay: 0.05 + navLinks.length * 0.06 }}
                             onClick={() => setMobileOpen(false)}
                             style={{
-                                fontFamily: 'var(--font-ibm-plex-mono)',
+                                fontFamily: 'var(--font-ibm-plex-sans)',
                                 fontSize: 13,
                                 fontWeight: 500,
                                 letterSpacing: '0.08em',

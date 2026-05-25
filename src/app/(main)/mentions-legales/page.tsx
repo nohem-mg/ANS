@@ -16,7 +16,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
     <section style={{ marginBottom: 48 }}>
       <h2
         style={{
-          fontFamily: 'var(--font-sora)',
+          fontFamily: 'var(--font-ibm-plex-sans)',
           fontSize: 'clamp(17px, 2vw, 20px)',
           fontWeight: 600,
           color: C.dark,
@@ -27,7 +27,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
       >
         {title}
       </h2>
-      <div style={{ fontFamily: 'var(--font-sora)', fontSize: 15, lineHeight: 1.85, color: C.text }}>
+      <div style={{ fontFamily: 'var(--font-ibm-plex-sans)', fontSize: 15, lineHeight: 1.85, color: C.text }}>
         {children}
       </div>
     </section>
@@ -56,7 +56,7 @@ export default function MentionsLegalesPage() {
         <div style={{ maxWidth: 880, margin: '0 auto' }}>
           <p
             style={{
-              fontFamily: 'var(--font-ibm-plex-mono)',
+              fontFamily: 'var(--font-ibm-plex-sans)',
               fontSize: 10,
               letterSpacing: '0.22em',
               textTransform: 'uppercase',
@@ -68,7 +68,7 @@ export default function MentionsLegalesPage() {
           </p>
           <h1
             style={{
-              fontFamily: 'var(--font-sora)',
+              fontFamily: 'var(--font-ibm-plex-sans)',
               fontSize: 'clamp(32px, 5vw, 56px)',
               fontWeight: 700,
               color: '#FFF6EF',
@@ -78,7 +78,7 @@ export default function MentionsLegalesPage() {
           >
             Mentions Légales
           </h1>
-          <p style={{ fontFamily: 'var(--font-sora)', fontSize: 15, color: 'rgba(255,246,239,0.6)', lineHeight: 1.75 }}>
+          <p style={{ fontFamily: 'var(--font-ibm-plex-sans)', fontSize: 15, color: 'rgba(255,246,239,0.6)', lineHeight: 1.75 }}>
             Conformément aux dispositions de la loi n° 2004-575 du 21 juin 2004 pour la confiance
             dans l'économie numérique (LCEN).
           </p>
@@ -188,7 +188,7 @@ export default function MentionsLegalesPage() {
           <Link
             href="/"
             style={{
-              fontFamily: 'var(--font-ibm-plex-mono)',
+              fontFamily: 'var(--font-ibm-plex-sans)',
               fontSize: 11,
               letterSpacing: '0.1em',
               textTransform: 'uppercase',
@@ -201,7 +201,7 @@ export default function MentionsLegalesPage() {
           >
             ← Retour à l'accueil
           </Link>
-          <p style={{ fontFamily: 'var(--font-ibm-plex-mono)', fontSize: 11, color: C.muted, marginTop: 16 }}>
+          <p style={{ fontFamily: 'var(--font-ibm-plex-sans)', fontSize: 11, color: C.muted, marginTop: 16 }}>
             Dernière mise à jour : mai 2026
           </p>
         </div>

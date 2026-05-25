@@ -78,13 +78,13 @@ const Gallery4 = ({
           <div className="flex flex-col gap-4">
             <span
               className="text-xs font-semibold uppercase tracking-[0.22em] text-primary"
-              style={{ fontFamily: 'var(--font-ibm-plex-mono)' }}
+              style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}
             >
               Notre parc
             </span>
             <h2
               className="text-3xl font-medium md:text-4xl lg:text-5xl"
-              style={{ fontFamily: 'var(--font-sora)' }}
+              style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}
             >
               {title}
             </h2>
@@ -128,7 +128,7 @@ const Gallery4 = ({
                   <div className="rounded-2xl border border-white/12 bg-[#140c08] p-5 text-white md:p-6">
                     <div
                       className="mb-3 text-lg font-semibold sm:text-xl md:text-2xl"
-                      style={{ fontFamily: 'var(--font-sora)' }}
+                      style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}
                     >
                       {item.title}
                     </div>

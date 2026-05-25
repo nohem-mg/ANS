@@ -52,7 +52,7 @@ export default function ContactPageClient({ data }: ContactPageClientProps) {
 
     // ─── INPUT STYLE CLASSES ───
     const inputClasses = "w-full bg-[#FAF2E9]/40 border border-deep-roast/20 rounded-lg px-4 py-3.5 text-sm font-[family-name:var(--font-ibm-plex-sans)] text-deep-roast focus:outline-none focus:border-sienna-racing transition-colors duration-200 placeholder:text-deep-roast/40";
-    const labelClasses = "block mb-2 text-[10px] font-[family-name:var(--font-ibm-plex-mono)] tracking-[0.15em] text-deep-roast/60 uppercase";
+    const labelClasses = "block mb-2 text-[10px] font-[family-name:var(--font-ibm-plex-sans)] tracking-[0.15em] text-deep-roast/60 uppercase";
 
     return (
         <div className="min-h-screen bg-[#FAF2E9] text-deep-roast font-[family-name:var(--font-ibm-plex-sans)] selection:bg-golden-extraction selection:text-white">
@@ -106,7 +106,7 @@ export default function ContactPageClient({ data }: ContactPageClientProps) {
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.2, duration: 0.7 }}
-                            className="text-[11px] font-[family-name:var(--font-ibm-plex-mono)] tracking-[0.22em] text-sienna-racing uppercase mb-9"
+                            className="text-[11px] font-[family-name:var(--font-ibm-plex-sans)] tracking-[0.22em] text-sienna-racing uppercase mb-9"
                         >
                             {data?.hero?.tag ?? 'Contact'}
                         </motion.div>
@@ -118,7 +118,7 @@ export default function ContactPageClient({ data }: ContactPageClientProps) {
                             className="drop-shadow-[0_4px_24px_rgba(0,0,0,0.5)]"
                             style={{
                                 fontSize: 'clamp(2.8rem, 6vw, 6rem)',
-                                fontFamily: 'var(--font-sora)',
+                                fontFamily: 'var(--font-ibm-plex-sans)',
                                 lineHeight: 1.05,
                                 letterSpacing: '-0.02em',
                                 color: 'var(--color-coffee-cream)',
@@ -299,7 +299,7 @@ export default function ContactPageClient({ data }: ContactPageClientProps) {
                             <motion.button
                                 type="submit"
                                 disabled={formState.submitting}
-                                className="mt-4 w-full flex items-center justify-center gap-2 px-8 py-4 bg-golden-extraction text-deep-roast font-[family-name:var(--font-ibm-plex-mono)] text-sm font-bold tracking-widest uppercase rounded hover:bg-white transition-colors duration-300 disabled:cursor-not-allowed disabled:opacity-60"
+                                className="mt-4 w-full flex items-center justify-center gap-2 px-8 py-4 bg-golden-extraction text-deep-roast font-[family-name:var(--font-ibm-plex-sans)] text-sm font-bold tracking-widest uppercase rounded hover:bg-white transition-colors duration-300 disabled:cursor-not-allowed disabled:opacity-60"
                                 whileHover={{ scale: 1.01 }}
                                 whileTap={{ scale: 0.99 }}
                             >
@@ -336,7 +336,7 @@ export default function ContactPageClient({ data }: ContactPageClientProps) {
                                             {info.icon}
                                         </div>
                                         <div className="flex flex-col pt-[3px]">
-                                            <p className="text-[0.7rem] font-[family-name:var(--font-ibm-plex-mono)] tracking-[0.1em] text-deep-roast/50 uppercase mb-1">
+                                            <p className="text-[0.7rem] font-[family-name:var(--font-ibm-plex-sans)] tracking-[0.1em] text-deep-roast/50 uppercase mb-1">
                                                 {info.label}
                                             </p>
                                             <p className="whitespace-pre-line text-[0.95rem] font-[family-name:var(--font-ibm-plex-sans)] text-deep-roast font-medium">
@@ -380,7 +380,7 @@ export default function ContactPageClient({ data }: ContactPageClientProps) {
                                 className="absolute inset-0 bg-gradient-to-t from-deep-roast/40 to-transparent pointer-events-none"
                             />
                             <div className="absolute bottom-4 left-5">
-                                <span className="text-[10px] font-[family-name:var(--font-ibm-plex-mono)] tracking-[0.1em] text-white uppercase drop-shadow-md">
+                                <span className="text-[10px] font-[family-name:var(--font-ibm-plex-sans)] tracking-[0.1em] text-white uppercase drop-shadow-md">
                                     Proville, Hauts-de-France
                                 </span>
                             </div>

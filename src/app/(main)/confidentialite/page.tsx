@@ -16,7 +16,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
     <section style={{ marginBottom: 48 }}>
       <h2
         style={{
-          fontFamily: 'var(--font-sora)',
+          fontFamily: 'var(--font-ibm-plex-sans)',
           fontSize: 'clamp(17px, 2vw, 20px)',
           fontWeight: 600,
           color: C.dark,
@@ -27,7 +27,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
       >
         {title}
       </h2>
-      <div style={{ fontFamily: 'var(--font-sora)', fontSize: 15, lineHeight: 1.85, color: C.text }}>
+      <div style={{ fontFamily: 'var(--font-ibm-plex-sans)', fontSize: 15, lineHeight: 1.85, color: C.text }}>
         {children}
       </div>
     </section>
@@ -57,7 +57,7 @@ export default function ConfidentialitePage() {
         <div style={{ maxWidth: 880, margin: '0 auto' }}>
           <p
             style={{
-              fontFamily: 'var(--font-ibm-plex-mono)',
+              fontFamily: 'var(--font-ibm-plex-sans)',
               fontSize: 10,
               letterSpacing: '0.22em',
               textTransform: 'uppercase',
@@ -69,7 +69,7 @@ export default function ConfidentialitePage() {
           </p>
           <h1
             style={{
-              fontFamily: 'var(--font-sora)',
+              fontFamily: 'var(--font-ibm-plex-sans)',
               fontSize: 'clamp(32px, 5vw, 56px)',
               fontWeight: 700,
               color: '#FFF6EF',
@@ -79,7 +79,7 @@ export default function ConfidentialitePage() {
           >
             Politique de Confidentialité
           </h1>
-          <p style={{ fontFamily: 'var(--font-sora)', fontSize: 15, color: 'rgba(255,246,239,0.6)', lineHeight: 1.75 }}>
+          <p style={{ fontFamily: 'var(--font-ibm-plex-sans)', fontSize: 15, color: 'rgba(255,246,239,0.6)', lineHeight: 1.75 }}>
             Conformément au Règlement Général sur la Protection des Données (RGPD — UE 2016/679)
             et à la loi Informatique et Libertés modifiée.
           </p>
@@ -116,7 +116,7 @@ export default function ConfidentialitePage() {
           </p>
 
           <div style={{ overflowX: 'auto', marginBottom: 16 }}>
-            <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14, fontFamily: 'var(--font-sora)' }}>
+            <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14, fontFamily: 'var(--font-ibm-plex-sans)' }}>
               <thead>
                 <tr style={{ backgroundColor: C.dark, color: '#FFF6EF' }}>
                   {['Données', 'Finalité', 'Base légale', 'Durée de conservation'].map((h) => (
@@ -164,7 +164,7 @@ export default function ConfidentialitePage() {
 
         <Section title="4. Cookies et traceurs">
           <p style={{ marginBottom: 12 }}>
-            Ce site utilise un stockage de session minimal (<code style={{ fontSize: 13, background: 'rgba(43,18,0,0.06)', padding: '1px 6px', borderRadius: 3, fontFamily: 'var(--font-ibm-plex-mono)' }}>sessionStorage</code>)
+            Ce site utilise un stockage de session minimal (<code style={{ fontSize: 13, background: 'rgba(43,18,0,0.06)', padding: '1px 6px', borderRadius: 3, fontFamily: 'var(--font-ibm-plex-sans)' }}>sessionStorage</code>)
             pour mémoriser si l'animation d'introduction a déjà été affichée lors de votre visite. Cette donnée est
             supprimée automatiquement à la fermeture de l'onglet et ne quitte pas votre navigateur.
           </p>
@@ -277,7 +277,7 @@ export default function ConfidentialitePage() {
             <Link
               href="/"
               style={{
-                fontFamily: 'var(--font-ibm-plex-mono)',
+                fontFamily: 'var(--font-ibm-plex-sans)',
                 fontSize: 11,
                 letterSpacing: '0.1em',
                 textTransform: 'uppercase',
@@ -290,7 +290,7 @@ export default function ConfidentialitePage() {
             <Link
               href="/mentions-legales"
               style={{
-                fontFamily: 'var(--font-ibm-plex-mono)',
+                fontFamily: 'var(--font-ibm-plex-sans)',
                 fontSize: 11,
                 letterSpacing: '0.1em',
                 textTransform: 'uppercase',
@@ -301,7 +301,7 @@ export default function ConfidentialitePage() {
               Mentions légales →
             </Link>
           </div>
-          <p style={{ fontFamily: 'var(--font-ibm-plex-mono)', fontSize: 11, color: C.muted, marginTop: 16 }}>
+          <p style={{ fontFamily: 'var(--font-ibm-plex-sans)', fontSize: 11, color: C.muted, marginTop: 16 }}>
             Dernière mise à jour : mai 2026
           </p>
         </div>

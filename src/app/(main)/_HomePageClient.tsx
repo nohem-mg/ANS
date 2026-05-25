@@ -233,10 +233,10 @@ const Timeline = ({ milestones: msData }: { milestones: typeof MILESTONES }) => 
             transition={{ delay: 0.1 + i * 0.12, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           >
             <div className="absolute -left-6 top-1 w-2.5 h-2.5 rounded-full bg-sienna-racing border-2 border-[#FAF2E9] z-10" />
-            <div className="text-sm font-mono uppercase tracking-[0.22em] text-golden-extraction mb-2" style={{ fontFamily: 'var(--font-ibm-plex-mono)', fontWeight: 600 }}>
+            <div className="text-sm font-mono uppercase tracking-[0.22em] text-golden-extraction mb-2" style={{ fontFamily: 'var(--font-ibm-plex-sans)', fontWeight: 600 }}>
               {m.year}
             </div>
-            <h3 className="text-deep-roast mb-3 leading-tight" style={{ fontFamily: 'var(--font-sora)', fontSize: '1.15rem', fontWeight: 600 }}>
+            <h3 className="text-deep-roast mb-3 leading-tight" style={{ fontFamily: 'var(--font-ibm-plex-sans)', fontSize: '1.15rem', fontWeight: 600 }}>
               {m.title}
             </h3>
             <div className="w-8 h-px bg-golden-extraction/40 mb-3" />
@@ -279,7 +279,7 @@ const Timeline = ({ milestones: msData }: { milestones: typeof MILESTONES }) => 
             transition={{ delay: 0.1 + i * 0.15, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
             {/* Year label */}
-            <div className="text-2xl md:text-[10px] font-mono uppercase tracking-[0.1em] md:tracking-[0.22em] text-golden-extraction mb-4 md:mb-8" style={{ fontFamily: 'var(--font-ibm-plex-mono)', fontWeight: 600 }}>
+            <div className="text-2xl md:text-[10px] font-mono uppercase tracking-[0.1em] md:tracking-[0.22em] text-golden-extraction mb-4 md:mb-8" style={{ fontFamily: 'var(--font-ibm-plex-sans)', fontWeight: 600 }}>
               {m.year}
             </div>
 
@@ -287,7 +287,7 @@ const Timeline = ({ milestones: msData }: { milestones: typeof MILESTONES }) => 
             <h3
               className="text-deep-roast mb-5 leading-tight"
               style={{
-                fontFamily: 'var(--font-sora)',
+                fontFamily: 'var(--font-ibm-plex-sans)',
                 fontSize: 'clamp(1.1rem, 1.5vw, 1.45rem)',
                 fontWeight: 600,
               }}
@@ -371,12 +371,9 @@ const ServiceRow = ({ title, desc, icon, index }: { title: string, desc: string,
       className="service-row group"
     >
       <div className="service-row-heading">
-        <div className="service-row-icon text-deep-roast/40 group-hover:text-golden-extraction transition-colors duration-300">
-          {icon}
-        </div>
         <h3
           className="service-row-title text-deep-roast font-semibold"
-          style={{ textTransform: 'uppercase', fontFamily: 'var(--font-ibm-plex-mono)' }}
+          style={{ textTransform: 'uppercase', fontFamily: 'var(--font-ibm-plex-sans)' }}
         >
           {title}
         </h3>
@@ -456,14 +453,14 @@ const VisionSection = ({ points, data }: { points: typeof VISION_POINTS; data?: 
           >
             <span
               className="block text-[10px] font-mono uppercase tracking-[0.22em] text-golden-extraction mb-4"
-              style={{ fontFamily: 'var(--font-ibm-plex-mono)' }}
+              style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}
             >
               {data?.vision?.tag ?? "Notre Vision"}
             </span>
             <h2
               className="text-deep-roast leading-tight"
               style={{
-                fontFamily: 'var(--font-sora)',
+                fontFamily: 'var(--font-ibm-plex-sans)',
                 fontSize: 'clamp(1.75rem, 3.5vw, 3rem)',
                 fontWeight: 600,
                 letterSpacing: '-0.02em'
@@ -659,14 +656,14 @@ const FAQSection = ({
         >
           <span
             className="block text-[10px] font-mono uppercase tracking-[0.22em] text-golden-extraction mb-4"
-            style={{ fontFamily: 'var(--font-ibm-plex-mono)' }}
+            style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}
           >
             {data?.faq?.tag ?? "FAQ"}
           </span>
           <h2
             className="text-deep-roast leading-tight mb-4"
             style={{
-              fontFamily: 'var(--font-sora)',
+              fontFamily: 'var(--font-ibm-plex-sans)',
               fontSize: 'clamp(1.9rem, 3.6vw, 3rem)',
               fontWeight: 600,
               letterSpacing: '-0.02em',
@@ -711,7 +708,7 @@ const FAQSection = ({
                   >
                     <span
                       className="shrink-0 pt-1 text-[11px] text-golden-extraction font-mono"
-                      style={{ fontFamily: 'var(--font-ibm-plex-mono)' }}
+                      style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}
                     >
                       {String(index + 1).padStart(2, '0')}
                     </span>
@@ -720,7 +717,7 @@ const FAQSection = ({
                       <h3
                         className="text-deep-roast leading-snug"
                         style={{
-                          fontFamily: 'var(--font-sora)',
+                          fontFamily: 'var(--font-ibm-plex-sans)',
                           fontSize: 'clamp(1rem, 1.4vw, 1.15rem)',
                           fontWeight: 600,
                           letterSpacing: '-0.01em'
@@ -973,7 +970,7 @@ export default function HomePageClient({ data }: { data: any }) {
                 className="drop-shadow-[0_4px_24px_rgba(0,0,0,0.5)]"
                 style={{
                   fontSize: 'clamp(3.2rem, 7vw, 6rem)',
-                  fontFamily: 'var(--font-sora)',
+                  fontFamily: 'var(--font-ibm-plex-sans)',
                   lineHeight: 1.05,
                   letterSpacing: '-0.02em',
                   color: 'var(--color-coffee-cream)',
@@ -1096,7 +1093,7 @@ export default function HomePageClient({ data }: { data: any }) {
               display: block;
               margin-bottom: 14px;
               color: #DE9E67;
-              font-family: var(--font-ibm-plex-mono);
+              font-family: var(--font-ibm-plex-sans);
               font-size: 0.68rem;
               font-weight: 600;
               letter-spacing: 0.18em;
@@ -1105,7 +1102,7 @@ export default function HomePageClient({ data }: { data: any }) {
 
             .services-title {
               color: #451F17;
-              font-family: var(--font-sora);
+              font-family: var(--font-ibm-plex-sans);
               font-size: 2.5rem;
               font-weight: 650;
               line-height: 1.06;
@@ -1308,22 +1305,22 @@ export default function HomePageClient({ data }: { data: any }) {
 
             @media (max-width: 767px) {
               .services-section {
-                padding: 10px 0 14px;
+                padding: 28px 0 32px;
               }
 
               .services-shell {
-                padding: 0 14px;
-                gap: 10px;
+                padding: 0 20px;
+                gap: 20px;
               }
 
               .services-eyebrow {
-                margin-bottom: 7px;
-                font-size: 0.62rem;
+                margin-bottom: 10px;
+                font-size: 0.68rem;
               }
 
               .services-title {
-                font-size: 1.52rem;
-                line-height: 1.1;
+                font-size: 1.65rem;
+                line-height: 1.12;
               }
 
               .services-visual-grid {
@@ -1333,38 +1330,38 @@ export default function HomePageClient({ data }: { data: any }) {
               }
 
               .service-row {
-                padding: 9px 0;
-                gap: 4px;
+                padding: 16px 0;
+                gap: 8px;
               }
 
               .service-row-heading {
-                gap: 9px;
+                gap: 10px;
               }
 
               .service-row-icon svg {
-                width: 17px;
-                height: 17px;
+                width: 19px;
+                height: 19px;
               }
 
               .service-row-title {
-                font-size: 0.72rem;
-                line-height: 1.22;
+                font-size: 0.85rem;
+                line-height: 1.3;
                 letter-spacing: 0.06em;
               }
 
               .service-row-desc {
-                font-size: 0.76rem;
-                line-height: 1.32;
+                font-size: 0.88rem;
+                line-height: 1.5;
               }
             }
 
             @media (max-width: 390px), (max-width: 767px) and (max-height: 700px) {
-              .services-section { padding: 8px 0 12px; }
-              .services-shell { gap: 8px; }
-              .services-title { font-size: 1.38rem; }
+              .services-section { padding: 20px 0 24px; }
+              .services-shell { gap: 14px; }
+              .services-title { font-size: 1.48rem; }
               .services-visual-grid { height: 300px; }
-              .service-row { padding: 7px 0; }
-              .service-row-desc { -webkit-line-clamp: 1; }
+              .service-row { padding: 13px 0; }
+              .service-row-desc { -webkit-line-clamp: 2; }
             }
           `}</style>
 
@@ -1436,10 +1433,10 @@ export default function HomePageClient({ data }: { data: any }) {
                   <h3
                     className="text-[#F5E6D3] mb-2"
                     style={{
-                      fontFamily: 'var(--font-sora)',
+                      fontFamily: 'var(--font-ibm-plex-sans)',
                       fontSize: 'clamp(1.4rem, 2.5vw, 2rem)',
                       fontWeight: 600,
-                      letterSpacing: '-0.02em',
+                      letterSpacing: '-0.01em',
                       lineHeight: 1.2,
                       textAlign: 'center'
                     }}
@@ -1457,7 +1454,7 @@ export default function HomePageClient({ data }: { data: any }) {
                   <motion.a
                     href="/contact"
                     className="inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-semibold text-[#1C0A00] bg-[#DE9E67] rounded-lg whitespace-nowrap w-full sm:w-auto"
-                    style={{ fontFamily: 'var(--font-ibm-plex-mono)', letterSpacing: '0.06em', textTransform: 'uppercase', fontSize: '12px' }}
+                    style={{ fontFamily: 'var(--font-ibm-plex-sans)', letterSpacing: '0.06em', textTransform: 'uppercase', fontSize: '12px' }}
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.97 }}
                   >
@@ -1466,7 +1463,7 @@ export default function HomePageClient({ data }: { data: any }) {
                   <a
                     href={`tel:${(data?.cta_band?.phone || "0327371684").replace(/\s/g, '')}`}
                     className="inline-flex items-center justify-center gap-2 px-6 py-3 text-sm text-[#F5E6D3] border border-[#F5E6D3]/20 rounded-lg hover:border-[#DE9E67]/50 transition-colors whitespace-nowrap w-full sm:w-auto"
-                    style={{ fontFamily: 'var(--font-ibm-plex-mono)', letterSpacing: '0.06em', fontSize: '12px' }}
+                    style={{ fontFamily: 'var(--font-ibm-plex-sans)', letterSpacing: '0.06em', fontSize: '12px' }}
                   >
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" />
@@ -1484,13 +1481,13 @@ export default function HomePageClient({ data }: { data: any }) {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 mb-12 lg:mb-20 items-start max-w-7xl">
               <div>
-                <span className="block text-[10px] font-mono uppercase tracking-[0.22em] text-golden-extraction mb-4" style={{ fontFamily: 'var(--font-ibm-plex-mono)' }}>
+                <span className="block text-[10px] font-mono uppercase tracking-[0.22em] text-golden-extraction mb-4" style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}>
                   {data?.testimonials?.tag ?? "La parole à nos clients"}
                 </span>
                 <h2
                   className="text-deep-roast leading-tight"
                   style={{
-                    fontFamily: 'var(--font-sora)',
+                    fontFamily: 'var(--font-ibm-plex-sans)',
                     fontSize: 'clamp(1.75rem, 3.5vw, 3rem)',
                     fontWeight: 600,
                     letterSpacing: '-0.02em',
@@ -1533,7 +1530,7 @@ export default function HomePageClient({ data }: { data: any }) {
                       &ldquo;{t.review}&rdquo;
                     </p>
                     <div className="mt-4 pt-4 border-t border-deep-roast/8">
-                      <p className="text-deep-roast font-medium text-sm" style={{ fontFamily: 'var(--font-sora)' }}>{t.name}</p>
+                      <p className="text-deep-roast font-medium text-sm" style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}>{t.name}</p>
                       <p className="text-deep-roast/50 text-xs mt-0.5" style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}>Avis Google</p>
                     </div>
                   </div>
@@ -1568,7 +1565,7 @@ export default function HomePageClient({ data }: { data: any }) {
                     "{t.review}"
                   </p>
                   <div>
-                    <p className="text-deep-roast font-medium text-sm" style={{ fontFamily: 'var(--font-sora)' }}>{t.name}</p>
+                    <p className="text-deep-roast font-medium text-sm" style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}>{t.name}</p>
                     <p className="text-deep-roast/50 text-xs mt-0.5" style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}>Avis Google</p>
                   </div>
                 </motion.div>
@@ -1606,7 +1603,7 @@ export default function HomePageClient({ data }: { data: any }) {
                 <h2
                   className="text-deep-roast leading-tight"
                   style={{
-                    fontFamily: 'var(--font-sora)',
+                    fontFamily: 'var(--font-ibm-plex-sans)',
                     fontSize: 'clamp(1rem, 6.2vw, 3.5rem)',
                     fontWeight: 600,
                   }}
@@ -1614,7 +1611,7 @@ export default function HomePageClient({ data }: { data: any }) {
                   {data?.timeline?.title ?? "+ de 40 Ans d'Excellence"}
                 </h2>
               </div>
-              <p className="text-deep-roast/50 text-sm max-w-xs leading-relaxed md:text-right" style={{ fontFamily: 'var(--font-ibm-plex-mono)' }}>
+              <p className="text-deep-roast/50 text-sm max-w-xs leading-relaxed md:text-right" style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}>
                 {data?.timeline?.subtitle ?? "De l'entreprise familiale au partenaire QVT de référence."}
               </p>
             </motion.div>
@@ -1641,13 +1638,13 @@ export default function HomePageClient({ data }: { data: any }) {
 
                 {/* Left: Title */}
                 <div className="lg:w-[40%] shrink-0">
-                  <span className="block text-[10px] font-mono uppercase tracking-[0.22em] text-golden-extraction mb-4" style={{ fontFamily: 'var(--font-ibm-plex-mono)' }}>
+                  <span className="block text-[10px] font-mono uppercase tracking-[0.22em] text-golden-extraction mb-4" style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}>
                     {data?.rse?.tag ?? "Notre Engagement"}
                   </span>
                   <h2
                     className="text-deep-roast leading-tight"
                     style={{
-                      fontFamily: 'var(--font-sora)',
+                      fontFamily: 'var(--font-ibm-plex-sans)',
                       fontSize: 'clamp(2rem, 4.5vw, 3.5rem)',
                       fontWeight: 600,
                       letterSpacing: '-0.02em',
@@ -1815,7 +1812,7 @@ export default function HomePageClient({ data }: { data: any }) {
           <div className="absolute bottom-0 left-0 w-full h-full from-sienna-racing/10 to-transparent pointer-events-none" />
 
           <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center relative z-10">
-            <h2 className="text-3xl sm:text-5xl md:text-7xl mb-6 tracking-tight" style={{ fontFamily: 'var(--font-sora)', fontWeight: 600 }}>{data?.final_cta?.title ?? "Prêt pour l'infusion ?"}</h2>
+            <h2 className="text-3xl sm:text-5xl md:text-7xl mb-6 tracking-tight" style={{ fontFamily: 'var(--font-ibm-plex-sans)', fontWeight: 600 }}>{data?.final_cta?.title ?? "Prêt pour l'infusion ?"}</h2>
             <p className="text-base md:text-xl text-deep-roast/70 mb-10 max-w-2xl mx-auto" style={{ fontFamily: 'var(--font-ibm-plex-sans)' }}>
               {data?.final_cta?.description ?? "Discutons de votre projet d'espace détente. Nos experts sont prêts à concevoir la solution idéale pour vos collaborateurs."}
             </p>
@@ -1824,7 +1821,7 @@ export default function HomePageClient({ data }: { data: any }) {
               <motion.a
                 href="/contact"
                 className="inline-flex items-center gap-2 px-4 sm:px-8 py-3 sm:py-4 text-xs sm:text-sm font-bold text-deep-roast bg-golden-extraction rounded-lg whitespace-nowrap"
-                style={{ fontFamily: 'var(--font-ibm-plex-mono)', letterSpacing: '0.08em', textTransform: 'uppercase' }}
+                style={{ fontFamily: 'var(--font-ibm-plex-sans)', letterSpacing: '0.08em', textTransform: 'uppercase' }}
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
               >
@@ -1833,7 +1830,7 @@ export default function HomePageClient({ data }: { data: any }) {
               <motion.a
                 href={`tel:${(data?.cta_band?.phone || "0327371684").replace(/\s/g, '')}`}
                 className="inline-flex items-center gap-2.5 px-4 sm:px-8 py-3 sm:py-4 text-xs sm:text-sm text-deep-roast border border-deep-roast/20 rounded-lg hover:border-golden-extraction/50 transition-colors whitespace-nowrap"
-                style={{ fontFamily: 'var(--font-ibm-plex-mono)', letterSpacing: '0.06em' }}
+                style={{ fontFamily: 'var(--font-ibm-plex-sans)', letterSpacing: '0.06em' }}
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
               >
@@ -1846,7 +1843,7 @@ export default function HomePageClient({ data }: { data: any }) {
 
             <p
               className="text-deep-roast/40 text-[9px] sm:text-xs whitespace-nowrap"
-              style={{ fontFamily: 'var(--font-ibm-plex-mono)', letterSpacing: '0.1em', textTransform: 'uppercase' }}
+              style={{ fontFamily: 'var(--font-ibm-plex-sans)', letterSpacing: '0.1em', textTransform: 'uppercase' }}
             >
               {data?.final_cta?.badge_text ?? "Audit gratuit · Réponse sous 24h · Hauts-de-France"}
             </p>

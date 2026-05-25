@@ -17,9 +17,9 @@ const C = {
 } as const;
 
 const FONT = {
-    display: "var(--font-sora, 'Georgia', serif)",
+    display: "var(--font-ibm-plex-sans, sans-serif)",
     body: "var(--font-ibm-plex-sans, sans-serif)",
-    mono: "var(--font-ibm-plex-mono, monospace)",
+    mono: "var(--font-ibm-plex-sans, sans-serif)",
 } as const;
 
 const EASE_OUT = [0.25, 0.46, 0.45, 0.94] as const;
@@ -143,45 +143,32 @@ function BentoFeaturedSection({ featuredChiffre, smallFigures, data }: { feature
 
                 .kf-bento-featured {
                     position: relative;
+                    background: #FFFBF4;
+                    border: 1px solid rgba(43,18,0,0.1);
                     border-radius: 18px;
                     padding: clamp(22px, 2.8vw, 34px);
-                    background: radial-gradient(ellipse at 42% 32%, rgba(90,52,38,1) 0%, #231008 62%, #1a0c06 100%);
-                    border: 1px solid rgba(245, 230, 211, 0.06);
-                    color: #F5E6D3;
+                    color: #2B1200;
                     overflow: hidden;
                     isolation: isolate;
                     display: flex;
                     flex-direction: column;
                     min-height: clamp(280px, 52vw, 420px);
+                    transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), box-shadow 0.4s, border-color 0.4s;
                 }
-                .kf-bento-featured-dot {
-                    position: absolute;
-                    inset: 0;
-                    background-image: radial-gradient(circle, rgba(245,230,211,0.12) 1px, transparent 1px);
-                    background-size: 28px 28px;
-                    opacity: 0.28;
-                    pointer-events: none;
-                    z-index: 0;
+                .kf-bento-featured:hover {
+                    transform: translateY(-3px);
+                    box-shadow: 0 14px 32px rgba(43,18,0,0.065);
+                    border-color: rgba(200,118,58,0.28);
                 }
-                .kf-bento-featured-glow {
-                    position: absolute;
-                    width: min(460px, 90vw);
-                    height: min(460px, 90vw);
-                    border-radius: 50%;
-                    right: -18%;
-                    top: -30%;
-                    background: radial-gradient(circle, rgba(200,118,58,0.28) 0%, transparent 65%);
-                    filter: blur(10px);
-                    pointer-events: none;
-                    z-index: 0;
-                }
+                .kf-bento-featured-dot { display: none; }
+                .kf-bento-featured-glow { display: none; }
                 .kf-bento-featured > .kf-inner { position: relative; z-index: 1; flex: 1; display: flex; flex-direction: column; gap: clamp(14px, 2vw, 20px); }
                 .kf-bento-fe-index {
                     align-self: flex-end;
                     font-family: ${FONT.mono};
                     font-size: 10px;
                     letter-spacing: 0.2em;
-                    color: rgba(245,230,211,0.45);
+                    color: rgba(43,18,0,0.42);
                     text-transform: uppercase;
                 }
                 .kf-bento-fe-num { line-height: 0.94; margin-top: 4px; }
@@ -189,7 +176,7 @@ function BentoFeaturedSection({ featuredChiffre, smallFigures, data }: { feature
                     font-family: ${FONT.display};
                     font-size: clamp(16px, 1.85vw, 22px);
                     font-weight: 600;
-                    color: #F5E6D3;
+                    color: #2B1200;
                     margin: 0;
                     letter-spacing: -0.02em;
                 }
@@ -197,7 +184,7 @@ function BentoFeaturedSection({ featuredChiffre, smallFigures, data }: { feature
                     font-family: ${FONT.display};
                     font-size: clamp(13px, 1.35vw, 17px);
                     font-style: italic;
-                    color: ${C.gold};
+                    color: ${C.accent};
                     margin: 0;
                     line-height: 1.35;
                 }
@@ -205,7 +192,7 @@ function BentoFeaturedSection({ featuredChiffre, smallFigures, data }: { feature
                     font-family: ${FONT.body};
                     font-size: 13px;
                     line-height: 1.6;
-                    color: rgba(245,230,211,0.72);
+                    color: rgba(43,18,0,0.6);
                     margin: 0;
                     margin-top: auto;
                     padding-top: 8px;
@@ -349,7 +336,7 @@ function BentoFeaturedSection({ featuredChiffre, smallFigures, data }: { feature
                                     <StatNumber
                                         value={featuredChiffre.value}
                                         suffix={featuredChiffre.suffix}
-                                        color="#F5E6D3"
+                                        color="#2B1200"
                                         fontSize="clamp(42px, 7vw, 92px)"
                                     />
                                 </div>
@@ -376,7 +363,6 @@ function BentoFeaturedSection({ featuredChiffre, smallFigures, data }: { feature
                                         transition={{ duration: 0.65, delay: idx * 0.06, ease: EASE_OUT }}
                                     >
                                         <div className="kf-bento-cell-top">
-                                            <span className="kf-bento-cell-ic">{fig.icon}</span>
                                             <span className="kf-bento-cell-index">{idxStr} / {totalStr}</span>
                                         </div>
                                         <div className="kf-bento-cell-num">
@@ -518,7 +504,7 @@ export default function GroupePageClient({ data }: { data: any }) {
                             transition={{ delay: 0.35, duration: 0.9, ease: EASE_OUT }}
                             style={{
                                 fontSize: 'clamp(3.2rem, 7vw, 6rem)',
-                                fontFamily: 'var(--font-sora)',
+                                fontFamily: 'var(--font-ibm-plex-sans)',
                                 lineHeight: 1.1,
                                 letterSpacing: '-0.02em',
                                 color: '#F5E6D3',

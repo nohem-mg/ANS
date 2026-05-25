@@ -171,7 +171,7 @@ export default async function SolutionDetailPage({
               fontSize: 13,
               letterSpacing: '0.08em',
               textTransform: 'uppercase',
-              fontFamily: 'var(--font-ibm-plex-mono)',
+              fontFamily: 'var(--font-ibm-plex-sans)',
             }}
           >
             <ArrowLeft size={14} />
@@ -207,7 +207,7 @@ export default async function SolutionDetailPage({
                     fontSize: 12,
                     letterSpacing: '0.14em',
                     textTransform: 'uppercase',
-                    fontFamily: 'var(--font-ibm-plex-mono)',
+                    fontFamily: 'var(--font-ibm-plex-sans)',
                   }}
                 >
                   {item.category}
@@ -216,7 +216,7 @@ export default async function SolutionDetailPage({
 
               <h1
                 style={{
-                  fontFamily: 'var(--font-sora)',
+                  fontFamily: 'var(--font-ibm-plex-sans)',
                   fontSize: 'clamp(2.6rem, 5vw, 4.8rem)',
                   lineHeight: 1.04,
                   letterSpacing: '-0.03em',
@@ -346,7 +346,7 @@ export default async function SolutionDetailPage({
                   letterSpacing: '0.16em',
                   fontSize: 12,
                   margin: '0 0 14px',
-                  fontFamily: 'var(--font-ibm-plex-mono)',
+                  fontFamily: 'var(--font-ibm-plex-sans)',
                 }}
               >
                 Projet entreprise
@@ -354,7 +354,7 @@ export default async function SolutionDetailPage({
               <h2
                 style={{
                   margin: '0 0 14px',
-                  fontFamily: 'var(--font-sora)',
+                  fontFamily: 'var(--font-ibm-plex-sans)',
                   fontSize: 'clamp(1.8rem, 3vw, 3rem)',
                   lineHeight: 1.08,
                   letterSpacing: '-0.02em',
@@ -430,7 +430,7 @@ function InfoCard({ title, items }: { title: string; items: string[] }) {
     >
       <h2
         style={{
-          fontFamily: 'var(--font-sora)',
+          fontFamily: 'var(--font-ibm-plex-sans)',
           fontSize: 24,
           margin: '0 0 20px',
         }}
